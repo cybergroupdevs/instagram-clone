@@ -1,3 +1,4 @@
+import { HomenavComponent } from './homenav/homenav.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -8,6 +9,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard.component';
 import {  ImageGalleryComponent } from './image-gallery/image-gallery.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,6 +17,7 @@ import {  ImageGalleryComponent } from './image-gallery/image-gallery.component'
     SignupComponent
     ProfileDashboardComponent,   
     ImageGalleryComponent,
+    HomenavComponent
   ],
   imports: [
     BrowserModule,
