@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "insta-clone"
+    }
+  },
+  "defaultProject": "insta-clone",
+  "cli": {
+    "analytics": false
+  }
 }
