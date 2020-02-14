@@ -1,0 +1,30 @@
+
+.profile-img{
+    width: 9rem;
+    height: 9rem;
+}
+.profile-sm-img{
+    width: 5rem;
+    height: 5rem;
+}
+.user-name{
+    font-weight: lighter;
+}
+.btn-color{
+    font-weight: 300;
+    background-color: #fafafa;
+    /* background-color: rgba(246, 241, 234, 1); */
+}
+
+/* .bio-name{
+    width: 60%;
+} */
+b{
+    font-weight: lighter;
+}
+li{
+    list-style-type: none;
+}
+h5{
+    font-weight: normal;
+}
