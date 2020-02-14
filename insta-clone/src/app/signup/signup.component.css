@@ -1,8 +1,3 @@
-* {
-    margin: 0px;
-    padding: 0px;
-  }
-  
   body {
     background-color:#fafafa;
   }
@@ -10,10 +5,7 @@
   #wrapper {
     width: 100vw;
     height: 100%;
-    top:0;
     overflow: hidden;
-    margin: 0 auto;
-    padding: 10px;
     background-color:#fafafa;
   }
   
@@ -21,10 +13,10 @@
     position: relative;
     width: 250px;
     height: 90%;
-    margin: 30px auto 20px;
+    margin: 1.875rem auto 1.25rem;
     background-color: #fff;
     border: 2px solid #e6e6e6;
-    padding: 30px 50px 30px;
+    padding: 1.875rem 3.125rem 1.875rem;
   }
   
   .header {
@@ -37,7 +29,7 @@
     height: 50px;
     width: 175px;
     margin: 0 auto;
-    left: 40px;
+    left: 0.5rem;
   }
   .header div {
     text-align: center;
@@ -108,6 +100,7 @@
     text-align: center;
     font-family: 'proxima-nova', 'Helvetica Neue', Arial, Helvetica, sans-serif ;
     font-weight: 100;
+  
   }
   
   .s-part a {

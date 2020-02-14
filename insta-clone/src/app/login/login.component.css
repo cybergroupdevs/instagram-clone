@@ -1,29 +1,23 @@
-* {
-    margin: 0px;
-    padding: 0px;
-  }
-  
+
   body {
-    background-color: #eee;
+    background-color: #fafafa;
   }
   
   #wrapper {
     width: 100vw;
-    height: 50%;
+    height: 100%;
     overflow: hidden;
-    border: 0px solid #000;
-    margin: 50px auto;
-    padding: 10px;
     background-color:#fafafa;
   }
   
   .main-content {
+    position: relative;
     width: 250px;
-    height: 70%;
-    margin: 35px auto;
+    height: 90%;
+    margin: 1.875rem auto 1.25rem;
     background-color: #fff;
     border: 2px solid #e6e6e6;
-    padding: 40px 50px 60px;
+    padding: 1.875rem 3.125rem 1.875rem;
   }
   
   .header {
@@ -34,9 +28,20 @@
   .header img {
     height: 50px;
     width: 175px;
-    margin: auto;
+    margin: 0 auto;
     position: relative;
-    left: 40px;
+    left: 0.5rem;
+  }
+  
+  .header div {
+    text-align: center;
+    color: #999999;
+    font-size: 14px;
+    line-height: 1.2rem;
+    margin: 8px 8px 15px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'proxima-nova', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   }
   
   .input-1,
@@ -58,13 +63,12 @@
   }
   
   .overlap-text a {
-    position: absolute;
     text-align: center;
-    margin-left: 80px;
-    top: 20px;
+    margin: 80px 33px 0px;
+    top: 40px;
     color: #003569;
     font-size: 14px;
-    line-height: 14px;
+    line-height: 20px;
     text-decoration: none;
     font-family: 'proxima-nova', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   }
@@ -88,7 +92,7 @@
     height: 40%;
     margin: 10px auto;
     border: 1px solid #e6e6e6;
-    padding: 20px 50px;
+    padding: 20px 20px;
     background-color: #fff;
   }
   
