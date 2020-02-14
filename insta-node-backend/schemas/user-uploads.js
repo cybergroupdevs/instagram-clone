@@ -1,40 +1,39 @@
+const user = require('./user-details');
+var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 module.exports = {
-    OwnerId: {
+    ownerId: {
+        type: ObjectId,
+        ref:'user',
+        default: null
+    },
+    url: {
         type: String,
         default: null
     },
-    Url: {
+    caption: {
         type: String,
         default: null
     },
-    Caption: {
+   
+    hashtags: {
         type: String,
         default: null
     },
-    //This will also include all the hashtags, and everything about Posts
-    AboutPost: {
-        type: String,
-        default: null
-    },
-    LikesCount: {
+    likesCount: {
         type: Number, 
         default: 0
     },
-    CommentsCount: {
+    commentsCount: {
         type: Number,
         default: 0
     },
-    RecentLikes: {
+    recentLikes: {
         type: Array,
         default: null
     },
     //No need to add any DEFAULT value, as this will be provided by the System, and not the USER
-    CreatedAt: {
+    createdAt: {
         type: Date
     }
-    // //If the POST is shared, then it will be set to TRUE, so that we can recognize whether the post was shared or does it actually belong to the USER
-    // IsShared: {
-    //     type: Boolean,
-    //     default: false
-    // }
 }

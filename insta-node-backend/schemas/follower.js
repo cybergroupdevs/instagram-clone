@@ -1,8 +1,13 @@
+const user = require('./user-details');
+var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 module.exports = {
-    OwnerId: {
-        type: String
+    ownerId: {
+        type: ObjectId,
+        ref:'user'
     },
-    FollowerId: {
-        type: String
+    followerId: {
+        type: ObjectId,
+        ref:'user'
     }
 }

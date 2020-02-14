@@ -1,11 +1,17 @@
+const user = require('./user-details');
+const upload=require('./user-uploads');
+var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 module.exports = {
-    OwnerId: {
-        type: String
+    ownerId: {
+        type: ObjectId,
+        ref:'user'
     },
-    UploadId: {
-        type: String
+    uploadId: {
+        type: ObjectId,
+        ref:'user-uploads'
     },
-    Comment: {
+    comment: {
         type: String
     }
 }
