@@ -3,7 +3,6 @@ const jwtHandler = require("../jwtHandler");
 class employee{
     constructor(){
     }
-
     async createLike(req, res){
         let userObjectId = model.user.get({"instaHandle": req.body.instaHandle},
                         {"_id": 1});
@@ -27,9 +26,10 @@ class employee{
                 commentsCount:req.body.commentscount,
                   },
         
-        const postObj= await model.postsModel.save(newPost)
+        const postObj= await model.postsModel.save(newPost);
         res.send(postObj);
                 }
+
     async updateFollow(req,res){
         let followerObj={
             $inc: {'following':1}
@@ -65,6 +65,7 @@ class employee{
         const unfollowed = await model.followingModel.unfollow({"ownerId":req.body.unfollowerId,"followingId":req.body.unfollowedId});
         res.send("now unfollowed user");
     }
+  
     async show(req,res) {
         const post = await model.postsModel.get();
         res.send(post);
