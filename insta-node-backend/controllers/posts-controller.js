@@ -12,16 +12,28 @@ class employee{
         if(objectId != null){
             model.likes.save({
                 ownerId: userObjectId._id,
-                uploadId: 
+                uploadId: postObjectId._id
             });
         }
         
     }
-
-    async show(req, res){
+    async createNewPost(req, res){
+        let newPost={
+                ownerId:req.body.ownerId,
+                url:req.body.url, //determine how to store images by kritika
+                caption:req.body.caption,
+                hashtags:req.body.hashtags,
+                likesCount:req.body.likesCount,
+                commentsCount:req.body.commentscount,
+                  },
+        
+        const postObj= await model.postsModel.save(newPost)
+        res.send(postObj);
     }
-
-    async index(req, res){
+    async show(req,res) {
+        const post = await model.postsModel.get();
+        res.send(post);
     }
+   
 }
 module.exports = new employee();
