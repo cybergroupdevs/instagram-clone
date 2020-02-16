@@ -15,11 +15,6 @@ module.exports = {
         type: String,
         default: null
     },
-   
-    hashtags: {
-        type: String,
-        default: null
-    },
     likesCount: {
         type: Number, 
         default: 0
@@ -28,12 +23,21 @@ module.exports = {
         type: Number,
         default: 0
     },
-    recentLikes: {
-        type: Array,
-        default: null
-    },
+    recentLikes:  [
+            {
+                type: ObjectId,
+                ref: "user"
+            }
+        ],
+    hashtags: [
+            {
+                type: String,
+                required: true
+            }
+        ],
     //No need to add any DEFAULT value, as this will be provided by the System, and not the USER
     createdAt: {
-        type: Date
+        type: Date,
+        default:Date.now
     }
 }
