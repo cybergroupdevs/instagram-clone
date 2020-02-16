@@ -5,10 +5,13 @@ module.exports = {
     },
     instaHandle: {
         type: String,
+        required: true,
+        unique: true,
         default: null
     },
     phone: {
         type: String,
+        max: 10,
         default: null
     },
     email: {
@@ -17,6 +20,7 @@ module.exports = {
     },
     password: {
         type: String,
+        required: true,
         default: null
     },
     profileImage: {
