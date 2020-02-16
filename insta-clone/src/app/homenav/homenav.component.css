@@ -8,20 +8,19 @@
     margin-left: 6vw;
 
 }
-#Search-Input{
-    margin-left: 16vw;
+#searchInput{
+    margin-left: 6vw;
     margin-top: 2.4vh;
     
 }
 #activity{
     margin-top: 2vh;
-    /* margin-right: 6vw; */
-    margin-left: 16vw;
+    margin-left: 6vw;
 }
 @media screen and(min-width:320px){
     #logo{
-        padding-right: 0;
-        margin-right: 0;
+        position: absolute;
+        left:0;
     }
     #activity{
         position: absolute;
@@ -31,18 +30,20 @@
 }
 
 @media screen and (max-width: 993px){
-    .SearchContainer {
+    .searchContainer {
       display: none;
     }
     #logo{
-        padding-left: 0;
-        margin-left: 0;
+        
+        position: absolute;
+        left:0;
     }
     #activity{
         position: absolute;
         right: 0;
      }
   }
+  
   
 
 
@@ -82,7 +83,7 @@
     
 }
 
-#Search-Input {    
+#searchInput {    
     background: url('../../assets/images/icons8-search-50.png');
     background-repeat: no-repeat;
     border: solid 1px #dbdbdb;
@@ -99,7 +100,7 @@
     width: 250px;
     padding-left: 80px;
     }
-#Search-Input:focus {
+#searchInput:focus {
     padding-left: 16px;
     background-position: 0;
     color:grey;
