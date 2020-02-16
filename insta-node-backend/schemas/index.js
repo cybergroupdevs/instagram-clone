@@ -1,8 +1,8 @@
 const user=require('./user-details');
-const post = require('./user-uploads');
+const post = require('./user-post');
 const follower=require('./follower');
 const following=require('./following');
-const likes=require('./upload-likes');
+const likes=require('./post-likes');
 const comments=require('./upload-comment');
 
 module.exports={
