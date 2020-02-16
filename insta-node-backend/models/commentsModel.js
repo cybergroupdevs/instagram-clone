@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const schema = require('../schemas');
-const postSchema = mongoose.Schema(schema.postLikes);
+const commentSchema = mongoose.Schema(schema.comments);
 class Operations{
 
     constructor(){
-        this.model = mongoose.model('postLike', postSchema);
+        this.model = mongoose.model('postComment', commentSchema);
     }
 
     async get(criteria={}, columns={}){

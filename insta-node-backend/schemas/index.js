@@ -3,11 +3,11 @@ const post = require('./user-post');
 const follower=require('./follower');
 const following=require('./following');
 const likes=require('./post-likes');
-const comments=require('./upload-comment');
+const comments=require('./post-comments');
 
 module.exports={
     user: user,
-    upload: post,
+    post: post,
     follower: follower,
     following: following,
     likes: likes,
