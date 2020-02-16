@@ -20,7 +20,7 @@ import { FeedComponent } from './feed/feed.component';
     ProfileDashboardComponent,   
     ImageGalleryComponent,
     FeedComponent,
-    HomenavComponent
+    HomenavComponent,
   ],
   imports: [
     BrowserModule,
