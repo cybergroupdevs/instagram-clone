@@ -1,3 +1,4 @@
+import { ProfileDashboardComponent } from './../profile-dashboard/profile-dashboard.component';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,12 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomenavComponent implements OnInit {
 
-  constructor(
+  constructor() { }
 
-
+  goToProfile = () => {
     
-  ) { }
-
+  }
   ngOnInit() {
   }
   
