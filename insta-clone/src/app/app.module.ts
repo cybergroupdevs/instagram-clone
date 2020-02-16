@@ -14,7 +14,7 @@ import {  ImageGalleryComponent } from './image-gallery/image-gallery.component'
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
     ProfileDashboardComponent,   
     ImageGalleryComponent,
     HomenavComponent

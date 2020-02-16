@@ -4,10 +4,11 @@ class employee{
     constructor(){
     }
 
-    async createUpload(req, res){
-    }
-
-    async deleteUpload(req, res){
+    async createLike(req, res){
+        model.likes.save({
+            OwnerId: req.instaHandle,
+            UploadId: 
+        });
     }
 
     async show(req, res){

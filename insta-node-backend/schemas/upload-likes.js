@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const schema = 
 module.exports = {
     OwnerId: {
-        type: 
+        type: user-detail
     },
     UploadId: {
         type: user-detail

@@ -1,41 +1,38 @@
 module.exports = {
-    Name: {
+    name: {
+        type: String
+    },
+    instaHandle: {
+        type: String
+    },
+    phone: {
         type: String,
         default: null
     },
-    InstaHandle: {
+    email: {
         type: String,
         default: null
     },
-    Phone: {
+    password: {
+        type: String
+    },
+    profileImage: {
         type: String,
         default: null
     },
-    Email: {
+    about: {
         type: String,
         default: null
     },
-    Password: {
-        type: String,
-        default: null
-    },
-    ProfileImage: {
-        type: String,
-        default: null
-    },
-    About: {
-        type: String,
-        default: null
-    },
-    PostsCount: {
+    postsCount: {
         type: Number, 
         default: 0
     },
-    Followers: {
+    followers: {
         type: Number,
         default: 0
     },
-    Following: {
+    following: {
         type: Number,
         default: 0
     }
