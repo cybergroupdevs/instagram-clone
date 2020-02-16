@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = (payload) => {
     //var privateKEY  = fs.readFileSync(path.resolve("./jwtHandler/private.key"), 'utf8');
-    const privateKEY = "ThisIsInstgramCloneMadeByInstaGangInHopeOfGettingTheirJobConfirmedPleasePrayForUs";
+    const privateKEY = "qmnwnmekjejohrfcgtlmknlkycxxdfxulkmnklnklnilkomncp";
     
     var i  = 'CyberGroup India Pvt. Ltd.';          // Issuer 
     var s  = 'User Auth';                           // Subject 
@@ -23,11 +23,9 @@ module.exports = (payload) => {
 
     try{
         var token = jwt.sign({data: actualPayload}, privateKEY, signOptions);
-        console.log("Token - " + token)
         return token;
     }
     catch(e){
-        console.log(e);
         return null;
     }
     

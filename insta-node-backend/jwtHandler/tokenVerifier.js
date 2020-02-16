@@ -3,11 +3,12 @@ const fs = require("fs");
 
 module.exports = (token) => {
 
-    const privateKEY = "ThisIsInstgramCloneMadeByInstaGangInHopeOfGettingTheirJobConfirmedPleasePrayForUs";
+    const privateKEY = "qmnwnmekjejohrfcgtlmknlkycxxdfxulkmnklnklnilkomncp";
 
     var i  = 'CyberGroup India Pvt. Ltd.';          // Issuer 
     var s  = 'User Auth';                           // Subject 
     var a  = 'someone@cygrp.com';                   // Audience
+
     var verifyOptions = {
         issuer:  i,
         subject:  s,
@@ -15,7 +16,13 @@ module.exports = (token) => {
         expiresIn:  "12h",
         algorithm:  ["RS256"]
     };
+
     //const publicKEY  = fs.readFileSync('./public.key.txt', 'utf8');
-    var legit = jwt.verify(token, publicKEY, verifyOptions);
-    console.log("\nJWT verification result: " + JSON.stringify(legit));
+
+    try{
+        return(jwt.verify(token, publicKEY, verifyOptions));
+    }
+    catch(error){
+        return false;
+    }
 }

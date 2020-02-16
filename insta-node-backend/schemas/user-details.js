@@ -1,5 +1,8 @@
 module.exports = {
     name: {
+        type: String
+    },
+    instaHandle: {
         type: String,
         default: null
     },
