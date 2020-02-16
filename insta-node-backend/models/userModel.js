@@ -18,5 +18,12 @@ class Operations{
     async update(criteria ={}, updateObj){
         return this.model.update(criteria, updateObj);
     }
+    async follow(criteria={}, updateObj){
+        return this.model.update(criteria, updateObj )
+    }
+
+    async unfollow(criteria={}, updateObj){
+        return this.model.update(criteria, updateObj )
+    }
 }
 module.exports = new Operations();
