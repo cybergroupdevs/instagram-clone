@@ -1,4 +1,6 @@
+import { HomenavComponent } from './../homenav/homenav.component';
 import { Component, OnInit}  from '@angular/core';
+
 
 @Component({
   selector: 'app-feed',
