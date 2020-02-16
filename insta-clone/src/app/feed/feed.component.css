@@ -1,7 +1,5 @@
 *{
-    font-family: inherit;
-    
-    
+    font-family: inherit;   
 }
 .location{
 
@@ -48,16 +46,13 @@
      
  }
  .responsive {
-    
-     height: auto;
-    max-width:100%;
-    width:fit-content;
 
-    
-     left:0;
-     right:0;
-     float:left;
-
+      height: auto;
+      max-width:100%;
+      width:fit-content;
+      left:0;
+      right:0;
+      float:left;
    } 
    div,section{
     border: 1 solid #000; 
@@ -91,8 +86,8 @@
      
  }
  .profile-info{
-     display:inline-block;
-     font-weight:bold;
+     display: inline-block;
+     font-weight: bold;
       
       
   }
