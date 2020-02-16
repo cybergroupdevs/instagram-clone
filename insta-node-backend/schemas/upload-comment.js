@@ -1,5 +1,5 @@
 const user = require('./user-details');
-const upload=require('./user-uploads');
+const post = require('./user-post');
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
     },
     uploadId: {
         type: ObjectId,
-        ref:'user-uploads'
+        ref:'post'
     },
     comment: {
         type: String
