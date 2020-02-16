@@ -1,0 +1,173 @@
+*{
+    font-family: inherit;
+    
+    
+}
+.location{
+
+    font-size:15px;
+    color:black;
+    
+}
+.name{
+    background:white;
+    font-size:15px;
+    color:black;
+    font-weight:10px;
+    float:right;
+    
+}
+.time{
+    background:white;
+    font-size:15x;
+    color:black;
+    font-weight:10px;
+    float:right;
+}
+
+.container{
+    background:white;
+    padding-top:50px;
+    width:50rem;
+    height:100vh;
+    max-width:100vw;
+    
+  }
+  
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .card-header{
+ 
+    background:white;
+     display:flex;
+     justify-content:flex-start;
+     
+ }
+ .responsive {
+    
+     height: auto;
+    max-width:100%;
+    width:fit-content;
+
+    
+     left:0;
+     right:0;
+     float:left;
+
+   } 
+   div,section{
+    border: 1 solid #000; 
+  }
+  .card{
+  background:white;
+ /* margin :0 100px;*/
+  width:500px;
+  height:800px;
+  border-radius:3px;
+  top:-5px;
+   bottom:0;
+   
+}
+ /* Create three equal columns that sits next to each other */
+ .column {
+    flex: 33.33%;
+    padding: 5px;
+    display:inline-flex;
+    
+    
+  }
+  .icon{
+      margin:10px;
+  }
+  .card-header{
+ 
+    background:white;
+     display:flex;
+     justify-content:flex-start;
+     
+ }
+ .profile-info{
+     display:inline-block;
+     font-weight:bold;
+      
+      
+  }
+ .like{
+  margin-top:-25px;
+  padding:0;
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  white-space:pre;
+  
+ }
+ .comment-intro{
+  margin-top:5px;
+  padding:0;
+  background-color:white;
+  color:#999;
+  line-height:inherit;
+ }
+ .like-button{
+   
+   box-sizing:border-box;
+   cursor:pointer;
+   font-weight:600;
+   text-align: center;
+    text-transform: inherit;
+    text-overflow: ellipsis;
+    
+   background:0 0;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    border:0;
+    width:auto;
+    user-select:none;
+    
+  }
+ .comments{
+  
+  background-color:white;
+  color:black;
+  line-height:inherit;
+  display:flex;
+  flex-direction:column;
+   margin-top:-20px;
+ }
+ .comm-para{
+  
+  margin-bottom:0rem;   
+   padding:0;
+ }
+ .card-footer{
+  padding:0;
+  box-sizing :border-box;
+  
+ }
+ .comment-link{
+   cursor:pointer;
+   text-decoration: none;
+   text-transform:  blue;
+ }
+ .btn{
+   align-items: center;
+   background:0 0;
+   border:0;
+   cursor:pointer;
+padding:8px
+  
+
+ }
+ button{
+  text-transform:none;
+  letter-spacing:normal;
+  text-shadow:none;
+  text-align:center;
+  box-sizing:border-box;
+
+ }

@@ -3,10 +3,18 @@ module.exports = {
         type: String
     },
     instaHandle: {
-        type: String
+        type: String,
+        default: null
+    },
+    instaHandle: {
+        type: String,
+        required: true,
+        unique: true,
+        default: null
     },
     phone: {
         type: String,
+        max: 10,
         default: null
     },
     email: {
@@ -14,7 +22,9 @@ module.exports = {
         default: null
     },
     password: {
-        type: String
+        type: String,
+        required: true,
+        default: null
     },
     profileImage: {
         type: String,

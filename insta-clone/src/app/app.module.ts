@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard.component';
 import {  ImageGalleryComponent } from './image-gallery/image-gallery.component';
+import { FeedComponent } from './feed/feed.component';
+
 
 
 @NgModule({
@@ -17,6 +19,7 @@ import {  ImageGalleryComponent } from './image-gallery/image-gallery.component'
     SignupComponent,
     ProfileDashboardComponent,   
     ImageGalleryComponent,
+    FeedComponent,
     HomenavComponent
   ],
   imports: [
