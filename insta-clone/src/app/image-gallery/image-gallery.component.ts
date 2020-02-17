@@ -14,6 +14,7 @@ export class ImageGalleryComponent implements OnInit {
   ngOnInit() {
 
   }
+
   // @ViewChild 
 
 allImages=[
