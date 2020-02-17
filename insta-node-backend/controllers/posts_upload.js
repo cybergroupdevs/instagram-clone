@@ -31,18 +31,3 @@ app.post('/upload', function (req, res, next) {
         res.end("Upload completed.");
     });
 })
-
-// app.get('/',function(req,res){
-//     res.sendFile(__dirname + "/index.html");
-// });
-
-// app.post('/api/photo',function(req,res){
-//   upload(req,res,function(err) {
-//       if(err) {
-//           return res.end("Error uploading file.");
-//       }
-//       res.end("File is uploaded");
-//   });
-// });
-
-//app.listen(3000);
