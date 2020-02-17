@@ -31,7 +31,7 @@
 
 @media screen and (max-width: 993px){
     .searchContainer {
-      display: none;
+      visibility: hidden;
     }
     #logo{
         
