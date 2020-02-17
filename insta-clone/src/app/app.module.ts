@@ -18,10 +18,10 @@ import { SuggestionForUComponent } from './suggestion-for-u/suggestion-for-u.com
     LoginComponent,
     SignupComponent,
     ProfileDashboardComponent,   
-    ImageGalleryComponent,   
+    ImageGalleryComponent,
+    FeedComponent,
     HomenavComponent,
     SuggestionForUComponent
-    FeedComponent
   ],
   imports: [
     BrowserModule,
