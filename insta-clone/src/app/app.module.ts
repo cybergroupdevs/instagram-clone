@@ -9,6 +9,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard.component';
 import {  ImageGalleryComponent } from './image-gallery/image-gallery.component';
 import { EditComponent } from './edit/edit.component';
+import { AddPostComponent } from './add-post/add-post.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { EditComponent } from './edit/edit.component';
     ImageGalleryComponent,
     HomenavComponent,
     EditComponent,
+    AddPostComponent,
     
   ],
   imports: [
