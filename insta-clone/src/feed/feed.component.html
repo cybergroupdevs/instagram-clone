@@ -73,18 +73,10 @@
                             <div class="card-body" >
                               
                               <h5>Suggestions for you</h5>
-                              <div *ngFor="let suggestion of suggestions">
-                                     <a routerlink="[/image,suggestion.username]">
-                              <p><img src={{suggestion.url}} class="rounded-circle float-left mr-2" width="40">
-                                <a href="#">{{suggestion.name}} <small class="text-muted">{{suggestion.username}}</small></a></p></a>
-                              <hr>
-                              <p><img src={{suggestion.url}} class="rounded-circle float-left mr-2" width="40">
+                              <p><img src={{suggestion_image}} class="rounded-circle float-left mr-2" width="40">
                                 <a href="#">{{suggestion.name}} <small class="text-muted">{{suggestion.username}}</small></a></p>
                               <hr>
-                              <p><img src={{suggestion.url}} class="rounded-circle float-left mr-2" width="40">
-                                <a href="#">{{suggestion.name}} <small class="text-muted">{{suggestion.username}}</small></a></p>
-                              <hr>
-                            </div>
+                              
                             </div>
                             <div class="card-footer">
                               <a href="#">Find more</a>

@@ -33,12 +33,7 @@ export class FeedComponent implements OnInit {
    username2="reena43";
    comment1="awesome";
    comment2="beauty queen";
-suggestions=[       {username:"deepsy123",name:"deepanshu",url:"https://picsum.photos/200/200?random"},
-                    {username:"dees234",name:"deepak",url:"https://picsum.photos/200/200?random"},
-                    {username:"saerty234",name:"sahil",url:"https://picsum.photos/200/200?random"}
-                         ];
-
-
+suggestion_image="https://picsum.photos/200/200?random";
 
 
 
