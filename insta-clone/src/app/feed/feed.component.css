@@ -32,7 +32,10 @@
 .location{
     font-size:15px;
     color:black;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5626a89d0592fff58f63000ea6d571b57d3ff748
 }
 .name{
   background:white;
@@ -150,7 +153,17 @@
  .like{
   margin-top:0;
   padding:0;
+<<<<<<< HEAD
 
+=======
+ }
+ .comment-intro{
+  margin-top:5px;
+  padding:0;
+  background-color:white;
+  color:#999;
+  line-height:inherit;
+>>>>>>> 5626a89d0592fff58f63000ea6d571b57d3ff748
  }
  #btn{
   cursor:pointer;
@@ -278,5 +291,9 @@ color:black;
    cursor:pointer;
    text-decoration: none;
    text-transform:  blue;
+<<<<<<< HEAD
  }
 
+=======
+ }
+>>>>>>> 5626a89d0592fff58f63000ea6d571b57d3ff748

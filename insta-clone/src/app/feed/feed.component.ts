@@ -1,10 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { HomenavComponent } from './../homenav/homenav.component';
+<<<<<<< HEAD
+=======
+import { Component, OnInit}  from '@angular/core';
+
+>>>>>>> 5626a89d0592fff58f63000ea6d571b57d3ff748
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5626a89d0592fff58f63000ea6d571b57d3ff748
 export class FeedComponent implements OnInit {
 
   constructor() { }
@@ -24,6 +33,7 @@ export class FeedComponent implements OnInit {
       "https://images.unsplash.com/photo-1505058707965-09a4469a87e4?w=500&h=500&fit=crop",
       "https://images.unsplash.com/photo-1423012373122-fff0a5d28cc9?w=500&h=500&fit=crop"
   ];
+<<<<<<< HEAD
 
    username="deeps_rocks12";
    location="cybergroup";
@@ -36,4 +46,6 @@ suggestions=[       {username:"deepsy123",name:"deepanshu",url:"https://picsum.p
                     {username:"saerty234",name:"sahil",url:"https://picsum.photos/200/200?random"}
                          ];
 
+=======
+>>>>>>> 5626a89d0592fff58f63000ea6d571b57d3ff748
 }
