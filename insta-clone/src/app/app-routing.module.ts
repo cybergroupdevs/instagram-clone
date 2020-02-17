@@ -1,3 +1,4 @@
+import { EditComponent } from './edit/edit.component';
 import { AppComponent } from './app.component';
 import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard.component';
 import { NgModule } from '@angular/core';
@@ -7,11 +8,13 @@ import { SignupComponent }  from './signup/signup.component';
 
 
 
+
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  {path: 'profile', component: ProfileDashboardComponent}
+  {path: 'profile', component: ProfileDashboardComponent},
+  {path: 'edit', component: EditComponent}
   ];
 
 
