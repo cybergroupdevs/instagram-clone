@@ -4,6 +4,7 @@
   "description": "Backend Code For Instagram Clone by Insta-Gang",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Insta-Gang",

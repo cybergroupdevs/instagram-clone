@@ -17,20 +17,48 @@ class employee{
         
     }
     async createNewPost(req, res){
-        let newPost={
+        let token = jwtHandler.tokenVerifier(req.body.token);
+        console.log(token);
+        if(token)
+        {
+            let newPost={
                 ownerId:req.body.ownerId,
                 url:req.body.url, //determine how to store images by kritika
-                caption:req.body.caption,
+                caption:req.body.caption
                   };
         
         const postObj= await model.posts.save(newPost);
         res.send(postObj);
+        }
+        else{
+            res.status(401).send("Unauthorized");
+        }
                 }
   
-    async show(req,res) {
-        const post = await model.postsModel.get();
+    async showAll(req,res) {
+        let token = jwtHandler.tokenVerifier(req.body.token);
+        console.log(token);
+        if(token)
+        {
+        const post = await model.posts.get();
         res.send(post);
+        }
+        else{
+            res.status(401).send("Unauthorized");
+        }
+
     }
-   
+    async show(req,res) {
+        let token = jwtHandler.tokenVerifier(req.header.token);
+        console.log(JSON.stringify(token));
+        if(token)
+        {
+    const userObj= await model.posts.get({_id:req.params.id});
+    res.send(userObj);
+     }
+else{
+   res.status(401).send("Unauthorized");
+    }
+}
 }
 module.exports = new employee();
