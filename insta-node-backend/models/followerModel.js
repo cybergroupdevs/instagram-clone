@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const schema = require('../schemas/followers');
+const schema = require('../schemas');
 const followerSchema = mongoose.Schema(schema.follower)
 
 class Follower{

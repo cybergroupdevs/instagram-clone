@@ -6,13 +6,14 @@ class employee{
 
     async createUser(req, res){
         let userObject = {
-            name = req.body.name,
-            instaHandle = req.body.instaHandle,
-            phone = req.body.phone,
-            email = req.body.email,
-            password = req.body.password
+            name :req.body.name,
+            instaHandle :req.body.instaHandle,
+            phone : req.body.phone,
+            email :req.body.email,
+            password : req.body.password
         };
-        model.user.save(userObject);
+        const user=await model.user.save(userObject);
+        res.send(user);
     }
 
     async checkUserAuthentication(req, res){
@@ -21,14 +22,14 @@ class employee{
                                                 {"instaHandle": 1,
                                                 "name": 1});
         if(user != null || user != []){
-            let token = jwtHandler.tokenGenerator(allEmp);
+            let token = jwtHandler.tokenGenerator(user);
             if(token != null)
                 res.status('200').send(token);
             else
                 res.status('503').send("Some Error Occured while generating token");
         }
         else{
-            res.status(401).send(allEmp);
+            res.status(401).send(user);
         }
     }
 }
