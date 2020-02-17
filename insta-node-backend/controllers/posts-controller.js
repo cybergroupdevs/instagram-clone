@@ -3,7 +3,6 @@ const jwtHandler = require("../jwtHandler");
 class employee{
     constructor(){
     }
-
     async createLike(req, res){
         let userObjectId = model.user.get({"instaHandle": req.body.instaHandle},
                         {"_id": 1});
@@ -12,11 +11,25 @@ class employee{
         if(objectId != null){
             model.likes.save({
                 ownerId: userObjectId._id,
-                uploadId: 
+                uploadId: postObjectId._id
             });
         }
         
     }
+    async createNewPost(req, res){
+        let newPost={
+                ownerId:req.body.ownerId,
+                url:req.body.url, //determine how to store images by kritika
+                caption:req.body.caption,
+                hashtags:req.body.hashtags,
+                likesCount:req.body.likesCount,
+                commentsCount:req.body.commentscount,
+                  },
+        
+        const postObj= await model.postsModel.save(newPost);
+        res.send(postObj);
+                }
+
     async updateFollow(req,res){
         let followerObj={
             $inc: {'following':1}
@@ -52,10 +65,11 @@ class employee{
         const unfollowed = await model.followingModel.unfollow({"ownerId":req.body.unfollowerId,"followingId":req.body.unfollowedId});
         res.send("now unfollowed user");
     }
-    async show(req, res){
+  
+    async show(req,res) {
+        const post = await model.postsModel.get();
+        res.send(post);
     }
-
-    async index(req, res){
-    }
+   
 }
 module.exports = new employee();
