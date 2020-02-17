@@ -8,7 +8,6 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard.component';
 import {  ImageGalleryComponent } from './image-gallery/image-gallery.component';
-import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { EditComponent } from './edit/edit.component';
 
 
@@ -20,8 +19,8 @@ import { EditComponent } from './edit/edit.component';
     ProfileDashboardComponent,   
     ImageGalleryComponent,
     HomenavComponent,
-    UpdateProfileComponent,
-    EditComponent
+    EditComponent,
+    
   ],
   imports: [
     BrowserModule,
