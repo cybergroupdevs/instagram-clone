@@ -20,7 +20,9 @@ class employee{
         let user = await model.user.get({$and : [{"instaHandle": req.body.instaHandle},{"password": req.body.password}]
                                                 }, 
                                                 {"instaHandle": 1,
-                                                "name": 1});
+                                                "name": 1,
+                                                "_id": 1
+                                            });
         if(user != null || user != []){
             let token = jwtHandler.tokenGenerator(user);
             if(token != null)

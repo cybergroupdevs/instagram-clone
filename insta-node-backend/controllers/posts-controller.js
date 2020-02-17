@@ -21,12 +21,9 @@ class employee{
                 ownerId:req.body.ownerId,
                 url:req.body.url, //determine how to store images by kritika
                 caption:req.body.caption,
-                hashtags:req.body.hashtags,
-                likesCount:req.body.likesCount,
-                commentsCount:req.body.commentscount,
                   };
         
-        const postObj= await model.postsModel.save(newPost);
+        const postObj= await model.posts.save(newPost);
         res.send(postObj);
                 }
   
