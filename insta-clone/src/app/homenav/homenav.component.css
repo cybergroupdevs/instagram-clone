@@ -1,0 +1,111 @@
+.container{
+    display: flex;
+    flex-flow: nowrap;
+    align-items: stretch;
+    }
+#logo{
+    margin-top: 2vh;
+    margin-left: 6vw;
+
+}
+#searchInput{
+    margin-left: 6vw;
+    margin-top: 2.4vh;
+    
+}
+#activity{
+    margin-top: 2vh;
+    margin-left: 6vw;
+}
+@media screen and(min-width:320px){
+    #logo{
+        position: absolute;
+        left:0;
+    }
+    #activity{
+        position: absolute;
+        right: 0;
+     }
+    
+}
+
+@media screen and (max-width: 993px){
+    .searchContainer {
+      display: none;
+    }
+    #logo{
+        
+        position: absolute;
+        left:0;
+    }
+    #activity{
+        position: absolute;
+        right: 0;
+     }
+  }
+  
+  
+
+
+.control::after {
+    content: url('../../assets/images/igheart.png');
+}
+#toggle:checked ~ .control::after {
+    content: url('../../assets/images/igheartfilled.png');
+}
+.exploreControl::after {
+    content: url('../../assets/images/compass.png');
+}
+#exploreToggle:checked ~ .exploreControl::after {
+    content: url('../../assets/images/compassfilled.png');
+}
+.userControl::after {
+    content: url('../../assets/images/account.png');
+}
+#userToggle:checked ~ .userControl::after {
+    content: url('../../assets/images/accountfilled.png');
+}
+
+.visually-hidden {
+    position: absolute;
+    left: -100vw;
+}
+.control{
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+
+.MainContainer {        
+    margin-top: 2.5vh;
+    height: 30px;
+    width: 200px
+    
+}
+
+#searchInput {    
+    background: url('../../assets/images/icons8-search-50.png');
+    background-repeat: no-repeat;
+    border: solid 1px #dbdbdb;
+    border-radius: 3px;
+    color: #262626;
+    font-size: 14px;
+    outline: none;
+    padding: 3px 10px 3px 26px;
+    z-index: 2;
+    box-sizing: border-box;
+    height: 30px;
+    background-size: 16px;
+    background-position: 62px 4px;
+    width: 250px;
+    padding-left: 80px;
+    }
+#searchInput:focus {
+    padding-left: 16px;
+    background-position: 0;
+    color:grey;
+}
+
+
+
+
