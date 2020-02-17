@@ -7,7 +7,7 @@ const followingDb=require('./followingModel');
 
 module.exports = {
     user: userDb,
-    posts:posttDb,
+    posts:postDb,
     likes: likeDb,
     comments:commentDb,
     followers:followerDb,
