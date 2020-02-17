@@ -16,7 +16,7 @@ import { EditComponent } from './edit/edit.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
     ProfileDashboardComponent,   
     ImageGalleryComponent,
     HomenavComponent,
