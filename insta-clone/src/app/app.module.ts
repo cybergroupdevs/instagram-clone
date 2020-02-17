@@ -9,7 +9,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard.component';
 import {  ImageGalleryComponent } from './image-gallery/image-gallery.component';
 import { FeedComponent } from './feed/feed.component';
-
+import { SuggestionForUComponent } from './suggestion-for-u/suggestion-for-u.component';
 
 
 @NgModule({
@@ -18,9 +18,10 @@ import { FeedComponent } from './feed/feed.component';
     LoginComponent,
     SignupComponent,
     ProfileDashboardComponent,   
-    ImageGalleryComponent,
-    FeedComponent,
-    HomenavComponent
+    ImageGalleryComponent,   
+    HomenavComponent,
+    SuggestionForUComponent
+    FeedComponent
   ],
   imports: [
     BrowserModule,

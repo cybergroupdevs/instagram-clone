@@ -1,11 +1,17 @@
 *{
-    font-family: inherit;   
+    font-family: inherit;
 }
+ .image{
+   max-width:100%;
+   display:block;
+   width:fit-content;
+   display:flex;
+   height:auto;
+   
+ }
 .location{
-
     font-size:15px;
     color:black;
-    
 }
 .name{
     background:white;
@@ -31,7 +37,6 @@
     max-width:100vw;
     
   }
-  
 .avatar {
     vertical-align: middle;
     width: 50px;
@@ -46,37 +51,37 @@
      
  }
  .responsive {
-
       height: auto;
-      max-width:100%;
-      width:fit-content;
+      max-width:18.25rem;
       left:0;
       right:0;
       float:left;
+      width:fit-content;
    } 
    div,section{
     border: 1 solid #000; 
   }
+
   .card{
   background:white;
- /* margin :0 100px;*/
-  width:500px;
-  height:800px;
+  width:18.25rem;
+  height:36rem;
   border-radius:3px;
   top:-5px;
    bottom:0;
-   
 }
  /* Create three equal columns that sits next to each other */
  .column {
     flex: 33.33%;
-    padding: 5px;
+    padding: 0;
     display:inline-flex;
-    
-    
+    margin-right:20px;
   }
   .icon{
-      margin:10px;
+      margin-top:0;
+      margin-right:20px;
+      margin-bottom:0;
+      margin-left:20px; 
   }
   .card-header{
  
@@ -92,13 +97,8 @@
       
   }
  .like{
-  margin-top:-25px;
+  margin-top:0;
   padding:0;
-  display:flex;
-  flex-direction:row;
-  flex-wrap:wrap;
-  white-space:pre;
-  
  }
  .comment-intro{
   margin-top:5px;
@@ -148,21 +148,4 @@
    cursor:pointer;
    text-decoration: none;
    text-transform:  blue;
- }
- .btn{
-   align-items: center;
-   background:0 0;
-   border:0;
-   cursor:pointer;
-padding:8px
-  
-
- }
- button{
-  text-transform:none;
-  letter-spacing:normal;
-  text-shadow:none;
-  text-align:center;
-  box-sizing:border-box;
-
  }
