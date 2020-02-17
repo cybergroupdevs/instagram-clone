@@ -26,13 +26,15 @@ module.exports = {
     recentLikes:  [
             {
                 type: ObjectId,
-                ref: "user"
+                ref: "user",
+                default:null
             }
         ],
     hashtags: [
             {
                 type: String,
-                required: true
+                required: true,
+                default:null
             }
         ],
     //No need to add any DEFAULT value, as this will be provided by the System, and not the USER
