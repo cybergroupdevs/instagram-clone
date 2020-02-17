@@ -1,0 +1,70 @@
+<app-homenav></app-homenav>
+<div class="d-sm-none d-md-block d-none d-sm-block mt-5">
+    <div class="row mx-4">
+        <div class="col-md-3 offset-md-1">
+            <img src="../../assets/ss.png" alt="Profile Image" class="mr-2 ml-3 rounded-circle profile-img align-self-center">
+        </div>
+    
+        <div class="col-md-4">
+            <div class="d-flex">     
+                <h3 class="user-name">{{username}}</h3>
+                <button class="btn border btn-color btn-sm py-0 ml-2"><b>Edit Profile</b></button>
+            </div>
+            <div>
+                <ul class="d-flex justify-content-between pl-0">
+                    <li class="mr-3">
+                        <span><b>{{posts}}</b> posts</span>
+                    </li>
+                    <li class="mr-3">
+                        <span><b>{{following}}</b> following</span>
+                    </li>
+                    <li class="mr-3">
+                        <span><b>{{followers}}</b> followers</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="bio-name">
+                <p>{{name}}</p>
+                <p>{{bio}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- For smaller screens -->
+<div class="d-block d-sm-none">
+
+    <div class="row mx-2">
+        <div class="col-3 offset-1">
+            <img src="../../assets/ss.png" alt="Profile Image" class="profile-sm-img rounded-circle">
+        </div>    
+        <div class="col-7">
+            <h3 class="user-name">{{username}}</h3>
+            <button class="btn border btn-color btn-sm w-100"><b>Edit Profile</b></button>
+        </div>
+    </div>
+
+    <div class="mx-3 mt-3">
+        <h6>Shubham Sharma</h6>
+        <p>
+            I am a Software Developer. Currently I am an Intern at Cyber Group. I am pursuing B.Tech from Sharda University.
+        </p>
+    </div>
+
+    <hr class="m-3">
+    <div class="d-flex ">
+        <ul class="d-flex justify-content-around my-auto pl-0 w-100">
+            <li class="mr-3">
+                <span><b>{{posts}}</b> posts</span>
+            </li>
+            <li class="mr-3">
+                <span><b>{{following}}</b> following</span>
+            </li>
+            <li class="mr-3">
+                <span><b>{{followers}}</b> followers</span>
+            </li>
+        </ul>
+    </div>
+    <hr class="m-3">
+</div>

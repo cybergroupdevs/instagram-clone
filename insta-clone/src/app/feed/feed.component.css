@@ -13,12 +13,26 @@
   font-weight:bold;
   margin-left:2px;
 }
+ 
 
 .location{
 
   font-size:15px;
   color:black;
   margin-left:0.5rem;
+}
+ .image{
+   max-width:100%;
+   display:block;
+   width:fit-content;
+   display:flex;
+   height:auto;
+   
+ }
+.location{
+    font-size:15px;
+    color:black;
+
 }
 .name{
   background:white;
@@ -37,6 +51,7 @@
 }
 
 .container{
+
   background:white;
   padding-top:50px;
   width:50rem;
@@ -66,7 +81,75 @@
   left:0;
    right:0;
    float:left;
-   
+    background:white;
+    padding-top:50px;
+    width:50rem;
+    height:100vh;
+    max-width:100vw;
+    
+  }
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .card-header{
+ 
+    background:white;
+     display:flex;
+     justify-content:flex-start;
+     
+ }
+ .responsive {
+      height: auto;
+      max-width:18.25rem;
+      left:0;
+      right:0;
+      float:left;
+      width:fit-content;
+   } 
+   div,section{
+    border: 1 solid #000; 
+  }
+
+  .card{
+  background:white;
+  width:18.25rem;
+  height:36rem;
+  border-radius:3px;
+  top:-5px;
+   bottom:0;
+}
+ /* Create three equal columns that sits next to each other */
+ .column {
+    flex: 33.33%;
+    padding: 0;
+    display:inline-flex;
+    margin-right:20px;
+  }
+  .icon{
+      margin-top:0;
+      margin-right:20px;
+      margin-bottom:0;
+      margin-left:20px; 
+  }
+  .card-header{
+ 
+    background:white;
+     display:flex;
+     justify-content:flex-start;
+     
+ }
+ .profile-info{
+     display: inline-block;
+     font-weight: bold;
+      
+      
+  }
+ .like{
+  margin-top:0;
+  padding:0;
 
  }
  #btn{
@@ -143,6 +226,7 @@ line-height:inherit;
   width:auto;
   user-select:none;
   
+
 }
 .comments{
 
@@ -158,7 +242,7 @@ flex-direction:column;
 margin-bottom:0rem;   
  padding:0;
 }
-.card-footer1{
+.mycard-footer{
 padding:0;
 box-sizing :border-box;
 
@@ -188,3 +272,11 @@ box-sizing:border-box;
 #list{
 color:black;
 }
+
+ 
+ .comment-link{
+   cursor:pointer;
+   text-decoration: none;
+   text-transform:  blue;
+ }
+

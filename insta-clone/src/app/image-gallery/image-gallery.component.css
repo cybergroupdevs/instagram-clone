@@ -60,26 +60,15 @@ img {
     clip: rect(1px, 1px, 1px, 1px);
 }
 
-/* Profile Section */
-
-.profile {
-    padding: 5rem 0;
-}
-
-.profile::after {
-    content: "";
-    display: block;
-    clear: both;
-}
-
-
 
 
 
 /* Gallery Section */
 
 .gallery {
+
     display: flex;
+
     flex-wrap: wrap;
     margin: -1rem -1rem;
     padding-bottom: 3rem;
@@ -100,7 +89,9 @@ img {
     align-items: center;
     position: absolute;
     top: 0;
+
     width: 77%;
+
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
 }
@@ -133,6 +124,7 @@ img {
 }
 
 .gallery-image {
+
     max-width: 100%;
     width: 18.25rem;
     height: 100%;
@@ -142,14 +134,32 @@ img {
 
 
 
-    .profile-image {
-        grid-row: 1 / -1;
-    }
+    
 
+/*
+
+The following code will only run if your browser supports CSS grid.
+
+Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling. 
+
+*/
+
+@supports (display: grid) {
+   
     .gallery {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
         grid-gap: 2rem;
     }
 
+
     
+
+    
+    .gallery-item,
+    .gallery {
+        width: auto;
+        margin: 0;
+    }
+
+}

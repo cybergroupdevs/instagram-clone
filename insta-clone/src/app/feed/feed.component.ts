@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
+import { HomenavComponent } from './../homenav/homenav.component';
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
-
-
-
 export class FeedComponent implements OnInit {
 
   constructor() { }
@@ -27,6 +24,7 @@ export class FeedComponent implements OnInit {
       "https://images.unsplash.com/photo-1505058707965-09a4469a87e4?w=500&h=500&fit=crop",
       "https://images.unsplash.com/photo-1423012373122-fff0a5d28cc9?w=500&h=500&fit=crop"
   ];
+
    username="deeps_rocks12";
    location="cybergroup";
    username1="shyam123";
@@ -38,9 +36,4 @@ suggestions=[       {username:"deepsy123",name:"deepanshu",url:"https://picsum.p
                     {username:"saerty234",name:"sahil",url:"https://picsum.photos/200/200?random"}
                          ];
 
-
-
-
-
-   
 }
