@@ -1,150 +1,193 @@
 *{
-    font-family: inherit;
+  font-family: inherit;
 }
- .image{
-   max-width:100%;
-   display:block;
-   width:fit-content;
-   display:flex;
-   height:auto;
-   
- }
+.image{
+ max-width:100%;
+ display:block;
+ 
+ 
+ height:auto;
+ 
+}
+#username{
+  font-weight:bold;
+  margin-left:2px;
+}
+
 .location{
-    font-size:15px;
-    color:black;
+
+  font-size:15px;
+  color:black;
+  margin-left:0.5rem;
 }
 .name{
-    background:white;
-    font-size:15px;
-    color:black;
-    font-weight:10px;
-    float:right;
-    
+  background:white;
+  font-size:15px;
+  color:black;
+  font-weight:bold;
+  float:right;
+  
 }
 .time{
-    background:white;
-    font-size:15x;
-    color:black;
-    font-weight:10px;
-    float:right;
+  background:white;
+  font-size:15x;
+  color:black;
+  font-weight:10px;
+  float:right;
 }
 
 .container{
-    background:white;
-    padding-top:50px;
-    width:50rem;
-    height:100vh;
-    max-width:100vw;
-  }
-.avatar {
-    vertical-align: middle;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-  .card-header{
- 
-    background:white;
-     display:flex;
-     justify-content:flex-start;
-     
- }
- .responsive {
-      height: auto;
-      max-width:18.25rem;
-      left:0;
-      right:0;
-      float:left;
-      width:fit-content;
-   } 
-   div,section{
-    border: 1 solid #000; 
-  }
-
-  .card{
   background:white;
-  width:18.25rem;
-  height:36rem;
-  border-radius:3px;
-  top:-5px;
-   bottom:0;
+  padding-top:50px;
+  width:50rem;
+  height:100vh;
+  max-width:100vw;
+  
 }
- /* Create three equal columns that sits next to each other */
- .column {
-    flex: 33.33%;
-    padding: 0;
-    display:inline-flex;
-    margin-right:20px;
-  }
-  .icon{
-      margin-top:0;
-      margin-right:20px;
-      margin-bottom:0;
-      margin-left:20px; 
-  }
-  .card-header{
- 
-    background:white;
-     display:flex;
-     justify-content:flex-start;
-     
- }
- .profile-info{
-     display: inline-block;
-     font-weight: bold;
-      
-      
-  }
- .like{
-  margin-top:0;
-  padding:0;
- }
- .comment-intro{
-  margin-top:5px;
-  padding:0;
-  background-color:white;
-  color:#999;
-  line-height:inherit;
- }
- .like-button{
+
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.card-header{
+
+  background:white;
+   display:flex;
+   justify-content:flex-start;
    
-   box-sizing:border-box;
-   cursor:pointer;
-   font-weight:600;
-   text-align: center;
-    text-transform: inherit;
-    text-overflow: ellipsis;
+}
+#responsive {
+  
+   height: auto;
+  max-width:18.25rem;
+  left:0;
+   right:0;
+   float:left;
+   
+
+ }
+ #btn{
+  cursor:pointer;
+  width:100%;
+ } 
+ div,section{
+  border: 1 solid #000; 
+}
+.card{
+background:white;
+/* margin :0 100px;*/
+width:19.25rem;
+height:auto;
+border-radius:3px;
+top:-5px;
+ bottom:0;
+margin-left:10%
+
+}
+/* Create three equal columns that sits next to each other */
+.column {
+  flex: 33.33%;
+  padding: 0;
+  display:inline-flex;
+  margin-right:20px;
+  
+}
+.icon{
+    margin-top:2%;
+    margin-right:20px;
+    margin-bottom:0;
+    margin-left:20px;
+}
+.card-header{
+
+  background:white;
+   display:flex;
+   justify-content:flex-start;
+   
+}
+.profile-info{
+   display:inline-block;
+   
     
-   background:0 0;
-    background-attachment: initial;
-    background-origin: initial;
-    background-clip: initial;
-    border:0;
-    width:auto;
-    user-select:none;
     
-  }
- .comments{
+}
+.like{
+margin-top:0;
+padding:0;
+
+}
+.comment-intro{
+margin-top:5px;
+padding:0;
+background-color:white;
+color:#999;
+line-height:inherit;
+}
+.like-button{
+ 
+ box-sizing:border-box;
+ cursor:pointer;
+ font-weight:600;
+ text-align: center;
+  text-transform: inherit;
+  text-overflow: ellipsis;
   
-  background-color:white;
-  color:black;
-  line-height:inherit;
-  display:flex;
-  flex-direction:column;
-   margin-top:-20px;
- }
- .comm-para{
+ background:0 0;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  border:0;
+  width:auto;
+  user-select:none;
   
-  margin-bottom:0rem;   
-   padding:0;
- }
- .card-footer{
-  padding:0;
-  box-sizing :border-box;
-  
- }
- .comment-link{
-   cursor:pointer;
-   text-decoration: none;
-   text-transform:  blue;
- }
+}
+.comments{
+
+background-color:white;
+color:black;
+line-height:inherit;
+display:flex;
+flex-direction:column;
+ margin-top:-20px;
+}
+.comm-para{
+
+margin-bottom:0rem;   
+ padding:0;
+}
+.card-footer1{
+padding:0;
+box-sizing :border-box;
+
+}
+.comment-link{
+ cursor:pointer;
+ text-decoration: none;
+ text-transform:  blue;
+}
+#btn{
+ align-items: center;
+ background:0 0;
+ border:0;
+ cursor:pointer;
+padding:8px
+
+
+}
+button{
+text-transform:none;
+letter-spacing:normal;
+text-shadow:none;
+text-align:center;
+box-sizing:border-box;
+
+}
+#list{
+color:black;
+}
+#comment{
+  font: 1em sans-serif;
+}

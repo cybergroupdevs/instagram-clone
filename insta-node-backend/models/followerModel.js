@@ -14,6 +14,13 @@ class Follower{
     async unfollow(criteria={}){
         return await this.model.deleteOne(criteria)
     }
+    async create(followObj){
+        return await this.model.create(followObj)
+    }
+    async deleteOne(criteria={}){
+        return await this.model.deleteOne(criteria)
+    }
+    
 
 }
 
