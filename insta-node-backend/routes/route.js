@@ -9,5 +9,6 @@ module.exports=(app) => {
          app.delete("/user/:id",controller.user.deleteAccount);
          app.post("/upload",controller.post.createNewPost);
          app.get("/upload",controller.post.show);
-         app.put("/follow",controller.follow.updateFollow)
+         app.put("/follow",controller.follow.updateFollow);
+         app.put("/unfollow",controller.unfollow.updateUnfollow);
 }
