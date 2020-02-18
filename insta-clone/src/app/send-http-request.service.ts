@@ -33,6 +33,35 @@ export class SendHttpRequestService {
     return this.http.get("url to come here");
   }
 
+  likePost(obj):Observable<any>{
+    return this.http.put("http://localhost:8080/like", obj).pipe(
+      tap(_ => this.log("Liked Picture")),
+      catchError(this.handleError<any>('error in liking post'))
+    );
+  }
+
+  commentPost(obj):Observable<any>{
+    return this.http.post("http://localhost:8080/comment", obj).pipe(
+      tap(_ => this.log("Commented")),
+      catchError(this.handleError<any>('error in commenting on post'))
+    );
+  }
+
+  
+  followUser(obj):Observable<any>{
+    return this.http.post("http://localhost:8080/follow", obj).pipe(
+      tap(_ => this.log("Followed")),
+      catchError(this.handleError<any>('error in following'))
+    );
+  }
+
+  unfollowUser(obj):Observable<any>{
+    return this.http.post("http://localhost:8080/unfollow", obj).pipe(
+      tap(_ => this.log("Unfollowed")),
+      catchError(this.handleError<any>('error in unfollowing'))
+    );
+  }
+
   /**
  * Handle Http operation that failed.
  * Let the app continue.
