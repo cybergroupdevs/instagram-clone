@@ -1,4 +1,5 @@
 const controller=require('../controllers');
+
 module.exports=(app) => {
    
        
@@ -8,8 +9,8 @@ module.exports=(app) => {
          app.put("/user/:id",controller.user.update);
          app.delete("/user/:id",controller.user.deleteAccount);
          app.post("/upload",controller.post.createNewPost);
-         app.post("/upload",controller.post.showAll);
-         app.post("/upload/:id",controller.post.show);
+         app.get("/upload",controller.post.showAll);
+         app.get("/upload/:id",controller.post.show);
          
 
 }

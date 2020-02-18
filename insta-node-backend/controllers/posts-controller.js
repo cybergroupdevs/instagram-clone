@@ -17,13 +17,13 @@ class employee{
         
     }
     async createNewPost(req, res){
-        let token = jwtHandler.tokenVerifier(req.body.token);
+        let token = jwtHandler.tokenVerifier(req.headers.token);
         console.log(token);
         if(token)
         {
             let newPost={
                 ownerId:req.body.ownerId,
-                url:req.body.url, //determine how to store images by kritika
+                url:req.body.url, 
                 caption:req.body.caption
                   };
         
@@ -36,12 +36,12 @@ class employee{
                 }
   
     async showAll(req,res) {
-        let token = jwtHandler.tokenVerifier(req.body.token);
+        let token = jwtHandler.tokenVerifier(req.headers.token);
         console.log(token);
         if(token)
         {
-        const post = await model.posts.get();
-        res.send(post);
+            const post = await model.posts.get();
+            res.send(post);
         }
         else{
             res.status(401).send("Unauthorized");
@@ -49,16 +49,19 @@ class employee{
 
     }
     async show(req,res) {
-        let token = jwtHandler.tokenVerifier(req.header.token);
+        let token = jwtHandler.tokenVerifier(req.headers.token);
+        console.log(req.headers.token);
         console.log(JSON.stringify(token));
+       console.log( typeof(token.data._id));
         if(token)
         {
-    const userObj= await model.posts.get({_id:req.params.id});
-    res.send(userObj);
-     }
-else{
-   res.status(401).send("Unauthorized");
+            let userObj= await model.posts.get({_id: req.params.id});
+            console.log(userObj);
+            res.send(userObj);
+        }
+        else{
+            res.status(401).send("Unauthorized");
+        }
     }
-}
 }
 module.exports = new employee();
