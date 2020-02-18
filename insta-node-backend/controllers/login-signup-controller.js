@@ -6,14 +6,14 @@ class employee{
 
     async createUser(req, res){
         let userObject = {
-            name :req.body.name,
-            instaHandle :req.body.instaHandle,
+            name : req.body.name,
+            instaHandle : req.body.instaHandle,
             phone : req.body.phone,
-            email :req.body.email,
+            email : req.body.email,
             password : req.body.password
         };
         const user=await model.user.save(userObject);
-        res.send(user);
+        res.status(200).send("Signed Up Successfully");
     }
 
     async checkUserAuthentication(req, res){

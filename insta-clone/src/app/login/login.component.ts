@@ -1,3 +1,4 @@
+import { SendHttpRequestService } from './../send-http-request.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sendReq: SendHttpRequestService) { }
   loginFunction() { 
    
  }
