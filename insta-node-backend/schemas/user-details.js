@@ -4,10 +4,6 @@ module.exports = {
     },
     instaHandle: {
         type: String,
-        default: null
-    },
-    instaHandle: {
-        type: String,
         required: true,
         unique: true,
         default: null
