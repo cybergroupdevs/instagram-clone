@@ -13,8 +13,13 @@
   .main-content {
     position: relative;
     width: 250px;
+<<<<<<< HEAD
     height: 90%;
     margin: 1.875rem auto 1.25rem;
+=======
+    height: 30rem;
+    margin: 8rem auto;
+>>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
     background-color: #fff;
     border: 2px solid #e6e6e6;
     padding: 1.875rem 3.125rem 1.875rem;

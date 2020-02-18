@@ -1,0 +1,4 @@
+<div class="file-upload">
+    <input type="file" name="image" ng2FileSelect [uploader] = "uploader">
+    <button type="submit" (click)="uploader.uploadAll()" [disabled] = "!uploader.getNotUploadedItems().length">Upload</button> 
+</div>

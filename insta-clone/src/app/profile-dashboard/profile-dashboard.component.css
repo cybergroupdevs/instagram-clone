@@ -13,12 +13,17 @@
 .btn-color{
     font-weight: 300;
     background-color: #fafafa;
+<<<<<<< HEAD
     /* background-color: rgba(246, 241, 234, 1); */
 }
 
 /* .bio-name{
     width: 60%;
 } */
+=======
+}
+
+>>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
 b{
     font-weight: lighter;
 }
