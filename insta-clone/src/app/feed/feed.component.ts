@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HomenavComponent } from './../homenav/homenav.component';
-
 
 
 @Component({
@@ -8,12 +6,17 @@ import { HomenavComponent } from './../homenav/homenav.component';
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
+ 
+
 
 export class FeedComponent implements OnInit {
-
+    public classlist;
+    
   constructor() { }
   ngOnInit() {
+    
   }
+  
   allImages=[
       "https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop",
       "https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop",
@@ -28,8 +31,6 @@ export class FeedComponent implements OnInit {
       "https://images.unsplash.com/photo-1505058707965-09a4469a87e4?w=500&h=500&fit=crop",
       "https://images.unsplash.com/photo-1423012373122-fff0a5d28cc9?w=500&h=500&fit=crop"
   ];
-
-
    username="deeps_rocks12";
    location="cybergroup";
    username1="shyam123";
@@ -40,5 +41,13 @@ suggestions=[       {username:"deepsy123",name:"deepanshu",url:"https://picsum.p
                     {username:"dees234",name:"deepak",url:"https://picsum.photos/200/200?random"},
                     {username:"saerty234",name:"sahil",url:"https://picsum.photos/200/200?random"}
                          ];
+      liked=function(){
+            return true;
+            
 
-}
+
+        }
+                        
+  }
+  
+

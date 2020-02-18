@@ -73,18 +73,18 @@
   cursor:pointer;
   width:100%;
  } 
- div,section{
-  border: 1 solid #000; 
-}
+ 
 .card{
 background:white;
 /* margin :0 100px;*/
 width:19.25rem;
 height:auto;
-border-radius:3px;
+
 top:-5px;
  bottom:0;
-margin-left:10%
+margin-left:10%;
+border:none;
+margin-top:8%;
 
 }
 /* Create three equal columns that sits next to each other */
@@ -155,8 +155,8 @@ flex-direction:column;
 }
 .comm-para{
 
-margin-bottom:0rem;   
- padding:0;
+margin-left:2%;   
+ 
 }
 .card-footer1{
 padding:0;
@@ -187,4 +187,18 @@ box-sizing:border-box;
 }
 #list{
 color:black;
+}
+#comment{
+  font: 1em sans-serif;
+  width:100%;
+}
+.fa-fa-heart{
+padding:0.5rem;
+margin-right:4rem;
+cursor: pointer;
+user-select: none;
+background-color:red;
+}
+#toggle{
+  margin:1rem;
 }

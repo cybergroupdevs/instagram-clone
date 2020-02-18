@@ -20,7 +20,11 @@ import { SuggestionForUComponent } from './suggestion-for-u/suggestion-for-u.com
     ProfileDashboardComponent,   
     ImageGalleryComponent,   
     HomenavComponent,
+<<<<<<< HEAD
     SuggestionForUComponent,
+=======
+    SuggestionForUComponent
+>>>>>>> 5626a89d0592fff58f63000ea6d571b57d3ff748
     FeedComponent
   ],
   imports: [
