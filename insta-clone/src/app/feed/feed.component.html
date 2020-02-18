@@ -98,6 +98,35 @@
            
         </div>
 
+        <!-- Floating Button Here -->
+        <div class="image-upload add-post">
+          <label for="file-input">
+            <img src="../../assets/add-btn2.png"/>
+          </label>
+          <button id="file-input" type="file" (click)="openModal()"></button>
+        </div>
+
+        <!-- Modal here -->
+        <div class="modal" tabindex="-1" role="dialog" #modal style="display: none;">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">What you thinking ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <input type="text" #caption>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="uploader.uploadAll()" [disabled] = "!uploader.getNotUploadedItems().length">Post</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <section id="lab_social_icon_footer" class="plus">
           <!-- Include Font Awesome Stylesheet in Header -->
           <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -107,12 +136,6 @@
           </div>
           </div>
           </section>
-
-   
-           
-        
-    <!-- </div> -->
-   
 
 </section>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
