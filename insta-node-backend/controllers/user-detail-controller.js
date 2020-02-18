@@ -12,17 +12,17 @@ class employee{
 
     async update(req, res){
         let updateObject = {...req.body};
-        model.userModel.update(updateObject);
+        model.user.update(updateObject);
     }
 
     async deleteAccount(req, res){
-        const deleteObj=await model.userModel.delete({ _id: req.params.id});
+        const deleteObj=await model.user.delete({ _id: req.params.id});
         res.send(deleteObj); 
     }
 
     async show(req, res){
-        if(jwtHandler.tokenVerifier(req.token)){
-            const user = await model.userModel.get({"_id": req.params.id}, 
+        if(jwtHandler.tokenVerifier(req.headers.token)){
+            const user = await model.user.get({"_id": req.params.id}, 
                                         {
                                             "instaHandle": 1,
                                             "name": 1,
@@ -38,5 +38,16 @@ class employee{
             res.status(401).send("Unauthorized");
         }
     }    
+    async showAll(req, res){
+        const token=jwtHandler.tokenVerifier(req.headers.token);
+        if(token)
+        {
+            const userObj = await model.user.get();
+            res.send(userObj);
+        }
+        else{
+            res.status(401).send("Unauthorized");
+        }
+    }
 }
 module.exports = new employee();
