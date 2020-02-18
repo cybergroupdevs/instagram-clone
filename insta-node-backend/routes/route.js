@@ -28,4 +28,6 @@ module.exports=(app) => {
          app.get("/upload",controller.post.showAll);
          app.get("/upload/:id",controller.post.show);
          app.put("/follow",controller.follow.updateFollow);
+         app.put("/unfollow",controller.unfollow.updateUnfollow);
+
 }
