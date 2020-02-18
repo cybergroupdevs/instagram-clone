@@ -18,6 +18,7 @@ var storage = multer.diskStorage({
 let upload = multer({storage: storage});
 
 module.exports=(app) => {
+
          app.post("/login", controller.loginSignup.checkUserAuthentication);
          app.post("/signup", controller.loginSignup.createUser);
          app.get("/user", controller.user.show);
@@ -26,4 +27,5 @@ module.exports=(app) => {
          app.post("/upload", upload.single('image'), controller.post.createNewPost);
          app.get("/upload",controller.post.showAll);
          app.get("/upload/:id",controller.post.show);
+        app.put("/follow",controller.follow.updateFollow);
 }
