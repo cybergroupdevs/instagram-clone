@@ -15,8 +15,6 @@ export class CreatePostComponent implements OnInit {
   
   constructor() { }
 
-  // objectId = "dkcdklcdslknk12knnckn11212n2nen1l";
-
   public uploader: FileUploader = new FileUploader({
     url: URL,
     itemAlias: 'image'

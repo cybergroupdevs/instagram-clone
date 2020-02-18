@@ -191,3 +191,28 @@ color:black;
 #comment{
   font: 1em sans-serif;
 }
+
+#lab_social_icon_footer {
+
+background-color:#dedede;
+cursor:pointer;
+ }
+.plus{
+margin-left:40vw;
+margin-right:50vw;
+color:#778899;
+ }
+
+#lab_social_icon_footera {
+color:#778899 ;
+ }
+
+#lab_social_icon_footer#social-tw:hover {
+color:#4099FF;
+ }
+
+
+#lab_social_icon_footer#social-em:hover {
+color:#1a4066 ;
+ }
+
