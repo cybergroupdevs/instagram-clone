@@ -1,7 +1,8 @@
+import { FileSelectDirective } from 'ng2-file-upload';
 import { HomenavComponent } from './homenav/homenav.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -10,6 +11,7 @@ import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard
 import {  ImageGalleryComponent } from './image-gallery/image-gallery.component';
 import { FeedComponent } from './feed/feed.component';
 import { SuggestionForUComponent } from './suggestion-for-u/suggestion-for-u.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 
 @NgModule({
@@ -21,11 +23,14 @@ import { SuggestionForUComponent } from './suggestion-for-u/suggestion-for-u.com
     ImageGalleryComponent,
     FeedComponent,
     HomenavComponent,
-    SuggestionForUComponent
+    SuggestionForUComponent,
+    CreatePostComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
