@@ -11,7 +11,7 @@ var storage = multer.diskStorage({
         callback(null, dir);
     },
     filename: function (req, file, callback) {
-        callback(null, file.originalname + '-' + Date.now());
+        callback(null, Date.now() + '-' + file.originalname);
         //appends the number of milliseconds elapsed since January 1, 1970, 00:00:00 UTC. to start of original file name
     }
 });

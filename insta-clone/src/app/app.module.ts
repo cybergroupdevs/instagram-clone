@@ -1,3 +1,4 @@
+import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { HomenavComponent } from './homenav/homenav.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -30,7 +31,8 @@ import { CreatePostComponent } from './create-post/create-post.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
