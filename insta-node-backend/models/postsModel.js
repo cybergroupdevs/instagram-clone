@@ -7,7 +7,7 @@ class Operations{
         this.model = mongoose.model('Post', postSchema);
     }
     async get(criteria={}, columns={}){
-        return this.model.find(criteria, columns);
+        return await this.model.find(criteria, columns);
     }
 
     async save(postObj){

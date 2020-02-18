@@ -1,4 +1,5 @@
 const controller=require('../controllers');
+
 var multer  = require('multer');
 var fs  = require('fs');
 
@@ -23,8 +24,7 @@ module.exports=(app) => {
          app.get("/user", controller.user.show);
          app.put("/user/:id", controller.user.update);
          app.delete("/user/:id", controller.user.deleteAccount);
-
          app.post("/upload", upload.single('image'), controller.post.createNewPost);
-         app.post("/upload",controller.post.showAll);
-         app.post("/upload/:id",controller.post.show);
+         app.get("/upload",controller.post.showAll);
+         app.get("/upload/:id",controller.post.show);
 }
