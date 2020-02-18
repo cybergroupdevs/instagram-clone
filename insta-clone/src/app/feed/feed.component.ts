@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,ElementRef, OnInit } from '@angular/core';
 
 
 @Component({
@@ -10,12 +10,23 @@ import { Component, OnInit } from '@angular/core';
 
 
 export class FeedComponent implements OnInit {
-    public classlist;
+    
+  
+    show:Boolean=false;
+    buttonName:String="follow";
+    follow(){
+      this.show = !this.show;
+
+    // CHANGE THE NAME OF THE BUTTON.
+    if(this.show)  
+      this.buttonName = "follow";
+    else
+      this.buttonName = "unfollow";
+    }
     
   constructor() { }
   ngOnInit() {
-    
-  }
+     }
   
   allImages=[
       "https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop",
@@ -39,15 +50,8 @@ export class FeedComponent implements OnInit {
    comment2="beauty queen";
 suggestions=[       {username:"deepsy123",name:"deepanshu",url:"https://picsum.photos/200/200?random"},
                     {username:"dees234",name:"deepak",url:"https://picsum.photos/200/200?random"},
-                    {username:"saerty234",name:"sahil",url:"https://picsum.photos/200/200?random"}
-                         ];
-      liked=function(){
-            return true;
-            
-
-
-        }
-                        
+                    {username:"saerty234",name:"sahil",url:"https://picsum.photos/200/200?random"}];
+             
   }
   
 

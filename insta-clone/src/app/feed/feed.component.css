@@ -1,6 +1,12 @@
 *{
   font-family: inherit;
 }
+a:before {
+  content: "<i class="fa fa-heart-o"></i>"
+}
+a:after{
+  content:"<i class="fa fa-heart"></i>"
+}
 .image{
  max-width:100%;
  display:block;
@@ -80,7 +86,7 @@ background:white;
 width:19.25rem;
 height:auto;
 
-top:-5px;
+top:75px;
  bottom:0;
 margin-left:10%;
 border:none;
@@ -192,13 +198,54 @@ color:black;
   font: 1em sans-serif;
   width:100%;
 }
-.fa-fa-heart{
-padding:0.5rem;
-margin-right:4rem;
-cursor: pointer;
-user-select: none;
-background-color:red;
+  .control::after {
+    content: url('../../assets/images/igheart.png');
 }
-#toggle{
-  margin:1rem;
+#togglefeed:checked ~ .control::after {
+    content: url('../../assets/images/igheartfilled.png');
+}
+#activity{
+  margin-top: 1vh;
+  margin-left: 6vw;
+  width:20%;
+}
+.visually-hidden {
+  position: absolute;
+  left: -100vw;
+  
+  
+}
+.control{
+  padding-left: 2vw;
+  padding-right: 2vw;
+  
+}
+button{
+  width:100px;
+  height:30px;
+  float:right;
+  background-color:white;
+  border:none;
+  color:blue;
+}
+
+button .msg-follow,
+button .msg-unfollow{
+  display: none;
+}
+
+button .msg-follow{
+  display: inline;
+}
+
+button.following .msg-follow{
+  display: none;
+}
+
+
+
+
+
+button.following:not(.wait):hover .msg-unfollow{
+  display: inline;
 }
