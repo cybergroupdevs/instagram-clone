@@ -22,12 +22,15 @@ module.exports=(app) => {
          app.post("/login", controller.loginSignup.checkUserAuthentication);
          app.post("/signup", controller.loginSignup.createUser);
          app.get("/user", controller.user.showAll);
+         app.get("/user/:id",controller.user.show);
          app.put("/user/:id", controller.user.update);
          app.delete("/user/:id", controller.user.deleteAccount);
-         app.post("/upload", upload.single('image'), controller.post.createNewPost);
+         app.post("/upload", upload.single('image'), controller.posts.createNewPost);
          app.get("/upload",controller.post.showAll);
          app.get("/upload/:id",controller.post.show);
          app.put("/follow",controller.follow.updateFollow);
          app.put("/unfollow",controller.unfollow.updateUnfollow);
+         app.put("/like",controller.likes.updateLike);
+         app.post("/comment",controller.comments.addComment);
 
 }

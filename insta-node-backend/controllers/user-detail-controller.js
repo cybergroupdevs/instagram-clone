@@ -49,5 +49,16 @@ class employee{
             res.status(401).send("Unauthorized");
         }
     }
+    async show(req, res){
+        const token=jwtHandler.tokenVerifier(req.headers.token);
+        if(token)
+        {
+            const userObj = await model.user.get({_id: req.params.id});
+            res.send(userObj);
+        }
+        else{
+            res.status(401).send("Unauthorized");
+        }
+    }
 }
 module.exports = new employee();

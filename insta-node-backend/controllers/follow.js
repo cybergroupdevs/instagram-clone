@@ -20,7 +20,6 @@ class follow{
     const userWhoHasFollowed = await user.findOne({instaHandle:followObj.followerId});
     await followersModel.create({ ownerId: userToBeFollowed, followerId: userWhoHasFollowed });
     await followingModel.create({ ownerId: userWhoHasFollowed, followingId: userToBeFollowed });
-
     var follower = await user.findOne({ instaHandle: followObj.ownerId });
     var following = await user.findOne({ instaHandle:followObj.followerId });
     followers = follower.followers;
