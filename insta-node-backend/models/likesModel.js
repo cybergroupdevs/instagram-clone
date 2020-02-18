@@ -11,7 +11,7 @@ class Operations{
         return this.model.find(criteria, columns);
     }
 
-    async save(employeeObj){
+    async save(likeObj){
         return await this.model.create(likeObj);
     }
 
