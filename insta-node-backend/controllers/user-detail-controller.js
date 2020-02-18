@@ -1,5 +1,11 @@
 const model = require("../models");
 const jwtHandler = require("../jwtHandler");
+const schema = require("../schemas")
+// const express = require('express')
+// const router = express.Router()
+const followerModel = require('../schemas/follower')
+const followingModel = require('../schemas/following')
+
 class employee{
     constructor(){
     }
@@ -31,41 +37,6 @@ class employee{
         else{
             res.status(401).send("Unauthorized");
         }
-    }
-    // async updateFollow(req,res){
-    //     // let followerObj={
-    //     //     $inc: {'following':1}
-    //     // }
-    //     // let followedObj={
-    //     //     $inc:{'follower':1}
-    //     // }
-    //     const follower = await model.userModel.follow({"instaHandle": req.body.followerId},followerObj)
-    //     const folowed = await model.userModel.follow({"instaHandle":req.body.followedId},followerObj)
-    //     let followerObj={
-    //         "ownerId" : req.body.followedId,
-    //         "followerId": req.body.followerId
-    //     }
-    //     let followedObj = {
-    //         "ownerId": req.body.followerId,
-    //         "followingId" : req.body.followedId
-    //     }
-    //     const follower = await model.followerModel.follow(followerObj);
-    //     const followed = await model.followingModel.follow(followedObj);
-
-    //     res.send("now following user")
-    // }
-    // async updateUnfollow(req,res){
-    //     let unfollowerObj={
-    //         $inc: {'following':-1}
-    //     }
-    //     let unfollowedObj={
-    //         $inc:{'follower':-1}
-    //     }
-    //     const unfollower = await model.userModel.unfollow({"instaHandle": req.body.unfollowerId},unfollowerObj);
-    //     const unfollowed = await model.userModel.unfollow({"instaHandle": req.body.unfollowedId},unfollowedObj);
-    //     const unfollower = await model.followerModel.unfollow({"ownerId": req.body.unfollowedId,"followerId":req.body.unfollowerId});
-    //     const unfollowed = await model.followingModel.unfollow({"ownerId":req.body.unfollowerId,"followingId":req.body.unfollowedId});
-    //     res.send("now unfollowed user");
-    // }
+    }    
 }
 module.exports = new employee();
