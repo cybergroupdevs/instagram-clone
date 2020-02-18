@@ -13,7 +13,7 @@ class employee{
             password : req.body.password
         };
         const user=await model.user.save(userObject);
-        res.send(user);
+        res.status('200').send(user);
     }
 
     async checkUserAuthentication(req, res){
