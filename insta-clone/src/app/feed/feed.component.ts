@@ -1,17 +1,53 @@
 import { SendHttpRequestService } from './../send-http-request.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 declare function addcomment(): any;
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
- 
-
 
 export class FeedComponent implements OnInit {
 
-  constructor(sendReq: SendHttpRequestService) { }
+  constructor(private sendReq: SendHttpRequestService,
+   private _router: Router) {}
+
+   goToProfile() {
+      this._router.navigate(['/profile']);
+    }
+
+   @ViewChild('liked', {static: false}) liked: ElementRef;
+   @ViewChild('comment', {static: false}) comment: ElementRef;
+   res: any;
+ 
+   liked_func() { 
+         let likedObj = {
+           //hande of user who liked and photoID
+           instaHandle: this.instaHandle.nativeElement.value,
+           photoID: this.photoID.nativeElement.value
+         }
+         console.log(likedObj);
+         this.sendReq.likePost(likedObj).subscribe(res => this.res = res);
+         console.log(this.res);
+
+   }
+
+   addcomment(){
+      let commentObj = {
+      //hande of user who liked and photoID
+      instaHandle: this.instaHandle.nativeElement.value,
+      upload_ID: this.photoID.nativeElement.value,
+      comment:this.comment.nativeElement.value
+    }
+
+    console.log(commentObj);
+    this.sendReq.commentPost(commentObj).subscribe(res => this.res = res);
+    console.log(this.res);
+      
+   }
+
+
 
   ngOnInit() {
   }
