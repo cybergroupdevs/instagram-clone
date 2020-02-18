@@ -1,12 +1,7 @@
 *{
   font-family: inherit;
 }
-a:before {
-  content: "<i class="fa fa-heart-o"></i>"
-}
-a:after{
-  content:"<i class="fa fa-heart"></i>"
-}
+
 .image{
  max-width:100%;
  display:block;
@@ -75,10 +70,7 @@ a:after{
    
 
  }
- #btn{
-  cursor:pointer;
-  width:100%;
- } 
+ 
  
 .card{
 background:white;
@@ -132,24 +124,7 @@ background-color:white;
 color:#999;
 line-height:inherit;
 }
-.like-button{
- 
- box-sizing:border-box;
- cursor:pointer;
- font-weight:600;
- text-align: center;
-  text-transform: inherit;
-  text-overflow: ellipsis;
-  
- background:0 0;
-  background-attachment: initial;
-  background-origin: initial;
-  background-clip: initial;
-  border:0;
-  width:auto;
-  user-select:none;
-  
-}
+
 .comments{
 
 background-color:white;
@@ -164,7 +139,7 @@ flex-direction:column;
 margin-left:2%;   
  
 }
-.card-footer1{
+.mycard-footer{
 padding:0;
 box-sizing :border-box;
 
@@ -174,15 +149,7 @@ box-sizing :border-box;
  text-decoration: none;
  text-transform:  blue;
 }
-#btn{
- align-items: center;
- background:0 0;
- border:0;
- cursor:pointer;
-padding:8px
 
-
-}
 button{
 text-transform:none;
 letter-spacing:normal;
@@ -191,9 +158,7 @@ text-align:center;
 box-sizing:border-box;
 
 }
-#list{
-color:black;
-}
+
 #comment{
   font: 1em sans-serif;
   width:100%;
