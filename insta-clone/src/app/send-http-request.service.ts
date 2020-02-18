@@ -23,7 +23,10 @@ export class SendHttpRequestService {
   }
 
   logMeIn(obj): Observable<any>{
-    return this.http.post("url to come here", obj);
+    return this.http.post("http://localhost:8080/login", obj, {responseType: 'text'}).pipe(
+      tap(_ => this.log("Signed Up")),
+      catchError(this.handleError<any>('updateHero'))
+    );
   }
 
   posts(): Observable<any>{
