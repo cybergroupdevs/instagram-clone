@@ -1,42 +1,54 @@
+
+
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
-
-<section class="container">
+<app-homenav></app-homenav>
+<section class="container-fluid">
     <!-- <div *ngFor="let img of allImages" class="mt-5 mx-auto"> -->
-        <div class="card" class="" *ngFor="let img of allImages">
-            <div class="card-header">
-                <div>
-                    <img src={{img}} alt="post"class="avatar">
-                </div>  
+       
+        <div class="row">
+            
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+             
+                    <div class="card w-75"  *ngFor="let img of allImages">
+           
+                          <div class="card-header">
+                               <div>
+                                 <img src={{img}} alt="post"class="avatar">
+                             </div>  
                   
                 <div class="profile-info">
-                    <div class="name">deepanshu</div>
-                    <div class="location">cybergroup</div>
-                    <div class="time">1hr</div>
+                    <div class="name">{{username}}</div>
+                    <div class="location">{{location}}</div>
+                    
                 </div>
-              
-                               <div class="responsive ">
-                                         <img src={{img}} class=" image"  alt="post">
-                                 </div>
+            </div>
+
+               
+             <div id="#responsive ">
+                <img src={{img}} class=" image"  alt="post">
+               </div>
                        
                 
                           <div class="row">
-                            <div class="column">
-                            
+                               <div class="column">
                                    
-                                     <img src="https://image.flaticon.com/icons/svg/25/25424.svg" class="icon"width="6%"/>
                                   
+                                     <img src="https://image.flaticon.com/icons/svg/25/25424.svg" class="icon"width="6%"/>
+                                   
                                      <img src="https://image.flaticon.com/icons/svg/54/54916.svg"class="icon" width="6%"/>
-                                      <img src="https://image.flaticon.com/icons/svg/126/126536.svg"class="icon" width="6%"/>
-                         </div>
+                                     
+                                     <img src="https://image.flaticon.com/icons/svg/126/126536.svg"class="icon" width="6%"/>
+                             </div>
                           </div>
                           <div class="like">
                               
                               4944 likes
                             
                           </div>
-                          <div class="card-footer"> 
+                          <div class="mycard-footer"> 
                                <div class="comment-intro">
                                    <a href="#" class="comment-link">
                                     <p>view all 24 comments</p>
@@ -44,17 +56,71 @@
                                 </div>
                               
                                <div class="comments" >
-                                 <p class="comm-para"><span style="margin-right:20px">username1</span>comment1</p>
-                                 <p class="comm-para"><span style="margin-right:20px">username2</span>comment2</p>
+                                 <p class="comm-para"><span id="username"style="margin-right:20px" >{{username1}}</span>{{comment1}}</p>
+                                 <p class="comm-para"><span id="username"style="margin-right:20px">{{username2}}</span>{{comment2}}</p>
                                </div> 
                                   <div>
-                                      add comment
+                                    <input type="text"id="comment" placeholder="add your comment"> 
+                                   
+                                      <button onclick="addcomment()" id="btn">add comment</button>
+                                      <ul id="list">
+                                        <li>excellent</li>
+                                         </ul>
                                   </div>
                          </div>
-               </div>
-       </div>
-     
+                    
+                </div>
+            </div>
+              
+                   <div class="col-lg-4 col-md-6 col-sm-0 col-xs-0">
+                      
+                        <div class="card shadow mb-3">
+                            <div class="card-body " >
+                              
+                              <h5>Suggestions for you</h5>
+                              <div *ngFor="let suggestion of suggestions">
+                                     <a routerlink="[/image,suggestion.username]">
+                              <p><img src={{suggestion.url}} class="rounded-circle float-left mr-2" width="40">
+                                <a href="#">{{suggestion.name}} <small class="text-muted">{{suggestion.username}}</small></a></p></a>
+                              <hr>
+                              <p><img src={{suggestion.url}} class="rounded-circle float-left mr-2" width="40">
+                                <a href="#">{{suggestion.name}} <small class="text-muted">{{suggestion.username}}</small></a></p>
+                              <hr>
+                              <p><img src={{suggestion.url}} class="rounded-circle float-left mr-2" width="40">
+                                <a href="#">{{suggestion.name}} <small class="text-muted">{{suggestion.username}}</small></a></p>
+                              <hr>
+                            </div>
+                            </div>
+                            <div class="card-footer">
+                              <a href="#">Find more</a>
+                            </div>
+                            
+                          </div>
+                          
+            </div>
+           
+        </div>
+
+   
+           
+        
+    <!-- </div> -->
+   
+
 </section>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+<script>
+    function addcomment(){
+   var node = document.createElement("li");   
+var textnode = document.createTextNode(document.getElementById("comment").value);         
+node.appendChild(textnode);                              
+list=document.getElementById("list").appendChild(node);   
+console.log(list);
+
+    }
+</script>
