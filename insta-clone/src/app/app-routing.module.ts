@@ -1,5 +1,5 @@
 import { CreatePostComponent } from './create-post/create-post.component';
-import { FileSelectDirective } from 'ng2-file-upload';
+//import { FileSelectDirective } from 'ng2-file-upload';
 import { FeedComponent } from './feed/feed.component';
 import { AppComponent } from './app.component';
 import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard.component';
