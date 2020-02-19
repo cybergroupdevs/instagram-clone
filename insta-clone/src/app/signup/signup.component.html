@@ -12,17 +12,17 @@
       <div>Sign up to see photos and videos from your friends.</div>
     </div>
     <div class="l-part">
-      <input type="text" placeholder="Mobile Number or Email" class="input-1" />
+      <input type="text" placeholder="Mobile Number or Email" #email class="input-1" />
       <div>
-        <input type="text" placeholder="Full Name" class="input-2" />
+        <input type="text" placeholder="Full Name" #name class="input-2" />
       </div>
       <div>
-        <input type="text" placeholder="Username" class="input-3" />
+        <input type="text" placeholder="Username" #instaHandle class="input-3" />
       </div>
       <div>
-        <input type="password" placeholder="Password" class="input-4" />
+        <input type="password" placeholder="Password" #password class="input-4" />
       </div>
-      <input type="button" value="Sign up" class="btn"/>
+      <input type="button" value="Sign up" (click)="signup()" class="btn"/>
       <div class="overlap-text">
       <p>By signing up, you agree to our Terms , Data Policy and Cookies Policy .</p>
     </div>

@@ -11,11 +11,11 @@
       <img src="https://i.imgur.com/zqpwkLQ.png" />
     </div>
     <div class="l-part">
-      <input type="text" placeholder="Username or Email" class="input-1" />
+      <input type="text" placeholder="Username or Email" #instaHandle class="input-1" />
       <div >
-        <input type="password" placeholder="Password" class="input-2" />
+        <input type="password" placeholder="Password" #password class="input-2" />
       </div>
-      <input type="button" value="Log In" class="btn" />
+      <input type="button" (click)="loginFunction()" value="Log In" class="btn"/>
       <div class="overlap-text">
       <a href="#">Forgot Password?</a>
     </div>

@@ -1,7 +1,6 @@
 *{
   font-family: inherit;
 }
-
 .image{
  max-width:100%;
  display:block;
@@ -43,10 +42,7 @@
   width:50rem;
   height:100vh;
   max-width:100vw;
-  
 }
-
-
 .avatar {
   vertical-align: middle;
   width: 50px;
@@ -70,19 +66,21 @@
    
 
  }
- 
- 
+ #btn{
+  cursor:pointer;
+  width:100%;
+ } 
 .card{
 background:white;
 /* margin :0 100px;*/
 width:19.25rem;
 height:auto;
-
 top:75px;
  bottom:0;
 margin-left:10%;
 border:none;
 margin-top:8%;
+border-radius:3px;
 
 }
 /* Create three equal columns that sits next to each other */
@@ -124,20 +122,16 @@ background-color:white;
 color:#999;
 line-height:inherit;
 }
-
 .comments{
-
-background-color:white;
-color:black;
-line-height:inherit;
-display:flex;
-flex-direction:column;
- margin-top:-20px;
+  background-color:white;
+  color:black;
+  line-height:inherit;
+  display:flex;
+  flex-direction:column;
+  margin-top:-20px;
 }
 .comm-para{
-
-margin-left:2%;   
- 
+  margin-left:2%;   
 }
 .mycard-footer{
 padding:0;
@@ -206,10 +200,6 @@ button .msg-follow{
 button.following .msg-follow{
   display: none;
 }
-
-
-
-
 
 button.following:not(.wait):hover .msg-unfollow{
   display: inline;

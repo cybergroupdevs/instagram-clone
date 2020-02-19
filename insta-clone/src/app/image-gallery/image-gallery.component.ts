@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, ElementRef, ViewChild} from '@angular/core';
+import { HostListener } from "@angular/core";
 
 @Component({
   selector: 'app-image-gallery',
@@ -10,7 +12,11 @@ export class ImageGalleryComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
+
+  // @ViewChild 
+
 allImages=[
   "https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop",
   "https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop",
