@@ -215,4 +215,11 @@ color:#4099FF;
 #lab_social_icon_footer#social-em:hover {
 color:#1a4066 ;
  }
-
+.add-post{
+  position: fixed;
+  left: 85%;
+  top: 85%;
+}
+.image-upload>input {
+  display: none;
+}

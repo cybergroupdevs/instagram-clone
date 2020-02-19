@@ -67,35 +67,37 @@
                          </div>
                     
                 </div>
+            </div>           
+        </div>
+
+        <!-- Floating Button Here -->
+        <div class="image-upload add-post">
+          <label for="file-input">
+            <img src="../../assets/add-btn2.png"/>
+          </label>
+          <button id="file-input" type="file" (click)="openModal()"></button>
+        </div>
+
+        <!-- Modal here -->
+        <div class="modal" tabindex="-1" role="dialog" #modal style="display: none;">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">What you thinking ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <input class="w-25" type="file" name="image" ng2FileSelect [uploader]="uploader">
+                <input type="text" #caption>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="uploadPost()" [disabled] = "!uploader.getNotUploadedItems().length">Post</button>
+                <button type="button" class="btn btn-secondary" (click)="closeModal()" data-dismiss="modal">Cancel</button>
+              </div>
             </div>
-              
-                   <!-- <div class="col-lg-4 col-md-6 col-sm-0 col-xs-0">
-                      
-                        <div class="card shadow mb-3">
-                            <div class="card-body " >
-                              
-                              <h5>Suggestions for you</h5>
-                              <div *ngFor="let suggestion of suggestions">
-                                     <a routerlink="[/image,suggestion.username]">
-                              <p><img src={{suggestion.url}} class="rounded-circle float-left mr-2" width="40">
-                                <a href="#">{{suggestion.name}} <small class="text-muted">{{suggestion.username}}</small></a></p></a>
-                              <hr>
-                              <p><img src={{suggestion.url}} class="rounded-circle float-left mr-2" width="40">
-                                <a href="#">{{suggestion.name}} <small class="text-muted">{{suggestion.username}}</small></a></p>
-                              <hr>
-                              <p><img src={{suggestion.url}} class="rounded-circle float-left mr-2" width="40">
-                                <a href="#">{{suggestion.name}} <small class="text-muted">{{suggestion.username}}</small></a></p>
-                              <hr>
-                            </div>
-                            </div>
-                            <div class="card-footer">
-                              <a href="#">Find more</a>
-                            </div>
-                            
-                          </div>
-                          
-            </div> -->
-           
+          </div>
         </div>
 
         <section id="lab_social_icon_footer" class="plus">
@@ -107,10 +109,6 @@
           </div>
           </div>
           </section>
-        
-    <!-- </div> -->
-   
-
 </section>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -1,8 +1,12 @@
 import { SendHttpRequestService } from './../send-http-request.service';
+import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
 import { Component, ViewChild, ElementRef, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 declare function addcomment(): any;
+
+const URL = 'http://localhost:8080/upload';
+
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
@@ -11,25 +15,50 @@ declare function addcomment(): any;
 
 export class FeedComponent implements OnInit {
 
-  constructor(private sendReq: SendHttpRequestService,
-   private _router: Router) {}
+  constructor(private sendReq: SendHttpRequestService) { }
+  @ViewChild('modal', {static: false}) modal: ElementRef;
+  @ViewChild('caption', {static: false}) caption: ElementRef;
 
-   @ViewChild('liked', {static: false}) liked: ElementRef;
-   @ViewChild('comment', {static: false}) comment: ElementRef;
-   res: any;
+  fileOptions: FileUploaderOptions = {};
 
-   ngOnInit() {
-      console.log("in oninit");
-      this.feed();
+  public uploader: FileUploader = new FileUploader({
+    url: URL,
+    itemAlias: 'image',
+    authTokenHeader: "token",
+    authToken: localStorage.getItem("token")
+  });
+
+  uploadPost(){
+    this.uploader.onBuildItemForm = (item, form) => {
+      form.append("ownerId", this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id);
+      form.append("caption", this.caption.nativeElement.value);
+    }
+    this.uploader.uploadAll();
   }
-  
-  feed(){
-     console.log("in feed");
-    let allImages = [];
-   this.sendReq.posts().subscribe((res: HttpResponse<any>) => allImages = res.body);
-   console.log(allImages);
+
+  loadPosts(){
+    console.log("posts()");
+    this.sendReq.posts().subscribe(res => {
+      console.log(res);
+    });
+    // console.log(this.sendReq.posts());
   }
-  
+
+  ngOnInit() {
+    this.loadPosts();
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+    };
+    this.uploader.onCompleteItem = (item: any, status: any) => {
+      console.log("Uploaded File details", item, status);
+    };
+  }
+  openModal(){
+    this.modal.nativeElement.style.display = "flex";
+  }
+
+  closeModal(){
+    this.modal.nativeElement.style.display = "none";
 }
 
    liked_func() { 
