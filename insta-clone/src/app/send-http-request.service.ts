@@ -41,12 +41,17 @@ export class SendHttpRequestService {
     );
   }
 
+
   updateUser(obj): Observable<any>{
     return this.http.put("http://localhost:8080/user:"+this.jsonDecoder(localStorage.getItem("token")).data._id,
     {headers: this.header_token});
   }
+
   posts(): Observable<any>{
-    return this.http.get("url to come here");
+    return this.http.get("http://localhost:8080/upload").pipe(
+      tap(_ => this.log("showing feed")),
+      catchError(this.handleError<any>('error in feed'))
+    );
   }
 
   likePost(obj):Observable<any>{
@@ -62,7 +67,6 @@ export class SendHttpRequestService {
       catchError(this.handleError<any>('error in commenting on post'))
     );
   }
-
   
   followUser(obj):Observable<any>{
     return this.http.post("http://localhost:8080/follow", obj).pipe(
@@ -73,6 +77,20 @@ export class SendHttpRequestService {
 
   unfollowUser(obj):Observable<any>{
     return this.http.post("http://localhost:8080/unfollow", obj).pipe(
+      tap(_ => this.log("Unfollowed")),
+      catchError(this.handleError<any>('error in unfollowing'))
+    );
+  }
+
+  loadUserDetail(obj):Observable<any>{
+    return this.http.get("http://localhost:8080/user", obj).pipe(
+      tap(_ => this.log("Unfollowed")),
+      catchError(this.handleError<any>('error in unfollowing'))
+    );
+  }
+
+  loadUploads(obj):Observable<any>{
+    return this.http.get("http://localhost:8080/upload", obj).pipe(
       tap(_ => this.log("Unfollowed")),
       catchError(this.handleError<any>('error in unfollowing'))
     );
