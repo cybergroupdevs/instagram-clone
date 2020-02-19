@@ -1,37 +1,78 @@
+
 import { SendHttpRequestService } from './../send-http-request.service';
+import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
 import { Component, ViewChild, ElementRef, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 declare function addcomment(): any;
+
+const URL = 'http://localhost:8080/upload';
+
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
+ 
+
 
 export class FeedComponent implements OnInit {
+    
+  constructor(private sendReq: SendHttpRequestService) { }
+  @ViewChild('modal', {static: false}) modal: ElementRef;
+  @ViewChild('caption', {static: false}) caption: ElementRef;
+    show:Boolean=false;
+    buttonName:String="follow";
+    follow(){
+      this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if(this.show)  
+      this.buttonName = "follow";
+    else
+      this.buttonName = "unfollow";
+    }
 
-  constructor(private sendReq: SendHttpRequestService,
-   private _router: Router) {}
+  fileOptions: FileUploaderOptions = {};
 
-   @ViewChild('liked', {static: false}) liked: ElementRef;
-   @ViewChild('comment', {static: false}) comment: ElementRef;
-   res: any;
- 
-   ngOnInit() {
-      console.log("in oninit");
-      this.feed();
+  public uploader: FileUploader = new FileUploader({
+    url: URL,
+    itemAlias: 'image',
+    authTokenHeader: "token",
+    authToken: localStorage.getItem("token")
+  });
+
+  uploadPost(){
+    this.uploader.onBuildItemForm = (item, form) => {
+      form.append("ownerId", this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id);
+      form.append("caption", this.caption.nativeElement.value);
+    }
+    this.uploader.uploadAll();
   }
-  
-  feed(){
-     console.log("in feed");
-    let allImages = [];
-   this.sendReq.posts().subscribe((res: HttpResponse<any>) => allImages = res.body);
-   console.log(allImages);
-  }
-  
-}
 
+  loadPosts(){
+    console.log("posts()");
+    this.sendReq.posts().subscribe(res => {
+      console.log(res);
+    });
+    // console.log(this.sendReq.posts());
+  }
+
+  ngOnInit() {
+    this.loadPosts();
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+    };
+    this.uploader.onCompleteItem = (item: any, status: any) => {
+      console.log("Uploaded File details", item, status);
+    };
+  }
+  openModal(){
+    this.modal.nativeElement.style.display = "flex";
+  }
+
+  closeModal(){
+    this.modal.nativeElement.style.display = "none";
+  }
    //    let instahandle= {
    //    //    //hande of owner of post
    //    //    ownerID: this.ownerID.nativeElement.value,
@@ -42,7 +83,6 @@ export class FeedComponent implements OnInit {
    //    //  console.log(this.res);
    //    //  this.sendReq.loadUploads(ownerID).subscribe(res => this.res = res);
    //     console.log(this.res);
-
    //  }
 
    // liked_func() { 
@@ -86,4 +126,5 @@ export class FeedComponent implements OnInit {
 //   ];
      
 //   });
+}
 

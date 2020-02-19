@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { Token } from '@angular/compiler/src/ml_parser/lexer';
 
 @Injectable({
   providedIn: 'root'
@@ -14,26 +15,67 @@ export class SendHttpRequestService {
   private log(message: string) {
     console.log(message);
   }
+  //Decode JWT and return the Payload in JSON Format
+  jsonDecoder = (token) => {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+  };
+
+  
+  header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem("token"));
+
+  header_options: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem("token"));
+
+  //Decode JWT and return the Payload in JSON Format
+  jsonDecoder = (token) => {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+  };
+  
+  header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem("token"));
 
   signMeUp(obj): Observable<any>{
     return this.http.post("http://localhost:8080/signup", obj).pipe(
       tap(_ => this.log("Signed Up")),
-      catchError(this.handleError<any>('updateHero'))
+      catchError(this.handleError<any>('Some Error Occurred'))
     );
   }
 
   logMeIn(obj): Observable<any>{
     return this.http.post("http://localhost:8080/login", obj, {responseType: 'text'}).pipe(
-      tap(_ => this.log("Signed Up")),
-      catchError(this.handleError<any>('updateHero'))
+      tap(_ => this.log("Log In")),
+      catchError(this.handleError<any>('Some Error Occurred'))
     );
   }
-  
+
+
+  updateUser(obj): Observable<any>{
+    return this.http.put("http://localhost:8080/user:"+this.jsonDecoder(localStorage.getItem("token")).data._id,
+    {headers: this.header_token});
+  }
+
   posts(): Observable<any>{
-    return this.http.get("http://localhost:8080/upload").pipe(
-      tap(_ => this.log("showing feed")),
-      catchError(this.handleError<any>('error in feed'))
+    return this.http.get("http://localhost:8080/posts", {headers: this.header_token}).pipe(
+      tap(_ => this.log("Got Posts")),
+      catchError(this.handleError<any>('Some Error Occurred'))
     );
+  }
+
+  userData(): Observable<any>{
+    return this.http.get("http://localhost:8080/user:"+this.jsonDecoder(localStorage.getItem("token")).data._id,
+       {headers: this.header_token});
+    //return this.http.get("http://localhost:8080/upload").pipe(
+      //tap(_ => this.log("showing feed")),
+      //catchError(this.handleError<any>('error in feed'))
+    //);
   }
 
   likePost(obj):Observable<any>{
@@ -61,6 +103,16 @@ export class SendHttpRequestService {
     return this.http.post("http://localhost:8080/unfollow", obj).pipe(
       tap(_ => this.log("Unfollowed")),
       catchError(this.handleError<any>('error in unfollowing'))
+    );
+  }
+  searchUsers(term: string): Observable<any> {
+    if (!term.trim()) {
+      // if not search term, return empty users array.
+      return of([]);
+    }//(`${this.heroesUrl}/?name=${term}`)
+    return this.http.get(`http://localhost:8080/user?instaHandle=${term}`, {headers: this.header_options}).pipe(
+      tap(_ => this.log("display users")),
+      catchError(this.handleError<any>('error in loading'))
     );
   }
 

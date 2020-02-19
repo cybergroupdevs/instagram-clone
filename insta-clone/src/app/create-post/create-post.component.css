@@ -1,0 +1,56 @@
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+html,body{
+    width: 500px;
+    margin: auto;
+    height: 100%;
+    background: #eee;
+}
+.container{
+    width: 500px;
+    margin: 20px auto;
+}
+.form-group{
+    width:  200px;
+    margin: 10px auto;
+    align-content: center;
+}
+.form-group input{
+    transition: 0.3s linear;
+}
+.form-group input:focus{
+    border: 1px solid crimson;
+    box-shadow: 0 0 0 0;
+}
+span{
+    font-size:15px;
+}
+a{
+    text-decoration:none; 
+    color: #0062cc;
+    border-bottom:2px solid #0062cc;
+}
+.button{
+    margin-top: 20vh;
+}
+.box{
+    margin-top: 5vh;
+}
+.box-part{
+    background:#FFF;
+    border-radius:0;
+}
+.text{
+    margin:20px 0px;
+}
+.fa{
+    color:black;
+}
+.ft14 {
+    font-size: 30px !important;
+    color:black;
+}
+.image-upload>input {
+    display: none;
+  }

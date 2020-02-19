@@ -1,8 +1,10 @@
+
+
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
-<app-homenav></app-homenav>
 <section class="container-fluid">
     <!-- <div *ngFor="let img of allImages" class="mt-5 mx-auto"> -->
        
@@ -32,13 +34,13 @@
                 
                           <div class="row">
                                <div class="column">
-                                <div id="activity">
-                                <input type="checkbox" id="togglefeed" class="visually-hidden">
-                                 <label for="togglefeed"  class="control"></label>
-                                </div> 
-                                   <div (click)="addcomment()">
-                                    <i class="fa fa-comment-o fa-2x "></i>
-                                   </div>
+                                   
+                                  
+                                     <img src="https://image.flaticon.com/icons/svg/25/25424.svg" class="icon"width="6%"/>
+                                   
+                                     <img src="https://image.flaticon.com/icons/svg/54/54916.svg"class="icon" width="6%"/>
+                                     
+                                     <img src="https://image.flaticon.com/icons/svg/126/126536.svg"class="icon" width="6%"/>
                              </div>
                           </div>
                           <div class="like">
@@ -46,9 +48,9 @@
                               4944 likes
                             
                           </div>
-                          <div class="mycard-footer"> 
+                          <div class="card-footer1"> 
                                <div class="comment-intro">
-                                   <a href="/feed" class="comment-link">
+                                   <a href="#" class="comment-link">
                                     <p>view all 24 comments</p>
                                 </a>   
                                 </div>
@@ -58,7 +60,7 @@
                                  <p class="comm-para"><span id="username"style="margin-right:20px">{{username2}}</span>{{comment2}}</p>
                                </div> 
                                   <div>
-                                    <input type="text"id="comment" placeholder="add your comment"> 
+                                      add comment
                                   </div>
                          </div>
                     
@@ -68,19 +70,13 @@
                    <div class="col-lg-4 col-md-6 col-sm-0 col-xs-0">
                       
                         <div class="card shadow mb-3">
-                            <div class="card-body " >
+                            <div class="card-body" >
                               
                               <h5>Suggestions for you</h5>
-                              <div *ngFor="let suggestion of suggestions">
-                                    
-                              <p><img src={{suggestion.url}} class="rounded-circle float-left mr-2" width="40"/>
+                              <p><img src={{suggestion_image}} class="rounded-circle float-left mr-2" width="40">
                                 <a href="#">{{suggestion.name}} <small class="text-muted">{{suggestion.username}}</small></a></p>
-                                <button class="follow"(click)="follow()">
-                                  {{buttonName}}
-                                </button><hr>
-                             
                               <hr>
-                            </div>
+                              
                             </div>
                             <div class="card-footer">
                               <a href="#">Find more</a>
@@ -88,50 +84,35 @@
                             
                           </div>
                           
-            </div> 
-           
-            </div>           
-
-        <!-- Floating Button Here -->
-        <div class="image-upload add-post">
-          <label for="file-input">
-            <img src="../../assets/add-btn2.png"/>
-          </label>
-          <button id="file-input" type="file" (click)="openModal()"></button>
-        </div>
-
-        <!-- Modal here -->
-        <div class="modal" tabindex="-1" role="dialog" #modal style="display: none;">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">What you thinking ?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <input class="w-25" type="file" name="image" ng2FileSelect [uploader]="uploader">
-                <input type="text" #caption>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" (click)="uploadPost()" [disabled] = "!uploader.getNotUploadedItems().length">Post</button>
-                <button type="button" class="btn btn-secondary" (click)="closeModal()" data-dismiss="modal">Cancel</button>
-              </div>
             </div>
-          </div>
+           
         </div>
 
-        <section id="lab_social_icon_footer" class="plus">
-          <!-- Include Font Awesome Stylesheet in Header -->
-          <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-          <div class="container">
-          <div class="text-center center-block">
-          <i id="social-em" class="fa fa-plus fa-3x social"></i>
-          </div>
-          </div>
-          </section>
+   
+           
+        
+    <!-- </div> -->
+    <ul>
+     <li>
+         <input type="text">
+     </li>
+
+    </ul>
+
 </section>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+<Script>
+    function addcomment(){
+   var node = document.createElement("li");   
+var textnode = document.createTextNode(document.getElementById("btn").value);         
+node.appendChild(textnode);                              
+document.getElementById("list").appendChild(node);   
+console.log(list);
+
+    }
+</Script>
