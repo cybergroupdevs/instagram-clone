@@ -13,6 +13,8 @@ import {  ImageGalleryComponent } from './image-gallery/image-gallery.component'
 import { FeedComponent } from './feed/feed.component';
 import { SuggestionForUComponent } from './suggestion-for-u/suggestion-for-u.component';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { CreatePostComponent } from './create-post/create-post.component';
     HomenavComponent,
     SuggestionForUComponent,
     CreatePostComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    EditProfileComponent,
+  
   ],
   imports: [
     BrowserModule,

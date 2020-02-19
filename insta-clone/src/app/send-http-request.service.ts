@@ -14,6 +14,18 @@ export class SendHttpRequestService {
   private log(message: string) {
     console.log(message);
   }
+  //Decode JWT and return the Payload in JSON Format
+  jsonDecoder = (token) => {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+  };
+
+  
+  header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem("token"));
 
   header_options: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem("token"));
 
@@ -31,8 +43,17 @@ export class SendHttpRequestService {
     );
   }
 
+
+  updateUser(obj): Observable<any>{
+    return this.http.put("http://localhost:8080/user:"+this.jsonDecoder(localStorage.getItem("token")).data._id,
+    {headers: this.header_token});
+  }
+
   posts(): Observable<any>{
-    return this.http.get("url to come here");
+    return this.http.get("http://localhost:8080/upload").pipe(
+      tap(_ => this.log("showing feed")),
+      catchError(this.handleError<any>('error in feed'))
+    );
   }
 
   likePost(obj):Observable<any>{
@@ -48,7 +69,6 @@ export class SendHttpRequestService {
       catchError(this.handleError<any>('error in commenting on post'))
     );
   }
-
   
   followUser(obj):Observable<any>{
     return this.http.post("http://localhost:8080/follow", obj).pipe(
@@ -71,6 +91,20 @@ export class SendHttpRequestService {
     return this.http.get(`http://localhost:8080/user?instaHandle=${term}`, {headers: this.header_options}).pipe(
       tap(_ => this.log("display users")),
       catchError(this.handleError<any>('error in loading'))
+    );
+  }
+
+  loadUserDetail(obj):Observable<any>{
+    return this.http.get("http://localhost:8080/user", obj).pipe(
+      tap(_ => this.log("Unfollowed")),
+      catchError(this.handleError<any>('error in unfollowing'))
+    );
+  }
+
+  loadUploads(obj):Observable<any>{
+    return this.http.get("http://localhost:8080/upload", obj).pipe(
+      tap(_ => this.log("Unfollowed")),
+      catchError(this.handleError<any>('error in unfollowing'))
     );
   }
 
