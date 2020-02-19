@@ -15,6 +15,8 @@ export class SendHttpRequestService {
     console.log(message);
   }
 
+  header_options: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem("token"));
+
   signMeUp(obj): Observable<any>{
     return this.http.post("http://localhost:8080/signup", obj).pipe(
       tap(_ => this.log("Signed Up")),
@@ -59,6 +61,16 @@ export class SendHttpRequestService {
     return this.http.post("http://localhost:8080/unfollow", obj).pipe(
       tap(_ => this.log("Unfollowed")),
       catchError(this.handleError<any>('error in unfollowing'))
+    );
+  }
+  searchUsers(term: string): Observable<any> {
+    if (!term.trim()) {
+      // if not search term, return empty users array.
+      return of([]);
+    }//(`${this.heroesUrl}/?name=${term}`)
+    return this.http.get(`http://localhost:8080/user?instaHandle=${term}`, {headers: this.header_options}).pipe(
+      tap(_ => this.log("display users")),
+      catchError(this.handleError<any>('error in loading'))
     );
   }
 
