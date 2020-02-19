@@ -24,8 +24,8 @@ export class FeedComponent implements OnInit {
    liked_func() { 
          let likedObj = {
            //hande of user who liked and photoID
-           instaHandle: this.instaHandle.nativeElement.value,
-           photoID: this.photoID.nativeElement.value
+           //instaHandle: this.instaHandle.nativeElement.value,
+          // photoID: this.photoID.nativeElement.value
          }
          console.log(likedObj);
          this.sendReq.likePost(likedObj).subscribe(res => this.res = res);
@@ -36,8 +36,8 @@ export class FeedComponent implements OnInit {
    addcomment(){
       let commentObj = {
       //hande of user who liked and photoID
-      instaHandle: this.instaHandle.nativeElement.value,
-      upload_ID: this.photoID.nativeElement.value,
+      //instaHandle: this.instaHandle.nativeElement.value,
+      //upload_ID: this.photoID.nativeElement.value,
       comment:this.comment.nativeElement.value
     }
 

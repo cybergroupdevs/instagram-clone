@@ -1,3 +1,5 @@
+
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { FeedComponent } from './feed/feed.component';
@@ -14,7 +16,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileDashboardComponent},
-  { path: 'uploadPost', component: CreatePostComponent}  
+  { path: 'uploadPost', component: CreatePostComponent},
+  { path: "editProfile", component: EditProfileComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,82 @@
+<div class=".col-xs-12">
+    <div class="panel panel-default panel-info Profile">
+      <div class="panel-heading"> <h6>Edit Profile</h6> </div>
+      <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> Profile successfully saved
+      </div>
+      <fieldset>
+          <div class="grid-35">
+            <label for="avatar">Your Photo</label>
+          </div>
+          <div class="grid-65">
+            <span class="photo" title="Upload your Avatar!"></span>
+            <input type="file" class="btn" />
+          </div>
+        </fieldset>
+      
+      <div class="panel-body">
+        <div class="form-horizontal">
+                              <form>
+                                    <div class="form-group">
+                                          <label class="col-sm-2 control-label">Name</label>
+                                          <div class="col-sm-4">
+                                                <input class="form-control" type="text" name="Name"
+                                                      placeholder="Name" ng-model="me.firstName">
+                                          </div>
+                                    </div>
+                                    <div class="form-group">
+                                          <label class="col-sm-2 control-label">InstaHandle</label>
+                                          <div class="col-sm-4">
+                                                <input class="form-control" type="text" name="userName"
+                                                      placeholder="UserName" ng-model="me.lastName">
+                                          </div>
+                                    </div>
+                                    
+  
+            <div class="form-group">
+                                          <label class="col-sm-2 control-label">Bio</label>
+                                          <div class="col-sm-4">
+                                               <textarea class="form-control" type="text" name="Bio"
+                                                      placeholder="Bio" ng-model="me.email"></textarea>
+                                          </div>
+                                    </div>
+  
+                                    <h6>Private Information</h6>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Email</label>
+                                        <div class="col-sm-4">
+                                              <input class="form-control" type="text" name="email"
+                                                    placeholder="Email" ng-model="me.email">
+                                        </div>
+                                  </div>        
+           
+            <div class="form-group">
+                                          <label class="col-sm-2 control-label">Phone</label>
+                                          <div class="col-sm-4">
+                                                <input class="form-control" type="text" name="phone"
+                                                      placeholder="8753485784" ng-model="me.email">
+                                          </div>
+                                    </div>   
+                                    
+                                    
+                                  <h6>Similar Account Suggestions</h6>
+                                  <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">   
+                                  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+<label for="vehicle1"> Include your account when recommending similar accounts people might want to follow.[?]</label><br>  
+</div>
+</div>
+                                    <div class="form-group">
+                                          <div class="col-sm-offset-2 col-sm-10">
+                                                <button class="btn btn-primary" ng-click="updateMe()">Submit</button>
+                                          </div>
+                                    </div>
+                              </form>
+                        </div>  <!-- end form-horizontal -->
+      </div> <!-- end panel-body -->
+
+    </div> <!-- end panel -->
+    
+
+  </div> <!-- end size -->
