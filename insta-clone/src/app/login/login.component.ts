@@ -12,6 +12,7 @@ export class LoginComponent implements AfterViewInit {
     private sendReq: SendHttpRequestService,
     private _router: Router) { }
 
+
   @ViewChild('instaHandle', {static: false}) instaHandle: ElementRef;
   @ViewChild('password', {static: false}) password: ElementRef;
   res: any;
