@@ -29,8 +29,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     SuggestionForUComponent,
     CreatePostComponent,
     FileSelectDirective,
-    EditProfileComponent,
-  
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

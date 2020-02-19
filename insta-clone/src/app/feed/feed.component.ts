@@ -1,3 +1,4 @@
+
 import { SendHttpRequestService } from './../send-http-request.service';
 import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
 import { Component, ViewChild, ElementRef, OnInit} from '@angular/core';
@@ -12,12 +13,24 @@ const URL = 'http://localhost:8080/upload';
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
+ 
+
 
 export class FeedComponent implements OnInit {
-
+    
   constructor(private sendReq: SendHttpRequestService) { }
   @ViewChild('modal', {static: false}) modal: ElementRef;
   @ViewChild('caption', {static: false}) caption: ElementRef;
+    show:Boolean=false;
+    buttonName:String="follow";
+    follow(){
+      this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if(this.show)  
+      this.buttonName = "follow";
+    else
+      this.buttonName = "unfollow";
+    }
 
   fileOptions: FileUploaderOptions = {};
 
@@ -59,20 +72,7 @@ export class FeedComponent implements OnInit {
 
   closeModal(){
     this.modal.nativeElement.style.display = "none";
-}
-
-   liked_func() { 
-         let likedObj = {
-           //hande of user who liked and photoID
-          //  instaHandle: this.instaHandle.nativeElement.value,
-          //  photoID: this.photoID.nativeElement.value
-
-         }
-         console.log(likedObj);
-         this.sendReq.likePost(likedObj).subscribe(res => this.res = res);
-         console.log(this.res);
-
-
+  }
    //    let instahandle= {
    //    //    //hande of owner of post
    //    //    ownerID: this.ownerID.nativeElement.value,
@@ -83,19 +83,6 @@ export class FeedComponent implements OnInit {
    //    //  console.log(this.res);
    //    //  this.sendReq.loadUploads(ownerID).subscribe(res => this.res = res);
    //     console.log(this.res);
-
-   addcomment(){
-      let commentObj = {
-      //hande of user who liked and photoID
-      // instaHandle: this.instaHandle.nativeElement.value,
-      // upload_ID: this.photoID.nativeElement.value,
-      // comment:this.comment.nativeElement.value
-
-      comment:this.comment.nativeElement.value
-
-    }
-
-
    //  }
 
    // liked_func() { 
@@ -139,4 +126,5 @@ export class FeedComponent implements OnInit {
 //   ];
      
 //   });
+}
 
