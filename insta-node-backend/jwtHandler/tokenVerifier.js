@@ -30,7 +30,6 @@ module.exports = (token) => {
 =======
 
     //const publicKEY  = fs.readFileSync('./public.key.txt', 'utf8');
-
     try{
         return(jwt.verify(token, privateKEY, verifyOptions));
     }

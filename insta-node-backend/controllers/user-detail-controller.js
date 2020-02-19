@@ -1,19 +1,18 @@
 const model = require("../models");
 const jwtHandler = require("../jwtHandler");
-<<<<<<< HEAD
-=======
+
 const schema = require("../schemas")
 // const express = require('express')
 // const router = express.Router()
 const followerModel = require('../schemas/follower')
 const followingModel = require('../schemas/following')
 
->>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
+
 class employee{
     constructor(){
     }
 
-<<<<<<< HEAD
+
     async createAccount(req, res){
     }
 
@@ -31,20 +30,20 @@ class employee{
 
     async index(req, res){
     }
-=======
+
     async update(req, res){
         let updateObject = {...req.body};
-        model.userModel.update(updateObject);
+        model.user.update(updateObject);
     }
 
     async deleteAccount(req, res){
-        const deleteObj=await model.userModel.delete({ _id: req.params.id});
+        const deleteObj=await model.user.delete({ _id: req.params.id});
         res.send(deleteObj); 
     }
 
     async show(req, res){
-        if(jwtHandler.tokenVerifier(req.token)){
-            const user = await model.userModel.get({"_id": req.params.id}, 
+        if(jwtHandler.tokenVerifier(req.headers.token)){
+            const user = await model.user.get({"_id": req.params.id}, 
                                         {
                                             "instaHandle": 1,
                                             "name": 1,
@@ -60,6 +59,29 @@ class employee{
             res.status(401).send("Unauthorized");
         }
     }    
->>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
+
+    async showAll(req, res){
+        const token=jwtHandler.tokenVerifier(req.headers.token);
+        if(token)
+        {
+            const userObj = await model.user.get();
+            res.send(userObj);
+        }
+        else{
+            res.status(401).send("Unauthorized");
+        }
+    }
+    async show(req, res){
+        const token=jwtHandler.tokenVerifier(req.headers.token);
+        if(token)
+        {
+            const userObj = await model.user.get({_id: req.params.id});
+            res.send(userObj);
+        }
+        else{
+            res.status(401).send("Unauthorized");
+        }
+    }
+
 }
 module.exports = new employee();

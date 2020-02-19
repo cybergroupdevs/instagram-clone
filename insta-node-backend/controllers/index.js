@@ -2,7 +2,10 @@ const loginSignup=require('./login-signup-controller');
 const post=require('./posts-controller');
 const  user=require('./user-detail-controller')
 const follow=require('./follow')
+const unfollow=require('./unfollow')
 const posts = require('./posts_upload');
+const likes=require('./like');
+const comments=require('./comment');
 
 
 module.exports =
@@ -11,5 +14,8 @@ module.exports =
     post:post,
     user:user,
     follow:follow,
-    posts: posts
+    unfollow:unfollow,
+    posts: posts,
+    likes:likes,
+    comments:comments
 }

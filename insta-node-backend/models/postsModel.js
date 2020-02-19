@@ -13,5 +13,11 @@ class Operations{
     async save(postObj){
         return await this.model.create(postObj);
     }
+    async findOne(criteria={},columns={}){
+        return this.model.findOne(criteria,columns)
+    }
+    async updateOne(criteria ={}, updateObj){
+        return this.model.updateOne(criteria, updateObj);
+    }
 }
 module.exports = new Operations();

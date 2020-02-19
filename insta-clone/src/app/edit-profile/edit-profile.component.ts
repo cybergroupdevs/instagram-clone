@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class EditProfileComponent implements OnInit {
 
   constructor() { }
+  ngOnInit(): void {
 
-  ngOnInit() {
   }
 
 }

@@ -11,24 +11,23 @@ class follow{
     async updateFollow(req, res){
     
     // const { ownerId, followerId } = req.body;
-    let abc={
+    let followObj={
         ownerId:req.body.ownerId,
         followerId:req.body.followerId,
     }
     try{
-    const userToBeFollowed = await user.findOne({instaHandle:abc.ownerId});
-    const userWhoHasFollowed = await user.findOne({instaHandle:abc.followerId});
+    const userToBeFollowed = await user.findOne({instaHandle:followObj.ownerId});
+    const userWhoHasFollowed = await user.findOne({instaHandle:followObj.followerId});
     await followersModel.create({ ownerId: userToBeFollowed, followerId: userWhoHasFollowed });
     await followingModel.create({ ownerId: userWhoHasFollowed, followingId: userToBeFollowed });
-
-    var follower = await user.findOne({ instaHandle: abc.ownerId });
-    var following = await user.findOne({ instaHandle:abc.followerId });
+    var follower = await user.findOne({ instaHandle: followObj.ownerId });
+    var following = await user.findOne({ instaHandle:followObj.followerId });
     followers = follower.followers;
     following = following.following;
 
-    await user.updateOne({ instaHandle : abc.ownerId  }, { followers: followers + 1 });
-    await user.updateOne({ instaHandle: abc.followerId }, { following: following + 1 })
-    res.send("now following user")
+    await user.updateOne({ instaHandle : followObj.ownerId  }, { followers: followers + 1 });
+    await user.updateOne({ instaHandle: followObj.followerId }, { following: following + 1 });
+    res.send("now following user");
     }
     
    

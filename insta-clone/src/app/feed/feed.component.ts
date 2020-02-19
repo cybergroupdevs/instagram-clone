@@ -1,18 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { SendHttpRequestService } from './../send-http-request.service';
+import { Component, ViewChild, ElementRef, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 declare function addcomment(): any;
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
- 
-
 
 export class FeedComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sendReq: SendHttpRequestService,
+   private _router: Router) {}
+
+   goToProfile() {
+      this._router.navigate(['/profile']);
+    }
+
+   @ViewChild('liked', {static: false}) liked: ElementRef;
+   @ViewChild('comment', {static: false}) comment: ElementRef;
+   res: any;
+ 
+   liked_func() { 
+         let likedObj = {
+           //hande of user who liked and photoID
+           //instaHandle: this.instaHandle.nativeElement.value,
+          // photoID: this.photoID.nativeElement.value
+         }
+         console.log(likedObj);
+         this.sendReq.likePost(likedObj).subscribe(res => this.res = res);
+         console.log(this.res);
+
+   }
+
+   addcomment(){
+      let commentObj = {
+      //hande of user who liked and photoID
+      //instaHandle: this.instaHandle.nativeElement.value,
+      //upload_ID: this.photoID.nativeElement.value,
+      comment:this.comment.nativeElement.value
+    }
+
+    console.log(commentObj);
+    this.sendReq.commentPost(commentObj).subscribe(res => this.res = res);
+    console.log(this.res);
+      
+   }
+
+
+
   ngOnInit() {
-    addcomment();
   }
   
   allImages=[
@@ -35,8 +72,9 @@ export class FeedComponent implements OnInit {
    username2="reena43";
    comment1="awesome";
    comment2="beauty queen";
-suggestions=[       {username:"deepsy123",name:"deepanshu",url:"https://picsum.photos/200/200?random"},
-                    {username:"dees234",name:"deepak",url:"https://picsum.photos/200/200?random"},
-                    {username:"saerty234",name:"sahil",url:"https://picsum.photos/200/200?random"}
-                         ];
+  suggestions=[      
+    {username:"deepsy123",name:"deepanshu",url:"https://picsum.photos/200/200?random"},
+    {username:"dees234",name:"deepak",url:"https://picsum.photos/200/200?random"},
+    {username:"saerty234",name:"sahil",url:"https://picsum.photos/200/200?random"}
+  ];
 }

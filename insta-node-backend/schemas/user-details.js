@@ -1,29 +1,29 @@
 module.exports = {
     name: {
-<<<<<<< HEAD
-=======
+
         type: String
     },
     instaHandle: {
->>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
+
         type: String,
+
         default: null
     },
     instaHandle: {
         type: String,
-<<<<<<< HEAD
-=======
+
         required: true,
         unique: true,
->>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
+
         default: null
+      
+
     },
     phone: {
         type: String,
-<<<<<<< HEAD
-=======
+
         max: 10,
->>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
+
         default: null
     },
     email: {
@@ -32,10 +32,9 @@ module.exports = {
     },
     password: {
         type: String,
-<<<<<<< HEAD
-=======
+
         required: true,
->>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
+
         default: null
     },
     profileImage: {
