@@ -1,6 +1,10 @@
 import { SendHttpRequestService } from './../send-http-request.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
 declare function addcomment(): any;
+
+const URL = 'http://localhost:8080/upload';
+
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
@@ -9,14 +13,50 @@ declare function addcomment(): any;
 
 export class FeedComponent implements OnInit {
 
-  constructor(sendReq: SendHttpRequestService) { }
+  constructor(private sendReq: SendHttpRequestService) { }
   @ViewChild('modal', {static: false}) modal: ElementRef;
+  @ViewChild('caption', {static: false}) caption: ElementRef;
 
-  ngOnInit() {
+  fileOptions: FileUploaderOptions = {};
+
+  public uploader: FileUploader = new FileUploader({
+    url: URL,
+    itemAlias: 'image',
+    authTokenHeader: "token",
+    authToken: localStorage.getItem("token")
+  });
+
+  uploadPost(){
+    this.uploader.onBuildItemForm = (item, form) => {
+      form.append("ownerId", this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id);
+      form.append("caption", this.caption.nativeElement.value);
+    }
+    this.uploader.uploadAll();
   }
 
+  loadPosts(){
+    console.log("posts()");
+    this.sendReq.posts().subscribe(res => {
+      console.log(res);
+    });
+    // console.log(this.sendReq.posts());
+  }
+
+  ngOnInit() {
+    this.loadPosts();
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+    };
+    this.uploader.onCompleteItem = (item: any, status: any) => {
+      console.log("Uploaded File details", item, status);
+    };
+  }
   openModal(){
     this.modal.nativeElement.style.display = "flex";
+  }
+
+  closeModal(){
+    this.modal.nativeElement.style.display = "none";
   }
   
   allImages=[

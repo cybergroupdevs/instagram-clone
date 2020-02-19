@@ -26,12 +26,7 @@ export class SendHttpRequestService {
     return JSON.parse(jsonPayload);
   };
   
-  header_token: HttpHeaders = new HttpHeaders().set("Authorization", localStorage.getItem("token"));
-
-  // header_options = {
-  //   header: this.header_token
-  // };
-  
+  header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem("token"));
 
   signMeUp(obj): Observable<any>{
     return this.http.post("http://localhost:8080/signup", obj).pipe(
@@ -42,13 +37,16 @@ export class SendHttpRequestService {
 
   logMeIn(obj): Observable<any>{
     return this.http.post("http://localhost:8080/login", obj, {responseType: 'text'}).pipe(
-      tap(_ => this.log("Signed Up")),
+      tap(_ => this.log("Log In")),
       catchError(this.handleError<any>('Some Error Occurred'))
     );
   }
 
   posts(): Observable<any>{
-    return this.http.get("url to come here");
+    return this.http.get("http://localhost:8080/posts", {headers: this.header_token}).pipe(
+      tap(_ => this.log("Got Posts")),
+      catchError(this.handleError<any>('Some Error Occurred'))
+    );
   }
 
   userData(): Observable<any>{
