@@ -1,6 +1,8 @@
+import { Observable } from 'rxjs';
 import { OnInit } from '@angular/core';
 import { SendHttpRequestService } from './../send-http-request.service';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-edit-profile',
@@ -8,6 +10,7 @@ import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
+
 
   constructor(private sendReq: SendHttpRequestService) { }
   @ViewChild('name', {static: false}) name: ElementRef;
@@ -32,7 +35,12 @@ export class EditProfileComponent implements OnInit {
       email: this.email.nativeElement.value,
       password: this.password.nativeElement.value
     }
-    
+    if(this.res.status == 406){
+      let message="Username is already in use!"
+      
+      
+     
+    }
 
   }
 }
