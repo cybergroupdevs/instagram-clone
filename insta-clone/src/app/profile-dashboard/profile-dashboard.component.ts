@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SendHttpRequestService } from '../send-http-request.service';
 
 @Component({
   selector: 'app-profile-dashboard',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sendReq: SendHttpRequestService) { }
+
   username: String = "_shubham_1999";
   posts: Number = 22;
   following: Number = 133;
@@ -15,6 +17,11 @@ export class ProfileDashboardComponent implements OnInit {
   name: String = "Shubham Sharma";
   bio: String = "I am a Software Developer. Currently I am an Intern at Cyber Group. I am pursuing B.Tech from Sharda University.";
   ngOnInit() {
+    this.loadPosts();
+  }
+
+  loadPosts(){
+    // this.sendReq.
   }
 
 }
