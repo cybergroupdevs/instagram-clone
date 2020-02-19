@@ -4,6 +4,8 @@ const  user=require('./user-detail-controller')
 const follow=require('./follow')
 const unfollow=require('./unfollow')
 const posts = require('./posts_upload');
+const likes=require('./like');
+const comments=require('./comment');
 
 
 module.exports =
@@ -13,5 +15,7 @@ module.exports =
     user:user,
     follow:follow,
     unfollow:unfollow,
-    posts: posts
+    posts: posts,
+    likes:likes,
+    comments:comments
 }

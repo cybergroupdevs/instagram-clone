@@ -17,7 +17,7 @@ export class FeedComponent implements OnInit {
    @ViewChild('liked', {static: false}) liked: ElementRef;
    @ViewChild('comment', {static: false}) comment: ElementRef;
    res: any;
- 
+
    ngOnInit() {
       console.log("in oninit");
       this.feed();
@@ -32,6 +32,17 @@ export class FeedComponent implements OnInit {
   
 }
 
+   liked_func() { 
+         let likedObj = {
+           //hande of user who liked and photoID
+           //instaHandle: this.instaHandle.nativeElement.value,
+          // photoID: this.photoID.nativeElement.value
+         }
+         console.log(likedObj);
+         this.sendReq.likePost(likedObj).subscribe(res => this.res = res);
+         console.log(this.res);
+
+
    //    let instahandle= {
    //    //    //hande of owner of post
    //    //    ownerID: this.ownerID.nativeElement.value,
@@ -42,6 +53,15 @@ export class FeedComponent implements OnInit {
    //    //  console.log(this.res);
    //    //  this.sendReq.loadUploads(ownerID).subscribe(res => this.res = res);
    //     console.log(this.res);
+
+   addcomment(){
+      let commentObj = {
+      //hande of user who liked and photoID
+      //instaHandle: this.instaHandle.nativeElement.value,
+      //upload_ID: this.photoID.nativeElement.value,
+      comment:this.comment.nativeElement.value
+    }
+
 
    //  }
 

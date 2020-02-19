@@ -31,6 +31,7 @@ class posts {
             });
         } else {
             console.log('File is available!');
+            
             return res.send({
                 success: true
             });
