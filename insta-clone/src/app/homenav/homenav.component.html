@@ -11,7 +11,7 @@
         />
         <ul class="search-result">
             <li *ngFor="let user of users$ | async" >
-              <a routerLink="/user/{{instaHandle}}">
+              <a routerLink="/profile">
                 {{user.instaHandle}}
               </a>
             </li>
