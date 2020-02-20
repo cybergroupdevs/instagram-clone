@@ -40,8 +40,23 @@ class employee{
         console.log(token);
         if(token)
         {
-            const post = await model.posts.get();
-            res.send(post);
+            const post = await model.posts.get({"ownerId":req.params.id});
+            console.log(post);
+            const userData=await model.user.get({"_id":req.params.id})
+            console.log(userData);
+            const userPost={
+                "ownerId":post.ownerId,
+                "instaHandle":userData.instaHandle,
+                "url": post.url,
+                "caption": post.caption,
+                "likesCount": post.likesCount,
+                "commentsCount": post.commentsCount,
+                "recentLikes": post.recentLikes,
+                "hashtags": post.hashtags,
+                "_id": post._id,
+                "createdAt": post.createdAt
+ }
+            res.send(JSON.stringify(userPost));
         }
         else{
             res.status(401).send("Unauthorized");
