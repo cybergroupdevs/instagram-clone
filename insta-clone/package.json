@@ -2,12 +2,10 @@
   "name": "insta-clone",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-<<<<<<< HEAD
-    "start": "ng serve --port=5000",
-=======
-    "start": "ng serve --port=5100",
->>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
+   "ng": "ng",
+   "start": "ng serve --port=5000",
+   "start": "ng serve --port=5100",
+    "start": "ng serve ",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -23,12 +21,9 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
-<<<<<<< HEAD
-=======
     "fs": "0.0.1-security",
     "multer": "^1.4.2",
     "ng2-file-upload": "^1.4.0",
->>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
     "rxjs": "~6.4.0",
     "screenfull": "^3.3.0",
     "tslib": "^1.10.0",

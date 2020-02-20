@@ -34,7 +34,11 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     HomenavComponent,
     SuggestionForUComponent,
     FileSelectDirective,
-    EditProfileComponent,
+
+    EditProfileComponent
+
+    BrowserModule,
+
     AppRoutingModule,
     FormsModule,
     HttpClientModule

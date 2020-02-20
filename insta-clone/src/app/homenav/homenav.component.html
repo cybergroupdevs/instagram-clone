@@ -1,22 +1,28 @@
-<<<<<<< HEAD
-<nav class="navbar fixed-top navbar-light bg-white">
-=======
+
 <nav class="navbar fixed-top navbar-light bg-white" id="nav">
->>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
     <div class="container">
       <div id="logo">
-         <img id="ig" src="../../assets/images/iglogo.png">
-         <img id="bar" src="../../assets/images/Untitled.png"/>
-         <img id="lettering" src="../../assets/images/letter.png"/>
+         <img id="ig" src="../../assets/images/iglogo.png" routerLink='/feed'>
+         <img id="bar" src="../../assets/images/Untitled.png" routerLink='/feed'>
+         <img id="lettering" src="../../assets/images/letter.png" routerLink='/feed'>
      </div>
-     
-<<<<<<< HEAD
+
      <div class="SearchContainer"> 
         <input id="Search-Input" type="search" placeholder="Search" value="">
-=======
+
      <div class="searchContainer"> 
+
         <input id="searchInput" type="search" placeholder="Search" value="">
->>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
+
+        <input #searchBox (input)="search(searchBox.value)"id="searchBox" type="search" placeholder="Search" value=""
+        />
+        <ul class="search-result">
+            <li *ngFor="let user of users$ | async" >
+              <a routerLink="/user/{{instaHandle}}">
+                {{user.instaHandle}}
+              </a>
+            </li>
+          </ul> 
     </div>
      <div id="activity">
             <input type="checkbox" id="exploreToggle" class="visually-hidden">
@@ -24,17 +30,14 @@
             <input type="checkbox" id="toggle" class="visually-hidden">
             <label for="toggle"  class="control"></label>
             <input type="checkbox" id="userToggle" class="visually-hidden">
-<<<<<<< HEAD
             <label for="userToggle"  class="userControl"></label>
      </div>
      
       
     </div>  
   </nav>
-   
-=======
             <label for="userToggle"  class="userControl" routerLink= "/profile"></label>
      </div>
     </div>  
 </nav>
->>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
+

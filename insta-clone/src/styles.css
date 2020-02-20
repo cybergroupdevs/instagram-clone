@@ -1,14 +1,11 @@
-<<<<<<< HEAD
+
 /* You can add global styles to this file, and also import other style files */
 body{
-    background-color: #fafafa;
-}
-=======
- body{
+
     background-color: #fafafa;
 }
 /*
->>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
+
 .container {
     max-width: 0.1rem;
     margin: 0 auto;
@@ -51,8 +48,11 @@ body{
     width: 100%;
     height: 100%;
     object-fit: cover;
-<<<<<<< HEAD
-}
-=======
+
 } */
->>>>>>> dea045d8ecd16c06e25ceb3ce46b54221ad3d7a4
+
+/* You can add global styles to this file, and also import other style files */
+body{
+    background-color: #fafafa;
+}
+

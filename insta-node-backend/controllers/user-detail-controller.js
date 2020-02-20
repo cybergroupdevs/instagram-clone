@@ -32,13 +32,37 @@ class employee{
     }
 
     async update(req, res){
-        let updateObject = {...req.body};
-        model.user.update(updateObject);
+        if(jwtHandler.tokenVerifier(req.headers.token)){
+
+            const instaHandle=await model.user.get({instaHandle:req.body.instaHandle});
+            if(instaHandle)
+            {
+                res.status(406).send("InstaHandle already exists!!");
+            }
+            else
+            {
+        let updateObject  = {}; 
+        updateObject = {...updateObject,...req.body};
+        const userObj=await model.user.update({ _id: req.params.id}, updateObject);
+        res.send(userObj);
+        }
+    }
+        else{
+            res.status(401).send("Unauthorized");
+        }
     }
 
     async deleteAccount(req, res){
+        const token=jwtHandler.tokenVerifier(req.headers.token);
+        if(token)
+        {
         const deleteObj=await model.user.delete({ _id: req.params.id});
         res.send(deleteObj); 
+        }
+        else{
+            res.status(401).send("Unauthorized");
+        }
+
     }
 
     async show(req, res){
