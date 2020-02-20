@@ -33,19 +33,22 @@ class employee{
 
     async update(req, res){
         if(jwtHandler.tokenVerifier(req.headers.token)){
-
-            const instaHandle=await model.user.get({instaHandle:req.body.instaHandle});
-            if(instaHandle)
+            try{
+                let instaHandle={};
+          instaHandle=await model.user.get({"instaHandle":req.body.instaHandle},{});
+            if(instaHandle.instaHandle!=req.body.instaHandle)
             {
-                res.status(406).send("InstaHandle already exists!!");
-            }
-            else
-            {
+              
         let updateObject  = {}; 
         updateObject = {...updateObject,...req.body};
-        const userObj=await model.user.update({ _id: req.params.id}, updateObject);
+        const userObj=await model.user.updateOne({ _id: req.params.id}, updateObject);
         res.send(userObj);
         }
+    }
+    catch(error)
+    {
+        res.status(406).send("InstaHandle already exists..so it cannot be updated!!");
+    }
     }
         else{
             res.status(401).send("Unauthorized");

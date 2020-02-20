@@ -15,12 +15,12 @@ const URL = 'http://localhost:8080/upload';
 })
  
 
-
 export class FeedComponent implements OnInit {
     
   constructor(private sendReq: SendHttpRequestService) { }
   @ViewChild('modal', {static: false}) modal: ElementRef;
   @ViewChild('caption', {static: false}) caption: ElementRef;
+  @ViewChild('commentarea', {static: false}) commentarea: ElementRef;
     show:Boolean=false;
     buttonName:String="follow";
     follow(){
@@ -56,6 +56,20 @@ export class FeedComponent implements OnInit {
     });
     // console.log(this.sendReq.posts());
   }
+  res: any;
+  addcomment(text:string){
+      let commentObj = {
+      //hande of user who liked,photoID and comment
+      ownerID: this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id,  //from token
+      // upload_ID: this.photoID.nativeElement.value,
+      comment:this.commentarea.nativeElement.value
+    }
+
+      console.log(commentObj);
+      this.sendReq.commentPost(commentObj).subscribe(res => this.res = res);
+      console.log(this.res);
+  }
+
 
   ngOnInit() {
     this.loadPosts();
@@ -96,35 +110,5 @@ export class FeedComponent implements OnInit {
    //       console.log(this.res);
 
    // }
-
-   // addcomment(){
-   //    let commentObj = {
-   //    //hande of user who liked and photoID
-   //    // ownerID: this.ownerID.nativeElement.value,  //from token
-   //    // upload_ID: this.photoID.nativeElement.value,
-   //    comment:this.comment.nativeElement.value
-   //  }
-
-   //  console.log(commentObj);
-   //  this.sendReq.commentPost(commentObj).subscribe(res => this.res = res);
-   //  console.log(this.res);
-   // }
-
-  
-//   allImages.forEach(element => {
-     
-//    username=;
-//    location="cybergroup";
-//    username1="shyam123";
-//    username2="reena43";
-//    comment1="awesome";
-//    comment2="beauty queen";
-//   suggestions=[      
-//     {username:"deepsy123",name:"deepanshu",url:"https://picsum.photos/200/200?random"},
-//     {username:"dees234",name:"deepak",url:"https://picsum.photos/200/200?random"},
-//     {username:"saerty234",name:"sahil",url:"https://picsum.photos/200/200?random"}
-//   ];
-     
-//   });
 }
 

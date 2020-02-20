@@ -11,14 +11,14 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
              
                     <div class="card w-75"  *ngFor="let img of allImages">
-           
+                           
                           <div class="card-header">
                                <div>
-                                 <img src={{img}} alt="post"class="avatar">
+                                 <img src={{res.profileImage}} alt="post"class="avatar">
                              </div>  
                   
                 <div class="profile-info">
-                    <div class="name">{{username}}</div>
+                  <a routerLink="/profile"> <div class="name">{{res.name}}</div> </a>
                     <div class="location">{{location}}</div>
                     
                 </div>
@@ -36,7 +36,7 @@
                                 <input type="checkbox" id="togglefeed" class="visually-hidden">
                                  <label for="togglefeed"  class="control"></label>
                                 </div> 
-                                   <div (click)="addcomment()">
+                                   <div >
                                     <i class="fa fa-comment-o fa-2x "></i>
                                    </div>
                              </div>
@@ -58,7 +58,8 @@
                                  <p class="comm-para"><span id="username"style="margin-right:20px">{{username2}}</span>{{comment2}}</p>
                                </div> 
                                   <div>
-                                    <input type="text"id="comment" placeholder="add your comment"> 
+                                    <input type="text" id="commentarea" #commentarea placeholder="add your comment">
+                                    <button (click)="addcomment(commentarea.value)">add comment</button> 
                                   </div>
                          </div>
                     
@@ -72,18 +73,19 @@
                               
                               <h5>Suggestions for you</h5>
                               <div *ngFor="let suggestion of suggestions">
-                                    
+                                <button (click)="getfollowdata()" id="btn">follow</button>
                               <p><img src={{suggestion.url}} class="rounded-circle float-left mr-2" width="40"/>
-                                <a href="#">{{suggestion.name}} <small class="text-muted">{{suggestion.username}}</small></a></p>
-                                <button class="follow"(click)="follow()">
+                                <a href="#">{{suggestion.instaHandle}} <small class="text-muted">{{suggestion.name}}</small></a></p>
+                                <button class="follow"(click)="follow(username,suggestion.instaHandle)">
                                   {{buttonName}}
                                 </button><hr>
-                             
+                               
                               <hr>
                             </div>
                             </div>
                             <div class="card-footer">
                               <a href="#">Find more</a>
+                            
                             </div>
                             
                           </div>
@@ -130,6 +132,7 @@
           <i id="social-em" class="fa fa-plus fa-3x social"></i>
           </div>
           </div>
+          
           </section>
 </section>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

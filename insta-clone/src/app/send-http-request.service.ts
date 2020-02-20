@@ -15,7 +15,7 @@ export class SendHttpRequestService {
   private log(message: string) {
     console.log(message);
   }
-  //Decode JWT and return the Payload in JSON Format
+  // //Decode JWT and return the Payload in JSON Format
   jsonDecoder = (token) => {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -27,10 +27,6 @@ export class SendHttpRequestService {
 
   
   header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem("token"));
-
-  header_options: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem("token"));
-
-  
 
   signMeUp(obj): Observable<any>{
     return this.http.post("http://localhost:8080/signup", obj).pipe(
@@ -62,10 +58,10 @@ export class SendHttpRequestService {
   userData(): Observable<any>{
     return this.http.get("http://localhost:8080/user:"+this.jsonDecoder(localStorage.getItem("token")).data._id,
        {headers: this.header_token});
-    //return this.http.get("http://localhost:8080/upload").pipe(
-      //tap(_ => this.log("showing feed")),
-      //catchError(this.handleError<any>('error in feed'))
-    //);
+    return this.http.get("http://localhost:8080/upload").pipe(
+      tap(_ => this.log("showing feed")),
+      catchError(this.handleError<any>('error in feed'))
+    );
   }
 
   likePost(obj):Observable<any>{
