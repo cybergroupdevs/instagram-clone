@@ -30,7 +30,7 @@ module.exports=(app) => {
 
          app.post("/upload", upload.single('image'), controller.posts.createNewPost);
          
-         app.get("/posts",controller.post.showAll);
+         app.get("/posts/:id",controller.post.showAll);
          app.get("/upload/:id",controller.post.show);
          app.put("/follow",controller.follow.updateFollow);
          app.put("/unfollow",controller.unfollow.updateUnfollow);
