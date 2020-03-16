@@ -96,7 +96,7 @@ export class SendHttpRequestService {
       // if not search term, return empty users array.
       return of([]);
     }//(`${this.heroesUrl}/?name=${term}`)
-    return this.http.get(`http://localhost:8080/user?instaHandle=${term}`, {headers: this.header_options}).pipe(
+    return this.http.get(`http://localhost:8080/user?instaHandle=${term}`, {headers: this.header_token}).pipe(
       tap(_ => this.log("display users")),
       catchError(this.handleError<any>('error in loading'))
     );
