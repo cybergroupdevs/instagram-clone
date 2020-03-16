@@ -2,7 +2,6 @@ const controller = require('../controllers');
 var multer  = require('multer');
 var fs  = require('fs');
 var fileName;
-
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
         var dir = '../postsDb';
@@ -24,11 +23,11 @@ module.exports=(app) => {
          app.post("/login", controller.loginSignup.checkUserAuthentication);
          app.post("/signup", controller.loginSignup.createUser);
          app.get("/user", controller.user.showAll);
-         app.get("/user/:id",controller.user.show);
+         app.get("/user/:id",controller.user.show);  
          app.put("/user/:id", controller.user.update);
          app.delete("/user/:id", controller.user.deleteAccount);
 
-         app.post("/upload", upload.single('image'), controller.posts.createNewPost);
+         app.post("/upload", upload.single('image'), controller.posts.createNewPost); //doubt
          
          app.get("/posts/:id",controller.post.showAll);
          app.get("/upload/:id",controller.post.show);
@@ -37,3 +36,4 @@ module.exports=(app) => {
          app.put("/like",controller.likes.updateLike);
          app.post("/comment",controller.comments.addComment);
 }
+

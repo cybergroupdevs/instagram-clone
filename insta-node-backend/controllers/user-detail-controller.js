@@ -1,10 +1,7 @@
 const model = require("../models");
 const jwtHandler = require("../jwtHandler");
 const schema = require("../schemas")
-// const express = require('express')
-// const router = express.Router()
-const followerModel = require('../schemas/follower')
-const followingModel = require('../schemas/following')
+
 
 class employee{
     constructor(){
@@ -20,7 +17,7 @@ class employee{
               
         let updateObject  = {}; 
         updateObject = {...updateObject,...req.body};
-        const userObj=await model.user.updateOne({ _id: req.params.id}, updateObject);
+        const userObj=await model.user.update({ _id: req.params.id}, updateObject);
         res.send(userObj);
         }
     }
@@ -38,8 +35,10 @@ class employee{
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token)
         {
-        const deleteObj=await model.user.delete({ _id: req.params.id});
-        res.send(deleteObj); 
+            console.log(token, "my token----->>")
+            console.log("recieved token")
+            const deleteObj=await model.user.delete({ _id: req.params.id});
+            res.send(deleteObj); 
         }
         else{
             res.status(401).send("Unauthorized");

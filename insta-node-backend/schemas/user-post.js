@@ -33,13 +33,14 @@ module.exports = {
     hashtags: [
             {
                 type: String,
-                required: true,
+                required: true, //doubt
                 default:null
             }
         ],
+
     //No need to add any DEFAULT value, as this will be provided by the System, and not the USER
     createdAt: {
         type: Date,
-        default:Date.now
+        default:Date.now()
     }
 }

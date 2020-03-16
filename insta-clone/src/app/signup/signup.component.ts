@@ -34,7 +34,7 @@ export class SignupComponent implements AfterViewInit {
     this.sendReq.signMeUp(userObj).subscribe(res => 
     {
     console.log(res, "res------->>>>>");
-    if(res !=null){
+    if(res.status == 200){
       console.log("Signed UP");
       this.message="Signed Up!!"
       this.loginFunction()
@@ -51,9 +51,12 @@ export class SignupComponent implements AfterViewInit {
     console.log(userObj);
     this.sendReq.logMeIn(userObj).subscribe(res => {
       console.log(res);
-      if(res != null){
-        localStorage.setItem("token", res);
+      if(res.status == 200){
+        localStorage.setItem("token", res.body.token);
         this._router.navigate(['/feed']);
+      }
+      else{
+        alert("Token does not exist");
       }
     });
   }

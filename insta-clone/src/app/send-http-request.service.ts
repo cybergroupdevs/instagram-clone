@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpParams,HttpErrorResponse } from '@angular/common/http';
+import { catchError, map, tap, retry } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Token } from '@angular/compiler/src/ml_parser/lexer';
 
@@ -36,9 +36,9 @@ export class SendHttpRequestService {
   }
 
   logMeIn(obj): Observable<any>{
-    return this.http.post("http://localhost:8080/login", obj, {responseType: 'text'}).pipe(
+    return this.http.post("http://localhost:8080/login", obj, {observe: 'response', responseType: 'json'}).pipe(
       tap(_ => this.log("Log In")),
-      catchError(this.handleError<any>('Some Error Occurred'))
+      catchError(this.handleError<any>('logMeIn ?'))
     );
   }
 
@@ -63,6 +63,14 @@ export class SendHttpRequestService {
       catchError(this.handleError<any>('error in feed'))
     );
   }
+
+  userInfo(id: string): Observable<any>{
+    return this.http.get(`http://localhost:8080/user/${id}`, {headers: this.header_token, observe: 'response'}).pipe(
+      tap(_ => this.log("showing details")),
+      catchError(this.handleError<any>('error in details')
+    ));
+  }
+
 
   likePost(obj):Observable<any>{
     return this.http.put("http://localhost:8080/like", obj).pipe(
@@ -126,13 +134,14 @@ private handleError<T> (operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {
 
     // TODO: send the error to remote logging infrastructure
-    console.error(error); // log to console instead
+    console.error(error.status); // log to console instead
 
     // TODO: better job of transforming error for user consumption
-    this.log(`${operation} failed: ${error.message}`);
+
+    // this.log(`${operation} failed: ${error.message}`);
 
     // Let the app keep running by returning an empty result.
-    return of(result as T);
+    return of(error as T);
     };
   }
 }
