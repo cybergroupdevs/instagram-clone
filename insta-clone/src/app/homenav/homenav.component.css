@@ -1,23 +1,23 @@
 #nav{
     width: 100%;
     background: white;
-    border: 2vh;
-    border-color: white;
+    border-bottom: 1px solid #DBDBDB;
     position: sticky;
 }
+
 .container{
     display: flex;
     flex-flow: nowrap;
     align-items: stretch;
     }
 #logo{
-    margin-top: 2vh;
-    margin-left: 6vw;
+    margin-left: 2.7rem;
+    margin-top: 0.7rem;
 
 }
 #searchBox{
-    margin-left: 6vw;
-    margin-top: 2.4vh;
+    margin-top: 0.6rem;
+    
     
 }
 .search-result{
@@ -42,10 +42,7 @@
 .search-result :empty{
    visibility: hidden;
 }
-#activity{
-    margin-top: 2vh;
-    margin-left: 6vw;
-}
+
 @media screen and(min-width:320px){
     #logo{
         position: absolute;
