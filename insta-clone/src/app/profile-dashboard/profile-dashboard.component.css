@@ -1,8 +1,39 @@
 
 .profile-img{
-    width: 9rem;
-    height: 9rem;
+    width: 11rem;
+    height: 11rem;
+    border: 3px solid #ddd;
+    padding: 5px;
 }
+
+.edit-profile-btn{
+    color: gray;
+    border: 1px solid #DBDBDB;
+}
+.insta-handle-div{
+    padding-right: 3rem;
+
+}
+.user-name{
+    font-weight: 300;
+}
+.settings-img{
+    width: 2rem;
+    height: 2rem;
+}
+.follow-list{
+    list-style-type: none;
+
+}
+.follow-list>li{
+    float: left;
+    margin-right: 3rem;
+    
+}
+.description-div{
+    
+}
+/* 
 .profile-sm-img{
     width: 5rem;
     height: 5rem;
@@ -23,4 +54,4 @@ li{
 }
 h5{
     font-weight: normal;
-}
+} */
