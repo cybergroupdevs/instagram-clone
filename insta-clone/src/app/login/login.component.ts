@@ -1,3 +1,4 @@
+import { Token } from '@angular/compiler/src/ml_parser/lexer';
 import { SendHttpRequestService } from './../send-http-request.service';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
