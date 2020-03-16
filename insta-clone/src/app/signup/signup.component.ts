@@ -1,5 +1,6 @@
 import { SendHttpRequestService } from './../send-http-request.service';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +10,7 @@ import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 export class SignupComponent implements AfterViewInit {
 
-  constructor(private sendReq: SendHttpRequestService) { }
+  constructor(private sendReq: SendHttpRequestService, private _router: Router) { }
   
   @ViewChild('email', {static: false}) email: ElementRef;
   @ViewChild('name', {static: false}) name: ElementRef;
@@ -17,6 +18,7 @@ export class SignupComponent implements AfterViewInit {
   @ViewChild('password', {static: false}) password: ElementRef;
 
   res: any;
+  message : String='';
   ngAfterViewInit(){
 
   }
@@ -27,11 +29,33 @@ export class SignupComponent implements AfterViewInit {
       email: this.email.nativeElement.value,
       password: this.password.nativeElement.value
     }
-    console.log(userObj);
-    this.sendReq.signMeUp(userObj).subscribe(res => this.res = res);
-    console.log(this.res);
-    // if(this.res.status == '200'){
-    //   console.log("Signed UP");
-    // }
+    
+    console.log(userObj, "userObj------>>>>");
+    this.sendReq.signMeUp(userObj).subscribe(res => 
+    {
+    console.log(res, "res------->>>>>");
+    if(res !=null){
+      console.log("Signed UP");
+      this.message="Signed Up!!"
+      this.loginFunction()
+    }
+    })
+
   }
+
+  loginFunction() { 
+    let userObj = {
+      instaHandle: this.instaHandle.nativeElement.value,
+      password: this.password.nativeElement.value
+    }
+    console.log(userObj);
+    this.sendReq.logMeIn(userObj).subscribe(res => {
+      console.log(res);
+      if(res != null){
+        localStorage.setItem("token", res);
+        this._router.navigate(['/feed']);
+      }
+    });
+  }
+
 }
