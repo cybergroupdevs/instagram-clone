@@ -22,14 +22,12 @@ export class HomenavComponent implements OnInit {
   private searchTerms = new Subject<string>();
 
   
-  constructor(private sendHttpRequestService: SendHttpRequestService) { }
+  constructor(private sendHttpRequestService: SendHttpRequestService, private _router:Router) { }
   // Push a search term into the observable stream. 
   search(term: string): void {
     this.searchTerms.next(term);
    }
   res:any;
-
-  
 
   ngOnInit(){
     this.users$ = this.searchTerms.pipe(
@@ -42,7 +40,15 @@ export class HomenavComponent implements OnInit {
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.sendHttpRequestService.searchUsers(term)
     ));
+    console.log(this.users$)
     
+  }
+
+  myProfile(){
+    console.log("inside my profile func---->>>>")
+    let loggedinUserHandle = this.sendHttpRequestService.jsonDecoder(localStorage.getItem("token")).data.instaHandle
+    this._router.navigate(["/profile", loggedinUserHandle]);
+
   }
   
 }

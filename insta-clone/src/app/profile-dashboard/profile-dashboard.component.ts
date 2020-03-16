@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SendHttpRequestService } from '../send-http-request.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile-dashboard',
@@ -8,7 +9,7 @@ import { SendHttpRequestService } from '../send-http-request.service';
 })
 export class ProfileDashboardComponent implements OnInit {
 
-  constructor(private sendReq: SendHttpRequestService) { }
+  constructor(private sendReq: SendHttpRequestService, private _router:Router) { }
 
   name:string;
   username:string;
@@ -20,8 +21,10 @@ export class ProfileDashboardComponent implements OnInit {
   usersArray: any;
   
   ngOnInit() {
-    let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
-    this.loadUserData(loggedinUserId);
+    let current_route = this._router.url.split("/");
+    console.log(current_route, "------->>>>>> current route")
+    //let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
+    this.loadUserData(current_route[2]);
     // this.loadPosts();
   }
 
@@ -36,10 +39,10 @@ export class ProfileDashboardComponent implements OnInit {
         this.usersArray = res.body[0];
         this.setUserData();
       }
-      // else if(res.status == 401){
-      //   localStorage.removeItem("token");
-      //   this._router.navigate(['/login']);
-      // }
+      else if(res.status == 401){
+        localStorage.removeItem("token");
+        this._router.navigate(['/login']);
+      }
       
     });
   }
