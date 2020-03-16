@@ -10,19 +10,19 @@
         <input #searchBox (input)="search(searchBox.value)"id="searchBox" type="search" placeholder="Search" value=""/>
         <ul class="search-result">
             <li *ngFor="let user of users$ | async" >
-              <a routerLink="/profile">
+              <a [routerLink]="['/profile', user.instaHandle]">
                 {{user.instaHandle}}
               </a>
             </li>
           </ul> 
     </div>
      <div id="activity">
-        <input type="checkbox" id="exploreToggle" class="visually-hidden">
-        <label for="exploreToggle"  class="exploreControl"></label>       
-        <input type="checkbox" id="toggle" class="visually-hidden">
-        <label for="toggle"  class="control"></label>
-        <input type="checkbox" id="userToggle" class="visually-hidden">
-        <label for="userToggle"  class="userControl" routerLink= "/profile"></label>
+            <input type="checkbox" id="exploreToggle" class="visually-hidden">
+            <label for="exploreToggle"  class="exploreControl"></label>       
+            <input type="checkbox" id="toggle" class="visually-hidden">
+            <label for="toggle"  class="control"></label>
+            <input type="checkbox" id="userToggle" class="visually-hidden">
+            <label for="userToggle"  class="userControl" (click)="myProfile()"></label>
      </div>
     </div>  
 </nav>

@@ -15,9 +15,10 @@ const routes: Routes = [
   { path: 'feed', component: FeedComponent},
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'profile', component: ProfileDashboardComponent},
+  { path: 'profile/:id', component: ProfileDashboardComponent},
   { path: 'uploadPost', component: CreatePostComponent},
   { path: "editProfile", component: EditProfileComponent}
+  
 ];
 
 @NgModule({

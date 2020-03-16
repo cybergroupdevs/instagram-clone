@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SendHttpRequestService } from '../send-http-request.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile-dashboard',
@@ -8,20 +9,51 @@ import { SendHttpRequestService } from '../send-http-request.service';
 })
 export class ProfileDashboardComponent implements OnInit {
 
-  constructor(private sendReq: SendHttpRequestService) { }
+  constructor(private sendReq: SendHttpRequestService, private _router:Router) { }
 
-  username: String = "_shubham_1999";
-  posts: Number = 22;
-  following: Number = 133;
-  followers: Number = 199;
-  name: String = "Shubham Sharma";
-  bio: String = "I am a Software Developer. Currently I am an Intern at Cyber Group. I am pursuing B.Tech from Sharda University.";
+  name:string;
+  username:string;
+  followers:number;
+  following:number;
+  posts: number;
+  bio:string;
+  loggedinUserId: string;
+  usersArray: any;
+  
   ngOnInit() {
-    this.loadPosts();
+    let current_route = this._router.url.split("/");
+    console.log(current_route, "------->>>>>> current route")
+    //let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
+    this.loadUserData(current_route[2]);
+    // this.loadPosts();
   }
 
   loadPosts(){
     // this.sendReq.
+  }
+
+  loadUserData(id: string){
+    this.sendReq.userInfo(id).subscribe(res => {
+      if(res.status == 200){
+        console.log(res.body[0]);
+        this.usersArray = res.body[0];
+        this.setUserData();
+      }
+      else if(res.status == 401){
+        localStorage.removeItem("token");
+        this._router.navigate(['/login']);
+      }
+      
+    });
+  }
+
+  setUserData(){
+    this.name = this.usersArray.name;
+    this.username = this.usersArray.instaHandle;
+    this.followers = this.usersArray.followers;
+    this.following = this.usersArray.following;
+    this.posts = this.usersArray.postsCount;
+    this.bio = this.usersArray.about;
   }
 
 }

@@ -25,13 +25,16 @@ export class LoginComponent implements AfterViewInit {
     }
     console.log(userObj);
     this.sendReq.logMeIn(userObj).subscribe(res => {
-      console.log(res, "res");
+      // console.log(res.status, "res.statusss")
+      console.log("helloooooooo")
+      console.log(res, "ressssssss");
       console.log(res.status, "res.statusss")
-      if(res != null){
-        localStorage.setItem("token", res);
+      // console.log(res.token, "tokennnnnnn");
+      if(res.status == 200){
+        localStorage.setItem("token", res.body.token);
         this._router.navigate(['/feed']);
       }
-      else{
+      else if (res == null){
         alert("not registered user")
       }
     });

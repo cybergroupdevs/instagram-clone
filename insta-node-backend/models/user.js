@@ -18,18 +18,23 @@ class Operations{
     async update(criteria ={}, updateObj){
         return this.model.update(criteria, updateObj);
     }
-    async follow(criteria={}, updateObj){
-        return this.model.update(criteria, updateObj )
-    }
+    // async follow(criteria={}, updateObj){
+    //     return this.model.update(criteria, updateObj )
+    // }
 
-    async unfollow(criteria={}, updateObj){
-        return this.model.update(criteria, updateObj )
-    }
-    async findOne(criteria={},columns={}){
-        return this.model.findOne(criteria,columns)
-    }
-    async updateOne(criteria ={}, updateObj){
-        return this.model.updateOne(criteria, updateObj);
+    // async unfollow(criteria={}, updateObj){
+    //     return this.model.update(criteria, updateObj )
+    // }
+    
+    // async get(criteria={},columns={}){
+    //     return this.model.findOne(criteria,columns)
+    // }
+    // async updateOne(criteria ={}, updateObj){
+    //     return this.model.updateOne(criteria, updateObj);
+    // }
+
+    async delete(criteria={}){
+        return this.model.delete(criteria);
     }
 }
 module.exports = new Operations();

@@ -1,6 +1,6 @@
 const loginSignup=require('./login-signup-controller');
 const post=require('./posts-controller');
-const  user=require('./user-detail-controller')
+const  user=require('./user')
 const follow=require('./follow')
 const unfollow=require('./unfollow')
 const posts = require('./posts_upload');

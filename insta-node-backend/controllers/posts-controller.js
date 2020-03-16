@@ -1,6 +1,6 @@
 const model = require("../models");
 const jwtHandler = require("../jwtHandler");
-var user= model.user;
+var user = model.user;
 //var postsCount =user.postsCount;
 class employee{
     constructor(){
@@ -16,24 +16,25 @@ class employee{
                 caption:req.body.caption
                   };
         
-        const postObj= await model.posts.save(newPost);
-        res.send(postObj)
-      
-        try{
-            const userWhoCreatedPost = await user.findOne({_id:newPost.ownerId}); 
-            var postsCount=userWhoCreatedPost.postsCount;
-            await user.updateOne({ _id : newPost.ownerId  }, { postsCount:postsCount + 1 });        
-           console.log("postsCount updated");
-        }
-        catch(error){
-            console.log(error);
-                
-        }
+            const postObj= await model.posts.save(newPost);
+            res.send(postObj)
+        
+            try{
+                const userWhoCreatedPost = await user.findOne({_id:newPost.ownerId}); 
+                var postsCount=userWhoCreatedPost.postsCount;
+                await user.updateOne({ _id : newPost.ownerId  }, { postsCount:postsCount + 1 });        
+            console.log("postsCount updated");
+            }
+            catch(error){
+                console.log(error);
+                    
+            }
         }
         else{
             res.status(401).send("Unauthorized");
         }
-                }
+                
+    }
   
     async showAll(req,res) {
         let token = jwtHandler.tokenVerifier(req.headers.token);
@@ -67,7 +68,7 @@ class employee{
         let token = jwtHandler.tokenVerifier(req.headers.token);
         console.log(req.headers.token);
         console.log(JSON.stringify(token));
-       console.log( typeof(token.data._id));
+        console.log( typeof(token.data._id));
         if(token)
         {
             let postObj= await model.posts.get({"ownerId": req.params.id});

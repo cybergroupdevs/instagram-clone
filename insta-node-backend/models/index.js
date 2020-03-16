@@ -1,15 +1,15 @@
-const userDb = require("./userModel");
-const postDb = require("./postsModel");
-const likeDb = require("./likesModel");
-const commentDb = require("./commentsModel");
-const followerDb=require('./followerModel');
-const followingDb=require('./followingModel');
+const user = require("./user");
+const post = require("./post");
+const like = require("./like");
+const comment = require("./comment");
+const follower=require('./follower');
+const following=require('./following');
 
 module.exports = {
-    user: userDb,
-    posts:postDb,
-    likes: likeDb,
-    comments:commentDb,
-    followers:followerDb,
-    following:followingDb
+    user: user,
+    post:post,
+    like: like,
+    comment:comment,
+    follower:follower,
+    following:following
 }
