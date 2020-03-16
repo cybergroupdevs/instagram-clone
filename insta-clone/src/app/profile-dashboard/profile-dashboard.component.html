@@ -1,5 +1,40 @@
 <app-homenav></app-homenav>
-<div class="d-sm-none d-md-block d-none d-sm-block mt-5">
+<div class="container">
+    <div class="row ml-4 mr-1">
+        <div class="col-lg-3 offset-lg-1 mt-4 profile-image-div">
+            <img src="../../assets/ss.png" alt="Profile Image" class="rounded-circle profile-img">
+        </div>
+        <div class="col-lg-8 mt-4 profile-details">
+            <div class="row edit-profile-div">
+                <h3 class="user-name mr-3">{{username}}</h3>
+                <a routerLink="/editProfile"><button class="btn edit-profile-btn mr-3"><b>Edit Profile</b></button></a>
+                <img src="https://image.flaticon.com/icons/svg/481/481271.svg" class="mt-1 settings-img">
+            </div>
+
+            <div class="row follow-div mt-3">
+                <ul class="follow-list">
+                    <li>
+                        <span><b>{{posts}}</b> posts</span>
+                    </li>
+                    <li>
+                        <span><b>{{following}}</b> following</span>
+                    </li>
+                    <li>
+                        <span><b>{{followers}}</b> followers</span>
+                    </li>
+                </ul> 
+            </div>
+            <div class="row description-div">
+                <p><b>{{name}}</b></p>
+                <p>{{bio}}</p>
+            </div>    
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="d-sm-none d-md-block d-none d-sm-block mt-5">
     <div class="row mx-4">
         <div class="col-md-3 offset-md-1">
             <img src="../../assets/ss.png" alt="Profile Image" class="mr-2 ml-3 rounded-circle profile-img align-self-center">
@@ -29,11 +64,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 <!-- For smaller screens -->
-<div class="d-block d-sm-none mt-2">
+<!-- <div class="d-block d-sm-none mt-2">
 
     <div class="row mx-2">
         <div class="col-3 offset-1">
@@ -67,5 +102,5 @@
         </ul>
     </div>
     <hr class="m-3">
-</div>
+</div> -->
 <app-image-gallery></app-image-gallery>
