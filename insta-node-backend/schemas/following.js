@@ -4,10 +4,10 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 module.exports = {
     ownerId: {
         type: ObjectId,
-        ref:'user'
+        ref:'User'
     },
     followingId: {
         type: ObjectId,
-        ref:'user'
+        ref:'User'
     }
 }

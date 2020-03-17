@@ -17,10 +17,10 @@
                         <span><b>{{posts}}</b> posts</span>
                     </li>
                     <li>
-                        <span><b>{{following}}</b> following</span>
+                        <span><a (click)="getFollowing()" ><b>{{following}}</b> following </a></span>
                     </li>
                     <li>
-                        <span><b>{{followers}}</b> followers</span>
+                        <span><a (click)="getFollowers()"><b>{{followers}}</b> followers</a></span>
                     </li>
                 </ul> 
             </div>

@@ -10,14 +10,13 @@ class Follower{
     async getRelation(criteria={}){
         return await this.model.findOne(criteria)
     }
-    
-    // async follow(followerObj){
-    //     return await this.model.create(followerObj)
-    // }
 
-    // async unfollow(criteria={}){
-    //     return await this.model.deleteOne(criteria)
-    // }
+    async getAll(criteria={}, columns={}){
+        let fields = 'profileImage about postsCount followers following name instaHandle';
+        let followerData = await this.model.find(criteria, columns).populate('followerId', fields);
+        return (JSON.stringify(followerData));
+    }
+    
     async create(followObj){
         return await this.model.create(followObj)
     }
@@ -25,7 +24,6 @@ class Follower{
         return await this.model.deleteOne(criteria)
     }
     
-
 }
 
 module.exports = new Follower();
