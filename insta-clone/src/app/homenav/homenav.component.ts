@@ -48,6 +48,7 @@ export class HomenavComponent implements OnInit {
     console.log("inside my profile func---->>>>")
     let loggedinUserHandle = this.sendHttpRequestService.jsonDecoder(localStorage.getItem("token")).data.instaHandle
     this._router.navigate(["/profile", loggedinUserHandle]);
+    
 
   }
   
