@@ -5,9 +5,6 @@ import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 
-
-
-
 import {
    debounceTime, distinctUntilChanged, switchMap
  } from 'rxjs/operators';
@@ -55,6 +52,10 @@ export class HomenavComponent implements OnInit {
 
   searchUser(id:string){
     this.profileDashboard.loadUserData(id)
+  }
+
+  logout(){
+    localStorage.removeItem("token");
   }
   
 }
