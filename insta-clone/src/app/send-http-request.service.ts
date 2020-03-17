@@ -42,10 +42,11 @@ export class SendHttpRequestService {
     );
   }
 
-
-  updateUser(obj): Observable<any>{
-    return this.http.put("http://localhost:8080/user:"+this.jsonDecoder(localStorage.getItem("token")).data._id,
-    {headers: this.header_token});
+  updateData(object: any, id:string): Observable<any>{
+    return this.http.patch(`http://localhost:8080/user/${id}`,object, {observe: 'response', headers: this.header_token}).pipe(
+      tap(_ => this.log("updating details")),
+      catchError(this.handleError<any>('error in details')
+    ));
   }
 
   posts(): Observable<any>{

@@ -25,7 +25,6 @@ export class ProfileDashboardComponent implements OnInit {
   ngOnInit() {
     let current_route = this._router.url.split("/");
     console.log(current_route, "------->>>>>> current route")
-    //let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this.loadUserData(current_route[2]);
     // this.loadPosts();
   }
