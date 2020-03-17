@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'profile/:id', component: ProfileDashboardComponent},
   { path: 'uploadPost', component: CreatePostComponent},
-  { path: "editProfile", component: EditProfileComponent}
+  { path: "accounts/edit", component: EditProfileComponent}
   
 ];
 

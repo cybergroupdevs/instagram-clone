@@ -5,8 +5,6 @@ import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 
-
-
 import {
    debounceTime, distinctUntilChanged, switchMap
  } from 'rxjs/operators';
@@ -22,7 +20,7 @@ export class HomenavComponent implements OnInit {
   private searchTerms = new Subject<string>();
 
   
-  constructor(private sendHttpRequestService: SendHttpRequestService, private _router:Router) { }
+  constructor(private sendHttpRequestService: SendHttpRequestService, private _router:Router, private profileDashboard: ProfileDashboardComponent) { }
   // Push a search term into the observable stream. 
   search(term: string): void {
     this.searchTerms.next(term);
@@ -48,7 +46,16 @@ export class HomenavComponent implements OnInit {
     console.log("inside my profile func---->>>>")
     let loggedinUserHandle = this.sendHttpRequestService.jsonDecoder(localStorage.getItem("token")).data.instaHandle
     this._router.navigate(["/profile", loggedinUserHandle]);
+    this.profileDashboard.loadUserData(loggedinUserHandle);
 
+  }
+
+  searchUser(id:string){
+    this.profileDashboard.loadUserData(id)
+  }
+
+  logout(){
+    localStorage.removeItem("token");
   }
   
 }

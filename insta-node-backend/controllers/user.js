@@ -8,26 +8,40 @@ class employee{
     }
 
     async update(req, res){
+        var exists = false
         if(jwtHandler.tokenVerifier(req.headers.token)){
+            let instaHandle = req.body.instaHandle
+            if (instaHandle != null){
+                
+                let user = await model.user.get({"instaHandle":instaHandle});
+                if(user[0]!=null){
+                    exists = true
+                }
+                else{
+                    exists = false
+                }
+            }
             try{
-                let instaHandle={};
-          instaHandle=await model.user.get({"instaHandle":req.body.instaHandle},{});
-            if(instaHandle.instaHandle!=req.body.instaHandle)
+                
+                if(exists==false){
+                    
+                    let updateObject  = {}; 
+                    updateObject = {...updateObject,...req.body};
+                    const userObj = await model.user.update({ _id: req.params.id}, updateObject);
+                    res.status(200).send(userObj);
+                }
+                else{
+                    res.status(406).send({"message":"InstaHandle already exists..so it cannot be updated!!"});
+                }
+            }
+            catch(error)
             {
-              
-        let updateObject  = {}; 
-        updateObject = {...updateObject,...req.body};
-        const userObj=await model.user.update({ _id: req.params.id}, updateObject);
-        res.send(userObj);
+                res.status(401).send({"message":"Unauthorized"});
+            }
         }
-    }
-    catch(error)
-    {
-        res.status(406).send("InstaHandle already exists..so it cannot be updated!!");
-    }
-    }
+
         else{
-            res.status(401).send("Unauthorized");
+            res.status(401).send({"message":"Unauthorized"});
         }
     }
 

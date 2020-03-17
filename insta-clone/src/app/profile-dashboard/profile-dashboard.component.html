@@ -7,7 +7,7 @@
         <div class="col-lg-8 mt-4 profile-details">
             <div class="row edit-profile-div">
                 <h3 class="user-name mr-3">{{username}}</h3>
-                <a routerLink="/editProfile"><button class="btn edit-profile-btn mr-3"><b>Edit Profile</b></button></a>
+                <a routerLink="/accounts/edit"><button class="btn edit-profile-btn mr-3"><b>Edit Profile</b></button></a>
                 <img src="https://image.flaticon.com/icons/svg/481/481271.svg" class="mt-1 settings-img">
             </div>
 
@@ -17,10 +17,10 @@
                         <span><b>{{posts}}</b> posts</span>
                     </li>
                     <li>
-                        <span><b>{{following}}</b> following</span>
+                        <span><a (click)="getFollowers()"><b>{{followers}}</b> followers</a></span>
                     </li>
                     <li>
-                        <span><b>{{followers}}</b> followers</span>
+                        <span><a (click)="getFollowing()" ><b>{{following}}</b> following </a></span>
                     </li>
                 </ul> 
             </div>

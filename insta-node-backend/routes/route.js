@@ -32,6 +32,8 @@ module.exports=(app) => {
          app.get("/posts/:id",controller.post.showAll);
          app.get("/upload/:id",controller.post.show);
          app.put("/follow",controller.follow.updateFollow);
+         app.get("/followers/:id", controller.follow.getFollowers);
+         app.get("/following/:id", controller.follow.getFollowing);
          app.put("/unfollow",controller.unfollow.updateUnfollow);
          app.put("/like",controller.likes.updateLike);
          app.post("/comment",controller.comments.addComment);
