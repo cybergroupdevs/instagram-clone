@@ -77,7 +77,7 @@ class user{
     }
 
     async show(req, res){
-        
+        console.log(req.body);
         if(jwtHandler.tokenVerifier(req.headers.token)){
             var obj = req.query
             console.log(obj)
