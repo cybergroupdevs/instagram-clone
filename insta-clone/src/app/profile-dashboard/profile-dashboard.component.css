@@ -30,28 +30,11 @@
     margin-right: 3rem;
     
 }
-.description-div{
-    
+.modal-content  {
+    -webkit-border-radius: 1rem !important;
+    -moz-border-radius: 1rem !important;
+    border-radius: 1rem !important; 
 }
-/* 
-.profile-sm-img{
-    width: 5rem;
-    height: 5rem;
+#settingsModal .modal-header:hover{
+    cursor: pointer;
 }
-.user-name{
-    font-weight: lighter;
-}
-.btn-color{
-    font-weight: 300;
-    background-color: #fafafa;
-}
-
-b{
-    font-weight: lighter;
-}
-li{
-    list-style-type: none;
-}
-h5{
-    font-weight: normal;
-} */
