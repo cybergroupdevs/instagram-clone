@@ -1,12 +1,11 @@
 const loginSignup=require('./login-signup-controller');
 const post=require('./posts-controller');
-const  user=require('./user')
+const user=require('./user')
 const follow=require('./follow')
 const unfollow=require('./unfollow')
 const posts = require('./posts_upload');
 const likes=require('./like');
 const comments=require('./comment');
-
 
 module.exports =
 {

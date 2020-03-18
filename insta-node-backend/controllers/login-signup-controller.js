@@ -71,4 +71,5 @@ class employee{
         }
     }
 }
+
 module.exports = new employee();

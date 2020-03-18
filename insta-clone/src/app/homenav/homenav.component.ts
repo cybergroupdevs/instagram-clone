@@ -19,8 +19,9 @@ export class HomenavComponent implements OnInit {
   users$: Observable<any[]>;
   private searchTerms = new Subject<string>();
 
-  
-  constructor(private sendHttpRequestService: SendHttpRequestService, private _router:Router) { }
+
+  constructor(private sendHttpRequestService: SendHttpRequestService, private _router:Router, private profileDashboard:ProfileDashboardComponent) { }
+
   // Push a search term into the observable stream. 
   search(term: string): void {
     this.searchTerms.next(term);
@@ -28,7 +29,9 @@ export class HomenavComponent implements OnInit {
   res:any;
 
   ngOnInit(){
+    // document.addEventListener('click',this.func);
     this.users$ = this.searchTerms.pipe(
+      
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
 
@@ -38,22 +41,42 @@ export class HomenavComponent implements OnInit {
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.sendHttpRequestService.searchUsers(term)
     ));
-    console.log(this.users$)
+    console.log(this.users$, "usersssssssssss")
     
   }
 
   myProfile(){
-    console.log("inside my profile func---->>>>")
-    let loggedinUserHandle = this.sendHttpRequestService.jsonDecoder(localStorage.getItem("token")).data.instaHandle
-    this._router.navigate(["/profile", loggedinUserHandle]);
-    //this.profileDashboard.loadUserData(loggedinUserHandle);
-
+    console.log("inside my profile func---->>>>")  
+    let loggedinUserId = this.sendHttpRequestService.jsonDecoder(localStorage.getItem("token")).data._id
+    this._router.navigate(["/profile", loggedinUserId]);
+    this.profileDashboard.loadUserData(loggedinUserId,null);
   }
 
-  searchUser(id:string){
-    //this.profileDashboard.loadUserData(id)
-  }
+  searchUser(loggedinUserId:string){
+    this.profileDashboard.loadUserData(loggedinUserId, null)
 
+  }
   
-  
+  // close(){
+  //   this.isVisible=false;
+  // }
+isVisible:boolean = true;
+func(event){  
+ 
+  var box = document.querySelector(".boxes");
+
+  console.log(box,event.target,  "my boxxxx")
+  // this.isVisible = box.contains(event.target)
+
+  if (box.contains(event.target)){
+    this.isVisible = true
+  }
+  else{
+    this.isVisible = false
+  }
+  console.log(this.isVisible, "valueee")
+  console.log(box.contains(event.target),"hhhhhh");
+
+}
+
 }

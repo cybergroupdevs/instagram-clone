@@ -6,15 +6,15 @@
          <img id="lettering" src="../../assets/images/letter.png" routerLink='/feed'>
       </div>
      
-     <div class="searchContainer"> 
-        <input #searchBox (input)="search(searchBox.value)"id="searchBox" type="search" placeholder="Search" value=""/>
-        <ul class="search-result">
+     <div class="searchContainer boxes"> 
+        <input #searchBox (input)="search(searchBox.value)" id="searchBox" type="search" placeholder="Search" value=""/>
+        <ul class="search-result " [style.display]="isVisible ? 'block' : 'none'" >
             <li *ngFor="let user of users$ | async" >
-              <a [routerLink]="['/profile', user.instaHandle]" (click)="searchUser(user.instaHandle)">
+              <a [routerLink]="['/profile', user._id]" (click)="searchUser(user._id)">
                 {{user.instaHandle}}
               </a>
             </li>
-          </ul> 
+        </ul> 
     </div>
      <div id="activity">
             <input type="checkbox" id="homeToggle" class="visually-hidden">

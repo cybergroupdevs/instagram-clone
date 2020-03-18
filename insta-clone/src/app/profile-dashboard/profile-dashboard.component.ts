@@ -21,11 +21,12 @@ export class ProfileDashboardComponent implements OnInit {
   usersArray: any;
   followersArray=[]
   followingArray=[]
+  isVisible : Boolean=true
   
   ngOnInit() {
     let current_route = this._router.url.split("/");
     console.log(current_route, "------->>>>>> current route")
-    this.loadUserData(current_route[2]);
+    this.loadUserData(current_route[2],null);
     // this.loadPosts();
   }
 
@@ -33,8 +34,8 @@ export class ProfileDashboardComponent implements OnInit {
     // this.sendReq.
   }
 
-  loadUserData(id: string){
-    this.sendReq.userInfo(id).subscribe(res => {
+  loadUserData(id:string=null, instaHandle:string=null){
+    this.sendReq.userInfo(id,instaHandle).subscribe(res => {
       if(res.status == 200){
         console.log(res.body[0]);
         this.usersArray = res.body[0];
@@ -55,6 +56,16 @@ export class ProfileDashboardComponent implements OnInit {
     this.following = this.usersArray.following;
     this.posts = this.usersArray.postsCount;
     this.bio = this.usersArray.about;
+
+    let current_route = this._router.url.split("/");
+    
+    let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
+    if (current_route[2] == loggedinUserId){
+      this.isVisible = true
+    }
+    else{
+      this.isVisible = false
+    }
   }
 
   getFollowers(){
@@ -93,9 +104,28 @@ export class ProfileDashboardComponent implements OnInit {
 
   }
 
+
   logout(){
     localStorage.removeItem("token");
     this._router.navigate(["/login"]);
   }
+  follow(){
+    console.log("inside follow function")
+    let current_route = this._router.url.split("/");
+    let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
+    this.sendReq.followUser(current_route[2], loggedinUserId).subscribe(res => {
+      console.log(res.status, "status ????")
+      if(res.status == 200){
+        console.log(res.body, "following---->>>>");
+        
+      }
+      else if(res.status == 401){
+        localStorage.removeItem("token");
+        this._router.navigate(['/login']);
+      }
+      
+    });
+  }
 
 }
+

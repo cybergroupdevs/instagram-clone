@@ -22,8 +22,8 @@ module.exports=(app) => {
 
          app.post("/login", controller.loginSignup.checkUserAuthentication);
          app.post("/signup", controller.loginSignup.createUser);
-         app.get("/user", controller.user.showAll);
-         app.get("/user/:id",controller.user.show);  
+         app.get("/users", controller.user.showAll);
+         app.get("/user",controller.user.show);  
          app.put("/user/:id", controller.user.update);
          app.delete("/user/:id", controller.user.deleteAccount);
 

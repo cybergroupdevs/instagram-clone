@@ -43,7 +43,7 @@ export class SendHttpRequestService {
   }
 
   updateData(object: any, id:string): Observable<any>{
-    return this.http.patch(`http://localhost:8080/user/${id}`,object, {observe: 'response', headers: this.header_token}).pipe(
+    return this.http.put(`http://localhost:8080/user/${id}`,object, {observe: 'response', headers: this.header_token}).pipe(
       tap(_ => this.log("updating details")),
       catchError(this.handleError<any>('error in details')
     ));
@@ -67,8 +67,8 @@ export class SendHttpRequestService {
 
 
 
-  userInfo(id: string): Observable<any>{
-    return this.http.get(`http://localhost:8080/user/${id}`, {headers: this.header_token, observe: 'response'}).pipe(
+  userInfo(id: string, instaHandle:string): Observable<any>{
+    return this.http.get("http://localhost:8080/user/?" + "id=" + id + "&instaHandle=" + instaHandle, {headers: this.header_token, observe: 'response'}).pipe(
       tap(_ => this.log("showing details")),
       catchError(this.handleError<any>('error in details')
     ));
@@ -103,15 +103,16 @@ export class SendHttpRequestService {
     );
   }
   
-  followUser(obj):Observable<any>{
-    return this.http.post("http://localhost:8080/follow", obj).pipe(
+
+  followUser(ownerId: string, followerId:string): Observable<any>{
+    return this.http.put("http://localhost:8080/follow/?" + "ownerId=" + ownerId + "&followerId=" + followerId, {headers: this.header_token, observe: 'response'}).pipe(
       tap(_ => this.log("Followed")),
-      catchError(this.handleError<any>('error in following'))
-    );
+      catchError(this.handleError<any>('error in following')
+    ));
   }
 
   unfollowUser(obj):Observable<any>{
-    return this.http.post("http://localhost:8080/unfollow", obj).pipe(
+    return this.http.put("http://localhost:8080/unfollow", obj).pipe(
       tap(_ => this.log("Unfollowed")),
       catchError(this.handleError<any>('error in unfollowing'))
     );
@@ -121,7 +122,7 @@ export class SendHttpRequestService {
       // if not search term, return empty users array.
       return of([]);
     }//(`${this.heroesUrl}/?name=${term}`)
-    return this.http.get(`http://localhost:8080/user?instaHandle=${term}`, {headers: this.header_token}).pipe(
+    return this.http.get(`http://localhost:8080/users?instaHandle=${term}`, {headers: this.header_token}).pipe(
       tap(_ => this.log("display users")),
       catchError(this.handleError<any>('error in loading'))
     );

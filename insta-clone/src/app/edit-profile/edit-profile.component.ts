@@ -67,7 +67,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   loadUserData(id: string){
-    this.sendReq.userInfo(id).subscribe(res => {
+    this.sendReq.userInfo(id, null).subscribe(res => {
       if(res.status == 200){
         console.log(res.body[0]);
         this.usersData = res.body[0];
