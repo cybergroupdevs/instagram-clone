@@ -10,7 +10,7 @@
         <input #searchBox (input)="search(searchBox.value)" id="searchBox" type="search" placeholder="Search" value=""/>
         <ul class="search-result " [style.display]="isVisible ? 'block' : 'none'" >
             <li *ngFor="let user of users$ | async" >
-              <a [routerLink]="['/profile', user.instaHandle]" (click)="searchUser(user.instaHandle)">
+              <a [routerLink]="['/profile', user._id]" (click)="searchUser(user._id)">
                 {{user.instaHandle}}
               </a>
             </li>

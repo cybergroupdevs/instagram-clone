@@ -26,7 +26,7 @@ export class ProfileDashboardComponent implements OnInit {
   ngOnInit() {
     let current_route = this._router.url.split("/");
     console.log(current_route, "------->>>>>> current route")
-    this.loadUserData(null,current_route[2]);
+    this.loadUserData(current_route[2],null);
     // this.loadPosts();
   }
 
@@ -59,8 +59,8 @@ export class ProfileDashboardComponent implements OnInit {
 
     let current_route = this._router.url.split("/");
     
-    let loggedinUserHandle = this.sendReq.jsonDecoder(localStorage.getItem("token")).data.instaHandle
-    if (current_route[2] == loggedinUserHandle){
+    let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
+    if (current_route[2] == loggedinUserId){
       this.isVisible = true
     }
     else{
@@ -104,8 +104,23 @@ export class ProfileDashboardComponent implements OnInit {
 
   }
 
-  
-
-
+  follow(){
+    console.log("inside follow function")
+    let current_route = this._router.url.split("/");
+    let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
+    this.sendReq.followUser(current_route[2], loggedinUserId).subscribe(res => {
+      console.log(res.status, "status ????")
+      if(res.status == 200){
+        console.log(res.body, "following---->>>>");
+        
+      }
+      else if(res.status == 401){
+        localStorage.removeItem("token");
+        this._router.navigate(['/login']);
+      }
+      
+    });
+  }
 
 }
+

@@ -43,7 +43,7 @@ export class SendHttpRequestService {
   }
 
   updateData(object: any, id:string): Observable<any>{
-    return this.http.patch(`http://localhost:8080/user/${id}`,object, {observe: 'response', headers: this.header_token}).pipe(
+    return this.http.put(`http://localhost:8080/user/${id}`,object, {observe: 'response', headers: this.header_token}).pipe(
       tap(_ => this.log("updating details")),
       catchError(this.handleError<any>('error in details')
     ));
@@ -103,15 +103,16 @@ export class SendHttpRequestService {
     );
   }
   
-  followUser(obj):Observable<any>{
-    return this.http.post("http://localhost:8080/follow", obj).pipe(
+
+  followUser(ownerId: string, followerId:string): Observable<any>{
+    return this.http.put("http://localhost:8080/follow/?" + "ownerId=" + ownerId + "&followerId=" + followerId, {headers: this.header_token, observe: 'response'}).pipe(
       tap(_ => this.log("Followed")),
-      catchError(this.handleError<any>('error in following'))
-    );
+      catchError(this.handleError<any>('error in following')
+    ));
   }
 
   unfollowUser(obj):Observable<any>{
-    return this.http.post("http://localhost:8080/unfollow", obj).pipe(
+    return this.http.put("http://localhost:8080/unfollow", obj).pipe(
       tap(_ => this.log("Unfollowed")),
       catchError(this.handleError<any>('error in unfollowing'))
     );

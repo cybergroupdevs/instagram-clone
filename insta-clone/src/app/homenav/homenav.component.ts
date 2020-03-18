@@ -20,7 +20,7 @@ export class HomenavComponent implements OnInit {
   private searchTerms = new Subject<string>();
 
   
-  constructor(private sendHttpRequestService: SendHttpRequestService, private _router:Router, private profileDashboard: ProfileDashboardComponent) { }
+  constructor(private sendHttpRequestService: SendHttpRequestService, private _router:Router, private profileDashboard:ProfileDashboardComponent) { }
   // Push a search term into the observable stream. 
   search(term: string): void {
     this.searchTerms.next(term);
@@ -30,6 +30,7 @@ export class HomenavComponent implements OnInit {
   ngOnInit(){
     // document.addEventListener('click',this.func);
     this.users$ = this.searchTerms.pipe(
+      
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
 
@@ -39,7 +40,7 @@ export class HomenavComponent implements OnInit {
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.sendHttpRequestService.searchUsers(term)
     ));
-    console.log(this.users$)
+    console.log(this.users$, "usersssssssssss")
     
   }
 
@@ -47,23 +48,13 @@ export class HomenavComponent implements OnInit {
     console.log("inside my profile func---->>>>")
     
     let loggedinUserId = this.sendHttpRequestService.jsonDecoder(localStorage.getItem("token")).data._id
-    var loggedinUserinstaHandle
-    this.sendHttpRequestService.userInfo(loggedinUserId,null).subscribe(res => {
-      if(res.status == 200){
-        
-        loggedinUserinstaHandle = res.body[0].instaHandle;
-        this._router.navigate(["/profile", loggedinUserinstaHandle]);
-        this.profileDashboard.loadUserData(loggedinUserId,null);
-      }
-      else if(res.status == 401){
-        localStorage.removeItem("token");
-        this._router.navigate(['/login']);
-      }
-    })
+    
+    this._router.navigate(["/profile", loggedinUserId]);
+    this.profileDashboard.loadUserData(loggedinUserId,null);
   }
 
-  searchUser(instaHandle:string){
-    this.profileDashboard.loadUserData(null, instaHandle)
+  searchUser(loggedinUserId:string){
+    this.profileDashboard.loadUserData(loggedinUserId, null)
   }
 
   logout(){
