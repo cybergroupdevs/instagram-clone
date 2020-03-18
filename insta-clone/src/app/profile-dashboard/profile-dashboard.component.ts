@@ -19,11 +19,12 @@ export class ProfileDashboardComponent implements OnInit {
   bio:string;
   loggedinUserId: string;
   usersArray: any;
+  followersArray=[]
+  followingArray=[]
   
   ngOnInit() {
     let current_route = this._router.url.split("/");
     console.log(current_route, "------->>>>>> current route")
-    //let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this.loadUserData(current_route[2]);
     // this.loadPosts();
   }
@@ -55,5 +56,42 @@ export class ProfileDashboardComponent implements OnInit {
     this.posts = this.usersArray.postsCount;
     this.bio = this.usersArray.about;
   }
+
+  getFollowers(){
+    let current_route = this._router.url.split("/");
+   
+    this.sendReq.getFollowersList(current_route[2]).subscribe(res => {
+      if(res.status == 200){
+        console.log(res.body);
+        this.followersArray = res.body;
+        console.log(this.followersArray, "------->>>>>> followers")
+      }
+      else if(res.status == 401){
+        localStorage.removeItem("token");
+        this._router.navigate(['/login']);
+      }
+      
+    });
+
+  }
+
+  getFollowing(){
+    let current_route = this._router.url.split("/");
+   
+    this.sendReq.getFollowingList(current_route[2]).subscribe(res => {
+      if(res.status == 200){
+        console.log(res.body);
+        this.followingArray = res.body;
+        console.log(this.followingArray, "------->>>>>> followers")
+      }
+      else if(res.status == 401){
+        localStorage.removeItem("token");
+        this._router.navigate(['/login']);
+      }
+      
+    });
+
+  }
+
 
 }

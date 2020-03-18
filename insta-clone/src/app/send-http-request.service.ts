@@ -42,10 +42,11 @@ export class SendHttpRequestService {
     );
   }
 
-
-  updateUser(obj): Observable<any>{
-    return this.http.put("http://localhost:8080/user:"+this.jsonDecoder(localStorage.getItem("token")).data._id,
-    {headers: this.header_token});
+  updateData(object: any, id:string): Observable<any>{
+    return this.http.patch(`http://localhost:8080/user/${id}`,object, {observe: 'response', headers: this.header_token}).pipe(
+      tap(_ => this.log("updating details")),
+      catchError(this.handleError<any>('error in details')
+    ));
   }
 
   posts(): Observable<any>{
@@ -55,17 +56,33 @@ export class SendHttpRequestService {
     );
   }
 
-  userData(): Observable<any>{
-    return this.http.get("http://localhost:8080/user:"+this.jsonDecoder(localStorage.getItem("token")).data._id,
-       {headers: this.header_token});
-    return this.http.get("http://localhost:8080/upload").pipe(
-      tap(_ => this.log("showing feed")),
-      catchError(this.handleError<any>('error in feed'))
-    );
-  }
+  // userData(): Observable<any>{
+  //   return this.http.get("http://localhost:8080/user:"+this.jsonDecoder(localStorage.getItem("token")).data._id,
+  //      {headers: this.header_token});
+  //   return this.http.get("http://localhost:8080/upload").pipe(
+  //     tap(_ => this.log("showing feed")),
+  //     catchError(this.handleError<any>('error in feed'))
+  //   );
+  // }
+
+
 
   userInfo(id: string): Observable<any>{
     return this.http.get(`http://localhost:8080/user/${id}`, {headers: this.header_token, observe: 'response'}).pipe(
+      tap(_ => this.log("showing details")),
+      catchError(this.handleError<any>('error in details')
+    ));
+  }
+
+  getFollowersList(id: string): Observable<any>{
+    return this.http.get(`http://localhost:8080/followers/${id}`, {headers: this.header_token, observe: 'response'}).pipe(
+      tap(_ => this.log("showing details")),
+      catchError(this.handleError<any>('error in details')
+    ));
+  }
+
+  getFollowingList(id: string): Observable<any>{
+    return this.http.get(`http://localhost:8080/following/${id}`, {headers: this.header_token, observe: 'response'}).pipe(
       tap(_ => this.log("showing details")),
       catchError(this.handleError<any>('error in details')
     ));

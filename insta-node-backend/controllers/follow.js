@@ -26,9 +26,6 @@ class follow{
 
             }
 
-            
-            console.log(followObj.ownerId, "hellooooooooooooooooooo")
-
             const relation = await model.follower.getRelation(followObj);
             console.log(relation, "relay----------->>>>")
             if (relation == null){
@@ -63,6 +60,52 @@ class follow{
         else{
             res.status(401).send("Unauthorized");
         }
+    }
+
+    async getFollowers(req, res){
+        const token=jwtHandler.tokenVerifier(req.headers.token);
+        if(token){
+
+            let searchInstaHandle = req.params.id;
+            const user = await model.user.get({instaHandle:searchInstaHandle})
+            const userId = user[0]._id
+            const allFollowers = await model.follower.getAll({"ownerId":userId});
+            
+            if (allFollowers != null){
+                res.status(200).send(allFollowers) 
+            }
+            else{
+                res.send({"message":"no followers"})
+            }   
+        }
+
+        else{
+            res.status(401).send("Unauthorized");
+        }
+
+    }
+
+    async getFollowing(req, res){
+        const token=jwtHandler.tokenVerifier(req.headers.token);
+        if(token){
+
+            let searchInstaHandle = req.params.id;
+            const user = await model.user.get({instaHandle:searchInstaHandle})
+            const userId = user[0]._id
+            const allFollowing = await model.following.getAll({"ownerId":userId});
+            
+            if (allFollowing != null){
+                res.status(200).send(allFollowing) 
+            }
+            else{
+                res.send({"message":"no following"})
+            }   
+        }
+
+        else{
+            res.status(401).send("Unauthorized");
+        }
+
     }
 }
 
