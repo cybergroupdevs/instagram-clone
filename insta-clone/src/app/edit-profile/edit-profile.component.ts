@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { OnInit } from '@angular/core';
-import { SendHttpRequestService } from './../send-http-request.service';
+import { SendHttpRequestService } from '../send-http-request.service';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
