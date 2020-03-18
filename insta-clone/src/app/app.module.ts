@@ -14,6 +14,8 @@ import { FeedComponent } from './feed/feed.component';
 import { SuggestionForUComponent } from './suggestion-for-u/suggestion-for-u.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { EditProfileDetailsComponent } from './edit-profile-details/edit-profile-details.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -29,7 +31,9 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     SuggestionForUComponent,
     CreatePostComponent,
     FileSelectDirective,
-    EditProfileComponent
+    EditProfileComponent,
+    EditProfileDetailsComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

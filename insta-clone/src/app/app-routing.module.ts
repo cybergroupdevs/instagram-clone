@@ -9,6 +9,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent }      from './login/login.component';
 import { SignupComponent }  from './signup/signup.component';
+import {ChangePasswordComponent} from './change-password/change-password.component'
+import { EditProfileDetailsComponent } from './edit-profile-details/edit-profile-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -17,10 +19,18 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'profile/:id', component: ProfileDashboardComponent},
   { path: 'uploadPost', component: CreatePostComponent},
-  { path: "editProfile", component: EditProfileComponent}
-  
-];
-
+  { path: "editProfile", component: EditProfileComponent, children:[
+    {
+      path: "", redirectTo: "editProfileDetails", pathMatch: "full"
+    },
+    {
+      path: "editProfileDetails", component:EditProfileDetailsComponent
+    },
+    {
+      path: "changePassword", component:ChangePasswordComponent 
+    }
+  ]}
+  ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ]
