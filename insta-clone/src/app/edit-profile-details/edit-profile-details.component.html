@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9 offset-lg-1" style=" margin-top: 2.5rem;">
+            <div class="row">
+                <div class="col-lg-3">
+                    <img class="rounded-circle" src="../../assets/ss.png" style="width: 3rem; height: 3rem; float:right;">
+                </div>
+                <div class="col-lg-9">
+                    <h5>himanshukumar2750</h5>
+                    <a href="">Change Profile picture</a>
+                </div>
+            </div>
+            <form class="form-horizontal">
+                <div class="form-group row">
+                    <label class="col-lg-3 control-label text-right">Name</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" name="Name"  required="required">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 control-label text-right">Username</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" name="Username"  required="required">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 control-label text-right">Website</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" name="Website"  required="required">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 control-label text-right">Bio</label>
+                    <div class="col-lg-8">
+                        <textarea class="form-control" type="text" name="Bio"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-3">
+                        <h5>Personal Informatiom</h5>
+                        <p>Provide your personal information, even if the account is used for a business, a pet or something else. This won't be a part of your public profile.</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 control-label text-right">Email</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="email" name="email" required="required">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 control-label text-right">Phone Number</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" name="mobile" required="required">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 control-label text-right">Gender</label>
+                    <div class="col-lg-8">
+                        <label class="radio-inline mr-3">
+                            <input type="radio" name="male" checked>male
+                          </label>
+                          <label class="radio-inline mr-3">
+                            <input type="radio" name="female">female
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="not to say">not to say
+                          </label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 control-label text-right">Similar Account Suggestions</label>
+                    <div class="col-lg-6">
+                        <input class="col-lg-1" type="checkbox" name="recommendation" value="">
+                        <label style="line-height: 0.8;" class="col-lg-11" for="recommendation">Include your account when recommending similar accounts people might want to follow.</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-9 offset-lg-3">
+                        <button class="btn btn-primary" ng-click="updateMe()">Submit</button>
+                    </div>
+                </div>    
+            </form> 
+        </div>
+    </div>
+</div>
