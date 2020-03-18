@@ -26,7 +26,7 @@ export class ProfileDashboardComponent implements OnInit {
   ngOnInit() {
     let current_route = this._router.url.split("/");
     console.log(current_route, "------->>>>>> current route")
-    this.loadUserData(current_route[2]);
+    this.loadUserData(null,current_route[2]);
     // this.loadPosts();
   }
 
@@ -34,8 +34,8 @@ export class ProfileDashboardComponent implements OnInit {
     // this.sendReq.
   }
 
-  loadUserData(id: string){
-    this.sendReq.userInfo(id).subscribe(res => {
+  loadUserData(id:string=null, instaHandle:string=null){
+    this.sendReq.userInfo(id,instaHandle).subscribe(res => {
       if(res.status == 200){
         console.log(res.body[0]);
         this.usersArray = res.body[0];
