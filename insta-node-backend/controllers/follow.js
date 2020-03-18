@@ -6,24 +6,22 @@ class follow{
     }
     
     async updateFollow(req, res){
-    
-    // const { ownerId, followerId } = req.body;
+        console.log(req.query, "my body---------------->>>")
+        // const { ownerId, followerId } = req.body;
 
         const token=jwtHandler.tokenVerifier(req.headers.token);
-        if(token){
+        if(true){
 
-            console.log(req.body, "my body---------------->>>")
+            console.log(req.query, "my body---------------->>>")
             
             let followObj={
-                ownerId:req.body.ownerId,
-                followerId:req.body.followerId,
+                ownerId:req.query.ownerId,
+                followerId:req.query.followerId,
             }
 
             let followingObj={
-                ownerId:req.body.followerId,
-                followingId:req.body.ownerId
-                
-
+                ownerId:req.query.followerId,
+                followingId:req.query.ownerId
             }
 
             const relation = await model.follower.getRelation(followObj);
@@ -44,7 +42,8 @@ class follow{
             
                     await model.user.update({ _id : followObj.ownerId  }, { followers: followerCount + 1 });
                     await model.user.update({ _id: followObj.followerId }, { following: followingCount + 1 });
-                    res.send("now following user");
+                    console.log("above status ")
+                    res.status(200).send({"message":"now following user"});
                 }
                     
                 catch(error){
