@@ -104,6 +104,11 @@ export class ProfileDashboardComponent implements OnInit {
 
   }
 
+
+  logout(){
+    localStorage.removeItem("token");
+    this._router.navigate(["/login"]);
+  }
   follow(){
     console.log("inside follow function")
     let current_route = this._router.url.split("/");

@@ -17,15 +17,14 @@
         </ul> 
     </div>
      <div id="activity">
+            <input type="checkbox" id="homeToggle" class="visually-hidden">
+            <label for="homeToggle"  class="homeControl"></label>
             <input type="checkbox" id="exploreToggle" class="visually-hidden">
             <label for="exploreToggle"  class="exploreControl"></label>       
             <input type="checkbox" id="toggle" class="visually-hidden">
             <label for="toggle"  class="control"></label>
             <input type="checkbox" id="userToggle" class="visually-hidden">
             <label for="userToggle"  class="userControl" (click)="myProfile()"></label>
-     </div>
-     <div class="nav-item">
-      <a class="nav-link" routerLink="/login" (click)="logout()">Logout</a>
      </div> 
   </div>  
 </nav>

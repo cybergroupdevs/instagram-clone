@@ -71,9 +71,13 @@
          padding-bottom: 1vh;
      }
   }
-  
-  
 
+.homeControl::after {
+    content: url('../../assets/images/home.png');
+}
+#homeToggle:checked ~ .homeControl::after {
+    content: url('https://img.icons8.com/material-rounded/24/000000/home.png');
+}
 
 .control::after {
     content: url('../../assets/images/igheart.png');
