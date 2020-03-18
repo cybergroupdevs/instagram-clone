@@ -21,11 +21,12 @@ export class ProfileDashboardComponent implements OnInit {
   usersArray: any;
   followersArray=[]
   followingArray=[]
+  isVisible : Boolean=true
   
   ngOnInit() {
     let current_route = this._router.url.split("/");
     console.log(current_route, "------->>>>>> current route")
-    this.loadUserData(current_route[2]);
+    this.loadUserData(null,current_route[2]);
     // this.loadPosts();
   }
 
@@ -33,8 +34,8 @@ export class ProfileDashboardComponent implements OnInit {
     // this.sendReq.
   }
 
-  loadUserData(id: string){
-    this.sendReq.userInfo(id).subscribe(res => {
+  loadUserData(id:string=null, instaHandle:string=null){
+    this.sendReq.userInfo(id,instaHandle).subscribe(res => {
       if(res.status == 200){
         console.log(res.body[0]);
         this.usersArray = res.body[0];
@@ -55,6 +56,16 @@ export class ProfileDashboardComponent implements OnInit {
     this.following = this.usersArray.following;
     this.posts = this.usersArray.postsCount;
     this.bio = this.usersArray.about;
+
+    let current_route = this._router.url.split("/");
+    
+    let loggedinUserHandle = this.sendReq.jsonDecoder(localStorage.getItem("token")).data.instaHandle
+    if (current_route[2] == loggedinUserHandle){
+      this.isVisible = true
+    }
+    else{
+      this.isVisible = false
+    }
   }
 
   getFollowers(){
@@ -92,6 +103,9 @@ export class ProfileDashboardComponent implements OnInit {
     });
 
   }
+
+  
+
 
 
 }

@@ -28,6 +28,7 @@ export class HomenavComponent implements OnInit {
   res:any;
 
   ngOnInit(){
+    // document.addEventListener('click',this.func);
     this.users$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
@@ -44,18 +45,51 @@ export class HomenavComponent implements OnInit {
 
   myProfile(){
     console.log("inside my profile func---->>>>")
-    let loggedinUserHandle = this.sendHttpRequestService.jsonDecoder(localStorage.getItem("token")).data.instaHandle
-    this._router.navigate(["/profile", loggedinUserHandle]);
-    this.profileDashboard.loadUserData(loggedinUserHandle);
-
+    
+    let loggedinUserId = this.sendHttpRequestService.jsonDecoder(localStorage.getItem("token")).data._id
+    var loggedinUserinstaHandle
+    this.sendHttpRequestService.userInfo(loggedinUserId,null).subscribe(res => {
+      if(res.status == 200){
+        
+        loggedinUserinstaHandle = res.body[0].instaHandle;
+        this._router.navigate(["/profile", loggedinUserinstaHandle]);
+        this.profileDashboard.loadUserData(loggedinUserId,null);
+      }
+      else if(res.status == 401){
+        localStorage.removeItem("token");
+        this._router.navigate(['/login']);
+      }
+    })
   }
 
-  searchUser(id:string){
-    this.profileDashboard.loadUserData(id)
+  searchUser(instaHandle:string){
+    this.profileDashboard.loadUserData(null, instaHandle)
   }
 
   logout(){
     localStorage.removeItem("token");
   }
   
+  // close(){
+  //   this.isVisible=false;
+  // }
+isVisible:boolean = true;
+func(event){  
+ 
+  var box = document.querySelector(".boxes");
+
+  console.log(box,event.target,  "my boxxxx")
+  // this.isVisible = box.contains(event.target)
+
+  if (box.contains(event.target)){
+    this.isVisible = true
+  }
+  else{
+    this.isVisible = false
+  }
+  console.log(this.isVisible, "valueee")
+  console.log(box.contains(event.target),"hhhhhh");
+
+}
+
 }
