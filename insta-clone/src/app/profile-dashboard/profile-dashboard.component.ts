@@ -21,6 +21,7 @@ export class ProfileDashboardComponent implements OnInit {
   usersArray: any;
   followersArray=[]
   followingArray=[]
+  isVisible : Boolean=true
   
   ngOnInit() {
     let current_route = this._router.url.split("/");
@@ -55,6 +56,16 @@ export class ProfileDashboardComponent implements OnInit {
     this.following = this.usersArray.following;
     this.posts = this.usersArray.postsCount;
     this.bio = this.usersArray.about;
+
+    let current_route = this._router.url.split("/");
+    
+    let loggedinUserHandle = this.sendReq.jsonDecoder(localStorage.getItem("token")).data.instaHandle
+    if (current_route[2] == loggedinUserHandle){
+      this.isVisible = true
+    }
+    else{
+      this.isVisible = false
+    }
   }
 
   getFollowers(){
@@ -92,6 +103,9 @@ export class ProfileDashboardComponent implements OnInit {
     });
 
   }
+
+  
+
 
 
 }

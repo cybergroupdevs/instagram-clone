@@ -7,19 +7,32 @@ class employee{
     constructor(){
     }
 
+    async checkInstaHandle(instaHandle){
+        const user = await model.user.get({"instaHandle":instaHandle})
+        if(user[0]!=null){
+            return true
+        }
+        else{
+            return false
+        }
+    }
+
     async update(req, res){
         var exists = false
         if(jwtHandler.tokenVerifier(req.headers.token)){
             let instaHandle = req.body.instaHandle
             if (instaHandle != null){
                 
-                let user = await model.user.get({"instaHandle":instaHandle});
-                if(user[0]!=null){
-                    exists = true
-                }
-                else{
-                    exists = false
-                }
+                // let user = await model.user.get({"instaHandle":instaHandle});
+                // if(user[0]!=null){
+                //     exists = true
+                // }
+                // else{
+                //     exists = false
+                // }
+                debugger
+                console.log(instaHandle, "instahandle")
+                exists = checkInstaHandle({instaHandle})
             }
             try{
                 

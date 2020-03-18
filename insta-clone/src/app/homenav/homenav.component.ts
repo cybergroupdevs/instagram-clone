@@ -20,7 +20,7 @@ export class HomenavComponent implements OnInit {
   private searchTerms = new Subject<string>();
 
   
-  constructor(private sendHttpRequestService: SendHttpRequestService, private _router:Router, private profileDashboard: ProfileDashboardComponent) { }
+  constructor(private sendHttpRequestService: SendHttpRequestService, private _router:Router, private profileDashboard:ProfileDashboardComponent) { }
   // Push a search term into the observable stream. 
   search(term: string): void {
     this.searchTerms.next(term);
@@ -28,6 +28,7 @@ export class HomenavComponent implements OnInit {
   res:any;
 
   ngOnInit(){
+    document.addEventListener('click',this.func);
     this.users$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
@@ -44,6 +45,7 @@ export class HomenavComponent implements OnInit {
 
   myProfile(){
     console.log("inside my profile func---->>>>")
+    let current_route = this._router.url.split("/");
     let loggedinUserHandle = this.sendHttpRequestService.jsonDecoder(localStorage.getItem("token")).data.instaHandle
     this._router.navigate(["/profile", loggedinUserHandle]);
     this.profileDashboard.loadUserData(loggedinUserHandle);
@@ -58,4 +60,26 @@ export class HomenavComponent implements OnInit {
     localStorage.removeItem("token");
   }
   
+  // close(){
+  //   this.isVisible=false;
+  // }
+isVisible:boolean = true;
+func(event){  
+ 
+  var box = document.querySelector(".boxes");
+
+  console.log(box,event.target,  "my boxxxx")
+  // this.isVisible = box.contains(event.target)
+
+  if (box.contains(event.target)){
+    this.isVisible = true
+  }
+  else{
+    this.isVisible = false
+  }
+  console.log(this.isVisible, "valueee")
+  console.log(box.contains(event.target),"hhhhhh");
+
+}
+
 }
