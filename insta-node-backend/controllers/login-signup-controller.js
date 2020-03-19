@@ -36,19 +36,7 @@ class employee{
     }
 
     async checkUserAuthentication(req, res){
-        let user = await model.user.get({$and : [{"instaHandle": req.body.instaHandle},{"password": req.body.password}]
-                                                }, 
-                                                {"instaHandle": 1,
-                                                "name": 1,
-                                                "phone":1,
-                                                "email":1,
-                                                "profileImage":1,
-                                                "about":1,
-                                                "postsCount":1,
-                                                "followers":1,
-                                                "following":1,
-                                                "_id": 1
-                                            });
+        let user = await model.user.get({$and : [{"instaHandle": req.body.instaHandle},{"password": req.body.password}]});
         console.log(user[0], "printing")
         if(user[0] != null){
             console.log("inside")

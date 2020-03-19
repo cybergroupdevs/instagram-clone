@@ -61,7 +61,7 @@ export class EditProfileDetailsComponent implements OnInit {
 
       }
       else if(res.status == 406){
-        let message="Username is already in use!" 
+        let message="Username or email or phone is already in use!" 
         console.log(message);
       }
       else if(res.status == 401){

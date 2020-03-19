@@ -27,11 +27,11 @@ class user{
             if (instaHandle != null){
                 console.log(this, "inside update")
                 let user = await model.user.get({"instaHandle":instaHandle});
-                if(user[0]!=null){
-                    exists = true
+                if(user[0]._id  == req.params.id){
+                    exists = false
                 }
                 else{
-                    exists = false
+                    exists = true
                 }
                 
                 // console.log(instaHandle, "instahandle")
@@ -52,7 +52,7 @@ class user{
             }
             catch(error)
             {
-                res.status(401).send({"message":"Unauthorized"});
+                res.status(406).send({"message":"something is duplicate"});
             }
         }
 
