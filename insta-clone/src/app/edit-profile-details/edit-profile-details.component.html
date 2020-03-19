@@ -1,13 +1,33 @@
+<div class="modal" id="uploadPicModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal header -->
+            <div class="modal-header text-center" style="padding: 1.5rem;">
+                <p class="modal-title w-100"><b>Profile Picture</b></p>
+            </div>
+            <div class="modal-header text-center cursor-pointer">
+                <label class="modal-title w-100 cursor-pointer" style="color:#3798F0"><input type='file'id="profileImageInput" onchange="readURL();" style="display: none;"/><b>Upload Photo</b></label>
+            </div>
+            <div class="modal-header text-center cursor-pointer">
+                <p class="modal-title w-100 removePhoto"><b>Remove Current Photo</b></p>
+            </div>
+            <div class="modal-header text-center">
+                <p class="modal-title w-100 cursor-pointer" data-dismiss="modal">Cancel</p>
+            </div>
+        </div>
+      </div>
+  </div>
+
 <div class="container">
     <div class="row">
         <div class="col-lg-9 offset-lg-1" style=" margin-top: 2.5rem;">
             <div class="row">
                 <div class="col-lg-3">
-                    <img class="rounded-circle" src="../../assets/ss.png" style="width: 3rem; height: 3rem; float:right;">
+                    <img class="rounded-circle" id="profilePic" src="../../assets/ss.png" style="width: 3rem; height: 3rem; float:right;">
                 </div>
                 <div class="col-lg-9">
                     <h5>{{username}}</h5>
-                    <a href="">Change Profile picture</a>
+                    <a href="" class="changeDP" data-toggle="modal" data-target="#uploadPicModal">Change Profile picture</a>
                 </div>
             </div>
             <form class="form-horizontal">

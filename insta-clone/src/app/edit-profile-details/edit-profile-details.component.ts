@@ -102,5 +102,37 @@ export class EditProfileDetailsComponent implements OnInit {
     this.gender = this.usersData.gender;
         
   }
+  readURL() {
+    const preview = document.getElementById('profilePic') as HTMLImageElement;
+    const file = (<HTMLInputElement>document.getElementById('profileImageInput')).files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener("load", function () {
+      preview.src = String(reader.result);
+      console.log(reader.result)
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+  }
+}
+
+//   readURL3(input){
+//     const preview = document.getElementById('profilePic');
+//     const file = document.querySelector('input[type=file]').files[0];
+//     const reader = new FileReader();
+
+//     reader.addEventListener("load", function () {
+//       preview.src = reader.result;
+//     }, false);
+
+//     if (file) {
+//       reader.readAsDataURL(file);
+//     }
+// }
+
+
+
+
 
 }
