@@ -1,6 +1,7 @@
 module.exports = {
     name: {
-        type: String
+        type: String,
+        required:true
     },
     instaHandle: {
         type: String,
@@ -10,11 +11,13 @@ module.exports = {
     phone: {
         type: String,
         max: 10,
-        default: null
+        default: null,
+        unique:true
     },
     email: {
         type: String,
-        default: null
+        default: null,
+        unique:true
     },
     password: {
         type: String,
@@ -40,5 +43,15 @@ module.exports = {
     following: {
         type: Number,
         default: 0
-    }
+    },
+    gender:{
+        type:String,
+        default:null,
+        enum: ['Male', 'Female', 'Not to say']
+    },
+    website: {
+        type: String,
+        default: null
+    },
+
 }

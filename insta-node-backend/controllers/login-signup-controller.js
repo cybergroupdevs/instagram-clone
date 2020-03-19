@@ -10,10 +10,10 @@ class employee{
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
         try{
-            let instaHandle={};
-            instaHandle =await model.user.get({"instaHandle":req.body.instaHandle});
-            console.log(instaHandle.instaHandle, "instahandle--->>>");
-            if(instaHandle.instaHandle!=req.body.instaHandle)
+            // let instaHandle={};
+            let user =await model.user.get({"instaHandle":req.body.instaHandle});
+            console.log(user, "instahandle--->>>");
+            if(user[0]==null )
             {
             
                 let userObject = {
@@ -23,9 +23,12 @@ class employee{
                     email : req.body.email,
                     password : req.body.password
                 };
-                const user=await model.user.save(userObject);
+                const user = await model.user.save(userObject);
                 res.status(200).send(userObject);
                 // res.status(200).send(employee)
+            }
+            else{
+                res.status(406).send("InstaHandle already exists!!");
             }
         }
 
@@ -36,19 +39,7 @@ class employee{
     }
 
     async checkUserAuthentication(req, res){
-        let user = await model.user.get({$and : [{"instaHandle": req.body.instaHandle},{"password": req.body.password}]
-                                                }, 
-                                                {"instaHandle": 1,
-                                                "name": 1,
-                                                "phone":1,
-                                                "email":1,
-                                                "profileImage":1,
-                                                "about":1,
-                                                "postsCount":1,
-                                                "followers":1,
-                                                "following":1,
-                                                "_id": 1
-                                            });
+        let user = await model.user.get({$and : [{"instaHandle": req.body.instaHandle},{"password": req.body.password}]});
         console.log(user[0], "printing")
         if(user[0] != null){
             console.log("inside")

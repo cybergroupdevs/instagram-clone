@@ -20,18 +20,18 @@ class user{
     // }
 
     async update(req, res){
-        
+        console.log("reached update")
         var exists = false
         if(jwtHandler.tokenVerifier(req.headers.token)){
             let instaHandle = req.body.instaHandle
             if (instaHandle != null){
-                console.log(this, "inside update")
+                console.log(req.body, "inside update")
                 let user = await model.user.get({"instaHandle":instaHandle});
-                if(user[0]!=null){
-                    exists = true
+                if(user[0]==null || user[0]._id  == req.params.id){
+                    exists = false
                 }
                 else{
-                    exists = false
+                    exists = true
                 }
                 
                 // console.log(instaHandle, "instahandle")
@@ -52,7 +52,7 @@ class user{
             }
             catch(error)
             {
-                res.status(401).send({"message":"Unauthorized"});
+                res.status(406).send({"message":"something is duplicate"});
             }
         }
 
@@ -83,32 +83,13 @@ class user{
             console.log(obj)
             if (obj.id !=  "null"){
                 
-                var userObj = await model.user.get({"_id": obj.id}, 
-                    {
-                        "instaHandle": 1,
-                        "name": 1,
-                        "profileImage": 1,
-                        "about": 1,
-                        "postsCount": 1,
-                        "followers": 1,
-                        "following": 1,
-                        "_id":1
-                    });
+                var userObj = await model.user.get({"_id": obj.id});
             }
             else{
-                userObj = await model.user.get({"instaHandle": obj.instaHandle}, 
-                    {
-                        "instaHandle": 1,
-                        "name": 1,
-                        "profileImage": 1,
-                        "about": 1,
-                        "postsCount": 1,
-                        "followers": 1,
-                        "following": 1,
-                        "_id":1
-                    });
+                userObj = await model.user.get({"instaHandle": obj.instaHandle});
             }
-            
+
+            console.log(userObj, "detailss")
             if (userObj[0] != null){                           
                 res.status(200).send(userObj);
             }
@@ -124,7 +105,9 @@ class user{
     }    
 
     async showAll(req, res){
+        console.log(req.headers, "inside show headers")
         const token=jwtHandler.tokenVerifier(req.headers.token);
+        console.log(token, "inside show all")
         if(token)
         {
             const userObj = await model.user.get();

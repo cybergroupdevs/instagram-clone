@@ -12,22 +12,23 @@ class posts {
                 console.log("No file is available!");
                 
                 return res.send({
-                    success: false
+                    "success": false
                 });
-            } else {
+            } 
+            else {
                 console.log('File is available!');
                 console.log(req.file);
                 console.log(req.headers.token);
                 let postObj = {
                     ownerId: req.body.ownerId,
-                    url: req.file.path,
+                    url: req.file.filename,   //changed
                     caption: req.body.caption,
                     createdAt: Date.now()
                 };
                 console.log(postObj);
                 try{
-                    const tempObj = await model.posts.save(postObj);
-                    return res.status(200).send("Uploaded");
+                    const tempObj = await model.post.save(postObj);
+                    return res.status(200).send({"message":"Uploaded"});
                 }catch(err){
                     return res.status(501).send("Some Error Occured");
                 }

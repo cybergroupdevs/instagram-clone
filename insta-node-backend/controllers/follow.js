@@ -6,12 +6,9 @@ class follow{
     }
     
     async updateFollow(req, res){
-        console.log(req.query, "my body---------------->>>")
-        // const { ownerId, followerId } = req.body;
-
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(true){
-
+            console.log(req, "request")
             console.log(req.query, "my body---------------->>>")
             
             let followObj={
@@ -64,11 +61,9 @@ class follow{
     async getFollowers(req, res){
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
-
-            let searchInstaHandle = req.params.id;
-            const user = await model.user.get({instaHandle:searchInstaHandle})
-            const userId = user[0]._id
-            const allFollowers = await model.follower.getAll({"ownerId":userId});
+            
+            let searchId = req.params.id;
+            const allFollowers = await model.follower.getAll({"ownerId":searchId});
             
             if (allFollowers != null){
                 res.status(200).send(allFollowers) 
@@ -88,10 +83,8 @@ class follow{
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
 
-            let searchInstaHandle = req.params.id;
-            const user = await model.user.get({instaHandle:searchInstaHandle})
-            const userId = user[0]._id
-            const allFollowing = await model.following.getAll({"ownerId":userId});
+            let searchId = req.params.id;
+            const allFollowing = await model.following.getAll({"ownerId":searchId});
             
             if (allFollowing != null){
                 res.status(200).send(allFollowing) 
@@ -106,6 +99,28 @@ class follow{
         }
 
     }
+
+    async followRelation(req,res){
+        const token=jwtHandler.tokenVerifier(req.headers.token);
+        if(token){
+            console.log(req.query, "check 1")
+            let searchObj = req.query;
+            const relation = await model.follower.getRelation(searchObj);
+            console.log(relation, "relation")
+            if (relation != null){
+                
+                res.status(200).send(relation) 
+            }
+            else{
+                res.status(404).send({"message":"not following"})
+            }   
+        }
+
+        else{
+            res.status(401).send("Unauthorized");
+        }
+    }
+
 }
 
 module.exports = new follow()
