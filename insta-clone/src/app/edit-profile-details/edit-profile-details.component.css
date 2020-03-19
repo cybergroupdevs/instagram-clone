@@ -1,0 +1,14 @@
+.changeDP{
+    text-decoration: none;   
+}
+.modal-content  {
+    -webkit-border-radius: 1rem !important;
+    -moz-border-radius: 1rem !important;
+    border-radius: 1rem !important; 
+}
+.removePhoto{
+    color: red;
+}
+.cursor-pointer:hover{
+    cursor: pointer;
+}

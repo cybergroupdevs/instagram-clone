@@ -44,3 +44,11 @@
 #settingsModal .modal-header:hover{
     cursor: pointer;
 }
+.changePassword{
+    text-decoration: none;
+    color: black;
+}
+
+.removePhoto{
+    color: red;
+}
