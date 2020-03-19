@@ -137,13 +137,14 @@ export class ProfileDashboardComponent implements OnInit {
     let current_route = this._router.url.split("/");
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this.sendReq.followUser(current_route[2], loggedinUserId).subscribe(res => {
-      console.log(res.status, "status ????")
-      if(res.status == 200){
+      console.log(res.status, res, "status ????")
+      if(res.status == 200  || res.message =="now following user"){
         console.log(res.body, "following---->>>>");
+        // this.followButton = false;
+        // this.unfollowButton = true;
+        // this.editButton = false
         this.loadUserData(current_route[2], null)
-        this.followButton = false;
-        this.unfollowButton = true;
-        this.editButton = false
+        
       }
       else if(res.status == 401){
         localStorage.removeItem("token");
@@ -158,20 +159,26 @@ export class ProfileDashboardComponent implements OnInit {
     let current_route = this._router.url.split("/");
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this.sendReq.unfollowUser(current_route[2], loggedinUserId).subscribe(res => {
-      console.log(res.status, "status ????")
-      if(res.status == 200){
+      console.log(res.status, res.message, "status ????")
+      if(res.status == 200 || res.message =="unfollowing user"){
         console.log(res.body, "unfollowing---->>>>");
+        // this.followButton = true;
+        // this.unfollowButton = false;
+        // this.editButton = false
         this.loadUserData(current_route[2], null)
-        this.followButton = true;
-        this.unfollowButton = false;
-        this.editButton = false
+        
       }
-      // else if(res.status == 401){
-      //   localStorage.removeItem("token");
-      //   this._router.navigate(['/login']);
-      // }
+      else if(res.status == 401){
+        localStorage.removeItem("token");
+        this._router.navigate(['/login']);
+      }
       
     });
+  }
+
+  logout(){
+    localStorage.removeItem("token");
+    this._router.navigate(['/login']);
   }
 
 

@@ -8,8 +8,9 @@ class follow{
     async updateFollow(req, res){
         console.log(req.query, "my body---------------->>>")
         // const { ownerId, followerId } = req.body;
-
+        console.log(req.headers, "headers")
         const token=jwtHandler.tokenVerifier(req.headers.token);
+        console.log(token, "token in follow")
         if(true){
 
             console.log(req.query, "my body---------------->>>")
@@ -63,8 +64,9 @@ class follow{
 
     async getFollowers(req, res){
         const token=jwtHandler.tokenVerifier(req.headers.token);
+        console.log(token, "token in followers get")
         if(token){
-
+            
             let searchId = req.params.id;
             const allFollowers = await model.follower.getAll({"ownerId":searchId});
             
@@ -106,11 +108,12 @@ class follow{
     async followRelation(req,res){
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
-
+            console.log(req.query, "check 1")
             let searchObj = req.query;
             const relation = await model.follower.getRelation(searchObj);
-            
+            console.log(relation, "relation")
             if (relation != null){
+                
                 res.status(200).send(relation) 
             }
             else{

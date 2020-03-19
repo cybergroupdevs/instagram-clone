@@ -105,7 +105,9 @@ class user{
     }    
 
     async showAll(req, res){
+        console.log(req.headers, "inside show headers")
         const token=jwtHandler.tokenVerifier(req.headers.token);
+        console.log(token, "inside show all")
         if(token)
         {
             const userObj = await model.user.get();
