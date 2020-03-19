@@ -10,10 +10,10 @@ class employee{
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
         try{
-            let instaHandle={};
-            instaHandle =await model.user.get({"instaHandle":req.body.instaHandle});
-            console.log(instaHandle.instaHandle, "instahandle--->>>");
-            if(instaHandle.instaHandle!=req.body.instaHandle)
+            // let instaHandle={};
+            let user =await model.user.get({"instaHandle":req.body.instaHandle});
+            console.log(user, "instahandle--->>>");
+            if(user[0]==null )
             {
             
                 let userObject = {
@@ -26,6 +26,9 @@ class employee{
                 const user = await model.user.save(userObject);
                 res.status(200).send(userObject);
                 // res.status(200).send(employee)
+            }
+            else{
+                res.status(406).send("InstaHandle already exists!!");
             }
         }
 

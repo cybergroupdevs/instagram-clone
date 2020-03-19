@@ -80,6 +80,7 @@ export class SendHttpRequestService {
   }
 
   getFollowingList(id: string): Observable<any>{
+    console.log(this.header_token, "followers ")
     return this.http.get(`http://localhost:8080/following/${id}`, {headers: this.header_token, observe: 'response'}).pipe(
       tap(_ => this.log("showing details")),
       catchError(this.handleError<any>('error in details')
@@ -103,6 +104,7 @@ export class SendHttpRequestService {
   
 
   followUser(ownerId: string, followerId:string): Observable<any>{
+    console.log(this.header_token, "token")
     return this.http.put("http://localhost:8080/follow/?" + "ownerId=" + ownerId + "&followerId=" + followerId, {headers: this.header_token, observe: 'response'}).pipe(
       tap(_ => this.log("Followed")),
       catchError(this.handleError<any>('error in following')

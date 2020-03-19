@@ -20,14 +20,14 @@ class user{
     // }
 
     async update(req, res){
-        
+        console.log("reached update")
         var exists = false
         if(jwtHandler.tokenVerifier(req.headers.token)){
             let instaHandle = req.body.instaHandle
             if (instaHandle != null){
-                console.log(this, "inside update")
+                console.log(req.body, "inside update")
                 let user = await model.user.get({"instaHandle":instaHandle});
-                if(user[0]._id  == req.params.id){
+                if(user[0]==null || user[0]._id  == req.params.id){
                     exists = false
                 }
                 else{

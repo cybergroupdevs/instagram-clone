@@ -41,6 +41,7 @@ export class EditProfileDetailsComponent implements OnInit {
     
   }
   update(){
+    console.log("inside update")
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id;
     let userObj = {
       name: this.uname.nativeElement.value,
@@ -52,7 +53,6 @@ export class EditProfileDetailsComponent implements OnInit {
       website: this.uwebsite.nativeElement.value,
       // gender: this.ugender.nativeElement.value,
      
-      
     }
 
     this.sendReq.updateData(userObj,loggedinUserId).subscribe(res =>  {

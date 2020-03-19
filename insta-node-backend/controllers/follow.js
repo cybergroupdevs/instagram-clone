@@ -6,13 +6,9 @@ class follow{
     }
     
     async updateFollow(req, res){
-        console.log(req.query, "my body---------------->>>")
-        // const { ownerId, followerId } = req.body;
-        console.log(req.headers, "headers")
         const token=jwtHandler.tokenVerifier(req.headers.token);
-        console.log(token, "token in follow")
         if(true){
-
+            console.log(req, "request")
             console.log(req.query, "my body---------------->>>")
             
             let followObj={
@@ -64,7 +60,6 @@ class follow{
 
     async getFollowers(req, res){
         const token=jwtHandler.tokenVerifier(req.headers.token);
-        console.log(token, "token in followers get")
         if(token){
             
             let searchId = req.params.id;
