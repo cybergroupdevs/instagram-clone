@@ -40,12 +40,12 @@
 
 
 <!-- Modal 3 Settings Modal -->
-<div class="modal" id="settingsModal" style="border-radius: 1rem;">
+<div class="modal" id="settingsModal">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
             <!-- Modal header -->
             <div class="modal-header text-center">
-                <p class="modal-title w-100">Change Password</p>
+                <a [routerLink]="['../../accounts/edit/changePassword']" data-dismiss="modal" class="modal-title w-100 changePassword">Change Password</a>
             </div>
             <div class="modal-header text-center">
                 <a class="modal-title w-100" data-dismiss="modal" (click)="logout()">Logout</a>
@@ -76,6 +76,27 @@
       </div>
   </div>
 
+  <!-- Modal 4 upload picture Modal -->
+<div class="modal" id="uploadPicModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal header -->
+            <div class="modal-header text-center" style="padding: 1.5rem;">
+                <p class="modal-title w-100"><b>Profile Picture</b></p>
+            </div>
+            <div class="modal-header text-center">
+                <a class="modal-title w-100" style="color:#3798F0"><b>Upload Photo</b></a>
+            </div>
+            <div class="modal-header text-center">
+                <p class="modal-title w-100 removePhoto"><b>Remove Current Photo</b></p>
+            </div>
+            <div class="modal-header text-center">
+                <p class="modal-title w-100" data-dismiss="modal">Cancel</p>
+            </div>
+        </div>
+      </div>
+  </div>
+
 
 
 
@@ -83,9 +104,9 @@
 <div class="container">
     <div class="row ml-4 mr-1">
         <div class="col-lg-3 offset-lg-1 mt-4 profile-image-div">
-            <img src="../../assets/ss.png" alt="Profile Image" class="rounded-circle profile-img">
+            <img src="../../assets/ss.png" alt="Profile Image" class="rounded-circle profile-img" data-toggle="modal" data-target="#uploadPicModal">
         </div>
-        <div class="col-lg-8 mt-4 profile-details" style="background-color: cadetblue;">
+        <div class="col-lg-8 mt-4 profile-details">
             <div class="row edit-profile-div">
                 <h3 class="user-name mr-3">{{username}}</h3>
 
@@ -107,10 +128,11 @@
                     </li>
                 </ul> 
             </div>
-            <div class="row description-div">
+            <div class="row name-div">
                 <p><b>{{name}}</b></p>
-                <p>jsdhgbf</p>
-                <div>{{bio}}</div>
+            </div>
+            <div class="row bio-div">
+                <p>{{bio}}</p>
             </div>    
         </div>
     </div>

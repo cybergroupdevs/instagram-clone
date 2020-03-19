@@ -20,7 +20,7 @@ export class HomenavComponent implements OnInit {
   private searchTerms = new Subject<string>();
 
 
-  constructor(private sendHttpRequestService: SendHttpRequestService, private _router:Router, private profileDashboard:ProfileDashboardComponent) { }
+  constructor(private sendHttpRequestService: SendHttpRequestService, private _router:Router) { }
 
   // Push a search term into the observable stream. 
   search(term: string): void {
@@ -49,11 +49,11 @@ export class HomenavComponent implements OnInit {
     console.log("inside my profile func---->>>>")  
     let loggedinUserId = this.sendHttpRequestService.jsonDecoder(localStorage.getItem("token")).data._id
     this._router.navigate(["/profile", loggedinUserId]);
-    this.profileDashboard.loadUserData(loggedinUserId,null);
+    //this.profileDashboard.loadUserData(loggedinUserId,null);
   }
 
   searchUser(loggedinUserId:string){
-    this.profileDashboard.loadUserData(loggedinUserId, null)
+    //this.profileDashboard.loadUserData(loggedinUserId, null)
 
   }
   

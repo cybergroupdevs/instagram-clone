@@ -32,8 +32,8 @@ export class EditProfileDetailsComponent implements OnInit {
   profileImage:any
 
   ngOnInit() {
-    let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data.instaHandle;
-    this.loadUserData(loggedinUserId)
+    let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id;
+    this.loadUserData(loggedinUserId,null)
     
   }
   update(){
@@ -65,8 +65,8 @@ export class EditProfileDetailsComponent implements OnInit {
     });
   }
 
-  loadUserData(id: string){
-    this.sendReq.userInfo(id).subscribe(res => {
+  loadUserData(id: string=null,instaHandle:string=null){
+    this.sendReq.userInfo(id,null).subscribe(res => {
       if(res.status == 200){
         console.log(res.body[0]);
         this.usersData = res.body[0];
@@ -90,6 +90,38 @@ export class EditProfileDetailsComponent implements OnInit {
     this.profileImage = this.usersData.profileImage;
     
   }
+  readURL() {
+    const preview = document.getElementById('profilePic') as HTMLImageElement;
+    const file = (<HTMLInputElement>document.getElementById('profileImageInput')).files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener("load", function () {
+      preview.src = String(reader.result);
+      console.log(reader.result)
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+  }
+}
+
+//   readURL3(input){
+//     const preview = document.getElementById('profilePic');
+//     const file = document.querySelector('input[type=file]').files[0];
+//     const reader = new FileReader();
+
+//     reader.addEventListener("load", function () {
+//       preview.src = reader.result;
+//     }, false);
+
+//     if (file) {
+//       reader.readAsDataURL(file);
+//     }
+// }
+
+
+
+
 
   
 
