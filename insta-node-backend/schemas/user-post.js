@@ -4,8 +4,9 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 module.exports = {
     ownerId: {
         type: ObjectId,
-        ref:'user',
-        default: null
+        ref:'User',
+        default: null,  //change
+        required:true
     },
     url: {
         type: String,
@@ -26,14 +27,13 @@ module.exports = {
     recentLikes:  [
             {
                 type: ObjectId,
-                ref: "user",
+                ref: "User",
                 default:null
             }
         ],
     hashtags: [
             {
                 type: String,
-                required: true, //doubt
                 default:null
             }
         ],

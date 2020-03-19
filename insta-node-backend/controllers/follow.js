@@ -102,6 +102,27 @@ class follow{
         }
 
     }
+
+    async followRelation(req,res){
+        const token=jwtHandler.tokenVerifier(req.headers.token);
+        if(token){
+
+            let searchObj = req.query;
+            const relation = await model.follower.getRelation(searchObj);
+            
+            if (relation != null){
+                res.status(200).send(relation) 
+            }
+            else{
+                res.status(404).send({"message":"not following"})
+            }   
+        }
+
+        else{
+            res.status(401).send("Unauthorized");
+        }
+    }
+
 }
 
 module.exports = new follow()

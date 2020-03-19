@@ -15,12 +15,12 @@ import {
   templateUrl: './homenav.component.html',
   styleUrls: ['./homenav.component.css']
 })
-export class HomenavComponent implements OnInit {
+export class HomenavComponent  implements OnInit {
   users$: Observable<any[]>;
   private searchTerms = new Subject<string>();
 
 
-  constructor(private sendHttpRequestService: SendHttpRequestService, private _router:Router) { }
+  constructor(private sendReq: SendHttpRequestService, private _router:Router, private profileDashboard: ProfileDashboardComponent) { }
 
   // Push a search term into the observable stream. 
   search(term: string): void {
@@ -39,7 +39,7 @@ export class HomenavComponent implements OnInit {
       distinctUntilChanged(),
 
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.sendHttpRequestService.searchUsers(term)
+      switchMap((term: string) => this.sendReq.searchUsers(term)
     ));
     console.log(this.users$, "usersssssssssss")
     
@@ -47,13 +47,13 @@ export class HomenavComponent implements OnInit {
 
   myProfile(){
     console.log("inside my profile func---->>>>")  
-    let loggedinUserId = this.sendHttpRequestService.jsonDecoder(localStorage.getItem("token")).data._id
+    let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this._router.navigate(["/profile", loggedinUserId]);
-    //this.profileDashboard.loadUserData(loggedinUserId,null);
+    this.profileDashboard.loadUserData(loggedinUserId,null);
   }
 
   searchUser(loggedinUserId:string){
-    //this.profileDashboard.loadUserData(loggedinUserId, null)
+    this.profileDashboard.loadUserData(loggedinUserId, null)
 
   }
   

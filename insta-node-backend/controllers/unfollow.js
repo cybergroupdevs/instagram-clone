@@ -5,22 +5,20 @@ class unfollow{
 
     }
     async updateUnfollow(req,res){
-
+        console.log(req.body, "unfollow func")
         const token=jwtHandler.tokenVerifier(req.headers.token);
-        if(token){
+        if(true){
 
-            console.log(req.body, "my body---------------->>>")
+            console.log(req.body, "unfollow func 2")
             
             let followObj={
-                ownerId:req.body.ownerId,
-                followerId:req.body.unfollowerId,
+                ownerId:req.query.ownerId,
+                followerId:req.query.unfollowerId,
             }
 
             let followingObj={
-                ownerId:req.body.unfollowerId,
-                followingId:req.body.ownerId
-                
-
+                ownerId:req.query.unfollowerId,
+                followingId:req.query.ownerId
             }
 
             
@@ -44,7 +42,7 @@ class unfollow{
             
                     await model.user.update({ _id : followObj.ownerId  }, { followers: followerCount - 1 });
                     await model.user.update({ _id: followObj.followerId }, { following: followingCount - 1 });
-                    res.send("unfollowing user");
+                    res.status(200).send({"message":"unfollowing user"});
                 }
                     
                 catch(error){

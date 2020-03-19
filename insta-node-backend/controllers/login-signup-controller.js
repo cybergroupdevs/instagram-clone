@@ -23,7 +23,7 @@ class employee{
                     email : req.body.email,
                     password : req.body.password
                 };
-                const user=await model.user.save(userObject);
+                const user = await model.user.save(userObject);
                 res.status(200).send(userObject);
                 // res.status(200).send(employee)
             }

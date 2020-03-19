@@ -4,7 +4,7 @@ var fs  = require('fs');
 var fileName;
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        var dir = '../postsDb';
+        var dir = '../postsDB';
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir);
         }
@@ -34,6 +34,7 @@ module.exports=(app) => {
          app.put("/follow",controller.follow.updateFollow);
          app.get("/followers/:id", controller.follow.getFollowers);
          app.get("/following/:id", controller.follow.getFollowing);
+         app.get("/followRelation", controller.follow.followRelation);
          app.put("/unfollow",controller.unfollow.updateUnfollow);
          app.put("/like",controller.likes.updateLike);
          app.post("/comment",controller.comments.addComment);
