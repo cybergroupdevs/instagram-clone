@@ -40,5 +40,15 @@ module.exports = {
     following: {
         type: Number,
         default: 0
-    }
+    },
+    gender:{
+        type:String,
+        default:null,
+        enum: ['Male', 'Female', 'Not to say']
+    },
+    website: {
+        type: String,
+        default: null
+    },
+
 }

@@ -13,13 +13,16 @@ export class EditProfileDetailsComponent implements OnInit {
 
   
   constructor(private sendReq: SendHttpRequestService, private _router:Router) { }
-  @ViewChild('name', {static: false}) uname: ElementRef;
-  @ViewChild('instaHandle', {static: false}) uinstaHandle: ElementRef;
-  @ViewChild('about', {static: false}) uabout: ElementRef;
-  @ViewChild('phone', {static: false}) uphone: ElementRef;
-  @ViewChild('profileImage', {static: false}) uprofileImage: ElementRef;
-  @ViewChild('email', {static: false}) uemail: ElementRef;
-  @ViewChild('password', {static: false}) upassword: ElementRef;
+
+  @ViewChild('uname', {static: false}) uname: ElementRef;
+  @ViewChild('uinstaHandle', {static: false}) uinstaHandle: ElementRef;
+  @ViewChild('uabout', {static: false}) uabout: ElementRef;
+  @ViewChild('uphone', {static: false}) uphone: ElementRef;
+  @ViewChild('uprofileImage', {static: false}) uprofileImage: ElementRef;
+  @ViewChild("uwebsite", {static:false}) uwebsite:ElementRef;
+  @ViewChild("ugender", {static:false}) ugender:ElementRef;
+  @ViewChild('uemail', {static: false}) uemail: ElementRef;
+  @ViewChild('updateButton', {static: false}) updateButton: ElementRef;
 
   res: any;
   usersData:any;
@@ -30,10 +33,11 @@ export class EditProfileDetailsComponent implements OnInit {
   phone:Number;
   gender:string;
   profileImage:any
-
+  website:string;
+  
   ngOnInit() {
-    let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data.instaHandle;
-    this.loadUserData(loggedinUserId)
+    let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id;
+    this.loadUserData(loggedinUserId, null)
     
   }
   update(){
@@ -43,9 +47,12 @@ export class EditProfileDetailsComponent implements OnInit {
       instaHandle: this.uinstaHandle.nativeElement.value,
       about: this.uabout.nativeElement.value,
       phone: this.uphone.nativeElement.value,
-      profileImage: this.uprofileImage.nativeElement.value,
       email: this.uemail.nativeElement.value,
-      password: this.upassword.nativeElement.value
+      // profileImage: this.uprofileImage.nativeElement.value,
+      website: this.uwebsite.nativeElement.value,
+      // gender: this.ugender.nativeElement.value,
+     
+      
     }
 
     this.sendReq.updateData(userObj,loggedinUserId).subscribe(res =>  {
@@ -65,8 +72,9 @@ export class EditProfileDetailsComponent implements OnInit {
     });
   }
 
-  loadUserData(id: string){
-    this.sendReq.userInfo(id).subscribe(res => {
+  loadUserData(id: string=null, instaHandle:string=null){
+    console.log("loadingggggg")
+    this.sendReq.userInfo(id, null).subscribe(res => {
       if(res.status == 200){
         console.log(res.body[0]);
         this.usersData = res.body[0];
@@ -81,16 +89,17 @@ export class EditProfileDetailsComponent implements OnInit {
   }
 
   setUserData(){
+
     this.name = this.usersData.name;
     this.username = this.usersData.instaHandle;
+    console.log(this.usersData.email, "emaillll", this.usersData,)
     this.email = this.usersData.email;
     this.phone = this.usersData.phone;
-    this.gender = this.usersData.gender;
     this.bio = this.usersData.about;
     this.profileImage = this.usersData.profileImage;
-    
+    this.website = this.usersData.website;
+    this.gender = this.usersData.gender;
+        
   }
-
-  
 
 }

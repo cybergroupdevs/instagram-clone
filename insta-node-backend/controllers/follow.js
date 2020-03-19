@@ -65,10 +65,8 @@ class follow{
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
 
-            let searchInstaHandle = req.params.id;
-            const user = await model.user.get({instaHandle:searchInstaHandle})
-            const userId = user[0]._id
-            const allFollowers = await model.follower.getAll({"ownerId":userId});
+            let searchId = req.params.id;
+            const allFollowers = await model.follower.getAll({"ownerId":searchId});
             
             if (allFollowers != null){
                 res.status(200).send(allFollowers) 
@@ -88,10 +86,8 @@ class follow{
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
 
-            let searchInstaHandle = req.params.id;
-            const user = await model.user.get({instaHandle:searchInstaHandle})
-            const userId = user[0]._id
-            const allFollowing = await model.following.getAll({"ownerId":userId});
+            let searchId = req.params.id;
+            const allFollowing = await model.following.getAll({"ownerId":searchId});
             
             if (allFollowing != null){
                 res.status(200).send(allFollowing) 

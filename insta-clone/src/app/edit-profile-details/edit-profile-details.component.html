@@ -6,7 +6,7 @@
                     <img class="rounded-circle" src="../../assets/ss.png" style="width: 3rem; height: 3rem; float:right;">
                 </div>
                 <div class="col-lg-9">
-                    <h5>himanshukumar2750</h5>
+                    <h5>{{username}}</h5>
                     <a href="">Change Profile picture</a>
                 </div>
             </div>
@@ -14,25 +14,25 @@
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Name</label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" name="Name" [value]="name"  required="required">
+                        <input type="text" class="form-control" name="Name" #uname [(value)]="name"  required="required">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Username</label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" name="Username" [value]="Username" #uname required="required">
+                        <input type="text" class="form-control" #uinstaHandle name="Username" value="{{username}}"  required="required">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Website</label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" name="Website" [value]="Website" required="required">
+                        <input type="text" class="form-control" #uwebsite name="Website" value="{{Website}}" required="required">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Bio</label>
                     <div class="col-lg-8">
-                        <textarea class="form-control" type="text" name="Bio" [value]="bio"></textarea>
+                        <textarea class="form-control" type="text" #uabout name="Bio" value="{{bio}}"></textarea>
                     </div>
                 </div>
                 <div class="row">
@@ -44,13 +44,13 @@
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Email</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="email" name="email" required="required">
+                        <input class="form-control" type="email" #uemail name="email" value="{{email}}" required="required">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Phone Number</label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" name="mobile" required="required">
+                        <input type="text" class="form-control" #uphone name="mobile" value="{{phone}}" required="required">
                     </div>
                 </div>
                 <div class="form-group row">

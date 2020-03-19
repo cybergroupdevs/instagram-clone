@@ -104,11 +104,6 @@ export class ProfileDashboardComponent implements OnInit {
 
   }
 
-
-  logout(){
-    localStorage.removeItem("token");
-    this._router.navigate(["/login"]);
-  }
   follow(){
     console.log("inside follow function")
     let current_route = this._router.url.split("/");
@@ -117,6 +112,7 @@ export class ProfileDashboardComponent implements OnInit {
       console.log(res.status, "status ????")
       if(res.status == 200){
         console.log(res.body, "following---->>>>");
+        this.loadUserData(current_route[2], null)
         
       }
       else if(res.status == 401){

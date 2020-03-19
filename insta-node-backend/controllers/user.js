@@ -83,32 +83,13 @@ class user{
             console.log(obj)
             if (obj.id !=  "null"){
                 
-                var userObj = await model.user.get({"_id": obj.id}, 
-                    {
-                        "instaHandle": 1,
-                        "name": 1,
-                        "profileImage": 1,
-                        "about": 1,
-                        "postsCount": 1,
-                        "followers": 1,
-                        "following": 1,
-                        "_id":1
-                    });
+                var userObj = await model.user.get({"_id": obj.id});
             }
             else{
-                userObj = await model.user.get({"instaHandle": obj.instaHandle}, 
-                    {
-                        "instaHandle": 1,
-                        "name": 1,
-                        "profileImage": 1,
-                        "about": 1,
-                        "postsCount": 1,
-                        "followers": 1,
-                        "following": 1,
-                        "_id":1
-                    });
+                userObj = await model.user.get({"instaHandle": obj.instaHandle});
             }
-            
+
+            console.log(userObj, "detailss")
             if (userObj[0] != null){                           
                 res.status(200).send(userObj);
             }
