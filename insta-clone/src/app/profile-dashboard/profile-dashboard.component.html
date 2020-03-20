@@ -5,13 +5,25 @@
       
           <!-- Modal Header -->
           <div class="modal-header text-center">
-            <p class="modal-title w-100">Followers</p>
+            <p class="modal-title w-100"><b>Followers</b></p>
             <button type="button" class="close" data-dismiss="modal" >&times;</button>
           </div>
     
           <!-- Modal body -->
           <div class="modal-body" *ngFor="let followers of followersArray">
-              <p>{{followers.followerId.instaHandle}}</p>
+              <div class="row">
+                <div class="col-lg-2">
+                    <img src="../../assets/ss.png" class="rounded-circle follwers-img" alt="">
+                </div>
+                <div class="col-lg-7">
+                  <div class="followers-username" ><a [routerLink]="['../',followers.followerId._id]" data-dismiss="modal"><b>{{followers.followerId.instaHandle}}</b></a></div>
+                  <div class="followers-name">{{followers.followerId.name}}</div>
+                </div>
+                <div class="col-lg-3">
+                    <a [style.display]="followButton ? 'block' : 'none'" ><button class="btn btn-primary follow-btn" (click)="follow()">Follow</button></a>
+                    <a [style.display]="unfollowButton ? 'block' : 'none'" ><button class="btn unfollow-btn" (click)="unfollow()">Following</button></a>
+                </div>
+              </div>    
           </div>
       
         </div>
@@ -25,13 +37,25 @@
       
           <!-- Modal Header -->
           <div class="modal-header text-center">
-            <p class="modal-title w-100">Following</p>
+            <p class="modal-title w-100"><b>Following</b></p>
             <button type="button" class="close" data-dismiss="modal" >&times;</button>
           </div>
     
           <!-- Modal body -->
           <div class="modal-body" *ngFor="let following of followingArray">
-            <p>{{following.followingId.instaHandle}}</p>
+            <div class="row">
+                <div class="col-lg-2">
+                    <img src="../../assets/ss.png" class="rounded-circle following-img" alt="">
+                </div>
+                <div class="col-lg-7">
+                  <div class="following-username"><a [routerLink]="['../',following.followingId._id]" data-dismiss="modal"><b>{{following.followingId.instaHandle}}</b></a></div>
+                  <div class="following-name">{{following.followingId.name}}</div>
+                </div>
+                <div class="col-lg-3">
+                    <a [style.display]="followButton ? 'block' : 'none'" ><button class="btn btn-primary follow-btn" (click)="follow()">Follow</button></a>
+                    <a [style.display]="unfollowButton ? 'block' : 'none'" ><button class="btn unfollow-btn" (click)="unfollow()">Following</button></a>
+                </div>
+              </div> 
           </div>
       
         </div>

@@ -98,7 +98,6 @@ export class ProfileDashboardComponent implements OnInit {
 
   getFollowers(){
     let current_route = this._router.url.split("/");
-   
     this.sendReq.getFollowersList(current_route[2]).subscribe(res => {
       if(res.status == 200){
         console.log(res.body);
