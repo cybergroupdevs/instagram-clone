@@ -2,6 +2,12 @@ import { Token } from '@angular/compiler/src/ml_parser/lexer';
 import { SendHttpRequestService } from './../send-http-request.service';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,23 +24,22 @@ export class LoginComponent implements AfterViewInit {
   @ViewChild('password', {static: false}) password: ElementRef;
   res: any;
 
-  loginFunction() { 
+  createUserObj(){
     let userObj = {
       instaHandle: this.instaHandle.nativeElement.value,
       password: this.password.nativeElement.value
     }
-    console.log(userObj);
+    this.loginFunction(userObj)
+  }
+
+  loginFunction(userObj) { 
     this.sendReq.logMeIn(userObj).subscribe(res => {
-      // console.log(res.status, "res.statusss")
-      console.log("helloooooooo")
-      console.log(res, "ressssssss");
-      console.log(res.status, "res.statusss")
-      // console.log(res.token, "tokennnnnnn");
+      
       if(res.status == 200){
         localStorage.setItem("token", res.body.token);
         this._router.navigate(['/feed']);
       }
-      else if (res == null){
+      else if (res.status == 401){
         alert("not registered user")
       }
     });

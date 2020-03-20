@@ -52,7 +52,6 @@ export class ProfileDashboardComponent implements OnInit {
         localStorage.removeItem("token");
         this._router.navigate(['/login']);
       }
-      
     });
   }
 
@@ -63,9 +62,7 @@ export class ProfileDashboardComponent implements OnInit {
     this.following = this.usersArray.following;
     this.posts = this.usersArray.postsCount;
     this.bio = this.usersArray.about;
-
     let current_route = this._router.url.split("/");
-    
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     if (current_route[2] == loggedinUserId){
       this.editButton = true
@@ -74,13 +71,14 @@ export class ProfileDashboardComponent implements OnInit {
     }
     else{
       this.sendReq.checkFollow(current_route[2],loggedinUserId).subscribe(res => {
-        if(res.status == 200){
+        console.log(res, "success")
+        if(res.body.success == true){
           console.log(res.body);
           this.followButton = false
           this.unfollowButton = true
           this.editButton = false
         }
-        else if(res.status == 404){
+        else if(res.body.success == false){
           this.followButton = true
           this.unfollowButton = false
           this.editButton = false
@@ -89,16 +87,12 @@ export class ProfileDashboardComponent implements OnInit {
           localStorage.removeItem("token");
           this._router.navigate(['/login']);
         }
-        
       });
-      
-      
     }
   }
 
   getFollowers(){
     let current_route = this._router.url.split("/");
-   
     this.sendReq.getFollowersList(current_route[2]).subscribe(res => {
       if(res.status == 200){
         console.log(res.body);
@@ -116,7 +110,6 @@ export class ProfileDashboardComponent implements OnInit {
 
   getFollowing(){
     let current_route = this._router.url.split("/");
-   
     this.sendReq.getFollowingList(current_route[2]).subscribe(res => {
       if(res.status == 200){
         console.log(res.body);
@@ -127,24 +120,16 @@ export class ProfileDashboardComponent implements OnInit {
         localStorage.removeItem("token");
         this._router.navigate(['/login']);
       }
-      
     });
-
   }
 
-  follow(){
-    console.log("inside follow function")
+  follow(){   
     let current_route = this._router.url.split("/");
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this.sendReq.followUser(current_route[2], loggedinUserId).subscribe(res => {
       console.log(res.status, res, "status ????")
-      if(res.status == 200  || res.message =="now following user"){
-        console.log(res.body, "following---->>>>");
-        // this.followButton = false;
-        // this.unfollowButton = true;
-        // this.editButton = false
+      if(res.status == 200 ){
         this.loadUserData(current_route[2], null)
-        
       }
       else if(res.status == 401){
         localStorage.removeItem("token");
@@ -155,32 +140,20 @@ export class ProfileDashboardComponent implements OnInit {
   }
 
   unfollow(){
-    console.log("inside unfollow function")
     let current_route = this._router.url.split("/");
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this.sendReq.unfollowUser(current_route[2], loggedinUserId).subscribe(res => {
-      console.log(res.status, res.message, "status ????")
-      if(res.status == 200 || res.message =="unfollowing user"){
-        console.log(res.body, "unfollowing---->>>>");
-        // this.followButton = true;
-        // this.unfollowButton = false;
-        // this.editButton = false
+      if(res.status == 200){
         this.loadUserData(current_route[2], null)
-        
       }
       else if(res.status == 401){
         localStorage.removeItem("token");
         this._router.navigate(['/login']);
-      }
-      
+      }   
     });
   }
-
   logout(){
     localStorage.removeItem("token");
     this._router.navigate(['/login']);
   }
-
-
 }
-

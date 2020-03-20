@@ -49,11 +49,11 @@ export class HomenavComponent  implements OnInit {
     console.log("inside my profile func---->>>>")  
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this._router.navigate(["/profile", loggedinUserId]);
-    //this.profileDashboard.loadUserData(loggedinUserId,null);
+    this.profileDashboard.loadUserData(loggedinUserId,null);
   }
 
   searchUser(loggedinUserId:string){
-    //this.profileDashboard.loadUserData(loggedinUserId, null)
+    this.profileDashboard.loadUserData(loggedinUserId, null)
 
   }
   
