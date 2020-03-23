@@ -38,5 +38,8 @@ module.exports=(app) => {
          app.put("/unfollow",controller.unfollow.updateUnfollow);
          app.put("/like",controller.likes.updateLike);
          app.post("/comment",controller.comments.addComment);
+
+
+         
 }
 

@@ -23,7 +23,7 @@ class employee{
                 const userWhoCreatedPost = await user.findOne({_id:newPost.ownerId}); 
                 var postsCount=userWhoCreatedPost.postsCount;
                 await user.updateOne({ _id : newPost.ownerId  }, { postsCount:postsCount + 1 });        
-            console.log("postsCount updated");
+            
             }
             catch(error){
                 console.log(error);
@@ -38,7 +38,7 @@ class employee{
   
     async showAll(req,res) {
         let token = jwtHandler.tokenVerifier(req.headers.token);
-        console.log(token);
+        
         if(token)
         {
             const post = await model.posts.get({"ownerId":req.params.id});

@@ -7,15 +7,13 @@ class employee{
     }
 
     async createUser(req, res){
+        
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
         try{
-            // let instaHandle={};
             let user =await model.user.get({"instaHandle":req.body.instaHandle});
-            console.log(user, "instahandle--->>>");
             if(user[0]==null )
             {
-            
                 let userObject = {
                     name : req.body.name,
                     instaHandle : req.body.instaHandle,
@@ -23,26 +21,24 @@ class employee{
                     email : req.body.email,
                     password : req.body.password
                 };
-                const user = await model.user.save(userObject);
-                res.status(200).send(userObject);
-                // res.status(200).send(employee)
+                var instaUser = await model.user.save(userObject);
+                res.status(200).send({"success":true, "message":"user created"});
             }
             else{
-                res.status(406).send("InstaHandle already exists!!");
+                res.status(406).send({"success":false, "message":"Instahandle already exists"});
             }
         }
-
         catch(error)
         {
-            res.status(406).send("InstaHandle already exists!!");
+            console.error
+            res.status(406).send({"success":false, "message":"Email or phone already exists"});
         }
     }
 
     async checkUserAuthentication(req, res){
         let user = await model.user.get({$and : [{"instaHandle": req.body.instaHandle},{"password": req.body.password}]});
-        console.log(user[0], "printing")
         if(user[0] != null){
-            console.log("inside")
+            
             let token = jwtHandler.tokenGenerator(user);
             if(token != null){
                 let resBody = {

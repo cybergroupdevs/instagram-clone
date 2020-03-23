@@ -20,12 +20,12 @@ class user{
     // }
 
     async update(req, res){
-        console.log("reached update")
+        
         var exists = false
         if(jwtHandler.tokenVerifier(req.headers.token)){
             let instaHandle = req.body.instaHandle
             if (instaHandle != null){
-                console.log(req.body, "inside update")
+                
                 let user = await model.user.get({"instaHandle":instaHandle});
                 if(user[0]==null || user[0]._id  == req.params.id){
                     exists = false
@@ -65,8 +65,6 @@ class user{
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token)
         {
-            console.log(token, "my token----->>")
-            console.log("recieved token")
             const deleteObj=await model.user.delete({ _id: req.params.id});
             res.send(deleteObj); 
         }
@@ -105,9 +103,8 @@ class user{
     }    
 
     async showAll(req, res){
-        console.log(req.headers, "inside show headers")
+        
         const token=jwtHandler.tokenVerifier(req.headers.token);
-        console.log(token, "inside show all")
         if(token)
         {
             const userObj = await model.user.get();
@@ -117,16 +114,6 @@ class user{
             res.status(401).send("Unauthorized");
         }
     }
-    // async show(req, res){
-    //     const token=jwtHandler.tokenVerifier(req.headers.token);
-    //     if(token)
-    //     {
-    //         const userObj = await model.user.get({_id: req.params.id});
-    //         res.send(userObj);
-    //     }
-    //     else{
-    //         res.status(401).send("Unauthorized");
-    //     }
-    // }
+    
 }
 module.exports = new user();
