@@ -123,13 +123,18 @@ export class ProfileDashboardComponent implements OnInit {
     });
   }
 
-  follow(){   
+  followObj(){
     let current_route = this._router.url.split("/");
+    this.follow(current_route[2])
+  }
+
+  follow(ownerId){   
+    
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
-    this.sendReq.followUser(current_route[2], loggedinUserId).subscribe(res => {
+    this.sendReq.followUser(ownerId, loggedinUserId).subscribe(res => {
       console.log(res.status, res, "status ????")
       if(res.status == 200 ){
-        this.loadUserData(current_route[2], null)
+        this.loadUserData(ownerId, null)
       }
       else if(res.status == 401){
         localStorage.removeItem("token");
@@ -139,12 +144,17 @@ export class ProfileDashboardComponent implements OnInit {
     });
   }
 
-  unfollow(){
+  unfollowObj(){
     let current_route = this._router.url.split("/");
+    this.unfollow(current_route[2])
+  }
+
+  unfollow(ownerId){
+    
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
-    this.sendReq.unfollowUser(current_route[2], loggedinUserId).subscribe(res => {
+    this.sendReq.unfollowUser(ownerId, loggedinUserId).subscribe(res => {
       if(res.status == 200){
-        this.loadUserData(current_route[2], null)
+        this.loadUserData(ownerId, null)
       }
       else if(res.status == 401){
         localStorage.removeItem("token");
