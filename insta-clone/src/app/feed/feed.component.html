@@ -1,10 +1,72 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
-<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
 <app-homenav></app-homenav>
-<section class="container-fluid">
-    <!-- <div *ngFor="let img of allImages" class="mt-5 mx-auto"> -->
+
+<div class="container-fluid" style="background-color: #FAFAFA;">
+  <div class="row">
+    <div class="col-lg-5 offset-lg-2" style="background-color: white; border:1px solid #DBDBDB; margin-top: 2rem;">
+      <div class="row user-details-row" style="padding: 0.5rem 0;">
+        <div class="col-lg-1">
+          <img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 2.5rem; height: 2.5rem; border: 1px solid black;">
+        </div>
+        <div class="col-lg-8">
+          <div><b>username</b></div>
+          <div style="line-height: 0.8;">name</div>
+        </div>
+        <div class="col-lg-3">
+          <label style="padding-top: 0.5rem;" for="feedInput" class="modal-title w-100 cursor-pointer"><input type='file'id="feedInput" onchange="readURL();" style="display: none;"/><b>Add a feed </b><img src="../../assets/add-btn2.png" style="width: 1.3rem;height:1.3rem;"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div *ngFor = "let img of allImages" class="col-lg-5 offset-lg-2" style="background-color: white; border:1px solid #DBDBDB; margin-top: 2rem; margin-bottom: 2rem; border-radius: 5px;">
+      <div class="row user-details-row" style="padding: 0.5rem 0;">
+        <div class="col-lg-1">
+          <img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 2.5rem; height: 2.5rem; border: 1px solid black;">
+        </div>
+        <div class="col-lg-10">
+          <div><b>username</b></div>
+          <div style="line-height: 0.8;">name</div>
+        </div>
+        <div class="col-lg-1">
+          <span ><b><h3 >...</h3></b></span>
+        </div>
+      </div>
+      <div class="row user-image-row">
+        <img src={{img}} class="img-responsive" style="width: 100%; ">
+      </div>
+      <div class="row like-comment-row" style="padding-top:0.4rem;">
+        <input type="checkbox" id="togglelike" class="visually-hidden">
+        <label for="togglelike"  class="control"></label>
+        <img src="../../assets/images/comment1.png" style="width:1.7rem; height:1.5rem; opacity: 0.75;">
+      </div>
+      <div class="row" style="padding:0 2rem">
+        <span></span><b>42&nbsp;</b><span>likes</span>
+      </div>
+      <div class="row" style="padding:0 2rem">
+        <span></span><b>username&nbsp;</b><span>caption</span>
+      </div>
+      <div class="row add-comment-section">
+        <input type="text" style="height: 4rem; width:100%; border: 1px solid #EFEFEF; border-bottom: none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" placeholder="  Add a comment...">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <section class="container-fluid">
+    
        
         <div class="row">
             
@@ -94,7 +156,7 @@
            
             </div>           
 
-        <!-- Floating Button Here -->
+      
         <div class="image-upload add-post">
           <label for="file-input">
             <img src="../../assets/add-btn2.png"/>
@@ -102,7 +164,7 @@
           <button id="file-input" type="file" (click)="openModal()"></button>
         </div>
 
-        <!-- Modal here -->
+        
         <div class="modal" tabindex="-1" role="dialog" #modal style="display: none;">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -125,7 +187,7 @@
         </div>
 
         <section id="lab_social_icon_footer" class="plus">
-          <!-- Include Font Awesome Stylesheet in Header -->
+          
           <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
           <div class="container">
           <div class="text-center center-block">
@@ -134,7 +196,5 @@
           </div>
           
           </section>
-</section>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</section> -->
+

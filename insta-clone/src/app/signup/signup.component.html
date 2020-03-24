@@ -1,6 +1,70 @@
-<!-- Latest compiled and minified CSS -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3 offset-lg-4 signup-card">
+      
+      <div class="row insta-image-row">
+        <img src="https://i.imgur.com/zqpwkLQ.png"/>
+      </div>
 
-<div id="container-fluid wrapper">
+      <div class="row signup-message-row">
+        <h2>Sign up to see photos and videos from your friends.</h2>
+      </div>
+
+      <div class="row login-with-fb-row">
+        <button class="btn login-with-fb"><img src="../../assets/images/fb-white.png"> Log in with Facebook</button>
+      </div>
+
+      <div class="row or-row">
+        <p class="or"><strong>OR</strong></p>
+      </div>
+
+      <div class="row input-row">
+        <input type="text" placeholder="Mobile Number or Email" #email class="input-1" />
+        <input type="text" placeholder="Full Name" #name class="input-2" />
+        <input type="text" placeholder="Username" #instaHandle class="input-3" />
+        <input type="password" placeholder="Password" #password class="input-4" />
+        <input type="button" value="Sign up" (click)="signup()" class="btn signup-btn"/>
+      </div>
+
+      <div class="row terms-row">
+        <h2>By signing up, you agree to our Terms , Data Policy and Cookies Policy .</h2>
+      </div>
+
+    </div>
+  </div> 
+  <div class="row below-signup-row">
+    <div class="col-lg-3 offset-lg-4">
+      <div class="row">
+        <span>Have an account? <a routerLink="/login">Log in</a></span>
+      </div>  
+    </div>
+  </div>
+  <div class="row get-app-row">
+    <div class="col-lg-3 offset-lg-4">
+      <div class="row get-app">
+        <p>Get the app.</p>
+      </div>
+      <div class="row app-img">
+        <div class="col-lg-4  offset-lg-1">
+          <a href="https://itunes.apple.com/app/instagram/id389801252?pt=428156&amp;ct=igweb.loginPage.badge&amp;mt=8">
+            <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/4b70f6fae447.png" >
+          </a>
+        </div>
+        <div class="col-lg-4 offset-lg-1">
+          <a href="https://play.google.com/store/apps/details?id=com.instagram.android&amp;referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26utm_medium%3Dbadge">
+            <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_english-en.png/f06b908907d5.png">
+          </a>
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- <div id="container-fluid wrapper">
   <div class="main-content">
     <div class="header ">
       <img src="https://i.imgur.com/zqpwkLQ.png" />
@@ -17,7 +81,7 @@
       <div>
         <input type="password" placeholder="Password" #password class="input-4" />
       </div>
-      <input type="button" value="Sign up" (click)="signup()" class="btn"/>
+      <input type="button" value="Sign up" (click)="signup()" class="btn signup-btn"/>
       <div class="overlap-text">
       <p>By signing up, you agree to our Terms , Data Policy and Cookies Policy .</p>
     </div>
@@ -29,4 +93,4 @@
    
     </div>
   </div>
-</div>
+</div> -->
