@@ -167,7 +167,7 @@ input:focus {
     line-height: 25px;
     background: #fafafa;
     font-family: Arial, Helvetica, sans-serif;
-
+    position: relative;
   }
   
   .overlap-text {
@@ -230,4 +230,21 @@ input:focus {
     .offset-lg-4 {
        margin-left: 37%; /* <- your value here */
     }
+  }
+
+
+  .outDiv{
+    position: relative;
+  }
+  .wrongIcon{
+    position: absolute;
+    right: 0rem;
+    top: 0rem;
+    font-size: 1.9em;
+    padding-right: -25rem;
+    color: rgb(237, 73, 86);
+  }
+
+  .rightIcon{
+    color: darkgray;
   }

@@ -42,6 +42,13 @@ export class SendHttpRequestService {
     );
   }
 
+  checkIfDuplicate(obj): Observable<any>{
+    return this.http.put("http://localhost:8080/checkIfDuplicate", obj, {observe: 'response', responseType: 'json'}).pipe(
+      tap(_ => this.log("checked")),
+      catchError(this.handleError<any>('checked'))
+    );
+  }
+
   updateData(object: any, id:string): Observable<any>{
     return this.http.put(`http://localhost:8080/user/${id}`,object, {observe: 'response', headers: this.header_token}).pipe(
       tap(_ => this.log("updating details")),
