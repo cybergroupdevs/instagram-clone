@@ -51,7 +51,7 @@ export class EditProfileDetailsComponent implements OnInit {
       email: this.uemail.nativeElement.value,
       // profileImage: this.uprofileImage.nativeElement.value,
       website: this.uwebsite.nativeElement.value,
-      // gender: this.ugender.nativeElement.value,
+      gender: this.ugender.nativeElement.value,
      
     }
 
@@ -115,6 +115,12 @@ export class EditProfileDetailsComponent implements OnInit {
     if (file) {
       reader.readAsDataURL(file);
   }
+}
+
+radioButtonValue(genderValue:string) {
+  console.log(genderValue,"abchgjkhgvjhbkj");
+  (<HTMLInputElement>document.getElementById("genderInput")).value = genderValue;
+  
 }
 
 //   readURL3(input){
