@@ -8,12 +8,7 @@ module.exports = {
         required: true,
         unique: true
     },
-    phone: {
-        type: String,
-        max: 10,
-        default: null,
-        unique:true
-    },
+    
     email: {
         type: String,
         default: null,
@@ -51,6 +46,11 @@ module.exports = {
     website: {
         type: String,
         default: null
-    },
+    }
+    // phone: {
+    //     type: String,
+    //     default : null,
+    //     max : 10   
+    // }
 
 }

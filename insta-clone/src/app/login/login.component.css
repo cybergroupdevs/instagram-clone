@@ -109,3 +109,11 @@ input:focus {
      margin-left: 37%; /* <- your value here */
   }
 }
+
+.was-validated :invalid~.invalid-feedback, .was-validated :invalid~.invalid-tooltip {
+  display: table-caption;
+}
+
+.warning{
+  color : rgb(237, 73, 86);
+}

@@ -1,4 +1,4 @@
-const user=require('./user-details');
+const user=require('./user');
 const post = require('./user-post');
 const follower=require('./follower');
 const following=require('./following');

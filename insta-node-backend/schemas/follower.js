@@ -1,4 +1,4 @@
-const user = require('./user-details');
+const user = require('./user');
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 module.exports = {

@@ -33,15 +33,17 @@ export class SignupComponent implements AfterViewInit {
     }
     this.sendReq.signMeUp(userObj).subscribe(res => 
     {
-      
-      if(res.body.success == true){
+      console.log(res, "response");  //to be removed
+      if(res.status == 200){
         this.message="Signed Up!!"
         console.log(this.message, res.status)
         
         this.LoginComponent.loginFunction({"instaHandle":userObj.instaHandle, "password":userObj.password})
       }
       else{
-        this.message = res.body.message
+        console.log("not signed up")
+        alert(res.error.message);
+        // this.message = res.body.message
       }
     })
   }
