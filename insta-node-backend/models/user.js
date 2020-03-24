@@ -8,6 +8,7 @@ class Operations{
     }
 
     async get(criteria={}, columns={}){
+        
         return this.model.find(criteria, columns).select("-password");
     }
 
