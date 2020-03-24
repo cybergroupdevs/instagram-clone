@@ -12,6 +12,7 @@ class Operations{
     }
 
     async save(userObj){
+        console.log("upto there")
         return await this.model.create(userObj);
     }
 

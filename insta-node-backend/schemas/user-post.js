@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const user = require('./user-details');
+const user = require('./user');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 module.exports = {
     ownerId: {

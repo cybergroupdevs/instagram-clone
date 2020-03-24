@@ -129,7 +129,6 @@ export class ProfileDashboardComponent implements OnInit {
   }
 
   follow(ownerId){   
-    
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this.sendReq.followUser(ownerId, loggedinUserId).subscribe(res => {
       console.log(res.status, res, "status ????")
@@ -140,7 +139,6 @@ export class ProfileDashboardComponent implements OnInit {
         localStorage.removeItem("token");
         this._router.navigate(['/login']);
       }
-      
     });
   }
 

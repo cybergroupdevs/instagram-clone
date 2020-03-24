@@ -136,3 +136,11 @@ input:focus {
 .app-img img {
   height:40px;
 }
+
+.was-validated :invalid~.invalid-feedback, .was-validated :invalid~.invalid-tooltip {
+  display: table-caption;
+}
+
+.warning{
+  color : rgb(237, 73, 86);
+}

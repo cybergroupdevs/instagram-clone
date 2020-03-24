@@ -3,6 +3,7 @@ import { SendHttpRequestService } from './../send-http-request.service';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+// import { BindOptions } from 'dgram';
 
 @Injectable({
   providedIn: 'root'
@@ -13,24 +14,15 @@ import { Injectable } from '@angular/core';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements AfterViewInit {
+export class LoginComponent  {
 
   constructor(
     private sendReq: SendHttpRequestService,
     private _router: Router) { }
 
-
-  @ViewChild('instaHandle', {static: false}) instaHandle: ElementRef;
-  @ViewChild('password', {static: false}) password: ElementRef;
   res: any;
-
-  createUserObj(){
-    let userObj = {
-      instaHandle: this.instaHandle.nativeElement.value,
-      password: this.password.nativeElement.value
-    }
-    this.loginFunction(userObj)
-  }
+  warningText : string;
+  warning : boolean = false;
 
   loginFunction(userObj) { 
     this.sendReq.logMeIn(userObj).subscribe(res => {
@@ -40,13 +32,10 @@ export class LoginComponent implements AfterViewInit {
         this._router.navigate(['/feed']);
       }
       else if (res.status == 401){
-        alert("not registered user")
+        console.log(res, "response")
+        this.warningText = res.error.message ;
+        this.warning = true;
       }
     });
   }
-  
-  ngAfterViewInit(){
-
-  }
-
 }

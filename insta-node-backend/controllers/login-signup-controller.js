@@ -21,39 +21,66 @@ class employee{
                     email : req.body.email,
                     password : req.body.password
                 };
+                console.log(userObject, "upto here")
                 var instaUser = await model.user.save(userObject);
-                res.status(200).send({"success":true, "message":"user created"});
+                let message = "user created"
+                res.status(200).
+                send({
+                    userObject
+                });
+                console.log(res, "response")
             }
             else{
-                res.status(406).send({"success":false, "message":"Instahandle already exists"});
+                let message = "Instahandle already exists";
+                res.status(406).send({
+                    "success":false, 
+                    "message":message
+                });
             }
         }
         catch(error)
         {
-            console.error
-            res.status(406).send({"success":false, "message":"Email or phone already exists"});
+            console.log(error, "----->>> error")
+            let message = "Email or phone already exists";
+            
+            res.status(406).send({
+                "success":false, 
+                "message": message
+            });
         }
     }
 
     async checkUserAuthentication(req, res){
-        let user = await model.user.get({$and : [{"instaHandle": req.body.instaHandle},{"password": req.body.password}]});
+        
+        let user = await model.user.get({"instaHandle": req.body.instaHandle});
         if(user[0] != null){
-            
-            let token = jwtHandler.tokenGenerator(user);
-            if(token != null){
-                let resBody = {
-                    "token": token
-                };
-                res.status(200).send(resBody);
-            }
+            let user = await model.user.get({$and : [{"instaHandle": req.body.instaHandle},{"password": req.body.password}]});
+            if (user[0] != null ){
+                let token = jwtHandler.tokenGenerator(user);
+                if(token != null){
+                    let resBody = {
+                        "token": token
+                    };
+                    res.status(200).send(resBody);
+                }
+                else{
+                    console.log("Token is Null");
+                }
+            } 
             else{
-                console.log("Token is Null");
+                let message = "Sorry, your password was incorrect. Please double-check your password."
+                res.status(401).send({
+                    "success" :false,
+                    "message": message
+                });
             }
+            
         }
         else {
-            
+            let message = "The username you entered doesn't belong to an account. Please check your username and try again."
             res.status(401).send({
-                "message": "Incorrect Email or username"
+                "success" :false,
+                "message": message
             });
         }
     }
