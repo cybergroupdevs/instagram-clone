@@ -118,7 +118,7 @@ export class EditProfileDetailsComponent implements OnInit {
 }
 
 radioButtonValue(genderValue:string) {
-  console.log(genderValue,"abchgjkhgvjhbkj");
+  
   (<HTMLInputElement>document.getElementById("genderInput")).value = genderValue;
   
 }
