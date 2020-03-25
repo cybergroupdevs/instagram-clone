@@ -29,8 +29,10 @@ export class ProfileDashboardComponent implements OnInit {
   editButton : Boolean=false;
   followButton:Boolean=false;
   unfollowButton : Boolean=false;
+ 
   
   ngOnInit() {
+    this.loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     let current_route = this._router.url.split("/");
     console.log(current_route, "------->>>>>> current route")
     this.loadUserData(current_route[2],null);
@@ -94,29 +96,25 @@ export class ProfileDashboardComponent implements OnInit {
   getFollowers(){
     let current_route = this._router.url.split("/");
     this.sendReq.getFollowersList(current_route[2]).subscribe(res => {
-      if(res.status == 200){
-        console.log(res.body);
-        this.followersArray = res.body;
+        console.log(res);
+        this.followersArray = res.payload.data.allFollowers;
         console.log(this.followersArray, "------->>>>>> followers")
-      }
-      else if(res.status == 401){
+      if(res.status == 401){
         localStorage.removeItem("token");
         this._router.navigate(['/login']);
       }
-      
     });
-
   }
 
   getFollowing(){
     let current_route = this._router.url.split("/");
     this.sendReq.getFollowingList(current_route[2]).subscribe(res => {
-      if(res.status == 200){
+      
         console.log(res.body);
-        this.followingArray = res.body;
+        this.followingArray = res.payload.data.allFollowing;
         console.log(this.followingArray, "------->>>>>> followers")
-      }
-      else if(res.status == 401){
+      
+      if(res.status == 401){
         localStorage.removeItem("token");
         this._router.navigate(['/login']);
       }
@@ -129,11 +127,14 @@ export class ProfileDashboardComponent implements OnInit {
   }
 
   follow(ownerId){   
+    let current_route = this._router.url.split("/");
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this.sendReq.followUser(ownerId, loggedinUserId).subscribe(res => {
       console.log(res.status, res, "status ????")
       if(res.status == 200 ){
-        this.loadUserData(ownerId, null)
+        if (current_route[2] == ownerId){
+          this.loadUserData(ownerId, null)
+        }
       }
       else if(res.status == 401){
         localStorage.removeItem("token");
@@ -148,12 +149,15 @@ export class ProfileDashboardComponent implements OnInit {
   }
 
   unfollow(ownerId){
-    
+    let current_route = this._router.url.split("/");
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this.sendReq.unfollowUser(ownerId, loggedinUserId).subscribe(res => {
       if(res.status == 200){
-        console.log(this.followersArray, 'this.followersArray');
-        this.loadUserData(ownerId, null)
+
+        if (current_route[2] == ownerId){
+          this.loadUserData(ownerId, null)
+        }
+
       }
       else if(res.status == 401){
         localStorage.removeItem("token");
