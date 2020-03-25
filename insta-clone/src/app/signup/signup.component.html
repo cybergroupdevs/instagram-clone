@@ -19,29 +19,24 @@
       </div>
 
       <div class="row input-row">
-        <form #form="ngForm" (ngSubmit)="signup(form.value)">
-          <div class="outDiv">
+        <form #form="ngForm" (ngSubmit)="signup(form.value)" class="signupForm">
+          <div>
             <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" ngModel  required placeholder="Mobile Number or Email" #email="ngModel" class="input-1" (blur) ="checkUniqueness(email)" >
-            <span><i class="fa fa-times-circle wrongIcon" [style.display]="(email.invalid && email.touched) || isEmail ? 'block' : 'none'"></i></span>
-            <span><i class="fa fa-check-circle rightIcon" [style.display]="email.valid && email.touched && !isEmail ? 'block' : 'none'"></i></span>
-          <!-- {{isEmail}} -->
+            <i class="fa fa-times-circle wrongIcon" [style.display]="(email.invalid && email.touched) || isEmail ? 'inline' : 'none'"></i>
+            <i class="fa fa-check-circle rightIcon" [style.display]="email.valid && email.touched && !isEmail ? 'inline' : 'none'"></i>
           </div>
-          
           <div>
             <input type="text" name="name" ngModel required placeholder="Full Name" #name="ngModel" class="input-2" />
-            <span><i class="fa fa-check-circle rightIcon" [style.display]="name.valid && name.touched ? 'block' : 'none'"></i></span>
+            <i class="fa fa-check-circle rightIcon" [style.display]="name.valid && name.touched ? 'inline' : 'none'"></i>
           </div>
-
           <div>
             <input type="text" name="instaHandle" ngModel required placeholder="Username" #instaHandle="ngModel" class="input-3" (blur) ="checkUniqueness(instaHandle)" />
-            <span><i class="fa fa-times-circle wrongIcon" [style.display]="(instaHandle.invalid && instaHandle.touched) || isinstaHandle ? 'block' : 'none'"></i></span>
-            <span><i class="fa fa-check-circle rightIcon" [style.display]="instaHandle.valid && instaHandle.touched && !isinstaHandle ? 'block' : 'none'"></i></span>
-          <!-- {{isinstaHandle}} -->
+            <i class="fa fa-times-circle wrongIcon" [style.display]="(instaHandle.invalid && instaHandle.touched) || isinstaHandle ? 'inline' : 'none'"></i>
+            <i class="fa fa-check-circle rightIcon" [style.display]="instaHandle.valid && instaHandle.touched && !isinstaHandle ? 'inline' : 'none'"></i>
           </div>
-
           <div>
             <input type="password" name="password" ngModel required placeholder="Password" #password="ngModel" class="input-4" />
-            <span><i class="fa fa-check-circle rightIcon" [style.display]="password.valid && password.touched ? 'block' : 'none'"></i></span>
+            <i class="fa fa-check-circle rightIcon" [style.display]="password.valid && password.touched ? 'inline' : 'none'"></i>
           </div>
 
           <button [disabled]="form.invalid" type="submit" class="btn signup-btn">Sign up</button>
@@ -70,6 +65,9 @@
     <div class="col-lg-3 offset-lg-4">
       <div class="row get-app">
         <p>Get the app.</p>
+        
+        
+        
       </div>
       <div class="row app-img">
         <div class="col-lg-4  offset-lg-1">
