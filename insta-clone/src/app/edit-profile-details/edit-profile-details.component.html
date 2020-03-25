@@ -48,6 +48,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-9 offset-lg-1" style=" margin-top: 2.5rem;">
+            <form class="form-horizontal" #form="ngForm">
             <div class="row">
                 <div class="col-lg-3">
                     <img class="rounded-circle" id="profilePic" src="../../assets/ss.png" style="width: 3rem; height: 3rem; float:right;">
@@ -57,23 +58,23 @@
                     <a href="" class="changeDP" data-toggle="modal" data-target="#uploadPicModal">Change Profile picture</a>
                 </div>
             </div>
-            <form class="form-horizontal">
+            
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Name</label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" name="Name" #uname [(value)]="name"  required="required">
+                        <input type="text" ngModel class="form-control" name="Name" #uname [(value)]="name"  required="required">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Username</label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" #uinstaHandle name="Username" value="{{username}}"  required="required">
+                        <input type="text" ngModel class="form-control" #uinstaHandle name="Username" value="{{username}}"  required="required">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Website</label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" #uwebsite name="Website" value="{{website}}" required="required">
+                        <input type="text" ngModel class="form-control" #uwebsite name="Website" value="{{website}}" required="required">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -91,19 +92,19 @@
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Email</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="email" #uemail name="email" value="{{email}}" required="required">
+                        <input class="form-control" ngModel type="email" #uemail name="email" value="{{email}}" required="required">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Phone Number</label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" #uphone name="mobile" value="{{phone}}" required="required">
+                        <input type="text" ngModel class="form-control" #uphone name="mobile" value="{{phone}}" required="required">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Gender</label>
                     <div class="col-lg-8">
-                        <input id="genderInput"  type="text" class="form-control" #ugender value="{{gender}}" data-toggle="modal" data-target="#genderModal">
+                        <input id="genderInput" ngModel  type="text" class="form-control" #ugender value="{{gender}}" data-toggle="modal" data-target="#genderModal">
                         <!-- <label class="radio-inline mr-3">
                             <input type="radio" name="gender" value="male" onclick="radioButtonValue(this.value)">male
                           </label>
@@ -118,13 +119,18 @@
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Similar Account Suggestions</label>
                     <div class="col-lg-6">
-                        <input class="col-lg-1" type="checkbox" name="recommendation" value="">
+                        <input class="col-lg-1" ngModel type="checkbox" name="recommendation" value="">
                         <label style="line-height: 0.8;" class="col-lg-11" for="recommendation">Include your account when recommending similar accounts people might want to follow.</label>
                     </div>
                 </div>
+                <div style="align-self: center;">
+                <small  class="warning" [style.display]="warning ? 'block' : 'none'">
+                    {{warningText}}
+                </small>
+                </div>
                 <div class="form-group row">
                     <div class="col-lg-9 offset-lg-3">
-                        <button class="btn btn-primary" (click)="update()">Submit</button>
+                        <button class="btn btn-primary" [disabled]="form.pristine" (click)="update()">Submit</button>
                     </div>
                 </div>    
             </form> 
