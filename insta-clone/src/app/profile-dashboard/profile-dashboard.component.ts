@@ -152,6 +152,7 @@ export class ProfileDashboardComponent implements OnInit {
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this.sendReq.unfollowUser(ownerId, loggedinUserId).subscribe(res => {
       if(res.status == 200){
+        console.log(this.followersArray, 'this.followersArray');
         this.loadUserData(ownerId, null)
       }
       else if(res.status == 401){

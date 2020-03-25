@@ -30,7 +30,8 @@ export class EditProfileComponent implements OnInit {
   email:string;
   phone:Number;
   gender:string;
-  profileImage:any
+  profileImage:any;
+  status:boolean=false;
 
   ngOnInit() {
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id;
