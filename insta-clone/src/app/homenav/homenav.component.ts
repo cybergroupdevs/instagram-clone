@@ -19,12 +19,13 @@ export class HomenavComponent  implements OnInit {
   users$: Observable<any[]>;
   private searchTerms = new Subject<string>();
 
-
+  isVisible:boolean = false;
   constructor(private sendReq: SendHttpRequestService, private _router:Router, private profileDashboard: ProfileDashboardComponent) { }
 
   // Push a search term into the observable stream. 
   search(term: string): void {
     this.searchTerms.next(term);
+    this.isVisible=true;
    }
   res:any;
 
@@ -54,13 +55,13 @@ export class HomenavComponent  implements OnInit {
 
   searchUser(loggedinUserId:string){
     this.profileDashboard.loadUserData(loggedinUserId, null)
-
+    console.log(loggedinUserId);
   }
   
   // close(){
   //   this.isVisible=false;
   // }
-isVisible:boolean = true;
+
 func(event){  
  
   var box = document.querySelector(".boxes");
@@ -77,6 +78,12 @@ func(event){
   console.log(this.isVisible, "valueee")
   console.log(box.contains(event.target),"hhhhhh");
 
+}
+onBlur(){
+  setTimeout(() =>{
+    this.isVisible=false;
+  },1000)
+  
 }
 
 }

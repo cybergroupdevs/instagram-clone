@@ -6,25 +6,27 @@
          <img id="lettering" src="../../assets/images/letter.png" routerLink='/feed'>
       </div>
      
-     <div class="searchContainer boxes"> 
-        <input #searchBox (input)="search(searchBox.value)" id="searchBox" type="search" placeholder="Search" value=""/>
-        <ul class="search-result " [style.display]="isVisible ? 'block' : 'none'" >
+     <div class="searchContainer boxes" [ngClass]="{'hover': true}"> 
+        <input #searchBox (input)="search(searchBox.value)" (blur)="onBlur()" id="searchBox" type="search" placeholder="Search" value=""/>
+        <ul class="search-result " *ngIf="searchBox.value.length > 0 && isVisible">
             <li *ngFor="let user of users$ | async" >
               <a [routerLink]="['/profile', user._id]" (click)="searchUser(user._id)">
-                {{user.instaHandle}}
+                {{user.instaHandle || user._id}}
               </a>
+              <p >{{user.name}}</p>
             </li>
         </ul> 
+       
     </div>
-     <div id="activity">
-            <input type="checkbox" id="homeToggle" class="visually-hidden">
-            <label for="homeToggle"  class="homeControl mr-4" routerLink='/feed'></label>
-            <input type="checkbox" id="exploreToggle" class="visually-hidden">
-            <label for="exploreToggle"  class="exploreControl"></label>       
-            <input type="checkbox" id="toggle" class="visually-hidden">
-            <label for="toggle"  class="control"></label>
-            <input type="checkbox" id="userToggle" class="visually-hidden">
-            <label for="userToggle"  class="userControl" (click)="myProfile()"></label>
-     </div> 
+    <div id="activity">
+      <input type="checkbox" id="homeToggle" class="visually-hidden">
+      <label for="homeToggle"  class="homeControl mr-4" routerLink='/feed'></label>
+      <input type="checkbox" id="exploreToggle" class="visually-hidden">
+      <label for="exploreToggle"  class="exploreControl"></label>       
+      <input type="checkbox" id="toggle" class="visually-hidden">
+      <label for="toggle"  class="control"></label>
+      <input type="checkbox" id="userToggle" class="visually-hidden">
+      <label for="userToggle"  class="userControl" (click)="myProfile()"></label>
+    </div> 
   </div>  
 </nav>
