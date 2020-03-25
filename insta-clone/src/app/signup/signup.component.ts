@@ -20,7 +20,6 @@ export class SignupComponent implements AfterViewInit {
   // @ViewChild('password', {static: false}) password: ElementRef;
 
   res: any;
-  message : String='';
   isEmail : boolean = false;
   isinstaHandle : boolean = false;
   warning : boolean=false ;
@@ -62,25 +61,15 @@ export class SignupComponent implements AfterViewInit {
   
 
   signup(userObj){
-    // let userObj = {
-    //   name: this.name.nativeElement.value,
-    //   instaHandle: this.instaHandle.nativeElement.value,
-    //   email: this.email.nativeElement.value,
-    //   password: this.password.nativeElement.value
-    // }
+    
     this.sendReq.signMeUp(userObj).subscribe(res => 
     {
       
-      if(res.status == 200){
-        this.message="Signed Up!!"
-        console.log(this.message, res.status)
-        
+      if(res.status == 200){        
         this.LoginComponent.loginFunction({"instaHandle":userObj.instaHandle, "password":userObj.password})
       }
       else{
         console.log("not signed up")
-        // alert(res.error.message);
-        // this.message = res.body.message
         this.warningText = res.error.message;
         this.warning = true
         
