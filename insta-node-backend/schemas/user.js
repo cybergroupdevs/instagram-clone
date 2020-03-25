@@ -46,11 +46,12 @@ module.exports = {
     website: {
         type: String,
         default: null
+    },
+    phone: {
+        type: String,
+        default : null,
+        max : 10,
+        unique:true
     }
-    // phone: {
-    //     type: String,
-    //     default : null,
-    //     max : 10   
-    // }
 
 }
