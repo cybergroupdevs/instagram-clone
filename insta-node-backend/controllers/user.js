@@ -47,12 +47,12 @@ class user{
                     res.status(200).send(userObj);
                 }
                 else{
-                    res.status(406).send({"message":"InstaHandle already exists..so it cannot be updated!!"});
+                    res.status(406).send({"message":"This username isn't available!!"});
                 }
             }
             catch(error)
             {
-                res.status(406).send({"message":"something is duplicate"});
+                res.status(406).send({"message":"Sorry, something went wrong updating your details. Please try again soon."});
             }
         }
 
