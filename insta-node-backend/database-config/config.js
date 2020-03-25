@@ -1,6 +1,6 @@
 //mongoose is a wrapper of mongodb
 const mongoose = require('mongoose');
-const url = "mongodb://localhost:27017/instadatabase"
+const url = "mongodb://localhost:27017/instaDB"
 
 //const url = "mongodb+srv://faizan:faizan20@instagram-clone-bddy7.mongodb.net/instaDB?retryWrites=true&w=majority"
 
