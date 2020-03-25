@@ -135,6 +135,10 @@ export class ProfileDashboardComponent implements OnInit {
         if (current_route[2] == ownerId){
           this.loadUserData(ownerId, null)
         }
+        else{
+          this.getFollowers();
+          this.getFollowing()
+        }
       }
       else if(res.status == 401){
         localStorage.removeItem("token");
@@ -156,6 +160,10 @@ export class ProfileDashboardComponent implements OnInit {
 
         if (current_route[2] == ownerId){
           this.loadUserData(ownerId, null)
+        }
+        else{
+          this.getFollowers();
+          this.getFollowing()
         }
 
       }
