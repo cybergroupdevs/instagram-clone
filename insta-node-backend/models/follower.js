@@ -12,9 +12,9 @@ class Follower{
     }
 
     async getAll(criteria={}, columns={}){
-        let fields = 'profileImage about postsCount followers following name instaHandle';
+        let fields = 'name instaHandle';
         let followerData = await this.model.find(criteria, columns).populate('followerId', fields);
-        return (JSON.stringify(followerData));
+        return (followerData);
     }
     
     async create(followObj){

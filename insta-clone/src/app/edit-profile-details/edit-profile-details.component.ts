@@ -34,6 +34,8 @@ export class EditProfileDetailsComponent implements OnInit {
   gender:string;
   profileImage:any
   website:string;
+  warningText : string;
+  warning : boolean = false;
   
   ngOnInit() {
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id;
@@ -61,9 +63,9 @@ export class EditProfileDetailsComponent implements OnInit {
 
       }
       else if(res.status == 406){
-        let message="Username or email or phone is already in use!" 
-        alert(message);
-        console.log(message);
+        this.warningText = res.error.message;
+        this.warning = true
+        
       }
       else if(res.status == 401){
         alert("Unauthorized");
@@ -118,7 +120,7 @@ export class EditProfileDetailsComponent implements OnInit {
 }
 
 radioButtonValue(genderValue:string) {
-  console.log(genderValue,"abchgjkhgvjhbkj");
+  
   (<HTMLInputElement>document.getElementById("genderInput")).value = genderValue;
   
 }

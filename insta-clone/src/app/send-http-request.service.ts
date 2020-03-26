@@ -42,6 +42,13 @@ export class SendHttpRequestService {
     );
   }
 
+  checkIfDuplicate(obj): Observable<any>{
+    return this.http.put("http://localhost:8080/checkIfDuplicate", obj, {observe: 'response', responseType: 'json'}).pipe(
+      tap(_ => this.log("checked")),
+      catchError(this.handleError<any>('checked'))
+    );
+  }
+
   updateData(object: any, id:string): Observable<any>{
     return this.http.put(`http://localhost:8080/user/${id}`,object, {observe: 'response', headers: this.header_token}).pipe(
       tap(_ => this.log("updating details")),
@@ -73,18 +80,12 @@ export class SendHttpRequestService {
   }
 
   getFollowersList(id: string): Observable<any>{
-    return this.http.get(`http://localhost:8080/followers/${id}`, {headers: this.header_token, observe: 'response'}).pipe(
-      tap(_ => this.log("showing details")),
-      catchError(this.handleError<any>('error in details')
-    ));
+    return this.http.get(`http://localhost:8080/followers/${id}`, {headers: this.header_token});
   }
 
   getFollowingList(id: string): Observable<any>{
     console.log(this.header_token, "followers ")
-    return this.http.get(`http://localhost:8080/following/${id}`, {headers: this.header_token, observe: 'response'}).pipe(
-      tap(_ => this.log("showing details")),
-      catchError(this.handleError<any>('error in details')
-    ));
+    return this.http.get(`http://localhost:8080/following/${id}`, {headers: this.header_token});
   }
 
   likePost(obj):Observable<any>{

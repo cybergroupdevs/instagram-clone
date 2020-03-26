@@ -9,15 +9,15 @@ class user{
     }
 
 
-    // async checkInstaHandle(instaHandle){
-    //     const user = await model.user.get({"instaHandle":instaHandle})
-    //     if(user[0]!=null){
-    //         return true
-    //     }
-    //     else{
-    //         return false
-    //     }
-    // }
+    async checkIfDuplicate(req,res){
+        const user = await model.user.get(req.body)
+        if(user[0]==null){
+            res.status(200).send({"success":true, "message":"does not exists"})
+        }
+        else{
+            res.status(406).send({"success":true, "message":"duplicate key"})
+        }
+    }
 
     async update(req, res){
         
@@ -47,12 +47,12 @@ class user{
                     res.status(200).send(userObj);
                 }
                 else{
-                    res.status(406).send({"message":"InstaHandle already exists..so it cannot be updated!!"});
+                    res.status(406).send({"message":"This username isn't available!!"});
                 }
             }
             catch(error)
             {
-                res.status(406).send({"message":"something is duplicate"});
+                res.status(406).send({"message":"Sorry, something went wrong updating your details. Please try again soon."});
             }
         }
 

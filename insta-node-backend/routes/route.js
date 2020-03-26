@@ -26,6 +26,8 @@ module.exports=(app) => {
          app.get("/user",controller.user.show);  
          app.put("/user/:id", controller.user.update);
          app.delete("/user/:id", controller.user.deleteAccount);
+         app.put("/checkIfDuplicate", controller.user.checkIfDuplicate);
+         
 
          app.post("/upload", upload.single('image'), controller.posts.createNewPost); //doubt
          

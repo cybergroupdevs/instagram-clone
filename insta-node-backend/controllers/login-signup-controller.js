@@ -31,7 +31,7 @@ class employee{
                 console.log(res, "response")
             }
             else{
-                let message = "Instahandle already exists";
+                let message = "Sorry, something went wrong creating your account. Please try again soon.";
                 res.status(406).send({
                     "success":false, 
                     "message":message
@@ -41,7 +41,7 @@ class employee{
         catch(error)
         {
             console.log(error, "----->>> error")
-            let message = "Email or phone already exists";
+            let message = "Sorry, something went wrong creating your account. Please try again soon.";
             
             res.status(406).send({
                 "success":false, 

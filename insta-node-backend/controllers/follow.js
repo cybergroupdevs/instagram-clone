@@ -60,11 +60,27 @@ class follow{
     async getFollowers(req, res){
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
+            
             let searchId = req.params.id;
-            const allFollowers = await model.follower.getAll({"ownerId":searchId});
+            let allFollowers = await model.follower.getAll({"ownerId":searchId});
+            
+            allFollowers = await Promise.all( allFollowers.map(async(follower) => {
+                const relation = await model.follower.getRelation({ ownerId: follower.followerId._id, followerId: token.data._id })
+                return {follower, relation: (relation? true: false) }
+            }) );
+
             if (allFollowers != null){
-                res.status(200).send(allFollowers) 
+                res.status(200).send({
+                    success: true,
+                    payload : {
+                        data: {
+                            allFollowers
+                        },
+                        message: "returned followers list",
+                    }
+                }) 
             }
+
             else{
                 res.send({"message":"no followers"})
             }   
@@ -78,9 +94,23 @@ class follow{
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
             let searchId = req.params.id;
-            const allFollowing = await model.following.getAll({"ownerId":searchId});
+            let allFollowing = await model.following.getAll({"ownerId":searchId});
+
+            allFollowing = await Promise.all( allFollowing.map(async(following) => {
+                const relation = await model.follower.getRelation({ ownerId: following.followingId._id, followerId: token.data._id })
+                return {following, relation: (relation? true: false) }
+            }) );
+
             if (allFollowing != null){
-                res.status(200).send(allFollowing) 
+                res.status(200).send({
+                    success: true,
+                    payload : {
+                        data: {
+                            allFollowing
+                        },
+                        message: "returned following list",
+                    }
+                }) 
             }
             else{
                 res.send({"message":"no following"})
