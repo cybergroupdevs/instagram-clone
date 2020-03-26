@@ -42,6 +42,6 @@ module.exports=(app) => {
          app.post("/comment",controller.comments.addComment);
 
 
-         
+         //Will add route for post operations!!!
 }
 
