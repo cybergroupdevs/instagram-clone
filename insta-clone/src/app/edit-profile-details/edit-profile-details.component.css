@@ -16,3 +16,7 @@
 .warning{
     color : rgb(237, 73, 86);
   }
+
+  small{
+    padding: 1rem;
+  }
