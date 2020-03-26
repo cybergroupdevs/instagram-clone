@@ -12,8 +12,9 @@ class Operations{
         return this.model.find(criteria, columns).select("-password");
     }
 
-    async save(employeeObj){
-        return await this.model.create(employeeObj);
+    async save(userObj){
+        console.log("upto there")
+        return await this.model.create(userObj);
     }
 
     async update(criteria ={}, updateObj){

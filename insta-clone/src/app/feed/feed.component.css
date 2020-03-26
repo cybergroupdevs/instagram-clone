@@ -160,9 +160,9 @@ box-sizing:border-box;
   .control::after {
     content: url('../../assets/images/igheart.png');
 }
-/* #togglefeed:checked ~ .control::after {
-    content: url('../../assets/images/igheartfilled.png');
-} */
+#togglelike:checked ~ .control::after {
+    content: url('../../assets/images/heartr.png');
+}
 #activity{
   margin-top: 1vh;
   margin-left: 6vw;

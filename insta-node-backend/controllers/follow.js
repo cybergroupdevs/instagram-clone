@@ -6,10 +6,9 @@ class follow{
     }
     
     async updateFollow(req, res){
-        const token=jwtHandler.tokenVerifier(req.headers.token);
-        if(true){
-            console.log(req, "request")
-            console.log(req.query, "my body---------------->>>")
+        const token = jwtHandler.tokenVerifier(req.headers.token);
+        
+        if(token){
             
             let followObj={
                 ownerId:req.query.ownerId,
@@ -22,7 +21,7 @@ class follow{
             }
 
             const relation = await model.follower.getRelation(followObj);
-            console.log(relation, "relay----------->>>>")
+            
             if (relation == null){
                 try{
                 // const userToBeFollowed = await user.findOne({_id:followObj.ownerId});
@@ -39,12 +38,12 @@ class follow{
             
                     await model.user.update({ _id : followObj.ownerId  }, { followers: followerCount + 1 });
                     await model.user.update({ _id: followObj.followerId }, { following: followingCount + 1 });
-                    console.log("above status ")
+                    
                     res.status(200).send({"message":"now following user"});
                 }
                     
                 catch(error){
-                    console.log(error);    
+                    console.error;    
                 }
             }
 
@@ -61,10 +60,8 @@ class follow{
     async getFollowers(req, res){
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
-            
             let searchId = req.params.id;
             const allFollowers = await model.follower.getAll({"ownerId":searchId});
-            
             if (allFollowers != null){
                 res.status(200).send(allFollowers) 
             }
@@ -72,20 +69,16 @@ class follow{
                 res.send({"message":"no followers"})
             }   
         }
-
         else{
             res.status(401).send("Unauthorized");
         }
-
     }
 
     async getFollowing(req, res){
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
-
             let searchId = req.params.id;
             const allFollowing = await model.following.getAll({"ownerId":searchId});
-            
             if (allFollowing != null){
                 res.status(200).send(allFollowing) 
             }
@@ -93,34 +86,27 @@ class follow{
                 res.send({"message":"no following"})
             }   
         }
-
         else{
             res.status(401).send("Unauthorized");
         }
-
     }
 
     async followRelation(req,res){
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
-            console.log(req.query, "check 1")
             let searchObj = req.query;
             const relation = await model.follower.getRelation(searchObj);
-            console.log(relation, "relation")
             if (relation != null){
                 
-                res.status(200).send(relation) 
+                res.send({"success":true, "message":"following" }) 
             }
             else{
-                res.status(404).send({"message":"not following"})
+                res.send({"success":false,"message":"not following"})
             }   
         }
-
         else{
             res.status(401).send("Unauthorized");
         }
     }
-
 }
-
 module.exports = new follow()

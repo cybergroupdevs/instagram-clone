@@ -5,12 +5,9 @@ class unfollow{
 
     }
     async updateUnfollow(req,res){
-        console.log(req.body, "unfollow func")
+        
         const token=jwtHandler.tokenVerifier(req.headers.token);
-        if(true){
-
-            console.log(req.body, "unfollow func 2")
-            
+        if(token){
             let followObj={
                 ownerId:req.query.ownerId,
                 followerId:req.query.unfollowerId,
@@ -21,16 +18,10 @@ class unfollow{
                 followingId:req.query.ownerId
             }
 
-            
-            console.log(followObj.ownerId, "hellooooooooooooooooooo")
-
             const relation = await model.follower.getRelation(followObj);
-            console.log(relation, "relay----------->>>>")
+            
             if (relation != null){
                 try{
-                // const userToBeFollowed = await user.findOne({_id:followObj.ownerId});
-                // const userWhoHasFollowed = await user.findOne({_id:followObj.followerId});
-        
                     await model.follower.delete(followObj);
                     await model.following.delete(followingObj);
             
@@ -46,7 +37,7 @@ class unfollow{
                 }
                     
                 catch(error){
-                    console.log(error);    
+                    console.error;    
                 }
             }
 

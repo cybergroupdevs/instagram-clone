@@ -1,6 +1,8 @@
+import { LoginComponent } from './../login/login.component';
 import { SendHttpRequestService } from './../send-http-request.service';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
 
 export class SignupComponent implements AfterViewInit {
 
-  constructor(private sendReq: SendHttpRequestService, private _router: Router) { }
+  constructor(private sendReq: SendHttpRequestService, private _router: Router, private  LoginComponent : LoginComponent) { }
   
   @ViewChild('email', {static: false}) email: ElementRef;
   @ViewChild('name', {static: false}) name: ElementRef;
@@ -29,36 +31,23 @@ export class SignupComponent implements AfterViewInit {
       email: this.email.nativeElement.value,
       password: this.password.nativeElement.value
     }
-    
-    console.log(userObj, "userObj------>>>>");
     this.sendReq.signMeUp(userObj).subscribe(res => 
     {
-    console.log(res, "res------->>>>>");
-    if(res.status == 200){
-      console.log("Signed UP");
-      this.message="Signed Up!!"
-      this.loginFunction()
-    }
-    })
-
-  }
-
-  loginFunction() { 
-    let userObj = {
-      instaHandle: this.instaHandle.nativeElement.value,
-      password: this.password.nativeElement.value
-    }
-    console.log(userObj);
-    this.sendReq.logMeIn(userObj).subscribe(res => {
-      console.log(res);
+      console.log(res, "response");  //to be removed
       if(res.status == 200){
-        localStorage.setItem("token", res.body.token);
-        this._router.navigate(['/feed']);
+        this.message="Signed Up!!"
+        console.log(this.message, res.status)
+        
+        this.LoginComponent.loginFunction({"instaHandle":userObj.instaHandle, "password":userObj.password})
       }
       else{
-        alert("Token does not exist");
+        console.log("not signed up")
+        alert(res.error.message);
+        // this.message = res.body.message
       }
-    });
+    })
   }
+
+  
 
 }

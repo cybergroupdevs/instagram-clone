@@ -7,7 +7,7 @@ class Operations{
         this.model = mongoose.model('Post', postSchema);
     }
     async get(criteria={}, columns={}){
-        let fields = 'instaHandle profileImage ';
+        let fields = 'instaHandle profileImage';
         let postData = await this.model.find(criteria, columns).populate('ownerId', fields)
         return (JSON.stringify(postData));
     }

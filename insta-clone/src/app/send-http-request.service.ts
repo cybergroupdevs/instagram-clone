@@ -29,7 +29,7 @@ export class SendHttpRequestService {
   header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem("token"));
 
   signMeUp(obj): Observable<any>{
-    return this.http.post("http://localhost:8080/signup", obj).pipe(
+    return this.http.post("http://localhost:8080/signup", obj, {observe: 'response'}).pipe(
       tap(_ => this.log("Signed Up")),
       catchError(this.handleError<any>('Some Error Occurred'))
     );
@@ -87,7 +87,6 @@ export class SendHttpRequestService {
     ));
   }
 
-
   likePost(obj):Observable<any>{
     return this.http.put("http://localhost:8080/like", obj).pipe(
       tap(_ => this.log("Liked Picture")),
@@ -101,21 +100,15 @@ export class SendHttpRequestService {
       catchError(this.handleError<any>('error in commenting on post'))
     );
   }
-  
 
   followUser(ownerId: string, followerId:string): Observable<any>{
-    console.log(this.header_token, "token")
-    return this.http.put("http://localhost:8080/follow/?" + "ownerId=" + ownerId + "&followerId=" + followerId, {headers: this.header_token, observe: 'response'}).pipe(
-      tap(_ => this.log("Followed")),
-      catchError(this.handleError<any>('error in following')
-    ));
+    const queryParams: HttpParams = new HttpParams().set("ownerId", ownerId).set("followerId", followerId);
+    return this.http.put("http://localhost:8080/follow", {}, {headers: this.header_token, observe: 'response', params: queryParams});
   }
 
   unfollowUser(ownerId: string, unfollowerId:string): Observable<any>{
-    return this.http.put("http://localhost:8080/unfollow/?" + "ownerId=" + ownerId + "&unfollowerId=" + unfollowerId, {headers: this.header_token, observe: 'response'}).pipe(
-      tap(_ => this.log("Unollowed")),
-      catchError(this.handleError<any>('error in unfollowing')
-    ));
+    const queryParams:HttpParams =  new HttpParams().set("ownerId",ownerId).set("unfollowerId",unfollowerId);
+    return this.http.put("http://localhost:8080/unfollow", {},{headers: this.header_token, observe: 'response', params:queryParams});
   }
 
   searchUsers(term: string): Observable<any> {
@@ -130,6 +123,7 @@ export class SendHttpRequestService {
   }
 
   checkFollow(ownerId: string, followerId:string): Observable<any>{
+
     return this.http.get("http://localhost:8080/followRelation/?" + "ownerId=" + ownerId + "&followerId=" + followerId, {headers: this.header_token, observe: 'response'}).pipe(
       tap(_ => this.log("Following")),
       catchError(this.handleError<any>('error in following')
@@ -145,7 +139,7 @@ export class SendHttpRequestService {
   // }
 
   // loadUploads(obj):Observable<any>{
-  //   return this.http.get("http://localhost:8080/upload", obj).pipe(
+   //   return this.http.get("http://localhost:8080/upload", obj).pipe(
   //     tap(_ => this.log("Unfollowed")),
   //     catchError(this.handleError<any>('error in unfollowing'))
   //   );

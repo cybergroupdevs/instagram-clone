@@ -8,12 +8,6 @@ module.exports = {
         required: true,
         unique: true
     },
-    phone: {
-        type: String,
-        max: 10,
-        default: null,
-        unique:true
-    },
     email: {
         type: String,
         default: null,
@@ -21,8 +15,7 @@ module.exports = {
     },
     password: {
         type: String,
-        required: true,
-        default: null
+        required: true
     },
     profileImage: {
         type: String,
@@ -47,11 +40,16 @@ module.exports = {
     gender:{
         type:String,
         default:null,
-        enum: ['Male', 'Female', 'Not to say']
+        enum: ['Male', 'Female', 'Not to say', null]
     },
     website: {
         type: String,
         default: null
-    },
+    }
+    // phone: {
+    //     type: String,
+    //     default : null,
+    //     max : 10   
+    // }
 
 }
