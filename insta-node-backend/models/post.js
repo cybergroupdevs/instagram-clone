@@ -1,23 +1,34 @@
 const mongoose = require('mongoose');
 const schema = require('../schemas');
 const postSchema = mongoose.Schema(schema.post);
-class Operations{
 
+class Post{
     constructor(){
         this.model = mongoose.model('Post', postSchema);
     }
-    async get(criteria={}, columns={}){
-        return await this.model.find(criteria, columns);
+
+    async get(criteria = {}, columns = {}){
+        return this.model.findOne(criteria, columns);
     }
 
-    async save(postObj){
-        return await this.model.create(postObj);
+    async save(post){
+        return this.model.create(post);
     }
-    async findOne(criteria={},columns={}){
-        return this.model.findOne(criteria,columns)
+
+    async log(criteria = {}, columns = {}){
+        return this.model.find(criteria ,columns)
     }
-    async updateOne(criteria ={}, updateObj){
-        return this.model.updateOne(criteria, updateObj);
+
+    async modify(criteria, patchObj){
+        return this.model.updateOne(criteria, { $set: patchObj });
+    }
+
+    async updateOne(criteria, newObj){
+        return this.model.updateOne(criteria, newObj);
+    }
+
+    async findById(postObjectId){
+        return this.model.findById(postObjectId);
     }
 }
-module.exports = new Operations();
+module.exports = new Post();

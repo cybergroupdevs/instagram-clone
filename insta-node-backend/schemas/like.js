@@ -1,14 +1,17 @@
-const user = require('./user');
-const post = require('./user-post');
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
+
 module.exports = {
-    ownerId: {
+    post: {
         type: ObjectId,
-        ref: 'user'
+        ref: 'Post'
     },
-    uploadId: {
+    likedBy: {
         type: ObjectId,
-        ref: 'post'
+        ref: 'User'
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now()
     }
 }
