@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const schema = require('../schemas');
-const postSchema = mongoose.Schema(schema.post);
+const postSchema = new mongoose.Schema(schema.post);
 
 class Post{
     constructor(){
