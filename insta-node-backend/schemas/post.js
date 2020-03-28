@@ -20,10 +20,8 @@ module.exports = {
   ],
   tags: [
     {
-      type: {
-        type: String,
-        maxlength: 20
-      },
+      type: String,
+      maxlength: 20,
       unique: true
     }
   ],

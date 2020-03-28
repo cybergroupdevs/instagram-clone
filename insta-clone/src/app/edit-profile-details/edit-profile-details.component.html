@@ -5,9 +5,9 @@
             <div class="modal-header text-center" style="padding: 1.5rem;">
                 <p class="modal-title w-100"><b>Profile Picture</b></p>
             </div>
-            <div class="modal-header text-center cursor-pointer">
-                <label class="modal-title w-100 cursor-pointer" style="color:#3798F0"><input type='file'id="profileImageInput" onchange="readURL();" style="display: none;"/><b>Upload Photo</b></label>
-            </div>
+            <form class="modal-header text-center cursor-pointer" action="localhost:3000/profile" method="post" enctype="multipart/form-data">
+                <label class="modal-title w-100 cursor-pointer" style="color:#3798F0"><input type='file' id="profileImageInput" onchange="readURL();" style="display: none;"/><b>Upload Photo</b></label>
+            </form>
             <div class="modal-header text-center cursor-pointer">
                 <p class="modal-title w-100 removePhoto"><b>Remove Current Photo</b></p>
             </div>
