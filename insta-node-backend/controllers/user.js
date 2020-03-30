@@ -102,21 +102,28 @@ class user {
   }
 
   async changeProfilePic(req, res) {
-    console.log(req.file, "req.body");
-    // upload.single(req.body.upload.imageUpload);
-    // var storage = multer.diskStorage({
-    //     destination: (req, file, callback) => {
-    //         var dir = `./public`;
-    //         callback(null, dir);
-    //     },
-    //     filename: (req, file, callback) => {
-    //         fileName = `${req.body.upload.imageUpload}-${Date.now()}`;
-    //         callback(null, fileName);
-    //     }
+    console.log(req.body, "req.body");
 
-    // });
-    // multer({ storage: storage });
-    // console.log(upload, "upload");
+    var storage = multer.diskStorage({
+        destination: (req, file, callback) => {
+            var dir = `./uploads/`;
+            callback(null, dir);
+        },
+        filename: (req, file, callback) => {
+            fileName = `${file.originalname}-${Date.now()}`;
+            callback(null, fileName);
+        }
+
+    });
+    var upload = multer({ storage: storage });
+    console.log(upload);
+    upload.single('file');
+
+    const file = req.file;
+
+    if(!file){
+        
+    }
 
     return res.send({
       success: true,

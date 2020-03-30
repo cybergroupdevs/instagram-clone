@@ -2,16 +2,14 @@ import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const path = 'http://localhost:8080/api/user'; 
+const PATH = 'http://localhost:8080/api/file'; 
 
 @Injectable({
     'providedIn': 'root'
 })
 export class FileUploadService{
     headers: HttpHeaders = new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('token'),
-        'Access-Control-Allow-Origin': '*'
+        Authorization: localStorage.getItem('token')
     });
 
     httpOptions = {
@@ -20,8 +18,8 @@ export class FileUploadService{
 
     constructor(private http: HttpClient){}
 
-    fileUpload(formData: any): Observable<any>{
+    fileUpload(formData: any, id: string): Observable<any>{
         console.log(formData, 'formData inside service');
-        return this.http.patch<any>(path, { formData }, this.httpOptions);
+        return this.http.patch<any>(`${PATH}`, formData, this.httpOptions);
     }
 }

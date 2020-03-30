@@ -1,6 +1,4 @@
 const controller = require('../controllers');
-const corsMiddleware = require('../middlewares/cors');
-
 
 module.exports=(app) => {
 
@@ -11,7 +9,10 @@ module.exports=(app) => {
          app.put("/user/:id", controller.user.update);
          app.delete("/user/:id", controller.user.deleteAccount);
          app.put("/checkIfDuplicate", controller.user.checkIfDuplicate);
-         app.patch('/api/user', corsMiddleware, controller.user.changeProfilePic);
+
+
+
+        //  app.patch('/api/user', controller.user.changeProfilePic);
 
 
         //  app.post("/upload", upload.single('image'), controller.posts.createNewPost); //doubt 

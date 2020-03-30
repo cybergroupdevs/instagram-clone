@@ -5,10 +5,10 @@
             <div class="modal-header text-center" style="padding: 1.5rem;">
                 <p class="modal-title w-100"><b>Profile Picture</b></p>
             </div>
-            <form class="modal-header text-center cursor-pointer" action="http://localhost:8080/api/profile" method="patch" #form="ngForm" (ngSubmit)="upload()" enctype="multipart/form-data">
+            <form class="modal-header text-center cursor-pointer" #form="ngForm" (ngSubmit)="onSubmit()">
                 <label class="modal-title w-100 cursor-pointer" name="imageUpload" style="color:#3798F0" for="profileImageInput">
                 </label>
-                <input type="file" name="imageUpload" id="photo" accept="image/*" ngModel #input="ngModel" ng2FileSelect [uploader]="uploader"  />
+                <input type="file" name="imageUpload" id="photo" accept="image/*" ngModel #input="ngModel" (change)="selectImage($event)"  />
                 <button type="submit">Upload Photo</button>
             </form>
             <div class="modal-header text-center cursor-pointer">
