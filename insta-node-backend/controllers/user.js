@@ -1,8 +1,40 @@
 const model = require("../models");
 const jwtHandler = require("../jwtHandler");
-const schema = require("../schemas");
-var multer = require("multer");
-var upload = multer({ dest: "./uploads/" }).single("photo");
+const fs = require("fs");
+const path = require("path");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    console.log(file, "file inside destination");
+    console.log(req.user.data.instaHandle, "instaHandle");
+    const dir = `./uploads/${req.user.data.instaHandle}`;
+    fs.exists(dir, exist => {
+      if (!exist) return fs.mkdir(dir, error => cb(error, dir));
+
+      return cb(null, `./uploads/${req.user.data.instaHandle}`);
+    });
+  },
+
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}${path.extname(file.originalname)}`);
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 10000000 },
+  fileFilter: (req, file, cb) => {
+    const fileTypes = /jpeg|jpg|png|gif/;
+    const extname = fileTypes.test(
+      path.extname(file.originalname).toLowerCase()
+    );
+    const mimetype = fileTypes.test(file.mimetype);
+
+    if (extname && mimetype) return cb(null, true);
+    return cb("Error: Images Only");
+  }
+}).single("image");
 
 class user {
   constructor() {
@@ -102,34 +134,36 @@ class user {
   }
 
   async changeProfilePic(req, res) {
-    console.log(req.body, "req.body");
-
-    var storage = multer.diskStorage({
-        destination: (req, file, callback) => {
-            var dir = `./uploads/`;
-            callback(null, dir);
-        },
-        filename: (req, file, callback) => {
-            fileName = `${file.originalname}-${Date.now()}`;
-            callback(null, fileName);
-        }
-
-    });
-    var upload = multer({ storage: storage });
-    console.log(upload);
-    upload.single('file');
-
-    const file = req.file;
-
-    if(!file){
-        
-    }
-
-    return res.send({
-      success: true,
-      payload: {
-        message: "Profile Pic Changed Successfully!"
+    upload(req, res, error => {
+      if (error) {
+        return res.status(400).send({
+          success: false,
+          payload: {
+            message: error
+          }
+        });
       }
+
+      const file = req.file;
+      console.log(req.file);
+      if (!file) {
+        const error = new Error("No File");
+        return res.status(400).send({
+          success: false,
+          payload: {
+            message: error
+          }
+        });
+      }
+      return res.send({
+        success: true,
+        payload: {
+          data: {
+            file
+          },
+          message: "File Uploaded Successfully!"
+        }
+      });
     });
   }
 }

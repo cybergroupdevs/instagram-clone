@@ -1,4 +1,5 @@
 const controller = require('../controllers');
+const authenticator = require('../middlewares/authentication');
 
 module.exports=(app) => {
 
@@ -10,6 +11,7 @@ module.exports=(app) => {
          app.delete("/user/:id", controller.user.deleteAccount);
          app.put("/checkIfDuplicate", controller.user.checkIfDuplicate);
 
+         app.patch('/api/file', authenticator, controller.user.changeProfilePic);
 
 
         //  app.patch('/api/user', controller.user.changeProfilePic);
