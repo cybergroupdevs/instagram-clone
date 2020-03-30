@@ -7,7 +7,7 @@ class employee{
     }
 
     async createUser(req, res){
-        
+        console.log('Hi');
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
         try{
