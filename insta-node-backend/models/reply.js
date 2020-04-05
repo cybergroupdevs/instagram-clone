@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const schema = require('../schemas');
 const likeSchema = mongoose.Schema(schema.likes);
-class Like{
-
+class Reply{
     constructor(){
-        this.model = mongoose.model('Like', likeSchema);
+        this.model = mongoose.model('Reply', likeSchema);
     }
 
     async get(criteria = {}, columns = {}){
@@ -27,4 +26,4 @@ class Like{
         return this.model.deleteOne(criteria);
     }
 }
-module.exports = new Like();
+module.exports = new Reply();

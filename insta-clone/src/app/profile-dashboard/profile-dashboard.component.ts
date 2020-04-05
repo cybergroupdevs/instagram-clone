@@ -51,7 +51,6 @@ export class ProfileDashboardComponent implements OnInit {
         this.setUserData();
       }
       else if(res.status == 401){
-        localStorage.removeItem("token");
         this._router.navigate(['/login']);
       }
     });

@@ -33,7 +33,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     FileSelectDirective,
     EditProfileComponent,
     EditProfileDetailsComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,

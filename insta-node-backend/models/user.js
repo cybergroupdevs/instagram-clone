@@ -7,13 +7,16 @@ class Operations{
         this.model = mongoose.model('User', userSchema);
     }
 
-    async get(criteria={}, columns={}){
+    async get(criteria={}, columns={}){  // Change its name to log if possible! ---Himanshu Sharma
         return this.model.find(criteria, columns).select("-password");
     }
 
+    async getOne(criteria = {}, columns = {}){
+        return this.model.findOne(criteria, columns).select("-password");
+    }
+
     async save(userObj){
-        console.log("upto there")
-        return await this.model.create(userObj);
+        return this.model.create(userObj);
     }
 
     async update(criteria ={}, updateObj){
@@ -34,7 +37,7 @@ class Operations{
     //     return this.model.updateOne(criteria, updateObj);
     // }
 
-    async delete(criteria={}){
+    async delete(criteria={}){ //delete is not any method! remove/deleteOne/deleteMany are ---@author<Himanshu Sharma>
         return this.model.delete(criteria);
     }
 }
