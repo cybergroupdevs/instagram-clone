@@ -52,7 +52,7 @@ class user{
             }
             catch(error)
             {
-                res.status(406).send({"message":"Sorry, something went wrong updating your details. Please try again soon."});
+                res.status(406).send({"message":"Email is already in use!!."});
             }
         }
 

@@ -173,6 +173,7 @@ export class ProfileDashboardComponent implements OnInit {
       }   
     });
   }
+  
   logout(){
     localStorage.removeItem("token");
     this._router.navigate(['/login']);
