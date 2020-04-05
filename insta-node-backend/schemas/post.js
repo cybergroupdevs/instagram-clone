@@ -26,8 +26,14 @@ module.exports = {
     }
   ],
   count: {
-    likeCount: Number,
-    commentCount: Number
+    likeCount: {
+      type: Number,
+      default: 0
+    },
+    commentCount: {
+      type: Number,
+      default: 0
+    }
   },
   createdAt: {
     type: Date,
