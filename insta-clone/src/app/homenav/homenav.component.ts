@@ -8,6 +8,7 @@ import { HttpResponse } from '@angular/common/http';
 import {
    debounceTime, distinctUntilChanged, switchMap
  } from 'rxjs/operators';
+import { jsonDecoder } from 'src/utils/jsonDecoder';
 
 
 @Component({
@@ -48,7 +49,7 @@ export class HomenavComponent  implements OnInit {
 
   myProfile(){
     console.log("inside my profile func---->>>>")  
-    let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
+    let loggedinUserId = jsonDecoder().data._id;
     this._router.navigate(["/profile", loggedinUserId]);
     this.profileDashboard.loadUserData(loggedinUserId,null);
   }
