@@ -16,7 +16,7 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditProfileDetailsComponent } from './edit-profile-details/edit-profile-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-
+import { AuthGuard } from './auth.guard';
 
 
 @NgModule({
@@ -41,7 +41,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
