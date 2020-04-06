@@ -3,7 +3,7 @@ import { OnInit } from "@angular/core";
 import { SendHttpRequestService } from "../send-http-request.service";
 import { Component, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { FileUploadService } from "services/fileUpload.service";
+import { FileUploadService } from "src/app/services/fileUpload.service";
 //3rd Party
 import { FileUploader } from "ng2-file-upload";
 import { jsonDecoder } from 'src/utils/jsonDecoder';

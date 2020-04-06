@@ -8,7 +8,9 @@ class Post{
     }
 
     async get(criteria = {}, columns = {}){
-        return this.model.findOne(criteria, columns);
+        return this.model.findOne(criteria, columns, (err, res) => {
+            console.log(err, res);
+        });
     }
 
     async save(post){
