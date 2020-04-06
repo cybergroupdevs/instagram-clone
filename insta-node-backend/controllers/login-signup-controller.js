@@ -18,13 +18,11 @@ class employee {
           email: req.body.email,
           password: req.body.password
         };
-        console.log(userObject, "upto here");
         var instaUser = await model.user.save(userObject);
         let message = "user created";
         res.status(200).send({
           userObject
         });
-        console.log(res, "response");
       } else {
         let message =
           "Sorry, something went wrong creating your account. Please try again soon.";
@@ -34,7 +32,6 @@ class employee {
         });
       }
     } catch (error) {
-      console.log(error, "----->>> error");
       let message =
         "Sorry, something went wrong creating your account. Please try again soon.";
 
@@ -47,7 +44,11 @@ class employee {
 
   async checkUserAuthentication(req, res) {
     let user = await model.user.get({
-      $or: [{ instaHandle: req.body.instaHandle }, { email: req.body.email }]
+      $or: [
+        { instaHandle: req.body.instaHandle },
+        { email: req.body.instaHandle },
+        { phone: req.body.instaHandle }
+      ]
     });
     //</expressionN> let user = await model.user.get({"instaHandle": req.body.instaHandle});
     if (user[0] != null) {
@@ -56,7 +57,8 @@ class employee {
           {
             $or: [
               { instaHandle: req.body.instaHandle },
-              { email: req.body.email }
+              { email: req.body.instaHandle },
+              { phone: req.body.instaHandle }
             ]
           },
           { password: req.body.password }
@@ -70,7 +72,6 @@ class employee {
           };
           res.status(200).send(resBody);
         } else {
-          console.log("Token is Null");
         }
       } else {
         let message =
