@@ -16,7 +16,7 @@ class employee {
           instaHandle: req.body.instaHandle,
           phone: req.body.phone,
           email: req.body.email,
-          password: req.body.password
+          password: hashedPassword
         };
         console.log(userObject, "upto here");
         var instaUser = await model.user.save(userObject);
