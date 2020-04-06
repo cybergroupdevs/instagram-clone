@@ -46,9 +46,15 @@ class employee {
   }
 
   async checkUserAuthentication(req, res) {
+      console.log(req.body,"request");
     let user = await model.user.get({
-      $or: [{ instaHandle: req.body.instaHandle }, { email: req.body.instaHandle }]
+      $or: [
+        { instaHandle: req.body.instaHandle },
+        { email: req.body.instaHandle },
+        { phone: req.body.instaHandle }
+      ]
     });
+    console.log(user,"user hai");
     //</expressionN> let user = await model.user.get({"instaHandle": req.body.instaHandle});
     if (user[0] != null) {
       let user = await model.user.get({
@@ -56,12 +62,14 @@ class employee {
           {
             $or: [
               { instaHandle: req.body.instaHandle },
-              { email: req.body.instaHandle }
+              { email: req.body.instaHandle },
+              { phone: req.body.instaHandle }
             ]
           },
           { password: req.body.password }
         ]
       });
+      console.log(user,"password matched")
       if (user[0] != null) {
         let token = jwtHandler.tokenGenerator(user);
         if (token != null) {
