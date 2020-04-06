@@ -12,20 +12,30 @@ export class ChangePasswordComponent  {
   
   instaHandle:string;
   message:string;
+  isVisible : boolean = false;
 
   constructor(private sendReq: SendHttpRequestService, private _router:Router) { }
 
   changePAssword(form){
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id;
-    this.sendReq.ChangePassword(form, loggedinUserId).subscribe(res=>{
-      console.log(res, "response")
+    this.sendReq.ChangePassword(form.value, loggedinUserId).subscribe(res=>{
+      
       if (res.status==200){
         this.message = res.body.message;
-        console.log(this.message, "messs1")
+        this.isVisible = true
+        setTimeout(() =>{
+          this.isVisible=false;
+        },2000)
+        form.reset()
+        
       }
       else if (res.status==400){
         this.message = res.error.message;
-        console.log(this.message, "mess2")
+        this.isVisible = true
+        setTimeout(() =>{
+          this.isVisible=false;
+        },2000)
+        
       }
 
       else if (res.status == 401) {
@@ -34,9 +44,8 @@ export class ChangePasswordComponent  {
         this._router.navigate(["/login"]);
       
       }
-
-
     })
+    
   }
 
   
