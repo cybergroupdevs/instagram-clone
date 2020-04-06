@@ -92,7 +92,7 @@ export class EditProfileDetailsComponent implements OnInit {
         this.warning = true;
       } else if (res.status == 401) {
         alert("Unauthorized");
-        localStorage.removeItem("JwtHrms");
+        localStorage.removeItem("token");
         this._router.navigate(["/login"]);
       }
     });

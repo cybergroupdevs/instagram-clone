@@ -10,6 +10,7 @@ module.exports=(app) => {
          app.put("/user/:id", controller.user.update);
          app.delete("/user/:id", controller.user.deleteAccount);
          app.put("/checkIfDuplicate", controller.user.checkIfDuplicate);
+         app.patch('/changePassword/:id' , controller.user.changePassword);
          app.put("/follow",controller.follow.updateFollow);
          app.get("/followers/:id", controller.follow.getFollowers);
          app.get("/following/:id", controller.follow.getFollowing);
