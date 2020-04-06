@@ -80,6 +80,7 @@ export class SendHttpRequestService {
   }
 
   getFollowersList(id: string): Observable<any>{
+    console.log("inside service")
     return this.http.get(`http://localhost:8080/followers/${id}`, {headers: this.header_token});
   }
 
