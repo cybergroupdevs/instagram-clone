@@ -19,7 +19,7 @@ export class ChangePasswordComponent  {
   changePAssword(form){
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id;
     this.sendReq.ChangePassword(form.value, loggedinUserId).subscribe(res=>{
-      
+
       if (res.status==200){
         this.message = res.body.message;
         this.isVisible = true
@@ -35,7 +35,6 @@ export class ChangePasswordComponent  {
         setTimeout(() =>{
           this.isVisible=false;
         },2000)
-        
       }
 
       else if (res.status == 401) {
@@ -47,7 +46,5 @@ export class ChangePasswordComponent  {
     })
     
   }
-
-  
 
 }
