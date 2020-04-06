@@ -1,3 +1,4 @@
+import { ChangePasswordComponent } from './change-password/change-password.component';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams,HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, tap, retry } from 'rxjs/operators';
@@ -51,6 +52,13 @@ export class SendHttpRequestService {
 
   updateData(object: any, id:string): Observable<any>{
     return this.http.put(`http://localhost:8080/user/${id}`,object, {observe: 'response', headers: this.header_token}).pipe(
+      tap(_ => this.log("updating details")),
+      catchError(this.handleError<any>('error in details')
+    ));
+  }
+
+  ChangePassword(object: any, id:string): Observable<any>{
+    return this.http.patch(`http://localhost:8080/changePassword/${id}`,object, {observe: 'response', headers: this.header_token}).pipe(
       tap(_ => this.log("updating details")),
       catchError(this.handleError<any>('error in details')
     ));

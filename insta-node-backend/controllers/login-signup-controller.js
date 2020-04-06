@@ -16,7 +16,7 @@ class employee {
           instaHandle: req.body.instaHandle,
           phone: req.body.phone,
           email: req.body.email,
-          password: req.body.password
+          password: hashedPassword
         };
         var instaUser = await model.user.save(userObject);
         let message = "user created";
@@ -50,9 +50,10 @@ class employee {
         { phone: req.body.instaHandle }
       ]
     });
+
     //</expressionN> let user = await model.user.get({"instaHandle": req.body.instaHandle});
     if (user[0] != null) {
-      let user = await model.user.get({
+      let checkUser = await model.user.checkPassword({
         $and: [
           {
             $or: [
@@ -60,11 +61,11 @@ class employee {
               { email: req.body.instaHandle },
               { phone: req.body.instaHandle }
             ]
-          },
-          { password: req.body.password }
+          }
         ]
-      });
-      if (user[0] != null) {
+      },req.body.password );
+      console.log(checkUser, "result")
+      if (checkUser == true) {
         let token = jwtHandler.tokenGenerator(user);
         if (token != null) {
           let resBody = {
@@ -73,7 +74,8 @@ class employee {
           res.status(200).send(resBody);
         } else {
         }
-      } else {
+      } 
+      else {
         let message =
           "Sorry, your password was incorrect. Please double-check your password.";
         res.status(401).send({
@@ -81,7 +83,9 @@ class employee {
           message: message
         });
       }
-    } else {
+    } 
+    
+    else {
       let message =
         "The username you entered doesn't belong to an account. Please check your username and try again.";
       res.status(401).send({
