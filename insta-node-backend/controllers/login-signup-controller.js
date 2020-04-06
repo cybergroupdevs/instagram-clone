@@ -18,11 +18,13 @@ class employee {
           email: req.body.email,
           password: hashedPassword
         };
+
         var instaUser = await model.user.save(userObject);
         let message = "user created";
         res.status(200).send({
           userObject
         });
+
       } else {
         let message =
           "Sorry, something went wrong creating your account. Please try again soon.";
@@ -64,7 +66,7 @@ class employee {
           }
         ]
       },req.body.password );
-      console.log(checkUser, "result")
+      
       if (checkUser == true) {
         let token = jwtHandler.tokenGenerator(user);
         if (token != null) {
