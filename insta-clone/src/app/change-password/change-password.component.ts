@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { SendHttpRequestService } from '../send-http-request.service';
 import { Router } from '@angular/router';
@@ -7,32 +8,37 @@ import { Router } from '@angular/router';
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.css']
 })
-export class ChangePasswordComponent implements OnInit {
+export class ChangePasswordComponent  {
   
   instaHandle:string;
+  message:string;
 
   constructor(private sendReq: SendHttpRequestService, private _router:Router) { }
 
-  ngOnInit() {
+  changePAssword(form){
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id;
-    console.log(loggedinUserId, "------->>>>>> current route pass")
-    this.loadUserData(loggedinUserId,null);
+    this.sendReq.ChangePassword(form, loggedinUserId).subscribe(res=>{
+      console.log(res, "response")
+      if (res.status==200){
+        this.message = res.body.message;
+        console.log(this.message, "messs1")
+      }
+      else if (res.status==400){
+        this.message = res.error.message;
+        console.log(this.message, "mess2")
+      }
+
+      else if (res.status == 401) {
+        alert("Unauthorized");
+        localStorage.removeItem("token");
+        this._router.navigate(["/login"]);
+      
+      }
+
+
+    })
   }
 
-  loadUserData(id:string=null, instaHandle:string=null){
-    this.sendReq.userInfo(id,instaHandle).subscribe(res => {
-      if(res.status == 200){
-        console.log(res.body[0]);
-        console.log(res.status, res.body[0], "hiiii")
-        this.instaHandle = res.body[0].instaHandle;
-        
-      }
-      else if(res.status == 401){
-        localStorage.removeItem("token");
-        this._router.navigate(['/login']);
-      }
-      
-    });
-  }
+  
 
 }

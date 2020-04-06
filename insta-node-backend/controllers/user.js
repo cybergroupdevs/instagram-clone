@@ -3,6 +3,7 @@ const jwtHandler = require("../jwtHandler");
 const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
+const bcrypt = require("bcrypt");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -81,7 +82,7 @@ class user {
       } catch (error) {
         res.status(406).send({
           message:
-            "Sorry, something went wrong updating your details. Please try again soon."
+            "Email is already in use!!."
         });
       }
     } else {
@@ -129,6 +130,58 @@ class user {
       const userObj = await model.user.get();
       res.send(userObj);
     } else {
+      res.status(401).send("Unauthorized");
+    }
+  }
+
+  async changePassword(req, res) {
+    const passwordObj = req.body
+    const token = jwtHandler.tokenVerifier(req.headers.token);
+    const checkPassword = await model.user.checkPassword({_id : req.params.id}, passwordObj.oldPassword)
+
+    console.log(checkPassword, "checkPassword")
+
+    if (token) {
+      
+      try{
+        if (passwordObj.newPassword != passwordObj.confirmNewPassword){
+          res.status(400).send({
+            success : false,
+            message: "Please make sure both passwords match."
+          })
+        }
+
+        else if (passwordObj.oldPassword == passwordObj.newPassword){
+          res.status(400).send({
+            success : false,
+            message: "Create a new password that isn't your current password."
+          })
+        }
+
+        else if(checkPassword==false){
+          res.status(400).send({
+            success : false,
+            message: "Your old password was entered incorrectly. Please enter it again."
+          })
+        }
+
+        else{
+          const salt = await bcrypt.genSalt(10);
+          const hashedPassword = await bcrypt.hash(passwordObj.newPassword, salt);
+          let obj = await model.user.update({_id:req.params.id}, {password: hashedPassword})
+          res.status(200).send({
+            success : true,
+            message: "Password Changed Successfully."
+          })
+        }
+      }
+      catch{
+        res.status(401).send({message:"Some error occured"})
+      }
+      
+    } 
+    
+    else {
       res.status(401).send("Unauthorized");
     }
   }
