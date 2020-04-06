@@ -16,7 +16,7 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditProfileDetailsComponent } from './edit-profile-details/edit-profile-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -36,6 +36,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ChangePasswordComponent
   ],
   imports: [
+    Ng2SearchPipeModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
