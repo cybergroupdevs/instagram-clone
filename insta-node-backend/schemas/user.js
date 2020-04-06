@@ -57,8 +57,8 @@ module.exports = {
     },
     phone: {
         type: String,
-        default : null,
-        max : 10
+        max : 10,
+        unique:true
     }
 }
 
