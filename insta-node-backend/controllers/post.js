@@ -3,6 +3,33 @@ const model = require("../models");
 class Post {
   constructor() {}
 
+  async create(req, res){
+    console.log(req.body);
+    const { mentions, tags, caption } = req.body;
+
+    let mentionsWithId = [];
+
+    await Promise.all(
+      mentions.map(async mention => {
+        mention = mention.replace('@', '');
+        let id = await (model.user.getOne({ instaHandle: mention }))._id;
+        if(!id) return;
+        mentionsWithId = [ ...mentionsWithId, id ];
+      })
+    );
+
+    let postBody = { mentions: mentionsWithId, caption, tags, user: req.user.data._id };
+
+    await model.post.save(postBody);
+
+    res.send({
+      success: true,
+      payload: {
+        message: 'Post Created Successfully!'
+      }
+    })
+  }
+
   async operations(req, res) {
     const post = await model.post.findById(req.params.postId);
 

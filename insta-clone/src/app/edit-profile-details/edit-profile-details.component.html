@@ -51,7 +51,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-9 offset-lg-1" style=" margin-top: 2.5rem;">
-            <form class="form-horizontal" #userForm="ngForm">
+            <form class="form-horizontal" #form="ngForm">
             <div class="row">
                 <div class="col-lg-3">
                     <img class="rounded-circle" id="profilePic" src="../../assets/ss.png" style="width: 3rem; height: 3rem; float:right;">
@@ -95,7 +95,7 @@
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Email</label>
                     <div class="col-lg-8">
-                        <input class="form-control" ngModel type="email" #uemail name="email" value="{{email}}" required="required">
+                        <input name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" ngModel type="email" #uemail name="email" value="{{email}}" required="required">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -126,13 +126,17 @@
                         <label style="line-height: 0.8;" class="col-lg-11" for="recommendation">Include your account when recommending similar accounts people might want to follow.</label>
                     </div>
                 </div>
-                <div style="align-self: center;">
-                <small  class="warning" [style.display]="warning ? 'block' : 'none'">
+                <div >
+                <!-- <small style="text-align: center;" [style.display]="form.valid">
+                    Enter a valid email address.
+                </small> -->
+                <small style="text-align: center;"  class="warning" [style.display]="warning ? 'block' : 'none'">
+                
                     {{warningText}}
                 </small>
                 </div>
                 <div class="form-group row">
-                    <div class="col-lg-9 offset-lg-3">
+                    <div class="col-lg-9 offset-lg-3 outDiv">
                         <button class="btn btn-primary" [disabled]="form.pristine" (click)="update()">Submit</button>
                     </div>
                 </div>    
