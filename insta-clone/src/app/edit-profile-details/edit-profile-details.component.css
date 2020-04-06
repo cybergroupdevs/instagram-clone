@@ -13,10 +13,13 @@
     cursor: pointer;
 }
 
-.warning{
-    color : rgb(237, 73, 86);
-  }
+.outDiv{
+    padding: 1rem;
+}
 
   small{
     padding: 1rem;
+    color :white;
+    background-color: black;
+
   }

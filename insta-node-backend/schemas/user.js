@@ -14,6 +14,7 @@ module.exports = {
         type: String,
         default: null,
         unique:true
+        
     },
 
     password: {
