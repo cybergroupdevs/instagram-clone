@@ -7,7 +7,7 @@ class posts {
     constructor() { 
     }
     async createNewPost(req, res){
-        if(jwtHandler.tokenVerifier(req.headers.token)){
+        if(!jwtHandler.tokenVerifier(req.headers.token)){
             if (!req.file) {
                 console.log("No file is available!");
                 
