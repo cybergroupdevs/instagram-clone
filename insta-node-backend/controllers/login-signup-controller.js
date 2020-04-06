@@ -47,7 +47,7 @@ class employee {
 
   async checkUserAuthentication(req, res) {
     let user = await model.user.get({
-      $or: [{ instaHandle: req.body.instaHandle }, { email: req.body.email }]
+      $or: [{ instaHandle: req.body.instaHandle }, { email: req.body.instaHandle }]
     });
     //</expressionN> let user = await model.user.get({"instaHandle": req.body.instaHandle});
     if (user[0] != null) {
@@ -56,7 +56,7 @@ class employee {
           {
             $or: [
               { instaHandle: req.body.instaHandle },
-              { email: req.body.email }
+              { email: req.body.instaHandle }
             ]
           },
           { password: req.body.password }
