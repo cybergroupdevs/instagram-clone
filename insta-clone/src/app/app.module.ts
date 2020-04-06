@@ -33,7 +33,8 @@ import { AuthGuard } from './auth.guard';
     FileSelectDirective,
     EditProfileComponent,
     EditProfileDetailsComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,

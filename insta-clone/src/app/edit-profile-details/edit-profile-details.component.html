@@ -5,8 +5,11 @@
             <div class="modal-header text-center" style="padding: 1.5rem;">
                 <p class="modal-title w-100"><b>Profile Picture</b></p>
             </div>
-            <form class="modal-header text-center cursor-pointer" action="localhost:3000/profile" method="post" enctype="multipart/form-data">
-                <label class="modal-title w-100 cursor-pointer" style="color:#3798F0"><input type='file' id="profileImageInput" onchange="readURL();" style="display: none;"/><b>Upload Photo</b></label>
+            <form class="modal-header text-center cursor-pointer" #form="ngForm" (ngSubmit)="onSubmit()">
+                <label class="modal-title w-100 cursor-pointer" name="imageUpload" style="color:#3798F0" for="profileImageInput">
+                </label>
+                <input type="file" name="imageUpload" id="photo" accept="image/*" ngModel #input="ngModel" (change)="selectImage($event)"  />
+                <button type="submit">Upload Photo</button>
             </form>
             <div class="modal-header text-center cursor-pointer">
                 <p class="modal-title w-100 removePhoto"><b>Remove Current Photo</b></p>
@@ -48,7 +51,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-9 offset-lg-1" style=" margin-top: 2.5rem;">
-            <form class="form-horizontal" #form="ngForm">
+            <form class="form-horizontal" #userForm="ngForm">
             <div class="row">
                 <div class="col-lg-3">
                     <img class="rounded-circle" id="profilePic" src="../../assets/ss.png" style="width: 3rem; height: 3rem; float:right;">

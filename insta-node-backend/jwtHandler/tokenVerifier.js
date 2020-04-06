@@ -2,9 +2,6 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs");
 
 module.exports = (token) => {
-
-    const privateKEY = "qmnwnmekjejohrfcgtlmknlkycxxdfxulkmnklnklnilkomncp";
-
     var i  = 'CyberGroup India Pvt. Ltd.';          // Issuer 
     var s  = 'User Auth';                           // Subject 
     var a  = 'someone@cygrp.com';                   // Audience
@@ -19,7 +16,7 @@ module.exports = (token) => {
 
     //const publicKEY  = fs.readFileSync('./public.key.txt', 'utf8');
     try{
-        return(jwt.verify(token, privateKEY, verifyOptions));
+        return(jwt.verify(token, 'secretkey', verifyOptions));
     }
     catch(error){
         return false;
