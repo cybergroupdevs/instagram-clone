@@ -204,3 +204,8 @@ button.following .msg-follow{
 button.following:not(.wait):hover .msg-unfollow{
   display: inline;
 }
+
+
+.viewComments{
+color: #8e8e8e;
+}

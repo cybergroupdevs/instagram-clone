@@ -3,9 +3,6 @@ const fs   = require('fs');
 const path = require('path');
 
 module.exports = (payload) => {
-    //var privateKEY  = fs.readFileSync(path.resolve("./jwtHandler/private.key"), 'utf8');
-    const privateKEY = "qmnwnmekjejohrfcgtlmknlkycxxdfxulkmnklnklnilkomncp";
-    
     var i  = 'CyberGroup India Pvt. Ltd.';          // Issuer 
     var s  = 'User Auth';                           // Subject 
     var a  = 'someone@cygrp.com';                   // Audience
@@ -14,15 +11,15 @@ module.exports = (payload) => {
 
     // SIGNING OPTIONS
     var signOptions = {
-    issuer:  i,
-    subject:  s,
-    audience:  a,
-    expiresIn:  "12h",
-    algorithm:  "HS256"
+        issuer:  i,
+        subject:  s,
+        audience:  a,
+        expiresIn:  "12h",
+        algorithm:  "HS256"
     };
 
     try{
-        var token = jwt.sign({data: actualPayload}, privateKEY, signOptions);
+        var token = jwt.sign({data: actualPayload}, 'secretkey', signOptions);
         return token;
     }
     catch(e){

@@ -1,0 +1,125 @@
+/* @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+html,body{
+    width: 500px;
+    margin: auto;
+    height: 100%;
+    background: #eee;
+}
+.container{
+    width: 500px;
+    margin: 20px auto;
+}
+.form-group{
+    width:  200px;
+    margin: 10px auto;
+    align-content: center;
+}
+.form-group input{
+    transition: 0.3s linear;
+}
+.form-group input:focus{
+    border: 1px solid crimson;
+    box-shadow: 0 0 0 0;
+}
+span{
+    font-size:15px;
+}
+a{
+    text-decoration:none; 
+    color: #0062cc;
+    border-bottom:2px solid #0062cc;
+}
+.button{
+    margin-top: 20vh;
+}
+.box{
+    margin-top: 5vh;
+}
+.box-part{
+    background:#FFF;
+    border-radius:0;
+}
+.text{
+    margin:20px 0px;
+}
+.fa{
+    color:black;
+}
+.ft14 {
+    font-size: 30px !important;
+    color:black;
+}
+.image-upload>input {
+    display: none;
+  } */
+
+
+  .post-create{
+      border: 1px solid #cdcdcd;
+      border-radius: 2.8px;
+      background-color: white;
+    width: 39.12rem;
+    margin-left: 15.6rem;
+
+    &__primary{
+        margin-left: 0.8rem;
+        display: flex;
+        justify-content: space-around;
+    
+        &--user_img{
+            background: url('https://www.w3schools.com/w3images/avatar6.png');
+            background-size: cover;
+            height: 2.6rem;
+            min-width: 2.6rem;
+            border-radius: 50% 50%;
+        }
+    
+        &--post_area{
+            font-size: 1.6rem;
+            margin-left: 0.8rem;
+            width: 52rem;
+            height: 6rem;
+            resize: none;
+            color: #333;
+            border: none;
+            outline: none;
+
+            overflow: -moz-scrollbars-none;
+            -ms-overflow-style: none;
+
+            &::placeholder{
+                color: #cdcdcd;
+            }
+
+            &::-webkit-scrollbar { width: 0 !important }
+        }
+    }
+
+    &__secondary{
+        height: 5.4rem;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    &--btn_post{
+        height: 3rem;
+        width: 5rem;
+        padding: 1px 2px;
+        background-color: #38a1f3;
+        color: white;
+        font-weight: 400;
+        font-size: 1.2rem;
+        border-radius: 4rem;
+        border: none;
+        margin-right: 1.2rem;
+
+        &:hover{
+            background-color: #1A91DA;
+            cursor: pointer;
+            transition: all .2s;
+        }
+    }
+}

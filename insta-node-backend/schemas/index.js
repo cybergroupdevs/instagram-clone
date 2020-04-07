@@ -1,15 +1,17 @@
-const user=require('./user');
-const post = require('./user-post');
-const follower=require('./follower');
-const following=require('./following');
-const likes=require('./post-likes');
-const comments=require('./post-comments');
+const user = require("./user");
+const post = require("./post");
+const follower = require("./follower");
+const following = require("./following");
+const like = require("./like");
+const comment = require("./comment");
+const reply = require("./reply");
 
-module.exports={
-    user: user,
-    post: post,
-    follower: follower,
-    following: following,
-    likes: likes,
-    comments: comments
+module.exports = {
+  user,
+  post,
+  follower,
+  following,
+  like,
+  comment,
+  reply
 };

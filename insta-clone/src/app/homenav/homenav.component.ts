@@ -1,3 +1,4 @@
+import { FeedComponent } from './../feed/feed.component';
 import { SendHttpRequestService } from './../send-http-request.service';
 import { ProfileDashboardComponent } from './../profile-dashboard/profile-dashboard.component';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +9,8 @@ import { HttpResponse } from '@angular/common/http';
 import {
    debounceTime, distinctUntilChanged, switchMap
  } from 'rxjs/operators';
+
+import { jsonDecoder } from 'src/utils/jsonDecoder';
 
 
 @Component({
@@ -20,7 +23,11 @@ export class HomenavComponent  implements OnInit {
   private searchTerms = new Subject<string>();
 
   isVisible:boolean = false;
-  constructor(private sendReq: SendHttpRequestService, private _router:Router, private profileDashboard: ProfileDashboardComponent) { }
+  constructor(private sendReq: SendHttpRequestService, private _router:Router, 
+    private profileDashboard: ProfileDashboardComponent,
+    private FeedComponent: FeedComponent
+    
+    ) { }
 
   // Push a search term into the observable stream. 
   search(term: string): void {
@@ -46,9 +53,13 @@ export class HomenavComponent  implements OnInit {
     
   }
 
+  feed(){
+    this.FeedComponent.loadPosts();
+  }
+
   myProfile(){
     console.log("inside my profile func---->>>>")  
-    let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
+    let loggedinUserId = jsonDecoder().data._id;
     this._router.navigate(["/profile", loggedinUserId]);
     this.profileDashboard.loadUserData(loggedinUserId,null);
   }

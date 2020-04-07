@@ -1,24 +1,20 @@
 const mongoose = require('mongoose');
 const schema = require('../schemas');
-const likeSchema = mongoose.Schema(schema.like);
-class Like{
-
+const likeSchema = mongoose.Schema(schema.likes);
+class Reply{
     constructor(){
-        this.model = mongoose.model('Like', likeSchema);
+        this.model = mongoose.model('Reply', likeSchema);
     }
 
     async get(criteria = {}, columns = {}){
-        
         return this.model.findOne(criteria, columns);
     }
 
     async log(criteria = {}, columns={}){
-        let fields = 'instaHandle';
-        return this.model.find(criteria, columns).sort({ 'createdAt': -1 }).populate('likedBy', fields);
+        return this.model.find(criteria, columns);
     }
 
     async save(likeObj){
-        console.log(likeObj);
         return this.model.create(likeObj);
     }
 
@@ -30,4 +26,4 @@ class Like{
         return this.model.deleteOne(criteria);
     }
 }
-module.exports = new Like();
+module.exports = new Reply();

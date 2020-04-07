@@ -13,6 +13,7 @@ module.exports = {
         type: String,
         default: null,
         unique:true
+        
     },
 
     password: {
@@ -56,7 +57,6 @@ module.exports = {
     },
     phone: {
         type: String,
-        default : null,
         max : 10,
         unique:true
     }
