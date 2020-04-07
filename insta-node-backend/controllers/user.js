@@ -220,8 +220,8 @@ class user {
     });
   }
   async index(req, res) {
-    const employeeList = await model.employee.get();
-    res.send(employeeList);
+    const userList = await model.user.get();
+    res.send(userList);
   }
 }
 module.exports = new user();
