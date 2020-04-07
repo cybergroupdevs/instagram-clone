@@ -21,16 +21,21 @@
     </div>
 </div> -->
 
-<div class="post-create">
-    <div class="post-create__primary">
-      <div class="post-create__primary--user_img"></div>
-      <!-- <div class="user_details">
-          <p class="user_details--username">username</p>
-          <p class="user_details--name">name</p>
-      </div> -->
-      <textarea class="post-create__primary--post_area" placeholder="Show to the world!" #postarea></textarea>
-    </div>
-    <div class="post-create__secondary">
-      <button class="post-create--btn_post" (click)="createPostHandler(postarea.value)">Post</button>
-    </div>
-  </div> 
+<form class="post-create" #form="ngForm" (ngSubmit)="createPostHandler(form.value)">
+  <div class="post-create__primary">
+    <div class="post-create__primary--user_img"></div>
+    <!-- <div class="user_details">
+        <p class="user_details--username">username</p>
+        <p class="user_details--name">name</p>
+    </div> -->
+    <textarea name="caption" class="post-create__primary--post_area" placeholder="Show to the world!" ngModel></textarea>
+  </div>
+  <div class="post-create__secondary">
+    <label class="custom-file-input-label" for="file-input">
+      <a class="post-create--image_upload"><i class="fa fa-image fa-2x"></i></a>
+    </label>
+    <input id="file-input" name="imageFile" type="file" accept="image/*" class="custom-file-input" ngModel (change)="selectImage($event)" />
+
+    <button type="submit" class="post-create--btn_post">Post</button>
+  </div>
+</form> 

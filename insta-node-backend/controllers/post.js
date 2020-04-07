@@ -1,33 +1,101 @@
 const model = require("../models");
+const fs = require("fs");
+const path = require("path");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    console.log(file, "file inside destination");
+    console.log(req.user.data.instaHandle, "instaHandle");
+    const dir = `./uploads/${req.user.data.instaHandle}/posts`;
+    fs.exists(dir, (exist) => {
+      if (!exist) return fs.mkdir(dir, (error) => cb(error, dir));
+
+      return cb(null, dir);
+    });
+  },
+
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}${path.extname(file.originalname)}`);
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 10000000 },
+  fileFilter: (req, file, cb) => {
+    const fileTypes = /jpeg|jpg|png|gif/;
+    const extname = fileTypes.test(
+      path.extname(file.originalname).toLowerCase()
+    );
+    const mimetype = fileTypes.test(file.mimetype);
+
+    if (extname && mimetype) return cb(null, true);
+    return cb("Error: Images Only");
+  },
+}).single("imageFile");
 
 class Post {
   constructor() {}
 
-  async create(req, res){
-    console.log(req.body);
-    const { mentions, tags, caption } = req.body;
+  async create(req, res) {
+    console.log(req.file);
 
-    let mentionsWithId = [];
-
-    await Promise.all(
-      mentions.map(async mention => {
-        mention = mention.replace('@', '');
-        let id = await (model.user.getOne({ instaHandle: mention }))._id;
-        if(!id) return;
-        mentionsWithId = [ ...mentionsWithId, id ];
-      })
-    );
-
-    let postBody = { mentions: mentionsWithId, caption, tags, user: req.user.data._id };
-
-    await model.post.save(postBody);
-
-    res.send({
-      success: true,
-      payload: {
-        message: 'Post Created Successfully!'
+    upload(req, res, async (error) => {
+      if (error) {
+        return res.status(400).send({
+          success: false,
+          payload: {
+            message: error,
+          },
+        });
       }
-    })
+
+      const file = req.file;
+      console.log(req.file);
+      if (!file) {
+        const error = new Error("No File");
+        return res.status(400).send({
+          success: false,
+          payload: {
+            message: error,
+          },
+        });
+      }
+      console.log(req.body);
+
+      let { mentions, hashtags, caption } = req.body;
+      hashtags = hashtags.split(',');
+      mentions = mentions.split(',');
+
+      let mentionsWithId = [];
+
+      await Promise.all(
+        mentions.map(async (mention) => {
+          mention = mention.replace("@", "");
+          let id = await model.user.getOne({ instaHandle: mention })._id;
+          if (!id) return;
+          mentionsWithId = [...mentionsWithId, id];
+        })
+      );
+
+      let postBody = {
+        mentions: mentionsWithId,
+        caption,
+        hashtags,
+        image: file.path,
+        user: req.user.data._id,
+      };
+
+      await model.post.save(postBody);
+
+      res.send({
+        success: true,
+        payload: {
+          message: "Post Created Successfully!",
+        },
+      });
+    });
   }
 
   async operations(req, res) {
@@ -41,8 +109,8 @@ class Post {
         );
 
         await model.like.save({
-          "post": req.params.postId,
-          "likedBy": req.user.data._id
+          post: req.params.postId,
+          likedBy: req.body.user,
         });
       }
 
@@ -69,7 +137,7 @@ class Post {
         await model.comment.save({
           post: req.params.postId,
           commentedBy: req.body.user,
-          content: req.body.content
+          content: req.body.content,
         });
       }
 
@@ -81,7 +149,7 @@ class Post {
 
         await model.like.deleteOne({
           post: req.params.postId,
-          commentedBy: req.body.user
+          commentedBy: req.body.user,
         });
       }
     }
@@ -91,7 +159,7 @@ class Post {
         await model.reply.create({
           comment: req.query.comment,
           repliedBy: req.query.repliedBy,
-          content: req.query.content
+          content: req.query.content,
         });
       }
       if (req.query.operation === "dec") {
@@ -102,8 +170,8 @@ class Post {
     res.send({
       success: true,
       payload: {
-          message: 'Operation Successful, Hopefully (Check Api and Database)!!!'
-      }
+        message: "Operation Successful, Hopefully (Check Api and Database)!!!",
+      },
     });
   }
 

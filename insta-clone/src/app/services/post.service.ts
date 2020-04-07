@@ -11,7 +11,6 @@ const GET_FEED = `http://localhost:8080/feed`;
 })
 export class PostService{
     headers: HttpHeaders = new HttpHeaders({
-        'Content-Type': 'application/json',
         Authorization: localStorage.getItem('token')
     });
 
@@ -21,8 +20,8 @@ export class PostService{
 
     constructor(private http: HttpClient){}
 
-    createPost(postBody: any): Observable<IResponse>{
-        return this.http.post<IResponse>(POST_API, postBody, this.httpOptions);
+    createPost(formData: FormData): Observable<IResponse>{
+        return this.http.post<IResponse>(POST_API, formData, this.httpOptions);
     }
 
     getFeed(): Observable<any>{
