@@ -11,6 +11,11 @@ export class SuggestionForUComponent implements OnInit {
   constructor(private _service: SendHttpRequestService) { }
   usersArray: any;
   ngOnInit() {
+    let obj=this._service.showSuggestion().subscribe(res => {
+      this.usersArray=res;
+      console.log(res);
+    });
+    console.log(obj);
   }
 
 }

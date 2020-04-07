@@ -139,7 +139,13 @@ export class SendHttpRequestService {
       catchError(this.handleError<any>('error in following')
     ));
   }
+  showSuggestion(): Observable<any>{
 
+    return this.http.get("http://localhost:8080/suggestions",{headers: this.header_token}).pipe(
+      tap(_ => this.log("Suggestions")),
+      catchError(this.handleError<any>('error')
+    ));
+  }
 
   // loadUserDetail(obj):Observable<any>{
   //   return this.http.get("http://localhost:8080/user", obj).pipe(
