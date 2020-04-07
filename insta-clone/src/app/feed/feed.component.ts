@@ -93,8 +93,9 @@ export class FeedComponent implements OnInit {
 
   loadPosts(){
     this.PostService.getFeed().subscribe(res=>{
-      console.log(res, "response feed")
-      this.feed = res.payload.data.feed;
+      
+      this.feed = res.payload.data.feedFinal;
+      console.log(res,this.feed, "response feed")      
       console.log(this.feed, "my feed")
     })
   }

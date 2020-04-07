@@ -21,10 +21,26 @@ module.exports = {
   tags: [
     {
       type: String,
-      maxlength: 20,
-      
+      maxlength: 20
     }
   ],
+
+  // likes:[      //added
+  //   {
+  //     type: ObjectId,
+  //     ref: "Like"
+
+  //   }
+  // ],
+
+  // comments:[     //added
+  //   {
+  //     type: ObjectId,
+  //     ref: "Comment"
+
+  //   }
+  // ],
+
   count: {
     likeCount: {
       type: Number,

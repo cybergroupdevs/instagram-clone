@@ -41,10 +41,11 @@ class Post {
         );
 
         await model.like.save({
-          post: req.params.postId,
-          likedBy: req.body.user
+          "post": req.params.postId,
+          "likedBy": req.user.data._id
         });
       }
+
       if (req.query.operation === "dec") {
         await model.post.modify(
           { _id: req.params.postId },
@@ -53,7 +54,7 @@ class Post {
 
         await model.like.deleteOne({
           post: req.params.postId,
-          likedBy: req.body.user
+          likedBy: req.user.data._id
         });
       }
     }
@@ -107,12 +108,11 @@ class Post {
   }
 
   async getFeed(req, res){
-    console.log(req.user.data._id, "gtoken ifd");
-    const loggedInUserId = req.user.data._id
     
+    const loggedInUserId = req.user.data._id
     let feed = await model.post.index({user:loggedInUserId})
     let followingList = await model.following.getAll({ownerId : loggedInUserId})
-    console.log(followingList, "followingsss")
+    
     await Promise.all(
       followingList.map(async following => {
         const followingId = following.followingId._id
@@ -121,13 +121,24 @@ class Post {
 
       })
     );
-    feed = feed.sort((a, b) => b.createdAt - a.createdAt)
-    console.log(feed, "feed")
+    let feedFinal = feed.sort((a, b) => b.createdAt - a.createdAt)
+
+    feedFinal = await Promise.all(
+      feedFinal.map(async (item) => {
+        const postId = item._id
+        
+        let likesArray = await model.like.log({post : postId})
+        let commentsArray = await model.comment.log({ post : postId })
+        
+        return { ...item.toObject(), likesArray, commentsArray };  
+      })
+    );
+      
     res.send({
       success: true,
       payload: {
           data : {
-            feed
+            feedFinal
           },
           message: "feed returned"
       }

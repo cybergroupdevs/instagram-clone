@@ -18,8 +18,8 @@ class Post{
     }
 
     async index(criteria = {}, columns = {}){
-        let fields = 'name instaHandle';
-        return this.model.find(criteria ,columns).populate('user', fields);
+        let fields = 'instaHandle';
+        return this.model.find(criteria ,columns).sort({ 'createdAt': -1 }).populate('user', fields);
     }
 
     async modify(criteria, patchObj){

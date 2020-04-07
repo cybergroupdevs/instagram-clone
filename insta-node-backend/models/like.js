@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const schema = require('../schemas');
-const likeSchema = mongoose.Schema(schema.likes);
+const likeSchema = mongoose.Schema(schema.like);
 class Like{
 
     constructor(){
@@ -8,14 +8,17 @@ class Like{
     }
 
     async get(criteria = {}, columns = {}){
+        
         return this.model.findOne(criteria, columns);
     }
 
     async log(criteria = {}, columns={}){
-        return this.model.find(criteria, columns);
+        let fields = 'instaHandle';
+        return this.model.find(criteria, columns).sort({ 'createdAt': -1 }).populate('likedBy', fields);
     }
 
     async save(likeObj){
+        console.log(likeObj);
         return this.model.create(likeObj);
     }
 
