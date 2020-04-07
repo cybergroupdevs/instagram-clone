@@ -6,11 +6,9 @@ class Suggestion{
     constructor(){
     }
 
-    async getAll(criteria={}, columns={}){
-        let fields = 'name instaHandle';
-        let followerData = await this.model.find(criteria, columns);
-        return (followerData);
-    }
+    async log(criteria={},columns={}){
+        return this.model.find(criteria,columns);
+      }
     
     
 }
