@@ -2,9 +2,16 @@
     <div class="card shadow mb-3">
       <div class="card-body">
         <h5>Suggestions for you</h5>
+       <div *ngFor="
+          let user of userArray">
         <p><img src="https://picsum.photos/200/200?random" class="rounded-circle float-left mr-2" width="40">
-          <a href="#">Lorem Ipsum <small class="text-muted">@LoremIpsum</small></a></p>
+          <a *ngIf="menu.type !== 'header'" (click)="toggle(menu)">
+            <i class="{{ menu.icon }}"></i>
+            <span>{{ user.name }}</span>
+            <span *ngIf="menu.badge" class="badge badge-pill" [ngClass]="menu.badge.class">{{ menu.badge.text }}</span>
+        </a>
         <hr>
+        </div>
         <p><img src="https://picsum.photos/200/200?random" class="rounded-circle float-left mr-2" width="40">
           <a href="#">Lorem Ipsum <small class="text-muted">@LoremIpsum</small></a></p>
         <hr>

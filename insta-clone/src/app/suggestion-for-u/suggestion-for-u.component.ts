@@ -1,3 +1,4 @@
+import { SendHttpRequestService } from './../send-http-request.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SuggestionForUComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private _service: SendHttpRequestService) { }
+  usersArray: any;
   ngOnInit() {
   }
 
