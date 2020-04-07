@@ -23,7 +23,7 @@ class Follower{
     async delete(criteria={}){
         return await this.model.deleteOne(criteria)
     }
-    
 }
 
 module.exports = new Follower();
+

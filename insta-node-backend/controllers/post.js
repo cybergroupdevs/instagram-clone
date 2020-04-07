@@ -105,6 +105,36 @@ class Post {
       }
     });
   }
+
+  async getFeed(req, res){
+    console.log(req.user.data._id, "gtoken ifd");
+    const loggedInUserId = req.user.data._id
+    
+    let feed = await model.post.index({user:loggedInUserId})
+    let followingList = await model.following.getAll({ownerId : loggedInUserId})
+    console.log(followingList, "followingsss")
+    await Promise.all(
+      followingList.map(async following => {
+        const followingId = following.followingId._id
+        let followingPosts = await model.post.index({user:followingId})
+        feed = feed.concat(followingPosts)
+
+      })
+    );
+    feed = feed.sort((a, b) => b.createdAt - a.createdAt)
+    console.log(feed, "feed")
+    res.send({
+      success: true,
+      payload: {
+          data : {
+            feed
+          },
+          message: "feed returned"
+      }
+    });
+
+  }
+
 }
 
 module.exports = new Post();

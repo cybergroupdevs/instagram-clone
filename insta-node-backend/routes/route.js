@@ -16,10 +16,11 @@ module.exports=(app) => {
          app.get("/following/:id", controller.follow.getFollowing);
          app.get("/followRelation", controller.follow.followRelation);
          app.put("/unfollow",controller.unfollow.updateUnfollow);
-
+         
          app.patch('/api/file', authenticator, controller.user.changeProfilePic);
 
-            app.post('/api/post', authenticator, controller.post.create);
+         app.post('/api/post', authenticator, controller.post.create);
+         app.get ("/feed", authenticator, controller.post.getFeed) 
         //  app.patch('/api/user', controller.user.changeProfilePic);
         //  app.post("/upload", upload.single('image'), controller.posts.createNewPost); //doubt 
         //  app.get("/posts/:id",controller.post.showAll);

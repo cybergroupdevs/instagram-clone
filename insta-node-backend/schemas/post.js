@@ -22,7 +22,7 @@ module.exports = {
     {
       type: String,
       maxlength: 20,
-      unique: true
+      
     }
   ],
   count: {
@@ -38,5 +38,10 @@ module.exports = {
   createdAt: {
     type: Date,
     default: Date.now()
+  },
+
+  location:{
+    type: String
   }
+
 };
