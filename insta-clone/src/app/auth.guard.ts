@@ -18,10 +18,6 @@ export class AuthGuard implements CanActivate {
          if(token!=null && now<=jsonDecoder().exp )
          { 
              return true
-        //     if(jsonDecoder().role==expectedRole || (expectedRole1 && jsonDecoder().role==expectedRole1))
-        //      return true
-        //     else
-        //   this.router.navigate(['/404']);
           }
           else if(now>=jsonDecoder().exp)
           {
