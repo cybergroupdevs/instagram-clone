@@ -1,12 +1,19 @@
+import { PostService } from './../services/post.service';
 
 import { SendHttpRequestService } from './../send-http-request.service';
 import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
-import { Component, ViewChild, ElementRef, OnInit} from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 declare function addcomment(): any;
+import { from } from 'rxjs';
+
 
 const URL = 'http://localhost:8080/upload';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-feed',
@@ -17,7 +24,7 @@ const URL = 'http://localhost:8080/upload';
 
 export class FeedComponent implements OnInit {
     
-  constructor(private sendReq: SendHttpRequestService) { }
+  constructor(private sendReq: SendHttpRequestService, private PostService: PostService) { }
   @ViewChild('modal', {static: false}) modal: ElementRef;
   @ViewChild('caption', {static: false}) caption: ElementRef;
   @ViewChild('commentarea', {static: false}) commentarea: ElementRef;
@@ -49,14 +56,10 @@ export class FeedComponent implements OnInit {
     this.uploader.uploadAll();
   }
 
-  loadPosts(){
-    console.log("posts()");
-    this.sendReq.posts().subscribe(res => {
-      console.log(res);
-    });
-    // console.log(this.sendReq.posts());
-  }
+  
   res: any;
+  feed : any;
+
   addcomment(text:string){
       let commentObj = {
       //hande of user who liked,photoID and comment
@@ -87,6 +90,16 @@ export class FeedComponent implements OnInit {
   closeModal(){
     this.modal.nativeElement.style.display = "none";
   }
+
+  loadPosts(){
+    this.PostService.getFeed().subscribe(res=>{
+      
+      this.feed = res.payload.data.feedFinal;
+      console.log(res,this.feed, "response feed")      
+      console.log(this.feed, "my feed")
+    })
+  }
+
    //    let instahandle= {
    //    //    //hande of owner of post
    //    //    ownerID: this.ownerID.nativeElement.value,

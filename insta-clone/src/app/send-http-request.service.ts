@@ -64,22 +64,6 @@ export class SendHttpRequestService {
     ));
   }
 
-  posts(): Observable<any>{
-    return this.http.get("http://localhost:8080/posts", {headers: this.header_token}).pipe(
-      tap(_ => this.log("Got Posts")),
-      catchError(this.handleError<any>('Some Error Occurred'))
-    );
-  }
-
-  // userData(): Observable<any>{
-  //   return this.http.get("http://localhost:8080/user:"+this.jsonDecoder(localStorage.getItem("token")).data._id,
-  //      {headers: this.header_token});
-  //   return this.http.get("http://localhost:8080/upload").pipe(
-  //     tap(_ => this.log("showing feed")),
-  //     catchError(this.handleError<any>('error in feed'))
-  //   );
-  // }
-
   userInfo(id: string, instaHandle:string): Observable<any>{
     return this.http.get("http://localhost:8080/user/?" + "id=" + id + "&instaHandle=" + instaHandle, {headers: this.header_token, observe: 'response'}).pipe(
       tap(_ => this.log("showing details")),
@@ -140,21 +124,10 @@ export class SendHttpRequestService {
     ));
   }
 
+  
 
-  // loadUserDetail(obj):Observable<any>{
-  //   return this.http.get("http://localhost:8080/user", obj).pipe(
-  //     tap(_ => this.log("Unfollowed")),
-  //     catchError(this.handleError<any>('error in unfollowing'))
-  //   );
-  // }
 
-  // loadUploads(obj):Observable<any>{
-   //   return this.http.get("http://localhost:8080/upload", obj).pipe(
-  //     tap(_ => this.log("Unfollowed")),
-  //     catchError(this.handleError<any>('error in unfollowing'))
-  //   );
-  // }
-
+  
   /**
  * Handle Http operation that failed.
  * Let the app continue.
