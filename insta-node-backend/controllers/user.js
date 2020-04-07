@@ -219,5 +219,9 @@ class user {
       });
     });
   }
+  async index(req, res) {
+    const employeeList = await model.employee.get();
+    res.send(employeeList);
+  }
 }
 module.exports = new user();

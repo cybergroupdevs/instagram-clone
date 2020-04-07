@@ -7,7 +7,6 @@ const posts = require('./posts_upload');
 const likes=require('./like');
 const comments=require('./comment');
 const post = require('./post');
-const suggestion = require('./suggestion')
 
 module.exports =
 {
@@ -18,6 +17,5 @@ module.exports =
     unfollow:unfollow,
     posts: posts,
     likes:likes,
-    comments:comments,
-    suggestions:suggestion
+    comments:comments
 }

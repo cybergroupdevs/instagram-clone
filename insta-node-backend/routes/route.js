@@ -19,7 +19,7 @@ module.exports = app => {
   app.patch("/api/file", authenticator, controller.user.changeProfilePic);
 
   app.post("/api/post", authenticator, controller.post.create);
-  app.get("/suggestions",controller.suggestions.index) 
+  app.get("/suggestions",controller.user.index) 
   //  app.patch('/api/user', controller.user.changeProfilePic);
   //  app.post("/upload", upload.single('image'), controller.posts.createNewPost); //doubt
   //  app.get("/posts/:id",controller.post.showAll);
