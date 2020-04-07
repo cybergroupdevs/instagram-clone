@@ -6,6 +6,12 @@
           let user of usersArray">
         <p><img src="https://picsum.photos/200/200?random" class="rounded-circle float-left mr-2" width="40">
           <a href="#">{{user.name}} <small class="text-muted">@LoremIpsum</small></a></p>
+           <!-- <a  ><button class="btn btn-primary follow-btn" *ngIf="followers.follower.followerId._id != loggedinUserId && !followers.relation" (click)="follow(followers.follower.followerId._id)">Follow</button></a>
+            <a ><button class="btn unfollow-btn" *ngIf="followers.follower.followerId._id != loggedinUserId && followers.relation" (click)="unfollow(followers.follower.followerId._id)">Following</button></a> -->
+          <!-- <div class="col-lg-3">
+            <a  ><button class="btn btn-primary follow-btn" *ngIf="followers.follower.followerId._id != loggedinUserId && !followers.relation" (click)="follow(followers.follower.followerId._id)">Follow</button></a>
+            <a ><button class="btn unfollow-btn" *ngIf="followers.follower.followerId._id != loggedinUserId && followers.relation" (click)="unfollow(followers.follower.followerId._id)">Following</button></a>
+        </div> -->
         <hr>
       </div>
     </div>

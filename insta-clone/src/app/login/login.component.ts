@@ -3,6 +3,7 @@ import { SendHttpRequestService } from './../send-http-request.service';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { OnInit } from "@angular/core";
 // import { BindOptions } from 'dgram';
 
 @Injectable({
@@ -23,7 +24,16 @@ export class LoginComponent  {
   res: any;
   warningText : string;
   warning : boolean = false;
-
+  ngOnInit(){
+    let token=localStorage.getItem('token');
+    if(!token)
+    {
+      this._router.navigate(['/login'])
+    }
+    else{
+      this._router.navigate(['/feed'])
+    }
+  }
   loginFunction(userObj) { 
     this.sendReq.logMeIn(userObj).subscribe(res => {
       
