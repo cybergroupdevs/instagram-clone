@@ -18,7 +18,7 @@ class Post {
       })
     );
 
-    let postBody = { mentions: mentionsWithId, caption, tags, user: req.user.data._id };
+    let postBody = { mentions: mentionsWithId, caption, tags, user: req.user.data._id, createdAt: Date.now() };
 
     await model.post.save(postBody);
 
@@ -120,9 +120,14 @@ class Post {
         feed = feed.concat(followingPosts)
       })
     );
-    
-    let feedFinal = feed.sort((a, b) => b.createdAt - a.createdAt)
 
+    let feedFinal = feed.sort((a, b) => {
+      if (new Date(b.createdAt) < new Date(a.createdAt)) return -1;
+      if (new Date(b.createdAt) > new Date(a.createdAt)) return 1;
+      return 0;
+    });
+
+    //let feedFinal = feed
     feedFinal = await Promise.all(
       feedFinal.map(async (item) => {
         const postId = item._id

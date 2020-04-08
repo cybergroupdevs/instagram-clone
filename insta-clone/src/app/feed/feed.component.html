@@ -44,7 +44,7 @@
       <div class="row" style="padding:0 2rem" *ngIf="item.count.likeCount>0">
         <span>Liked by</span><b>{{item.likesArray[0].likedBy.instaHandle}}</b><div *ngIf="item.count.likeCount-1>0" >and {{item.count.likeCount-1}} others</div>
       </div>
-      <div class="row" style="padding:0 2rem">
+      <div class="row" style="padding:0 2rem ">
         <span></span><b>{{item.user.instaHandle}}</b><span>{{item.caption}}</span>
       </div>
       <div *ngIf="item.count.commentCount>0">
