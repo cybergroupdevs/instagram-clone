@@ -2,8 +2,8 @@ import { FileUploader } from 'ng2-file-upload';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { Component, OnInit, NgModule } from '@angular/core';
 import { ObjectUnsubscribedError } from 'rxjs';
-import findHashtags from 'src/utils/findHashTags';
-import findMentions from 'src/utils/findMentions';
+import findHashtags from 'src/app/utils/findHashTags';
+import findMentions from 'src/app/utils/findMentions';
 import { PostService } from '../services/post.service';
 import { IResponse } from '../models/IResponse';
 

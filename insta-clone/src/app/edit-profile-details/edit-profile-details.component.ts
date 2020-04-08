@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { FileUploadService } from "src/app/services/fileUpload.service";
 //3rd Party
 import { FileUploader } from "ng2-file-upload";
-import { jsonDecoder } from 'src/utils/jsonDecoder';
+import { jsonDecoder } from 'src/app/utils/jsonDecoder';
 
 const URL = "http://localhost:8080/api/upload";
 

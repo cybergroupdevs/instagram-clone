@@ -197,10 +197,17 @@ class Post {
         
         let likesArray = await model.like.log({post : postId})
         let commentsArray = await model.comment.log({ post : postId })
-        
-        return { ...item.toObject(), likesArray, commentsArray };  
+
+        let returnObj = { ...item.toObject(), likesArray, commentsArray };
+        if(!item.image){
+          return returnObj;
+        }
+        console.log(fs.readFileSync(item.image), 'IMAGE AFTER READ FILE');
+        console.log(fs.createReadStream(item.image));
+        return { ...returnObj, image: fs.readFileSync(item.image) }
       })
     );
+    
       
     res.send({
       success: true,

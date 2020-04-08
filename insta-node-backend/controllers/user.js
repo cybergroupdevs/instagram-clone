@@ -111,9 +111,8 @@ class user {
         userObj = await model.user.get({ instaHandle: obj.instaHandle });
       }
 
-      console.log(userObj, "detailss");
       if (userObj[0] != null) {
-        res.status(200).send(userObj);
+        res.status(200).send({ user: userObj['0'], bufferedImage: fs.readFileSync(userObj[0].image) });
       } else {
         res.status(404).send({
           message: "not a user"
@@ -187,7 +186,7 @@ class user {
   }
 
   async changeProfilePic(req, res) {
-    upload(req, res, error => {
+    upload(req, res, async error => {
       if (error) {
         return res.status(400).send({
           success: false,
@@ -199,6 +198,8 @@ class user {
 
       const file = req.file;
       console.log(req.file);
+
+
       if (!file) {
         const error = new Error("No File");
         return res.status(400).send({
@@ -208,6 +209,9 @@ class user {
           }
         });
       }
+
+      await model.user.update({ _id: req.user.data._id }, { image: file.path });
+
       return res.send({
         success: true,
         payload: {
