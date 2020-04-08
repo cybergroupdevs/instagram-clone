@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const url = "mongodb://localhost:127.0.0.1:27017/instaDB";
+// const url = "mongodb+srv://faizan:faizan20@instagram-clone-bddy7.mongodb.net/instaDB?retryWrites=true&w=majority"
+
 
 mongoose.Promise = global.Promise;
 

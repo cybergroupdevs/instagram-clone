@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="card">
+        <img class="card-img-top" src="../../assets/myFile.png" alt="Card image cap">
+        <div class="card-body">
+            <div class="user-header">
+                <img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 2.5rem; height: 2.5rem; border: 1px solid black;">
+                <div>
+                    <b>username</b>
+                </div>  
+            </div>
+            <hr class="solid">
+          
+            <h5 class="card-title">Caption</h5>
+
+            <div class="post-create">
+                <div class="post-create__primary">
+                  <div class="post-create__primary--user_img"></div>
+                  <!-- <div class="user_details">
+                      <p class="user_details--username">username</p>
+                      <p class="user_details--name">name</p>
+                  </div> -->
+                  <textarea class="post-create__primary--post_area" placeholder="Show to the world!" #postarea></textarea>
+                </div>
+                <div class="post-create__secondary">
+                  <button class="post-create--btn_post" (click)="createPostHandler(postarea.value)">Post</button>
+                </div>
+              </div>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Post</a>
+        </div>
+      </div>
+</div>

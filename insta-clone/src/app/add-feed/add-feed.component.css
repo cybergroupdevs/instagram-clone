@@ -1,0 +1,15 @@
+.card{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.user-header{
+    display: flex;
+    
+    flex-direction: row;
+}
+hr.solid {
+    border-top: 1px solid #bbb;
+    margin-top: 1.5rem;
+}
+
