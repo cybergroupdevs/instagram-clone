@@ -17,6 +17,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditProfileDetailsComponent } from './edit-profile-details/edit-profile-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ViewPostComponent } from './view-post/view-post.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     FileSelectDirective,
     EditProfileComponent,
     EditProfileDetailsComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ViewPostComponent
   ],
   imports: [
     Ng2SearchPipeModule,

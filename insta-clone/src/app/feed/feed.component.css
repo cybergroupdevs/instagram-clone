@@ -157,7 +157,7 @@ box-sizing:border-box;
   font: 1em sans-serif;
   width:100%;
 }
-  .control::after {
+.control::after {
     content: url('../../assets/images/igheart.png');
 }
 #togglelike:checked ~ .control::after {

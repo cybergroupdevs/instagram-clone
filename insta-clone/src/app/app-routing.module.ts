@@ -11,6 +11,7 @@ import { LoginComponent }      from './login/login.component';
 import { SignupComponent }  from './signup/signup.component';
 import {ChangePasswordComponent} from './change-password/change-password.component'
 import { EditProfileDetailsComponent } from './edit-profile-details/edit-profile-details.component';
+import {ViewPostComponent} from './view-post/view-post.component'
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -30,7 +31,8 @@ const routes: Routes = [
     {
       path: "changePassword", component:ChangePasswordComponent 
     }
-  ]}
+  ]},
+  {path:"post/id", component:ViewPostComponent}
   ];
 
 @NgModule({

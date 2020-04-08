@@ -40,3 +40,8 @@
 .gallery-item-likes {
     margin-right: 2.2rem;
 }
+@media (min-width: 992px) {
+    .gallery-item {
+       margin-left: 2%; 
+    }
+  }
