@@ -12,13 +12,16 @@ module.exports = {
     default: null,
     maxlength: 500
   },
+  image: {
+    type: String
+  },
   mentions: [
     {
       type: ObjectId,
       ref: "User"
     }
   ],
-  tags: [
+  hashtags: [
     {
       type: String,
       maxlength: 20
@@ -61,3 +64,4 @@ module.exports = {
   }
 
 };
+//RECENT UPDATES

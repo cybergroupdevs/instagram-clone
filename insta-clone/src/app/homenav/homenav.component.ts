@@ -10,7 +10,7 @@ import {
    debounceTime, distinctUntilChanged, switchMap
  } from 'rxjs/operators';
 
-import { jsonDecoder } from 'src/utils/jsonDecoder';
+import { jsonDecoder } from 'src/app/utils/jsonDecoder';
 
 
 @Component({

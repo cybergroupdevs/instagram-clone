@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "fs": "0.0.1-security",
     "multer": "^1.4.2",
     "ng2-file-upload": "^1.4.0",
