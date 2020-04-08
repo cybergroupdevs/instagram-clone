@@ -9,13 +9,7 @@
       <div *ngFor="
           let user of usersArray">
         <p><img src="https://picsum.photos/200/200?random" class="rounded-circle float-left mr-2" width="40">
-          <a href="#" class="text-design">{{user.name}} <small class="text-design">@LoremIpsum</small></a></p>
-        <!-- <a  ><button class="btn btn-primary follow-btn" *ngIf="followers.follower.followerId._id != loggedinUserId && !followers.relation" (click)="follow(followers.follower.followerId._id)">Follow</button></a>
-            <a ><button class="btn unfollow-btn" *ngIf="followers.follower.followerId._id != loggedinUserId && followers.relation" (click)="unfollow(followers.follower.followerId._id)">Following</button></a> -->
-        <!-- <div class="col-lg-3">
-            <a  ><button class="btn btn-primary follow-btn" *ngIf="followers.follower.followerId._id != loggedinUserId && !followers.relation" (click)="follow(followers.follower.followerId._id)">Follow</button></a>
-            <a ><button class="btn unfollow-btn" *ngIf="followers.follower.followerId._id != loggedinUserId && followers.relation" (click)="unfollow(followers.follower.followerId._id)">Following</button></a>
-        </div> -->
+          <a [routerLink]="['/profile', user._id]" href="" class="text-design">{{user.name}} <small class="text-design">YO BUDDY</small></a></p>
         <hr>
       </div>
     </div>
