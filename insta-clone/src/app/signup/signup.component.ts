@@ -1,6 +1,6 @@
 import { LoginComponent } from './../login/login.component';
 import { SendHttpRequestService } from './../send-http-request.service';
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit ,OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 
 
@@ -28,7 +28,16 @@ export class SignupComponent implements AfterViewInit {
   ngAfterViewInit(){
 
   }
-
+  ngOnInit(){
+    let token=localStorage.getItem('token');
+    if(!token)
+    {
+      this._router.navigate(['/signup'])
+    }
+    else{
+      this._router.navigate(['/feed'])
+    }
+  }
   checkUniqueness(reference){
     let searchObj = {}
     let key = reference.name;
