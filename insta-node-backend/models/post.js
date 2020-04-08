@@ -17,8 +17,9 @@ class Post{
         return this.model.create(post);
     }
 
-    async log(criteria = {}, columns = {}){
-        return this.model.find(criteria ,columns)
+    async index(criteria = {}, columns = {}){
+        let fields = 'instaHandle';
+        return this.model.find(criteria ,columns).sort({ 'createdAt': -1 }).populate('user', fields);
     }
 
     async modify(criteria, patchObj){
