@@ -1,3 +1,4 @@
+import { AddFeedComponent } from './add-feed/add-feed.component';
 import { AuthGuard } from './auth.guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CreatePostComponent } from './create-post/create-post.component';
@@ -18,6 +19,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'profile/:id', component: ProfileDashboardComponent,canActivate:[AuthGuard]},
   { path: 'uploadPost', component: CreatePostComponent,canActivate:[AuthGuard]},
+  { path: 'post', component: AddFeedComponent},
+
 
   { path: "accounts/edit", component: EditProfileComponent, children:[
     {

@@ -17,6 +17,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditProfileDetailsComponent } from './edit-profile-details/edit-profile-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AuthGuard } from './auth.guard';
+import { AddFeedComponent } from './add-feed/add-feed.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AuthGuard } from './auth.guard';
     EditProfileComponent,
     EditProfileDetailsComponent,
     ChangePasswordComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    AddFeedComponent
   ],
   imports: [
     BrowserModule,
