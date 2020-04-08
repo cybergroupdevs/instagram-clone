@@ -1,6 +1,8 @@
-
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { CreatePostComponent } from './create-post/create-post.component';
+import { SuggestionForUComponent } from "./suggestion-for-u/suggestion-for-u.component";
+import { AuthGuard } from "./auth.guard";
+import { EditProfileComponent } from "./edit-profile/edit-profile.component";
+import { CreatePostComponent } from "./create-post/create-post.component";
+import { AddFeedComponent } from './add-feed/add-feed.component';
 //import { FileSelectDirective } from 'ng2-file-upload';
 import { FeedComponent } from './feed/feed.component';
 import { AppComponent } from './app.component';
@@ -13,31 +15,57 @@ import {ChangePasswordComponent} from './change-password/change-password.compone
 import { EditProfileDetailsComponent } from './edit-profile-details/edit-profile-details.component';
 import {ViewPostComponent} from './view-post/view-post.component'
 
-const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full'},
-  { path: 'feed', component: FeedComponent},
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'profile/:id', component: ProfileDashboardComponent},
-  { path: 'uploadPost', component: CreatePostComponent},
 
-  { path: "accounts/edit", component: EditProfileComponent, children:[
-    {
-      path: "", redirectTo: "editProfileDetails", pathMatch: "full"
-    },
-    {
-      path: "editProfileDetails", component:EditProfileDetailsComponent
-    },
-    {
-      path: "changePassword", component:ChangePasswordComponent 
-    }
-  ]},
-  {path:"post/id", component:ViewPostComponent}
-  ];
+const routes: Routes = [
+  { path: "", redirectTo: "login", pathMatch: "full" },
+  { path: "feed", component: FeedComponent, canActivate: [AuthGuard] },
+  { path: "login", component: LoginComponent },
+  { path: "signup", component: SignupComponent },
+  {
+    path: "profile/:id",
+    component: ProfileDashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "uploadPost",
+    component: CreatePostComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "suggests",
+    component: SuggestionForUComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'post', component: AddFeedComponent},
+  {
+    path: "accounts/edit",
+    component: EditProfileComponent,
+    children: [
+      {
+        path: "",
+        redirectTo: "editProfileDetails",
+        pathMatch: "full",
+        canActivate: [AuthGuard]
+      },
+      {
+        path: "editProfileDetails",
+        component: EditProfileDetailsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: "changePassword",
+        component: ChangePasswordComponent,
+        canActivate: [AuthGuard]
+      }
+    ]
+  },
+  {path:"post/id", component:ViewPostComponent,
+  canActivate: [AuthGuard]
+}
+];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule{ }
-
+export class AppRoutingModule {}

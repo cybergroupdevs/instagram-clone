@@ -5,9 +5,12 @@
             <div class="modal-header text-center" style="padding: 1.5rem;">
                 <p class="modal-title w-100"><b>Profile Picture</b></p>
             </div>
-            <div class="modal-header text-center cursor-pointer">
-                <label class="modal-title w-100 cursor-pointer" style="color:#3798F0"><input type='file'id="profileImageInput" onchange="readURL();" style="display: none;"/><b>Upload Photo</b></label>
-            </div>
+            <form class="modal-header text-center cursor-pointer" #form="ngForm" (ngSubmit)="onSubmit()">
+                <label class="modal-title w-100 cursor-pointer" name="imageUpload" style="color:#3798F0" for="profileImageInput">
+                </label>
+                <input type="file" name="imageUpload" id="photo" accept="image/*" ngModel #input="ngModel" (change)="selectImage($event)"  />
+                <button type="submit">Upload Photo</button>
+            </form>
             <div class="modal-header text-center cursor-pointer">
                 <p class="modal-title w-100 removePhoto"><b>Remove Current Photo</b></p>
             </div>
@@ -92,7 +95,7 @@
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-right">Email</label>
                     <div class="col-lg-8">
-                        <input class="form-control" ngModel type="email" #uemail name="email" value="{{email}}" required="required">
+                        <input name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" ngModel type="email" #uemail name="email" value="{{email}}" required="required">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -123,13 +126,17 @@
                         <label style="line-height: 0.8;" class="col-lg-11" for="recommendation">Include your account when recommending similar accounts people might want to follow.</label>
                     </div>
                 </div>
-                <div style="align-self: center;">
-                <small  class="warning" [style.display]="warning ? 'block' : 'none'">
+                <div >
+                <!-- <small style="text-align: center;" [style.display]="form.valid">
+                    Enter a valid email address.
+                </small> -->
+                <small style="text-align: center;" [style.display]="warning ? 'block' : 'none'">
+                
                     {{warningText}}
                 </small>
                 </div>
                 <div class="form-group row">
-                    <div class="col-lg-9 offset-lg-3">
+                    <div class="col-lg-9 offset-lg-3 outDiv">
                         <button class="btn btn-primary" [disabled]="form.pristine" (click)="update()">Submit</button>
                     </div>
                 </div>    

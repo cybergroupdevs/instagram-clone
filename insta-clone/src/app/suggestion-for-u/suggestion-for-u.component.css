@@ -1,0 +1,8 @@
+.head-design{
+    color: rgba(var(--f52,142,142,142),1);
+    font: 14px;
+}
+.text-design{
+    color: #262626 !important;
+    font: 12px;
+}

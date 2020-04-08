@@ -2,7 +2,7 @@
     <input type="file" name="image" ng2FileSelect [uploader] = "uploader">
     <button type="submit" (click)="uploader.uploadAll()" [disabled] = "!uploader.getNotUploadedItems().length">Upload</button> 
 </div> -->
-<div class="h-100">
+<!-- <div class="h-100">
     <div class="image-upload text-center">
         <label for="file-input">
           <img src="https://icon-library.net/images/upload-photo-icon/upload-photo-icon-21.jpg"/>
@@ -19,4 +19,18 @@
     <div class="form-group text-center ">
         <input class="btn btn-primary btn-block" type="submit" value="Post"/>
     </div>
-</div>
+</div> -->
+
+<div class="post-create">
+    <div class="post-create__primary">
+      <div class="post-create__primary--user_img"></div>
+      <!-- <div class="user_details">
+          <p class="user_details--username">username</p>
+          <p class="user_details--name">name</p>
+      </div> -->
+      <textarea class="post-create__primary--post_area" placeholder="Show to the world!" #postarea></textarea>
+    </div>
+    <div class="post-create__secondary">
+      <button class="post-create--btn_post" (click)="createPostHandler(postarea.value)">Post</button>
+    </div>
+  </div> 

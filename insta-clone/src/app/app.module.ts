@@ -18,6 +18,8 @@ import { EditProfileDetailsComponent } from './edit-profile-details/edit-profile
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ViewPostComponent } from './view-post/view-post.component';
+import { AuthGuard } from './auth.guard';
+import { AddFeedComponent } from './add-feed/add-feed.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { ViewPostComponent } from './view-post/view-post.component';
     EditProfileComponent,
     EditProfileDetailsComponent,
     ChangePasswordComponent,
-    ViewPostComponent
+    ViewPostComponent,
+    FileSelectDirective,
+    AddFeedComponent
   ],
   imports: [
     Ng2SearchPipeModule,
@@ -44,7 +48,7 @@ import { ViewPostComponent } from './view-post/view-post.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

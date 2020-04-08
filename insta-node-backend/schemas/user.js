@@ -9,11 +9,11 @@ module.exports = {
         required: true,
         unique: true
     },
-
     email: {
         type: String,
         default: null,
         unique:true
+        
     },
 
     password: {
@@ -57,7 +57,6 @@ module.exports = {
     },
     phone: {
         type: String,
-        default : null,
         max : 10,
         unique:true
     }

@@ -1,26 +1,15 @@
 <div class="col-md-3 mb-3 order-2 order-md-3">
-    <div class="card shadow mb-3">
-      <div class="card-body">
-        <h5>Suggestions for you</h5>
-        <p><img src="https://picsum.photos/200/200?random" class="rounded-circle float-left mr-2" width="40">
-          <a href="#">Lorem Ipsum <small class="text-muted">@LoremIpsum</small></a></p>
-        <hr>
-        <p><img src="https://picsum.photos/200/200?random" class="rounded-circle float-left mr-2" width="40">
-          <a href="#">Lorem Ipsum <small class="text-muted">@LoremIpsum</small></a></p>
-        <hr>
-        <p><img src="https://picsum.photos/200/200?random" class="rounded-circle float-left mr-2" width="40">
-          <a href="#">Lorem Ipsum <small class="text-muted">@LoremIpsum</small></a></p>
+  <div class="card shadow mb-3">
+    <div class="card-body">
+      <div style="clear: both">
+        <h5 class="head-design" style="float: left">Suggestions for you</h5>
+        <h5 class="text-design" style="float: right">See All</h5>
       </div>
-      <div class="card-footer">
-        <a href="#">Find more</a>
+      <hr />
+      <div *ngFor="
+          let user of usersArray">
+        <p><img src="https://picsum.photos/200/200?random" class="rounded-circle float-left mr-2" width="40">
+          <a [routerLink]="['/profile', user._id]" href="" class="text-design">{{user.name}} <small class="text-design">YO BUDDY</small></a></p>
+        <hr>
       </div>
     </div>
-    <div class="card shadow">
-      <div class="card-body">
-        &copy; 2018 Lorem Ipsum <a href="#">Dolor</a> <a href="#">Sit</a> <a href="#">Amet</a>
-      </div>
-      <div class="card-footer">
-        Languages <a href="#">English (UK)</a> <a href="#">English (US)</a> <a href="#">English (Aus)</a>
-      </div>
-    </div>
-  </div>
