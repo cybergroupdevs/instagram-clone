@@ -2,6 +2,7 @@ import { SuggestionForUComponent } from "./suggestion-for-u/suggestion-for-u.com
 import { AuthGuard } from "./auth.guard";
 import { EditProfileComponent } from "./edit-profile/edit-profile.component";
 import { CreatePostComponent } from "./create-post/create-post.component";
+import { AddFeedComponent } from './add-feed/add-feed.component';
 //import { FileSelectDirective } from 'ng2-file-upload';
 import { FeedComponent } from "./feed/feed.component";
 import { AppComponent } from "./app.component";
@@ -32,7 +33,7 @@ const routes: Routes = [
     component: SuggestionForUComponent,
     canActivate: [AuthGuard]
   },
-
+  { path: 'post', component: AddFeedComponent},
   {
     path: "accounts/edit",
     component: EditProfileComponent,

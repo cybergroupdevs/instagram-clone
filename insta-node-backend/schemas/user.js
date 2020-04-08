@@ -9,7 +9,6 @@ module.exports = {
         required: true,
         unique: true
     },
-
     email: {
         type: String,
         default: null,
