@@ -34,22 +34,23 @@
         </div>
       </div>
       <div class="row user-image-row">
-        <img src="{{allImages}}[2]" class="img-responsive" style="width: 100%; ">
+        <img src="{{allImages}}[3]" class="img-responsive" style="width: 100%; ">
       </div>
       <div class="row like-comment-row" style="padding-top:0.4rem;">
         <input type="checkbox" id="togglelike" class="visually-hidden">
         <label for="togglelike"  class="control"></label>
         <img src="../../assets/images/comment1.png" style="width:1.7rem; height:1.5rem; opacity: 0.75;">
       </div>
-      <div class="row" style="padding:0 2rem">
-        <span>Liked by</span><b>{{item.likesArray[0].likedBy.instaHandle}}</b><div >and {{item.count.likeCount}} others</div>
+      <div class="row" style="padding:0 2rem" *ngIf="item.count.likeCount>0">
+        <span>Liked by</span><b>{{item.likesArray[0].likedBy.instaHandle}}</b><div *ngIf="item.count.likeCount-1>0" >and {{item.count.likeCount-1}} others</div>
       </div>
       <div class="row" style="padding:0 2rem">
         <span></span><b>{{item.user.instaHandle}}</b><span>{{item.caption}}</span>
       </div>
-      <div>
-        <span class="viewComments">View all {{item.count.commentCount}} comments</span>
-        <span class="row"><b>{{item.commentsArray[0].commentedBy.instaHandle}}</b></span>
+      <div *ngIf="item.count.commentCount>0">
+        <span class="viewComments" *ngIf="item.count.commentCount>2">View all {{item.count.commentCount}} comments</span>
+        <span class="row" *ngIf="item.count.commentCount>0"><b>{{item.commentsArray[0].commentedBy.instaHandle}}</b></span>
+        <span class="row" *ngIf="item.count.commentCount>1"><b>{{item.commentsArray[1].commentedBy.instaHandle}}</b></span>
       </div>
       <div class="row add-comment-section">
         <input type="text" style="height: 4rem; width:100%; border: 1px solid #EFEFEF; border-bottom: none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" placeholder="  Add a comment...">

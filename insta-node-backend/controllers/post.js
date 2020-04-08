@@ -118,9 +118,9 @@ class Post {
         const followingId = following.followingId._id
         let followingPosts = await model.post.index({user:followingId})
         feed = feed.concat(followingPosts)
-
       })
     );
+    
     let feedFinal = feed.sort((a, b) => b.createdAt - a.createdAt)
 
     feedFinal = await Promise.all(
