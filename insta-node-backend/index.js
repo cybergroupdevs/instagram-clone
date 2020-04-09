@@ -6,8 +6,6 @@ const app = express();
 
 app.use(cors({ origin: "*" }));
 
-app.use(express.static('uploads/shivani_'));
-
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));

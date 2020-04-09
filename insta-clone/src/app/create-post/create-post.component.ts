@@ -51,5 +51,20 @@ export class CreatePostComponent implements OnInit {
     }); 
   }
 
+  styleCaption(caption: string){
+    console.log(caption);
+    let substrings: Array<string> = caption.split(/\s([@,#][\w_-]+)/g);
+    
+    substrings.forEach((substring: string, index: number) => {
+      if(substring[0] === '@' || substring[0] === '#'){
+        substrings[index] = `<p class="highlight">${substring}</p>`;
+      }
+    }); 
 
+    console.log(substrings.join(""));
+    
+    this.caption = substrings.join('');
+  }
+
+  caption: string;
 }

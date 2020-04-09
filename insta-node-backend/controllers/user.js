@@ -112,7 +112,7 @@ class user {
       }
 
       if (userObj[0] != null) {
-        res.status(200).send({ user: userObj['0'], bufferedImage: fs.readFileSync(userObj[0].image) });
+        res.status(200).send({ user: userObj['0'], bufferedImage: userObj[0].image? fs.readFileSync(userObj[0].image): null });
       } else {
         res.status(404).send({
           message: "not a user"
