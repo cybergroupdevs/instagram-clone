@@ -68,3 +68,8 @@
 .removePhoto{
     color: red;
 }
+
+.modal-body-size-fix{
+    height: 75vh;
+    overflow-y: scroll;
+}

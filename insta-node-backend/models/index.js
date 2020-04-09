@@ -5,7 +5,6 @@ const comment = require("./comment");
 const reply = require("./reply");
 const follower=require('./follower');
 const following=require('./following');
-
 module.exports = {
     user: user,
     post:post,

@@ -16,7 +16,10 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditProfileDetailsComponent } from './edit-profile-details/edit-profile-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ViewPostComponent } from './view-post/view-post.component';
 import { AuthGuard } from './auth.guard';
+import { AddFeedComponent } from './add-feed/add-feed.component';
 
 
 @NgModule({
@@ -34,9 +37,12 @@ import { AuthGuard } from './auth.guard';
     EditProfileComponent,
     EditProfileDetailsComponent,
     ChangePasswordComponent,
-    FileSelectDirective
+    ViewPostComponent,
+    FileSelectDirective,
+    AddFeedComponent
   ],
   imports: [
+    Ng2SearchPipeModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

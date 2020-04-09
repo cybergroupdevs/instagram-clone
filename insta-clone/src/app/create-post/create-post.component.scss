@@ -104,6 +104,22 @@ a{
         align-items: center;
     }
 
+    label{
+        margin: 0;
+    }
+    label &--image_upload{
+        margin-right: 1.2rem;
+        cursor: pointer;
+        i{
+            transition: all .2s;
+            color: #1A91DA;
+            
+            &:hover{
+                color: #38a1f3;
+            }
+        }
+    }
+
     &--btn_post{
         height: 3rem;
         width: 5rem;
@@ -122,4 +138,12 @@ a{
             transition: all .2s;
         }
     }
+}
+
+.custom-file-input{
+    display: none;
+}
+
+.highlight{
+    color: #38a1f3;
 }

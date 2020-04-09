@@ -10,6 +10,11 @@ module.exports = {
         unique: true
     },
 
+    image: {
+        type: String,
+        default: null
+    },
+
     email: {
         type: String,
         default: null,
@@ -58,8 +63,9 @@ module.exports = {
     },
     phone: {
         type: String,
-        max : 10,
-        unique:true
+        max : 15,
+        required: false,
+        unique: true
     }
 }
 

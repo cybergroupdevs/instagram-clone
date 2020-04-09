@@ -5,6 +5,7 @@ var cors = require("cors");
 const app = express();
 
 app.use(cors({ origin: "*" }));
+
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));

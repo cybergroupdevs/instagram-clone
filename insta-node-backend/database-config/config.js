@@ -1,5 +1,7 @@
-const mongoose = require("mongoose");
-const url = "mongodb://localhost:127.0.0.1:27017/instaDB";
+//mongoose is a wrapper of mongodb
+const mongoose = require('mongoose');
+const url = "mongodb://localhost:27017/instaDB"
+
 
 mongoose.Promise = global.Promise;
 

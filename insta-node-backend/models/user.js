@@ -8,7 +8,7 @@ class Operations{
         this.model = mongoose.model('User', userSchema);
     }
 
-    async get(criteria={}, columns={}){  // Change its name to log if possible! ---Himanshu Sharma
+    async get(criteria={}, columns={}){
         return this.model.find(criteria, columns).select("-password");
     }
 
@@ -21,7 +21,7 @@ class Operations{
     }
 
     async update(criteria ={}, updateObj){
-        return this.model.update(criteria, updateObj);
+        return this.model.updateOne(criteria, updateObj);
     }
 
     async checkPassword(criteria={}, enteredPassword){

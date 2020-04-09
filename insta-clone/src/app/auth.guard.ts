@@ -1,6 +1,6 @@
-import { jsonDecoder } from 'src/app/utils/jso.util';
+import { jsonDecoder } from 'src/app/utils/jsonDecoder';
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot,Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot,Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -16,12 +16,13 @@ export class AuthGuard implements CanActivate {
    // decode the token to get its payload
      const now = Date.now().valueOf() / 1000
          if(token!=null && now<=jsonDecoder().exp )
-         {
+         { 
              return true
-        //     if(jsonDecoder().role==expectedRole || (expectedRole1 && jsonDecoder().role==expectedRole1))
-        //      return true
-        //     else
-        //   this.router.navigate(['/404']);
+          }
+          else if(now>=jsonDecoder().exp)
+          {
+            localStorage.removeItem("token");
+            this.router.navigate(['/login']);
           }
           else{
           this.router.navigate(['/login']);
