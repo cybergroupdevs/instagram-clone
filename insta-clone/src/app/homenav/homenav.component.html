@@ -7,16 +7,16 @@
       </div>
      
      <div class="searchContainer boxes" [ngClass]="{'hover': true}"> 
-        <input #searchBox (input)="search(searchBox.value)" (blur)="onBlur()" id="searchBox" type="search" placeholder="Search" value=""/>
+        <input #searchBox (input)="search(searchBox.value)" (blur)="onBlur()" [(ngModel)]="valuee" id="searchBox" type="search" placeholder="Search" value=""/>
         <ul class="search-result " *ngIf="searchBox.value.length > 0 && isVisible">
-            <li *ngFor="let user of users$ | async" >
+            <li *ngFor="let user of users$ | filter: searchBox.value">
               <a [routerLink]="['/profile', user._id]" (click)="searchUser(user._id)">
                 {{user.instaHandle || user._id}}
               </a>
               <p >{{user.name}}</p>
+              
             </li>
         </ul> 
-       
     </div>
     <div id="activity">
       <input type="checkbox" id="homeToggle"  class="visually-hidden">

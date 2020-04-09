@@ -25,18 +25,11 @@ class employee {
         res.status(200).send({
           userObject,
         });
-      } else {
-        let message =
-          "Sorry, something went wrong creating your account. Please try again soon.";
-        res.status(406).send({
-          success: false,
-          message: message,
-        });
       }
     } catch (error) {
       console.log(error);
       let message =
-        "Sorry, something went wrong creating your account. Please try again soon.";
+        error.message;
 
       res.status(406).send({
         success: false,
