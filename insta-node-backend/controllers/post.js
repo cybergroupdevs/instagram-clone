@@ -111,6 +111,14 @@ class Post {
 
     if (req.query.type === "like") {
       if (req.query.operation === "inc") {
+        if (await model.like.get({ post: req.params.postId, likedBy: req.user.data._id }))
+          return res.status(400).send({
+            success: false,
+            payload: {
+              message: 'Already Liked'
+            }
+          });
+
         await model.post.modify(
           { _id: req.params.postId },
           { "count.likeCount": ++post.count.likeCount }
@@ -118,11 +126,19 @@ class Post {
 
         await model.like.save({
           post: req.params.postId,
-          likedBy: req.body.user,
+          likedBy: req.user.data._id,
         });
       }
 
       if (req.query.operation === "dec") {
+        if (!await model.like.get({ post: req.params.postId, likedBy: req.user.data._id }))
+          return res.status(400).send({
+            success: false,
+            payload: {
+              message: 'Attempt of unnecessary dislike'
+            }
+          });
+
         await model.post.modify(
           { _id: req.params.postId },
           { "count.likeCount": --post.count.likeCount }
@@ -144,34 +160,35 @@ class Post {
 
         await model.comment.save({
           post: req.params.postId,
-          commentedBy: req.body.user,
+          commentedBy: req.user.data._id,
           content: req.body.content,
         });
       }
 
       if (req.query.operation === "dec") {
-        await model.post.modify(
-          { _id: req.params.postId },
-          { "count.commentCount": --post.count.commentCount }
-        );
-
-        await model.like.deleteOne({
-          post: req.params.postId,
-          commentedBy: req.body.user,
-        });
+        if(await model.comment.get({ _id: req.body.commentId })){
+          await model.post.modify(
+            { _id: req.params.postId },
+            { "count.commentCount": --post.count.commentCount }
+          );
+  
+          await model.comment.deleteOne({
+            _id: req.body.commentId
+          });
+        }
       }
     }
 
     if (req.query.type === "reply") {
       if (req.query.operation === "inc") {
         await model.reply.create({
-          comment: req.query.comment,
-          repliedBy: req.query.repliedBy,
-          content: req.query.content,
+          comment: req.body.commentId,
+          repliedBy: req.user.data._id,
+          content: req.body.content,
         });
       }
       if (req.query.operation === "dec") {
-        await model.reply.deleteOne({ _id: req.query.reply });
+        await model.reply.deleteOne({ _id: req.body.replyId });
       }
     }
 
