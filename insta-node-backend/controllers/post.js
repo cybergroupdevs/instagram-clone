@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
       if (!exist) return fs.mkdir(dir, (error) => cb(error, dir));
 
       return cb(null, dir);
-    });
+    });  
   },
 
   filename: (req, file, cb) => {

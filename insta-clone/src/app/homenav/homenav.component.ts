@@ -10,7 +10,7 @@ import {
    debounceTime, distinctUntilChanged, switchMap
  } from 'rxjs/operators';
 
-import { jsonDecoder } from 'src/app/utils/jsonDecoder';
+import { jsonDecoder } from '.././utils/jsonDecoder';
 
 
 @Component({
@@ -23,6 +23,8 @@ export class HomenavComponent  implements OnInit {
   private searchTerms = new Subject<string>();
 
   isVisible:boolean = false;
+  valuee:string="";
+  
   constructor(private sendReq: SendHttpRequestService, private _router:Router, 
     private profileDashboard: ProfileDashboardComponent,
     private FeedComponent: FeedComponent
@@ -38,7 +40,7 @@ export class HomenavComponent  implements OnInit {
 
   ngOnInit(){
     // document.addEventListener('click',this.func);
-    this.users$ = this.searchTerms.pipe(
+    this.searchTerms.pipe(
       
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
@@ -48,8 +50,11 @@ export class HomenavComponent  implements OnInit {
 
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.sendReq.searchUsers(term)
-    ));
-    console.log(this.users$, "usersssssssssss")
+    )).subscribe(res => {
+      console.log(res, 'response inseide searchTerms pipe call');
+      this.users$ = res;  
+    });
+    // console.log(this.users$, "usersssssssssss")
     
   }
 
@@ -93,8 +98,10 @@ func(event){
 onBlur(){
   setTimeout(() =>{
     this.isVisible=false;
+    this.valuee="";
   },1000)
   
 }
+
 
 }
