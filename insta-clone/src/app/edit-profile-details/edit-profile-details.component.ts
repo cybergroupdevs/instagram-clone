@@ -102,8 +102,8 @@ export class EditProfileDetailsComponent implements OnInit {
     console.log("loadingggggg");
     this.sendReq.userInfo(id, null).subscribe(res => {
       if (res.status == 200) {
-        console.log(res.body[0]);
-        this.usersData = res.body[0];
+        console.log(res.body.user);
+        this.usersData = res.body.user;
         this.setUserData();
       } else if (res.status == 401) {
         localStorage.removeItem("token");

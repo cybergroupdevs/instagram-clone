@@ -7,18 +7,20 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     console.log(file, "file inside destination");
     console.log(req.user.data.instaHandle, "instaHandle");
+    let dir = `./uploads/${req.user.data.instaHandle}`;
+    console.log(dir, 'before fs.exists');
 
-    console.log(path.dirname, 'path');
-    let dir = path+`/uploads/${req.user.data.instaHandle}`;
-    fs.exists(dir.toString(), (exist) => {
-      if (!exist) fs.mkdir(dir, (error) => cb(error, dir));
-      dir = dir + '/posts';
-      console.log('reached here');
+    if(!fs.existsSync(dir)){
+      fs.mkdirSync(dir);
+    };
+    dir = `./uploads/${req.user.data.instaHandle}/posts`;
 
+    fs.exists(dir, (exist) => {
+      console.log(dir, 'Inside second fs.exists');
       if (!exist) return fs.mkdir(dir, (error) => cb(error, dir));
-      console.log('reached here');
+
       return cb(null, dir);
-    });
+    });  
   },
 
   filename: (req, file, cb) => {

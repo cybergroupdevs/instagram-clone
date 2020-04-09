@@ -50,7 +50,7 @@ export class ProfileDashboardComponent implements OnInit {
       if(res.status == 200){
         console.log(res.body, 'this.usersArray');
         this.usersArray = res.body.user;
-        this.image = BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer);
+        this.image = res.body.bufferedImage ? BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer): null;
         this.setUserData();
       }
       else if(res.status == 401){
