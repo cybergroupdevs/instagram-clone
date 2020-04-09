@@ -1,4 +1,4 @@
-import { jsonDecoder } from 'src/app/utils/jso.util';
+import { jsonDecoder } from 'src/app/utils/jsonDecoder';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot,Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';

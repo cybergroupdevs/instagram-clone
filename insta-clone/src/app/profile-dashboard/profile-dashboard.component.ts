@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SendHttpRequestService } from '../send-http-request.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { BufferToImage } from '../utils/bufferToImage';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ import { Injectable } from '@angular/core';
 })
 export class ProfileDashboardComponent implements OnInit {
 
-  constructor(private sendReq: SendHttpRequestService, private _router:Router) { }
+  constructor(private sendReq: SendHttpRequestService, private _router:Router, private domSanitizer: DomSanitizer) { }
 
   name:string;
   username:string;
@@ -46,8 +48,9 @@ export class ProfileDashboardComponent implements OnInit {
   loadUserData(id:string=null, instaHandle:string=null){
     this.sendReq.userInfo(id,instaHandle).subscribe(res => {
       if(res.status == 200){
-        console.log(res.body[0]);
-        this.usersArray = res.body[0];
+        console.log(res.body, 'this.usersArray');
+        this.usersArray = res.body.user;
+        this.image = BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer);
         this.setUserData();
       }
       else if(res.status == 401){
@@ -57,6 +60,7 @@ export class ProfileDashboardComponent implements OnInit {
     });
   }
 
+  image: any;
   setUserData(){
     this.name = this.usersArray.name;
     this.username = this.usersArray.instaHandle;
@@ -64,6 +68,8 @@ export class ProfileDashboardComponent implements OnInit {
     this.following = this.usersArray.following;
     this.posts = this.usersArray.postsCount;
     this.bio = this.usersArray.about;
+    console.log(this.image);
+
     let current_route = this._router.url.split("/");
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     if (current_route[2] == loggedinUserId){

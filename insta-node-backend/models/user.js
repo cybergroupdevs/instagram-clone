@@ -21,7 +21,7 @@ class Operations{
     }
 
     async update(criteria ={}, updateObj){
-        return this.model.update(criteria, updateObj);
+        return this.model.updateOne(criteria, updateObj);
     }
 
     async checkPassword(criteria={}, enteredPassword){

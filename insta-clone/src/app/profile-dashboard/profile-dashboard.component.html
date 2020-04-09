@@ -42,22 +42,25 @@
           </div>
     
           <!-- Modal body -->
-          <div class="modal-body" *ngFor="let following of followingArray">
-            <div class="row">
-                <div class="col-lg-2">
-                    <img src="../../assets/ss.png" class="rounded-circle following-img" alt="">
-                </div>
-                <div class="col-lg-7">
-                  <div class="following-username"><a [routerLink]="['../',following.following.followingId._id]" (click)="loadUserData(null, following.following.followingId.instaHandle)" data-dismiss="modal"><b>{{following.following.followingId.instaHandle}}</b></a></div>
-                  <div class="following-name">{{following.following.followingId.name}}</div>
-                </div>
-                <div class="col-lg-3">
-                    <a ><button class="btn btn-primary follow-btn" *ngIf="following.following.followingId._id != loggedinUserId && !following.relation" (click)="follow(following.following.followingId._id)">Follow</button></a>
-                    <a ><button class="btn unfollow-btn" *ngIf="following.following.followingId._id != loggedinUserId && following.relation" (click)="unfollow(following.following.followingId._id)">Following</button></a>
-                </div>
-              </div> 
-          </div>
+          
+          <div class="modal-body-size-fix">
+              <div class="modal-body" *ngFor="let following of followingArray">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <img src="../../assets/ss.png" class="rounded-circle following-img" alt="">
+                    </div>
+                    <div class="col-lg-7">
+                      <div class="following-username"><a [routerLink]="['../',following.following.followingId._id]" (click)="loadUserData(null, following.following.followingId.instaHandle)" data-dismiss="modal"><b>{{following.following.followingId.instaHandle}}</b></a></div>
+                      <div class="following-name">{{following.following.followingId.name}}</div>
+                    </div>
+                    <div class="col-lg-3">
+                        <a ><button class="btn btn-primary follow-btn" *ngIf="following.following.followingId._id != loggedinUserId && !following.relation" (click)="follow(following.following.followingId._id)">Follow</button></a>
+                        <a ><button class="btn unfollow-btn" *ngIf="following.following.followingId._id != loggedinUserId && following.relation" (click)="unfollow(following.following.followingId._id)">Following</button></a>
+                    </div>
+                  </div> 
+              </div>
       
+          </div>    
         </div>
       </div>
   </div>
@@ -128,7 +131,7 @@
 <div class="container">
     <div class="row ml-4 mr-1">
         <div class="col-lg-3 offset-lg-1 mt-4 profile-image-div">
-            <img src="../../assets/ss.png" alt="Profile Image" class="rounded-circle profile-img" data-toggle="modal" data-target="#uploadPicModal">
+            <img [src]="image" alt="Profile Image" class="rounded-circle profile-img" data-toggle="modal" data-target="#uploadPicModal">
         </div>
         <div class="col-lg-8 mt-4 profile-details">
             <div class="row edit-profile-div">
