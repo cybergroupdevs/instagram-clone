@@ -18,9 +18,10 @@ import {ViewPostComponent} from './view-post/view-post.component'
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
-  { path: "feed", component: FeedComponent, canActivate: [AuthGuard] },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
+  { path: "feed", component: FeedComponent, canActivate: [AuthGuard] },
+  
   {
     path: "profile/:id",
     component: ProfileDashboardComponent,
