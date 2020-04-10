@@ -57,8 +57,11 @@ export class CreatePostComponent implements OnInit {
     let substrings: Array<string> = caption.split(/([@,#][\w_-]+)/g);
     
     substrings.forEach((substring: string, index: number) => {
-      if(substring[0] === '@' || substring[0] === '#'){
-        substrings[index] = `<span class="highlight">${substring}</span>`;
+      if(substring[0] === '@'){
+        substrings[index] = `<a class="highlight" href="/profile/${substring.slice(1)}">${substring}</a>`;
+      }
+      if(substring[0] === '#'){
+        substrings[index] = `<a class="highlight">${substring}</a>`;
       }
     }); 
 
