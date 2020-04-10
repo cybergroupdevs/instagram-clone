@@ -269,19 +269,19 @@ class Post {
 
   }
 
-  async getPosts(){
-    const loggedInUserId = req.user.data._id
-    let posts = await model.post.index({user:loggedInUserId}) 
+  async userPosts(req, res){
+    const { _id } = (await model.user.getOne({ instaHandle: req.query.instaHandle })) || {};
+    const posts = await model.post.index({ user: _id });
 
-    res.send({
+    return res.send({
       success: true,
       payload: {
-          data : {
-            posts
-          },
-          message: "posts returned"
+        data: {
+          posts
+        },
+        message: 'Posts for profile retrieved successfully'
       }
-    });  
+    })
   }
 
 }
