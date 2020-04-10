@@ -1,7 +1,7 @@
 const controller = require("../controllers");
 const authenticator = require("../middlewares/authentication");
 
-module.exports = app => {
+module.exports = (app) => {
   app.post("/login", controller.loginSignup.checkUserAuthentication);
   app.post("/signup", controller.loginSignup.createUser);
   app.get("/users", controller.user.showAll);
@@ -20,14 +20,16 @@ module.exports = app => {
 
   app.post("/api/post", authenticator, controller.post.create);
   app.get("/feed", authenticator, controller.post.getFeed);
-  app.get("/posts", authenticator, controller.post.getPosts);
-  app.get("/likes/:id", authenticator, controller.likes.getLikes);  
+  app.get("/likes/:id", authenticator, controller.likes.getLikes);
 
   app.patch(
     "/api/operation/:postId",
     authenticator,
     controller.post.operations
   );
+
+  app.get("/api/post", authenticator, controller.post.userPosts);
+
   //for suggestion
   app.get("/suggestions", controller.user.index);
 
