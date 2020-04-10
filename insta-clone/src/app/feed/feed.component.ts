@@ -122,4 +122,9 @@ export class FeedComponent implements OnInit {
     })
   }
 
+  reloadPosts(){
+    console.log('inside reloadPosts');
+    this.loadPosts();
+  }
+
 }

@@ -1,6 +1,6 @@
 import { FileUploader } from 'ng2-file-upload';
 import { FileSelectDirective } from 'ng2-file-upload';
-import { Component, OnInit, NgModule, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, NgModule, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { ObjectUnsubscribedError } from 'rxjs';
 import findHashtags from '../utils/findHashTags';
 import findMentions from '../utils/findMentions';
@@ -22,6 +22,10 @@ interface IPostContent{
 
 export class CreatePostComponent implements OnInit {
   imageFile: File;
+  caption: string;
+
+  @Output()
+  reloadPost: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private postService: PostService) { }
 
@@ -49,6 +53,9 @@ export class CreatePostComponent implements OnInit {
 
     this.postService.createPost(formData).subscribe((res: IResponse) => {
       console.log(res, 'response after subscribing');
+      this.reloadPost.emit();
+      this.caption = null;
+      this.imageFile = null;
     }); 
   }
 
@@ -69,6 +76,4 @@ export class CreatePostComponent implements OnInit {
     
     this.caption = substrings.join('');
   }
-
-  caption: string;
 }
