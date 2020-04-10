@@ -5,17 +5,17 @@ class unfollow{
 
     }
     async updateUnfollow(req,res){
-        
+        let user = await  model.user.getOne({instaHandle:req.query.ownerId})
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
             let followObj={
-                ownerId:req.query.ownerId,
+                ownerId:user._id,
                 followerId:req.query.unfollowerId,
             }
 
             let followingObj={
                 ownerId:req.query.unfollowerId,
-                followingId:req.query.ownerId
+                followingId:user._id
             }
 
             const relation = await model.follower.getRelation(followObj);

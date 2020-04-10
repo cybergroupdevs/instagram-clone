@@ -1,3 +1,4 @@
+//import { ModalComponent } from './modal/modal.component';
 import { SuggestionForUComponent } from "./suggestion-for-u/suggestion-for-u.component";
 import { AuthGuard } from "./auth.guard";
 import { EditProfileComponent } from "./edit-profile/edit-profile.component";
@@ -20,7 +21,16 @@ const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
-  { path: "feed", component: FeedComponent, canActivate: [AuthGuard] },
+  { path: "feed", component: FeedComponent, canActivate: [AuthGuard] ,
+
+    // children:[
+    //   {
+    //     path: "likes",
+    //     component: ModalComponent,
+    //     canActivate: [AuthGuard]
+    //   }
+    // ]
+  },
   
   {
     path: "profile/:id",
@@ -61,8 +71,16 @@ const routes: Routes = [
     ]
   },
   {path:"post/id", component:ViewPostComponent,
-  canActivate: [AuthGuard]
-}
+  
+  // children:[
+  //   {
+  //     path: "likes",
+  //     component: ModalComponent,
+  //     canActivate: [AuthGuard]
+  //   }
+  // ]
+
+  }
 ];
 
 @NgModule({

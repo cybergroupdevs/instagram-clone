@@ -7,17 +7,17 @@ class follow{
     
     async updateFollow(req, res){
         const token = jwtHandler.tokenVerifier(req.headers.token);
-        
+        let user = await model.user.getOne({instaHandle:req.query.ownerId})
         if(token){
             
             let followObj={
-                ownerId:req.query.ownerId,
+                ownerId:user._id,
                 followerId:req.query.followerId,
             }
 
             let followingObj={
                 ownerId:req.query.followerId,
-                followingId:req.query.ownerId
+                followingId:user._id
             }
 
             const relation = await model.follower.getRelation(followObj);
@@ -61,8 +61,9 @@ class follow{
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
             
-            let searchId = req.params.id;
-            let allFollowers = await model.follower.getAll({"ownerId":searchId});
+            let user = await model.user.getOne({instaHandle:req.params.id})
+            console.log(user, "user")
+            let allFollowers = await model.follower.getAll({"ownerId":user._id});
             
             allFollowers = await Promise.all( allFollowers.map(async(follower) => {
                 const relation = await model.follower.getRelation({ ownerId: follower.followerId._id, followerId: token.data._id })
@@ -93,8 +94,8 @@ class follow{
     async getFollowing(req, res){
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
-            let searchId = req.params.id;
-            let allFollowing = await model.following.getAll({"ownerId":searchId});
+            let user = await model.user.getOne({instaHandle:req.params.id})
+            let allFollowing = await model.following.getAll({"ownerId":user._id});
 
             allFollowing = await Promise.all( allFollowing.map(async(following) => {
                 const relation = await model.follower.getRelation({ ownerId: following.followingId._id, followerId: token.data._id })
@@ -124,7 +125,9 @@ class follow{
     async followRelation(req,res){
         const token=jwtHandler.tokenVerifier(req.headers.token);
         if(token){
-            let searchObj = req.query;
+            
+            let user = await model.user.getOne({instaHandle:req.query.ownerId})
+            let searchObj = {ownerId : user._id, followerId:req.query.followerId}
             const relation = await model.follower.getRelation(searchObj);
             if (relation != null){
                 

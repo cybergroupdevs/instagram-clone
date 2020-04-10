@@ -1,6 +1,8 @@
 import { FileUploader } from 'ng2-file-upload';
 import { FileSelectDirective } from 'ng2-file-upload';
-import { Component, OnInit, NgModule, Input } from '@angular/core';
+
+import { Component, OnInit, NgModule, ViewEncapsulation } from '@angular/core';
+
 import { ObjectUnsubscribedError } from 'rxjs';
 import findHashtags from '../utils/findHashTags';
 import findMentions from '../utils/findMentions';
@@ -17,7 +19,8 @@ interface IPostContent{
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
-  styleUrls: ['./create-post.component.scss']
+  styleUrls: ['./create-post.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CreatePostComponent implements OnInit {
   imageFile: File;
@@ -60,11 +63,14 @@ export class CreatePostComponent implements OnInit {
 
   styleCaption(caption: string){
     console.log(caption);
-    let substrings: Array<string> = caption.split(/\s([@,#][\w_-]+)/g);
+    let substrings: Array<string> = caption.split(/([@,#][\w_-]+)/g);
     
     substrings.forEach((substring: string, index: number) => {
-      if(substring[0] === '@' || substring[0] === '#'){
-        substrings[index] = `<p class="highlight">${substring}</p>`;
+      if(substring[0] === '@'){
+        substrings[index] = `<a class="highlight" href="/profile/${substring.slice(1)}">${substring}</a>`;
+      }
+      if(substring[0] === '#'){
+        substrings[index] = `<a class="highlight">${substring}</a>`;
       }
     }); 
 

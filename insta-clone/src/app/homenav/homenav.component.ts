@@ -63,15 +63,16 @@ export class HomenavComponent  implements OnInit {
   }
 
   myProfile(){
-    console.log("inside my profile func---->>>>")  
+    
+    let instaHandle = jsonDecoder().data.instaHandle;
     let loggedinUserId = jsonDecoder().data._id;
-    this._router.navigate(["/profile", loggedinUserId]);
+    this._router.navigate(["/profile", instaHandle]);
     this.profileDashboard.loadUserData(loggedinUserId,null);
   }
 
-  searchUser(loggedinUserId:string){
-    this.profileDashboard.loadUserData(loggedinUserId, null)
-    console.log(loggedinUserId);
+  searchUser(userId:string){
+    this.profileDashboard.loadUserData(userId, null)
+    console.log(userId);
   }
   
   // close(){
