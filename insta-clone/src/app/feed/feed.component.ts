@@ -1,3 +1,4 @@
+import { LikeService } from './../services/like.service';
 import { PostService } from "./../services/post.service";
 
 import { SendHttpRequestService } from "./../send-http-request.service";
@@ -9,6 +10,8 @@ import {
   Injectable,
 } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
+
+
 
 @Injectable({
   providedIn: "root",
@@ -22,7 +25,8 @@ export class FeedComponent implements OnInit {
   constructor(
     private sendReq: SendHttpRequestService,
     private PostService: PostService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private LikeService:LikeService
   ) {}
   @ViewChild("modal", { static: false }) modal: ElementRef;
   @ViewChild("caption", { static: false }) caption: ElementRef;
@@ -38,6 +42,8 @@ export class FeedComponent implements OnInit {
   
   res: any;
   feed: any;
+  liked : boolean = false
+  operation : string = "inc"
 
   addcomment(text: string) {
     let commentObj = {
@@ -86,5 +92,24 @@ export class FeedComponent implements OnInit {
       }
       return null;
     });
+
   }
+
+  like(postId){
+    console.log("here")
+    if (this.liked==false){
+      this.operation = "inc"
+      this.liked = true;
+    }
+    else{
+        this.operation = "dec";
+        this.liked = false;
+    }
+
+    this.LikeService.like(postId, this.operation).subscribe(res=>{
+          let message = res.payload.message
+          console.log(message, "message")
+    })
+  }
+
 }

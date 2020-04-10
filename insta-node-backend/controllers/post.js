@@ -46,8 +46,23 @@ const upload = multer({
 class Post {
   constructor() {}
 
-  async create(req, res) {
-    console.log(req.file);
+  async create(req, res){
+    console.log(req.body);
+    const { mentions, tags, caption } = req.body;
+
+    let mentionsWithId = [];
+    mentions &&
+    (await Promise.all(
+      mentions.map(async mention => {
+        mention = mention.replace('@', '');
+        let id = await (model.user.getOne({ instaHandle: mention }))._id;
+        if(!id) return;
+        mentionsWithId = [ ...mentionsWithId, id ];
+      })
+    )
+    )
+
+    let postBody = { mentions: mentionsWithId, caption, tags, user: req.user.data._id, createdAt: Date.now() };
 
     upload(req, res, async (error) => {
       if (error) {
@@ -107,6 +122,7 @@ class Post {
   }
 
   async operations(req, res) {
+    console.log("inside api")
     const post = await model.post.findById(req.params.postId);
 
     if (req.query.type === "like") {
@@ -213,22 +229,29 @@ class Post {
         feed = feed.concat(followingPosts)
       })
     );
-    
-    let feedFinal = feed.sort((a, b) => b.createdAt - a.createdAt)
 
+    let feedFinal = feed.sort((a, b) => {
+      if (new Date(b.createdAt) < new Date(a.createdAt)) return -1;
+      if (new Date(b.createdAt) > new Date(a.createdAt)) return 1;
+      return 0;
+    });
+
+    //let feedFinal = feed
     feedFinal = await Promise.all(
       feedFinal.map(async (item) => {
         const postId = item._id
         
         let likesArray = await model.like.log({post : postId})
+        console.log(likesArray, "lkesArray")
         let commentsArray = await model.comment.log({ post : postId })
 
         let returnObj = { ...item.toObject(), likesArray, commentsArray };
         if(!item.image){
           return returnObj;
         }
-        console.log(fs.readFileSync(item.image), 'IMAGE AFTER READ FILE');
-        console.log(fs.createReadStream(item.image));
+        // console.log(fs.readFileSync(item.image), 'IMAGE AFTER READ FILE');
+        // console.log(fs.createReadStream(item.image), "image");
+        
         return { ...returnObj, image: fs.readFileSync(item.image) }
       })
     );
@@ -244,6 +267,21 @@ class Post {
       }
     });
 
+  }
+
+  async getPosts(){
+    const loggedInUserId = req.user.data._id
+    let posts = await model.post.index({user:loggedInUserId}) 
+
+    res.send({
+      success: true,
+      payload: {
+          data : {
+            posts
+          },
+          message: "posts returned"
+      }
+    });  
   }
 
 }

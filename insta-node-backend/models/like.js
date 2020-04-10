@@ -13,7 +13,7 @@ class Like{
     }
 
     async log(criteria = {}, columns={}){
-        let fields = 'instaHandle';
+        let fields = 'name instaHandle';
         return this.model.find(criteria, columns).sort({ 'createdAt': -1 }).populate('likedBy', fields);
     }
 

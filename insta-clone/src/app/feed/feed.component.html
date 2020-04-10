@@ -37,14 +37,14 @@
         <img [src]="postImages[i]" class="img-responsive" style="width: 100%; ">
       </div>
       <div class="row like-comment-row" style="padding-top:0.4rem;">
-        <input type="checkbox" id="togglelike" class="visually-hidden">
-        <label for="togglelike"  class="control"></label>
+        <input type="checkbox"  id="togglelike" class="visually-hidden">
+        <label for="togglelike" (click)="like(item._id)"  class="control"></label>
         <img src="../../assets/images/comment1.png" style="width:1.7rem; height:1.5rem; opacity: 0.75;">
       </div>
-      <div class="row" style="padding:0 2rem" *ngIf="item.count.likeCount>0">
-        <span>Liked by</span><b>{{item.likesArray[0].likedBy.instaHandle}}</b><div *ngIf="item.count.likeCount-1>0" >and {{item.count.likeCount-1}} others</div>
+      <div class="row" style="padding:0 2rem" >
+        <span *ngIf="item.count.likeCount != 0">Liked by<b>{{item.likesArray[0].likedBy.instaHandle}}</b></span><div *ngIf="item.count.likeCount-1>0" >and {{item.count.likeCount-1}} others</div>
       </div>
-      <div class="row" style="padding:0 2rem">
+      <div class="row" style="padding:0 2rem ">
         <span></span><b>{{item.user.instaHandle}}</b><span>{{item.caption}}</span>
       </div>
       <div *ngIf="item.count.commentCount>0">
