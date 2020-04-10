@@ -5,6 +5,9 @@
     border: 3px solid #ddd;
     padding: 5px;
 }
+.profile-img:hover{
+    cursor: pointer;
+}
 .follwers-img,.following-img{
     width: 3rem;
     height: 3rem;
@@ -43,9 +46,15 @@
     width: 2rem;
     height: 2rem;
 }
+.settings-img:hover{
+    cursor: pointer;
+}
 .follow-list{
     list-style-type: none;
 
+}
+.follow-list>li>span>a:hover{
+    cursor: pointer;
 }
 .follow-list>li{
     float: left;
