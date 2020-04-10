@@ -28,8 +28,8 @@
         <p class="user_details--username">username</p>
         <p class="user_details--name">name</p>
     </div> -->
-    <textarea name="caption" placeholder="Show to the world!" ngModel (ngModelChange)="styleCaption($event)"></textarea>
-    <div class="post-create__primary--post_area" [innerHtml]="caption"></div>
+    <label for="caption" class="post-create__primary--post_area" [innerHtml]="caption"></label>
+    <textarea id="caption" name="caption" placeholder="Show to the world!" ngModel (ngModelChange)="styleCaption($event)"></textarea>
   </div>
   <div class="post-create__secondary">
     <label class="custom-file-input-label" for="file-input">

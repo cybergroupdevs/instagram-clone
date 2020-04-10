@@ -78,7 +78,7 @@ a{
     
         &--post_area{
             font-size: 1.6rem;
-            margin-left: 0.8rem;
+            margin-left: 1.2rem !important;
             width: 52rem;
             height: 8rem;
             resize: none;
@@ -152,11 +152,16 @@ a{
 }
 
 .highlight{
-    color: #38a1f3;
+    color: #38a1f3 !important;
+
+    &:hover{
+        color: #38a1f3 !important;
+        text-decoration: none !important;
+    }
 }
 
 textarea{
-    width: 4rem;
-    height: 1rem;
-    resize: none;
+    width: 0.5rem;
+    height: 0.5rem;
+    opacity: 0;
 }
