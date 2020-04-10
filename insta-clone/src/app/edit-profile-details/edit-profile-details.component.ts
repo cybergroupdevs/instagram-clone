@@ -3,10 +3,12 @@ import { OnInit } from "@angular/core";
 import { SendHttpRequestService } from "../send-http-request.service";
 import { Component, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { FileUploadService } from "src/app/services/fileUpload.service";
+import { FileUploadService } from "../services/fileUpload.service";
 //3rd Party
 import { FileUploader } from "ng2-file-upload";
-import { jsonDecoder } from 'src/app/utils/jsonDecoder';
+import { jsonDecoder } from '../utils/jsonDecoder';
+import { BufferToImage } from '../utils/bufferToImage';
+import { DomSanitizer } from '@angular/platform-browser';
 
 const URL = "http://localhost:8080/api/upload";
 
@@ -17,6 +19,7 @@ const URL = "http://localhost:8080/api/upload";
 })
 export class EditProfileDetailsComponent implements OnInit {
   constructor(
+    private domSanitizer: DomSanitizer,
     private sendReq: SendHttpRequestService,
     private _router: Router,
     private fileUploadService: FileUploadService,
@@ -104,6 +107,7 @@ export class EditProfileDetailsComponent implements OnInit {
       if (res.status == 200) {
         console.log(res.body.user);
         this.usersData = res.body.user;
+        this.image = res.body.bufferedImage ? BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer): null;
         this.setUserData();
       } else if (res.status == 401) {
         localStorage.removeItem("token");
@@ -111,7 +115,7 @@ export class EditProfileDetailsComponent implements OnInit {
       }
     });
   }
-
+  image: any;
   setUserData() {
     this.name = this.usersData.name;
     this.username = this.usersData.instaHandle;
@@ -157,6 +161,8 @@ export class EditProfileDetailsComponent implements OnInit {
       console.log(event.target.files);
       const file = event.target.files[0];
       this.images = file;
+
+      this.onSubmit();
     }
   }
 
@@ -169,6 +175,9 @@ export class EditProfileDetailsComponent implements OnInit {
     const _id = jsonDecoder().data.instaHandle;
     this.fileUploadService.fileUpload(formData, _id).subscribe((res: any) => {
       console.log(res);
+      alert('Successful');
     });
   }
+
+  
 }
