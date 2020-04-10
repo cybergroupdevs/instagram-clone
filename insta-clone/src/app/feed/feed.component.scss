@@ -209,3 +209,9 @@ button.following:not(.wait):hover .msg-unfollow{
 .viewComments{
 color: #8e8e8e;
 }
+
+@media (max-width: 425px) {
+  .col-12{
+     width: 425px;
+  }
+}

@@ -3,10 +3,12 @@ import { OnInit } from "@angular/core";
 import { SendHttpRequestService } from "../send-http-request.service";
 import { Component, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { FileUploadService } from "src/app/services/fileUpload.service";
+import { FileUploadService } from "../services/fileUpload.service";
 //3rd Party
 import { FileUploader } from "ng2-file-upload";
-import { jsonDecoder } from 'src/app/utils/jsonDecoder';
+import { jsonDecoder } from '../utils/jsonDecoder';
+import { BufferToImage } from '../utils/bufferToImage';
+import { DomSanitizer } from '@angular/platform-browser';
 
 const URL = "http://localhost:8080/api/upload";
 
@@ -17,6 +19,7 @@ const URL = "http://localhost:8080/api/upload";
 })
 export class EditProfileDetailsComponent implements OnInit {
   constructor(
+    private domSanitizer: DomSanitizer,
     private sendReq: SendHttpRequestService,
     private _router: Router,
     private fileUploadService: FileUploadService,
@@ -104,6 +107,7 @@ export class EditProfileDetailsComponent implements OnInit {
       if (res.status == 200) {
         console.log(res.body.user);
         this.usersData = res.body.user;
+        this.image = res.body.bufferedImage ? BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer): null;
         this.setUserData();
       } else if (res.status == 401) {
         localStorage.removeItem("token");
@@ -111,7 +115,7 @@ export class EditProfileDetailsComponent implements OnInit {
       }
     });
   }
-
+  image: any;
   setUserData() {
     this.name = this.usersData.name;
     this.username = this.usersData.instaHandle;
@@ -150,80 +154,6 @@ export class EditProfileDetailsComponent implements OnInit {
     )).value = genderValue;
   }
 
-  //   readURL3(input){
-  //     const preview = document.getElementById('profilePic');
-  //     const file = document.querySelector('input[type=file]').files[0];
-  //     const reader = new FileReader();
-
-  //     reader.addEventListener("load", function () {
-  //       preview.src = reader.result;
-  //     }, false);
-
-  //     if (file) {
-  //       reader.readAsDataURL(file);
-  //     }
-  // }
-
-  // upload() {
-  //   //locate the file element meant for the file upload.
-  //   let inputEl: HTMLInputElement = this.el.nativeElement.querySelector(
-  //     "#photo"
-  //   );
-  //   //get the total amount of files attached to the file input.
-  //   let fileCount: number = inputEl.files.length;
-  //   console.log(fileCount, "fileCount");
-  //   //create a new fromdata instance
-  //   let formData = new FormData();
-  //   //check if the filecount is greater than zero, to be sure a file was selected.
-  //   if (fileCount > 0) {
-  //     // a file was selected
-  //     //append the key name 'photo' with the first file in the element
-  //     formData.append("photo", inputEl.files[0]);
-  //     console.log(formData, "formData", inputEl.files[0], "inputEl.files");
-  //     this.fileUploadService.fileUpload(formData).subscribe(res => {
-  //       console.log(res);
-  //     });
-  //   }
-  // }
-
-  // fileUpload(value: any) {
-  //   console.log(value, "value of multipart");
-  //   this.fileUploadService.fileUpload(value).subscribe((res: any) => {
-  //     console.log(res, "response");
-  //   });
-
-  //   this.makeFileRequest("", [], value).then(result => {
-  //     console.log(result);
-  //   });
-  // }
-
-  // makeFileRequest(url: string, params: Array<string>, file: File) {
-  //   return new Promise((resolve, reject) => {
-  //     var formData: any = new FormData();
-
-  //     console.log(formData, "formData");
-
-  //     var xhr = new XMLHttpRequest();
-  //     formData.append("upload", file, file.name);
-
-  //     console.log(formData, "formData Appended");
-
-  //     // for(var i = 0; i < files.length; i++) {
-  //     //     formData.append("uploads[]", files[i], files[i].name);
-  //     // }
-  //     // xhr.onreadystatechange = function () {
-  //     //     if (xhr.readyState == 4) {
-  //     //         if (xhr.status == 200) {
-  //     //             resolve(JSON.parse(xhr.response));
-  //     //         } else {
-  //     //             reject(xhr.response);
-  //     //         }
-  //     //     }
-  //     // }
-  //     // xhr.open("POST", url, true);
-  //     // xhr.send(formData);
-  //   });
-  // }
   images: any;
 
   selectImage(event) {
@@ -231,6 +161,8 @@ export class EditProfileDetailsComponent implements OnInit {
       console.log(event.target.files);
       const file = event.target.files[0];
       this.images = file;
+
+      this.onSubmit();
     }
   }
 
@@ -243,6 +175,9 @@ export class EditProfileDetailsComponent implements OnInit {
     const _id = jsonDecoder().data.instaHandle;
     this.fileUploadService.fileUpload(formData, _id).subscribe((res: any) => {
       console.log(res);
+      alert('Successful');
     });
   }
+
+  
 }
