@@ -8,7 +8,9 @@ import {
   OnInit,
   Injectable,
 } from "@angular/core";
-import { DomSanitizer } from "@angular/platform-browser";
+import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
+import { jsonDecoder } from '../utils/jsonDecoder';
+import { BufferToImage } from '../utils/bufferToImage';
 
 @Injectable({
   providedIn: "root",
@@ -22,6 +24,7 @@ export class FeedComponent implements OnInit {
   constructor(
     private sendReq: SendHttpRequestService,
     private PostService: PostService,
+    private userService: SendHttpRequestService,
     private domSanitizer: DomSanitizer
   ) {}
   @ViewChild("modal", { static: false }) modal: ElementRef;
@@ -61,6 +64,9 @@ export class FeedComponent implements OnInit {
     this.modal.nativeElement.style.display = "none";
   }
 
+  userInfo: any;
+  bufferedImage: SafeUrl;
+
   postImages: any = [];
   loadPosts() {
     this.PostService.getFeed().subscribe((res) => {
@@ -69,6 +75,12 @@ export class FeedComponent implements OnInit {
       console.log(this.feed, "my feed");
       this.fillPostImages();
     });
+
+    this.userService.userInfo(jsonDecoder().data._id, null).subscribe((res) => {
+      console.log(res.body);
+      this.userInfo = res.body.user;
+      this.bufferedImage = BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer);
+    })
   }
 
   fillPostImages() {

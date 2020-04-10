@@ -1,13 +1,14 @@
 import { FileUploader } from 'ng2-file-upload';
 import { FileSelectDirective } from 'ng2-file-upload';
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule, Input } from '@angular/core';
 import { ObjectUnsubscribedError } from 'rxjs';
 import findHashtags from '../utils/findHashTags';
 import findMentions from '../utils/findMentions';
 import { PostService } from '../services/post.service';
 import { IResponse } from '../models/IResponse';
-
-
+import { jsonDecoder } from '../utils/jsonDecoder';
+import { FileUploadService } from "../services/fileUpload.service";
+import { SafeUrl } from '@angular/platform-browser';
 interface IPostContent{
   caption: string;
   imageFile: File;
@@ -18,13 +19,19 @@ interface IPostContent{
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss']
 })
-
 export class CreatePostComponent implements OnInit {
   imageFile: File;
 
-  constructor(private postService: PostService) { }
+  @Input()
+  bufferedImage: SafeUrl;
 
-  ngOnInit(){}
+  constructor(
+    private postService: PostService,
+    private fileUploadService: FileUploadService) { }
+
+  ngOnInit(){
+    
+  }
 
   selectImage(event: any): void{
     console.log(event, 'event');
@@ -67,4 +74,5 @@ export class CreatePostComponent implements OnInit {
   }
 
   caption: string;
+
 }

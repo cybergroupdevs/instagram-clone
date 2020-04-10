@@ -3,7 +3,7 @@
 <div class="container-fluid" style="background-color: #FAFAFA;">
   
   
-  <app-create-post></app-create-post>
+  <app-create-post [bufferedImage]="bufferedImage"></app-create-post>
   
   <div class="row">
     <div *ngFor = "let item of feed; let i = index" class="col-12 col-lg-5 offset-lg-2" style="background-color: white; border:1px solid #DBDBDB; margin-top: 2rem; margin-bottom: 2rem; border-radius: 5px;">
