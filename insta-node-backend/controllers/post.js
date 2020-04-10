@@ -122,6 +122,7 @@ class Post {
   }
 
   async operations(req, res) {
+    console.log("inside api")
     const post = await model.post.findById(req.params.postId);
 
     if (req.query.type === "like") {
@@ -241,14 +242,16 @@ class Post {
         const postId = item._id
         
         let likesArray = await model.like.log({post : postId})
+        console.log(likesArray, "lkesArray")
         let commentsArray = await model.comment.log({ post : postId })
 
         let returnObj = { ...item.toObject(), likesArray, commentsArray };
         if(!item.image){
           return returnObj;
         }
-        console.log(fs.readFileSync(item.image), 'IMAGE AFTER READ FILE');
-        console.log(fs.createReadStream(item.image));
+        // console.log(fs.readFileSync(item.image), 'IMAGE AFTER READ FILE');
+        // console.log(fs.createReadStream(item.image), "image");
+        
         return { ...returnObj, image: fs.readFileSync(item.image) }
       })
     );
@@ -264,6 +267,21 @@ class Post {
       }
     });
 
+  }
+
+  async getPosts(){
+    const loggedInUserId = req.user.data._id
+    let posts = await model.post.index({user:loggedInUserId}) 
+
+    res.send({
+      success: true,
+      payload: {
+          data : {
+            posts
+          },
+          message: "posts returned"
+      }
+    });  
   }
 
 }

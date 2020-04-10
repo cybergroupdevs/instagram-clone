@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { SendHttpRequestService } from '../send-http-request.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -25,33 +25,39 @@ export class ProfileDashboardComponent implements OnInit {
   posts: number;
   bio:string;
   loggedinUserId: string;
+  loggedinUserInstaHandle:string;
   usersArray: any;
   followersArray=[]
   followingArray=[]
   editButton : Boolean=false;
   followButton:Boolean=false;
   unfollowButton : Boolean=false;
- 
+  currentProfileId : string ;
+  image: any;
   
   ngOnInit() {
     this.loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
+    this.loggedinUserInstaHandle = this.sendReq.jsonDecoder(localStorage.getItem("token")).data.instaHandle
+
     let current_route = this._router.url.split("/");
-    console.log(current_route, "------->>>>>> current route")
-    this.loadUserData(current_route[2],null);
-    // this.loadPosts();
+    this.loadUserData(this.currentProfileId,current_route[2]);
   }
 
-  loadPosts(){
-    // this.sendReq.
-  }
+  loadUserData(id:string=null, instaHandle:string=null) {
 
-  loadUserData(id:string=null, instaHandle:string=null){
+    if (id != null){
+      this.currentProfileId = id;
+    }
+
+    console.log(this.currentProfileId, "id")
+
     this.sendReq.userInfo(id,instaHandle).subscribe(res => {
       if(res.status == 200){
-        console.log(res.body, 'this.usersArray');
+        
         this.usersArray = res.body.user;
         this.image = res.body.bufferedImage ? BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer): null;
         this.setUserData();
+        
       }
       else if(res.status == 401){
         localStorage.removeItem("token");
@@ -60,8 +66,10 @@ export class ProfileDashboardComponent implements OnInit {
     });
   }
 
-  image: any;
   setUserData(){
+
+    let current_route = this._router.url.split("/");
+    
     this.name = this.usersArray.name;
     this.username = this.usersArray.instaHandle;
     this.followers = this.usersArray.followers;
@@ -69,19 +77,18 @@ export class ProfileDashboardComponent implements OnInit {
     this.posts = this.usersArray.postsCount;
     this.bio = this.usersArray.about;
     console.log(this.image);
+    
 
-    let current_route = this._router.url.split("/");
-    let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
-    if (current_route[2] == loggedinUserId){
+    if (this.loggedinUserInstaHandle == current_route[2]){
+      
       this.editButton = true
       this.followButton = false
       this.unfollowButton = false
     }
     else{
-      this.sendReq.checkFollow(current_route[2],loggedinUserId).subscribe(res => {
-        console.log(res, "success")
+      this.sendReq.checkFollow(current_route[2],this.loggedinUserId).subscribe(res => {
+      
         if(res.body.success == true){
-          console.log(res.body);
           this.followButton = false
           this.unfollowButton = true
           this.editButton = false
@@ -101,10 +108,11 @@ export class ProfileDashboardComponent implements OnInit {
 
   getFollowers(){
     let current_route = this._router.url.split("/");
+    
     this.sendReq.getFollowersList(current_route[2]).subscribe(res => {
-        console.log(res);
+        
         this.followersArray = res.payload.data.allFollowers;
-        console.log(this.followersArray, "------->>>>>> followers")
+        
       if(res.status == 401){
         localStorage.removeItem("token");
         this._router.navigate(['/login']);
@@ -113,13 +121,12 @@ export class ProfileDashboardComponent implements OnInit {
   }
 
   getFollowing(){
+    
     let current_route = this._router.url.split("/");
     this.sendReq.getFollowingList(current_route[2]).subscribe(res => {
       
-        console.log(res.body);
         this.followingArray = res.payload.data.allFollowing;
-        console.log(this.followingArray, "------->>>>>> followers")
-      
+        
       if(res.status == 401){
         localStorage.removeItem("token");
         this._router.navigate(['/login']);
@@ -139,7 +146,7 @@ export class ProfileDashboardComponent implements OnInit {
       console.log(res.status, res, "status ????")
       if(res.status == 200 ){
         if (current_route[2] == ownerId){
-          this.loadUserData(ownerId, null)
+          this.loadUserData(null, ownerId)
         }
         else{
           this.getFollowers();
@@ -165,7 +172,7 @@ export class ProfileDashboardComponent implements OnInit {
       if(res.status == 200){
 
         if (current_route[2] == ownerId){
-          this.loadUserData(ownerId, null)
+          this.loadUserData(null, ownerId)
         }
         else{
           this.getFollowers();
