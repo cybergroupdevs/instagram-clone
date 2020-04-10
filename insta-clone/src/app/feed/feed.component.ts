@@ -10,7 +10,8 @@ import {
   Injectable,
 } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
-
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../modal/modal.component';
 
 
 @Injectable({
@@ -26,7 +27,8 @@ export class FeedComponent implements OnInit {
     private sendReq: SendHttpRequestService,
     private PostService: PostService,
     private domSanitizer: DomSanitizer,
-    private LikeService:LikeService
+    private LikeService:LikeService,
+    private dialog: MatDialog
   ) {}
   @ViewChild("modal", { static: false }) modal: ElementRef;
   @ViewChild("caption", { static: false }) caption: ElementRef;
@@ -54,6 +56,14 @@ export class FeedComponent implements OnInit {
     console.log(commentObj);
     this.sendReq.commentPost(commentObj).subscribe((res) => (this.res = res));
     console.log(this.res);
+  }
+
+  openDialog() {
+    this.dialog.open(ModalComponent, {
+      data: {
+        animal: 'panda'
+      }
+    });
   }
 
   ngOnInit() {

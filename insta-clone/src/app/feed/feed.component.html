@@ -42,7 +42,7 @@
         <img src="../../assets/images/comment1.png" style="width:1.7rem; height:1.5rem; opacity: 0.75;">
       </div>
       <div class="row" style="padding:0 2rem" >
-        <span *ngIf="item.count.likeCount != 0">Liked by<b>{{item.likesArray[0].likedBy.instaHandle}}</b></span><div *ngIf="item.count.likeCount-1>0" >and {{item.count.likeCount-1}} others</div>
+        <span *ngIf="item.count.likeCount != 0">Liked by<b>{{item.likesArray[0].likedBy.instaHandle}}</b></span><button (click)="openDialog()" *ngIf="899>0" >and {{item.count.likeCount-1}} others</button>
       </div>
       <div class="row" style="padding:0 2rem ">
         <span></span><b>{{item.user.instaHandle}}</b><span>{{item.caption}}</span>
