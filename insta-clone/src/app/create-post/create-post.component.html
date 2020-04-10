@@ -6,13 +6,13 @@
         <p class="user_details--name">name</p>
     </div> -->
     <label for="caption" class="post-create__primary--post_area" [innerHtml]="caption"></label>
-    <textarea id="caption" name="caption" placeholder="Show to the world!" [ngModel]="caption" (ngModelChange)="styleCaption($event)"></textarea>
+    <textarea id="caption" name="caption" placeholder="Show to the world!" ngModel (ngModelChange)="styleCaption($event)"></textarea>
   </div>
   <div class="post-create__secondary">
     <label class="custom-file-input-label" for="file-input">
       <a class="post-create--image_upload"><i class="fa fa-image fa-2x"></i></a>
     </label>
-    <input id="file-input" name="imageFile" type="file" accept="image/*" class="custom-file-input" [ngModel]="imageFile" (change)="selectImage($event)" />
+    <input id="file-input" name="imageFile" type="file" accept="image/*" class="custom-file-input" ngModel (change)="selectImage($event)" />
 
     <button type="submit" class="post-create--btn_post">Post</button>
   </div>
