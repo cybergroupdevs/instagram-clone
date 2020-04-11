@@ -29,8 +29,6 @@ export class FeedComponent implements OnInit {
     private PostService: PostService,
 
     private userService: SendHttpRequestService,
-    private domSanitizer: DomSanitizer
-
     private domSanitizer: DomSanitizer,
     private LikeService:LikeService
 

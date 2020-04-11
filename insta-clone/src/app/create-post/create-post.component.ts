@@ -1,7 +1,7 @@
 import { FileUploader } from 'ng2-file-upload';
 import { FileSelectDirective } from 'ng2-file-upload';
 
-import { Component, OnInit, NgModule, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, NgModule, ViewEncapsulation ,Input} from '@angular/core';
 
 import { ObjectUnsubscribedError } from 'rxjs';
 import findHashtags from '../utils/findHashTags';
