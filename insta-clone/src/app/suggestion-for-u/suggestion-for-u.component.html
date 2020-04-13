@@ -9,7 +9,7 @@
       <div *ngFor="
           let user of usersArray">
         <p><img src="https://picsum.photos/200/200?random" class="rounded-circle float-left mr-2" width="40">
-          <a [routerLink]="['/profile', user._id]" href="" class="text-design">{{user.name}} <small class="about-design">{{user.instaHandle}}</small></a></p>
+          <a [routerLink]="['/profile', user.instaHandle]" href="" class="text-design">{{user.name}} <small class="about-design">{{user.instaHandle}}</small></a></p>
         <hr>
       </div>
     </div>
