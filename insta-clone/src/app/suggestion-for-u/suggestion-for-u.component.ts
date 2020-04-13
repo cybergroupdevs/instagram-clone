@@ -1,3 +1,4 @@
+import { jsonDecoder } from 'src/app/utils/jsonDecoder';
 import { ProfileDashboardComponent } from './../profile-dashboard/profile-dashboard.component';
 import { SendHttpRequestService } from './../send-http-request.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +18,7 @@ export class SuggestionForUComponent implements OnInit {
   // following:number;
   // posts: number;
   // bio:string;
-  // loggedinUserId: string;
+   loggedInUser: any;
   // followersArray=[]
   // followingArray=[]
   // editButton : Boolean=false;
@@ -25,6 +26,7 @@ export class SuggestionForUComponent implements OnInit {
   // unfollowButton : Boolean=false;
  
   ngOnInit() {
+    this.loggedInUser=jsonDecoder();
     let obj=this._service.showSuggestion().subscribe(res => {
       this.usersArray=res;
     });
