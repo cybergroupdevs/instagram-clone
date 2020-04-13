@@ -15,7 +15,7 @@ export class LikeService{
     constructor(private http: HttpClient){}
 
     like(postId:string, operation:string): Observable<IResponse>{
-
+        console.log("inside service-->>>>>>.")
         const queryParams: HttpParams = new HttpParams()
             .set("type", "like")
             .set("operation", operation);
@@ -25,9 +25,9 @@ export class LikeService{
             params: queryParams
         };
 
-        console.log(httpOptions, "httpOptions" )
+        console.log(httpOptions, "------>>>>>>>>httpOptions" )
 
-        return this.http.patch<IResponse>(`http://localhost:8080/api/operation${postId}`, {}, httpOptions );
+        return this.http.patch<IResponse>(`http://localhost:8080/api/operation/${postId}`, {}, httpOptions );
     }
 
     getLikes(id:string): Observable<IResponse>{

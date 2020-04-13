@@ -29,6 +29,7 @@ class like{
             const postId = req.params.id
             let likesArray = await models.like.log({post:postId})
             console.log(likesArray, "array")
+            
             let allLikes = await Promise.all( likesArray.map(async(like) => {
                 const relation = await models.follower.getRelation({ ownerId: like.likedBy._id, followerId: req.user.data._id })
                 return {like, relation: (relation? true: false) }

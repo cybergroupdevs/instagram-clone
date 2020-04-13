@@ -255,6 +255,12 @@ class Post {
         return { ...returnObj, image: fs.readFileSync(item.image) }
       })
     );
+
+    feedFinal = await Promise.all( feedFinal.map(async(post) => {
+      const relation = await model.like.get({ post: post._id, likedBy: req.user.data._id })
+      return {post, relation: (relation? true: false) }
+    }) );
+
     
       
     res.send({

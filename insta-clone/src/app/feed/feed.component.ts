@@ -42,8 +42,6 @@ export class FeedComponent implements OnInit {
   
   res: any;
   feed: any;
-  liked : boolean = false
-  operation : string = "inc"
 
   addcomment(text: string) {
     let commentObj = {
@@ -79,8 +77,8 @@ export class FeedComponent implements OnInit {
 
   fillPostImages() {
     this.feed.map((post: any, index: number) => {
-      if (post.image) {
-        let TYPED_ARRAY = new Uint8Array(post.image.data);
+      if (post.post.image) {
+        let TYPED_ARRAY = new Uint8Array(post.post.image.data);
 
         const STRING_CHAR = TYPED_ARRAY.reduce((data, byte)=> {
           return data + String.fromCharCode(byte);
@@ -95,21 +93,12 @@ export class FeedComponent implements OnInit {
 
   }
 
-  like(postId){
+  toggleLike(postId, operation){
     console.log("here")
-    if (this.liked==false){
-      this.operation = "inc"
-      this.liked = true;
-    }
-    else{
-        this.operation = "dec";
-        this.liked = false;
-    }
-
-    this.LikeService.like(postId, this.operation).subscribe(res=>{
-          let message = res.payload.message
-          console.log(message, "message")
+    
+    this.LikeService.like(postId, operation).subscribe(res=>{
+          console.log(res.success, res.payload.message, "response")
     })
+    this.loadPosts();
   }
-
 }
