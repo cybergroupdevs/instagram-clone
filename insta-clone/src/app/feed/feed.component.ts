@@ -9,11 +9,12 @@ import {
   OnInit,
   Injectable,
 } from "@angular/core";
+
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../modal/modal.component';
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { jsonDecoder } from '../utils/jsonDecoder';
 import { BufferToImage } from '../utils/bufferToImage';
-
-
 
 @Injectable({
   providedIn: "root",
@@ -27,12 +28,10 @@ export class FeedComponent implements OnInit {
   constructor(
     private sendReq: SendHttpRequestService,
     private PostService: PostService,
-
     private userService: SendHttpRequestService,
-    private domSanitizer: DomSanitizer
-
     private domSanitizer: DomSanitizer,
-    private LikeService:LikeService
+    private LikeService:LikeService,
+    private dialog: MatDialog
 
   ) {}
   @ViewChild("modal", { static: false }) modal: ElementRef;
@@ -61,6 +60,14 @@ export class FeedComponent implements OnInit {
     console.log(commentObj);
     this.sendReq.commentPost(commentObj).subscribe((res) => (this.res = res));
     console.log(this.res);
+  }
+
+  openDialog() {
+    this.dialog.open(ModalComponent, {
+      data: {
+        animal: 'panda'
+      }
+    });
   }
 
   ngOnInit() {
@@ -126,6 +133,11 @@ export class FeedComponent implements OnInit {
           let message = res.payload.message
           console.log(message, "message")
     })
+  }
+
+  reloadPosts(){
+    console.log('inside reloadPosts');
+    this.loadPosts();
   }
 
 }

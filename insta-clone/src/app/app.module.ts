@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard.component';
-import {  ImageGalleryComponent } from './image-gallery/image-gallery.component';
+import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
 import { FeedComponent } from './feed/feed.component';
 import { SuggestionForUComponent } from './suggestion-for-u/suggestion-for-u.component';
 import { CreatePostComponent } from './create-post/create-post.component';
@@ -20,6 +20,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ViewPostComponent } from './view-post/view-post.component';
 import { AuthGuard } from './auth.guard';
 import { AddFeedComponent } from './add-feed/add-feed.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({
@@ -39,16 +42,22 @@ import { AddFeedComponent } from './add-feed/add-feed.component';
     ChangePasswordComponent,
     ViewPostComponent,
     FileSelectDirective,
-    AddFeedComponent
+    AddFeedComponent,
+    ModalComponent
   ],
   imports: [
     Ng2SearchPipeModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ModalComponent
+  ]
 })
 export class AppModule { }

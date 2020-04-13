@@ -6,7 +6,27 @@
   <app-create-post [bufferedImage]="bufferedImage"></app-create-post>
   
   <div class="row">
-    <div *ngFor = "let item of feed; let i = index" class="col-12 col-lg-5 offset-lg-2" style="background-color: white; border:1px solid #DBDBDB; margin-top: 2rem; margin-bottom: 2rem; border-radius: 5px;">
+
+    <div class="col-lg-5 offset-lg-2" style="background-color: white; border:1px solid #DBDBDB; margin-top: 2rem;">
+      <div class="row user-details-row" style="padding: 0.5rem 0;">
+        <div class="col-lg-1">
+          <img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 2.5rem; height: 2.5rem; border: 1px solid black;">
+        </div>
+        <div class="col-lg-8">
+          <div><b>username</b></div>
+          <div style="line-height: 0.8;">name</div>
+        </div>
+        <div class="col-lg-3">
+          <label style="padding-top: 0.5rem;" for="feedInput" class="modal-title w-100 cursor-pointer"><input type='file'id="feedInput" onchange="readURL();" style="display: none;"/><b>Add a feed </b><img src="../../assets/add-btn2.png" style="width: 1.3rem;height:1.3rem;"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <app-create-post (reloadPost)="reloadPosts()"></app-create-post>
+
+    <div *ngFor = "let item of feed; let i = index" class="col-lg-5 offset-lg-2" style="background-color: white; border:1px solid #DBDBDB; margin-top: 2rem; margin-bottom: 2rem; border-radius: 5px;">
       <div class="row user-details-row" style="padding: 0.5rem 0;">
         <div class="col-lg-1">
           <img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 2.5rem; height: 2.5rem; border: 1px solid black;">
@@ -27,7 +47,7 @@
         <img src="../../assets/images/comment1.png" style="width:1.7rem; height:1.5rem; opacity: 0.75;">
       </div>
       <div class="row" style="padding:0 2rem" >
-        <span *ngIf="item.count.likeCount != 0">Liked by<b>{{item.likesArray[0].likedBy.instaHandle}}</b></span><div *ngIf="item.count.likeCount-1>0" >and {{item.count.likeCount-1}} others</div>
+        <span *ngIf="item.count.likeCount != 0">Liked by<b>{{item.likesArray[0].likedBy.instaHandle}}</b></span><button (click)="openDialog()" *ngIf="899>0" >and {{item.count.likeCount-1}} others</button>
       </div>
       <div class="row" style="padding:0 2rem ">
         <span></span><b>{{item.user.instaHandle}}</b><span>{{item.caption}}</span>
