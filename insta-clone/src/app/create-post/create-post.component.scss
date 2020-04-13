@@ -1,9 +1,45 @@
-.post-create {
-  border: 1px solid #cdcdcd;
-  border-radius: 2.8px;
-  background-color: white;
-  width: 39.12rem;
-  margin-left: 15.6rem;
+
+
+
+  .post-create{
+      border: 1px solid #cdcdcd;
+      border-radius: 5px;
+      background-color: white;
+      margin-top:1rem;
+    
+
+    &__primary{
+        margin-left: 0.8rem;
+        display: flex;
+        justify-content: space-around;
+    
+        &--user_img{
+            height: 2.6rem;
+            min-width: 2.6rem;
+            border-radius: 50% 50%;
+        }
+    
+        &--post_area{
+            font-size: 1.6rem;
+            margin-left: 0.8rem;
+            width: 52rem;
+            height: 6rem;
+            resize: none;
+            color: #333;
+            border: none;
+            outline: none;
+
+            overflow: -moz-scrollbars-none;
+            -ms-overflow-style: none;
+
+            &::placeholder{
+                color: #cdcdcd;
+            }
+
+            &::-webkit-scrollbar { width: 0 !important }
+        }
+    }
+
 
   background-image: linear-gradient(
       to bottom right,
@@ -123,6 +159,25 @@
   opacity: 0;
 }
 
+
+.highlight{
+    color: #38a1f3;
+}
+
+@media (max-width: 375px) {
+    .post-create {
+       margin-left: 0;
+       max-width: 375px;
+    }
+  }
+@media (max-width: 320px) {
+    .post-create {
+       margin-left: 0;
+       max-width: 320px;
+    }
+  }
+  
+
 .post-create:focus-within {
   transition: all 1s;
 
@@ -133,3 +188,4 @@
     ),
     url(https://api.time.com/wp-content/uploads/2019/07/instagram-eliminates-likes.jpg?w=600&quality=85);
 }
+

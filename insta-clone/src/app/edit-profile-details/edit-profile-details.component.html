@@ -5,11 +5,10 @@
             <div class="modal-header text-center" style="padding: 1.5rem;">
                 <p class="modal-title w-100"><b>Profile Picture</b></p>
             </div>
-            <form class="modal-header text-center cursor-pointer" #form="ngForm" (ngSubmit)="onSubmit()">
-                <label class="modal-title w-100 cursor-pointer" name="imageUpload" style="color:#3798F0" for="profileImageInput">
+            <form class="modal-header text-center cursor-pointer" #form="ngForm">
+                <label class="modal-title w-100 cursor-pointer" name="imageUpload" style="color:#3798F0; font-weight: bold;" for="photo">Upload Photo
                 </label>
-                <input type="file" name="imageUpload" id="photo" accept="image/*" ngModel #input="ngModel" (change)="selectImage($event)"  />
-                <button type="submit">Upload Photo</button>
+                <input style="display: none;" type="file" name="imageUpload" id="photo" accept="image/*" ngModel #input="ngModel" (change)="selectImage($event)"/>
             </form>
             <div class="modal-header text-center cursor-pointer">
                 <p class="modal-title w-100 removePhoto"><b>Remove Current Photo</b></p>
@@ -54,7 +53,7 @@
             <form class="form-horizontal" #form="ngForm">
             <div class="row">
                 <div class="col-lg-3">
-                    <img class="rounded-circle" id="profilePic" src="../../assets/ss.png" style="width: 3rem; height: 3rem; float:right;">
+                    <img [src]="image" alt="Profile Image" class="rounded-circle profile-img" style="width: 3rem; height: 3rem; float: right;">
                 </div>
                 <div class="col-lg-9">
                     <h5>{{username}}</h5>
