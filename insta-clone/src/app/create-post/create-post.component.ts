@@ -1,13 +1,14 @@
 import { FileUploader } from 'ng2-file-upload';
 import { FileSelectDirective } from 'ng2-file-upload';
-import { Component, OnInit, NgModule, ViewEncapsulation } from '@angular/core';
+import { Component,Input, OnInit, NgModule, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { ObjectUnsubscribedError } from 'rxjs';
 import findHashtags from '../utils/findHashTags';
 import findMentions from '../utils/findMentions';
 import { PostService } from '../services/post.service';
 import { IResponse } from '../models/IResponse';
-
-
+import { jsonDecoder } from '../utils/jsonDecoder';
+import { FileUploadService } from "../services/fileUpload.service";
+import { SafeUrl } from '@angular/platform-browser';
 interface IPostContent{
   caption: string;
   imageFile: File;
@@ -19,13 +20,23 @@ interface IPostContent{
   styleUrls: ['./create-post.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-
 export class CreatePostComponent implements OnInit {
   imageFile: File;
+  caption: string;
 
-  constructor(private postService: PostService) { }
+  @Output()
+  reloadPost: EventEmitter<void> = new EventEmitter<void>();
 
-  ngOnInit(){}
+  @Input()
+  bufferedImage: SafeUrl;
+
+  constructor(
+    private postService: PostService,
+    private fileUploadService: FileUploadService) { }
+
+  ngOnInit(){
+    
+  }
 
   selectImage(event: any): void{
     console.log(event, 'event');
@@ -49,6 +60,9 @@ export class CreatePostComponent implements OnInit {
 
     this.postService.createPost(formData).subscribe((res: IResponse) => {
       console.log(res, 'response after subscribing');
+      this.reloadPost.emit();
+      this.caption = null;
+      this.imageFile = null;
     }); 
   }
 
@@ -69,6 +83,4 @@ export class CreatePostComponent implements OnInit {
     
     this.caption = substrings.join('');
   }
-
-  caption: string;
 }

@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { BufferToImage } from '../utils/bufferToImage';
 import { DomSanitizer } from '@angular/platform-browser';
+import { jsonDecoder } from '../utils/jsonDecoder';
+import { FileUploadService } from "../services/fileUpload.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class ProfileDashboardComponent implements OnInit {
 
-  constructor(private sendReq: SendHttpRequestService, private _router:Router, private domSanitizer: DomSanitizer) { }
+  constructor(private sendReq: SendHttpRequestService, 
+  private _router:Router,
+  private domSanitizer:DomSanitizer,
+  private fileUploadService: FileUploadService) { }
 
   name:string;
   username:string;
@@ -43,6 +48,34 @@ export class ProfileDashboardComponent implements OnInit {
     this.loadUserData(this.currentProfileId,current_route[2]);
   }
 
+
+  loadPosts(){
+    // this.sendReq.
+  }
+  images: any;
+
+  selectImage(event) {
+    if (event.target.files.length > 0) {
+      console.log(event.target.files);
+      const file = event.target.files[0];
+      this.images = file;
+
+      this.onSubmit();
+    }
+  }
+  onSubmit(){
+    const formData = new FormData();
+    formData.append('image', this.images);
+
+    console.log(formData);
+
+    const _id = jsonDecoder().data.instaHandle;
+    this.fileUploadService.fileUpload(formData, _id).subscribe((res: any) => {
+      console.log(res);
+      alert('Successful');
+    });
+  }
+
   loadUserData(id:string=null, instaHandle:string=null) {
 
     if (id != null){
@@ -50,6 +83,7 @@ export class ProfileDashboardComponent implements OnInit {
     }
 
     console.log(this.currentProfileId, "id")
+
 
     this.sendReq.userInfo(id,instaHandle).subscribe(res => {
       if(res.status == 200){
@@ -151,6 +185,7 @@ export class ProfileDashboardComponent implements OnInit {
         else{
           this.getFollowers();
           this.getFollowing()
+          this.loadUserData(null, ownerId)
         }
       }
       else if(res.status == 401){
@@ -177,6 +212,7 @@ export class ProfileDashboardComponent implements OnInit {
         else{
           this.getFollowers();
           this.getFollowing()
+          this.loadUserData(null, ownerId)
         }
 
       }

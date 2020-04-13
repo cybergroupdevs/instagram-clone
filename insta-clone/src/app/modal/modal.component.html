@@ -1,34 +1,56 @@
-Modal 2 Following Modal
-<div class="modal" id="followingModal">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-      <div class="modal-content">
+<div mat-dialog-content class="modal-dialog modal-dialog-scrollable modal-dialog-centered" >
+  <div class="modal-header text-center">
+    <p class="modal-title w-100"><b>Likes</b></p>
     
-        <!-- Modal Header -->
-        <div class="modal-header text-center">
-          <p class="modal-title w-100"><b>Likes</b></p>
-          <button type="button" class="close" data-dismiss="modal" >&times;</button>
+    <button type="button" class="close" (click)="closeBtn()" mat-button mat-dialog-close>&times;</button>
+  </div>
+
+  <div class="modal-body " *ngFor="let like of likesArray">
+    <div class="row">
+      <div class="col-lg-2">
+        <img
+          src="../../assets/ss.png"
+          class="rounded-circle follwers-img"
+          alt=""
+        />
+      </div>
+      <div class="col-lg-7">
+        <div class="followers-username">
+          <a
+            [routerLink]="['../', like.like.likedBy.instaHandle]"
+            (click)="
+              loadUserData(null, followers.follower.followerId.instaHandle)
+            "
+            data-dismiss="modal"
+            ><b>{{like.like.likedBy.instaHandle}}</b></a
+          >
         </div>
-  
-        <!-- Modal body -->
+        <div class="followers-name">{{like.like.likedBy.name}}</div>
+      </div>
+      <div class="col-lg-3">
+        <!-- {{like.like.likedBy._id}} -->
         
-        <div class="modal-body-size-fix">
-            <div class="modal-body" *ngFor="let like of likesArray">
-              <div class="row">
-                  <div class="col-lg-2">
-                      <img src="../../assets/ss.png" class="rounded-circle following-img" alt="">
-                  </div>
-                  <div class="col-lg-7">
-                    <div class="following-username"><a [routerLink]="['../',like.likedBy.instaHandle]"  data-dismiss="modal"><b>{{like.likedBy.instaHandle}}</b></a></div>
-                    <div class="following-name">{{like.likedBy.name}}</div>
-                  </div>
-                  <div class="col-lg-3">
-                      <a ><button class="btn btn-primary follow-btn" *ngIf="like.likedBy._id != loggedinUserId && !following.relation" (click)="follow(following.following.followingId._id)">Follow</button></a>
-                      <a ><button class="btn unfollow-btn" *ngIf="like.likedBy._id != loggedinUserId && following.relation" (click)="unfollow(following.following.followingId._id)">Following</button></a>
-                  </div>
-                </div> 
-            </div>
-    
-        </div>    
+        <button
+            class="btn btn-primary follow-btn"
+            *ngIf="
+            like.like.likedBy._id != loggedInUserId &&
+              !like.relation
+            "
+            (click)="follow(like.like.likedBy.instaHandle)"
+          >
+            Follow
+          </button>
+          <button
+            class="btn unfollow-btn"
+            *ngIf="
+            like.like.likedBy._id != loggedInUserId &&
+              like.relation
+            "
+            (click)="unfollow(like.like.likedBy.instaHandle)"
+          >
+            Following
+          </button>
       </div>
     </div>
+  </div>
 </div>

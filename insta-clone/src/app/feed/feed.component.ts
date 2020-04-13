@@ -9,9 +9,12 @@ import {
   OnInit,
   Injectable,
 } from "@angular/core";
-import { DomSanitizer } from "@angular/platform-browser";
 
-
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../modal/modal.component';
+import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
+import { jsonDecoder } from '../utils/jsonDecoder';
+import { BufferToImage } from '../utils/bufferToImage';
 
 @Injectable({
   providedIn: "root",
@@ -25,8 +28,11 @@ export class FeedComponent implements OnInit {
   constructor(
     private sendReq: SendHttpRequestService,
     private PostService: PostService,
+    private userService: SendHttpRequestService,
     private domSanitizer: DomSanitizer,
-    private LikeService:LikeService
+    private LikeService:LikeService,
+    private dialog: MatDialog
+
   ) {}
   @ViewChild("modal", { static: false }) modal: ElementRef;
   @ViewChild("caption", { static: false }) caption: ElementRef;
@@ -54,6 +60,14 @@ export class FeedComponent implements OnInit {
     console.log(this.res);
   }
 
+  openDialog(postId : string) {
+    this.dialog.open(ModalComponent, {
+      data: {
+        postId : postId
+      }
+    });
+  }
+
   ngOnInit() {
     this.loadPosts();
   }
@@ -65,6 +79,9 @@ export class FeedComponent implements OnInit {
     this.modal.nativeElement.style.display = "none";
   }
 
+  userInfo: any;
+  bufferedImage: SafeUrl;
+
   postImages: any = [];
   loadPosts() {
     this.PostService.getFeed().subscribe((res) => {
@@ -73,13 +90,19 @@ export class FeedComponent implements OnInit {
       console.log(this.feed, "my feed");
       this.fillPostImages();
     });
+
+    this.userService.userInfo(jsonDecoder().data._id, null).subscribe((res) => {
+      console.log(res.body);
+      this.userInfo = res.body.user;
+      this.bufferedImage = BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer);
+    })
   }
 
   fillPostImages() {
     this.feed.map((post: any, index: number) => {
       if (post.post.image) {
         let TYPED_ARRAY = new Uint8Array(post.post.image.data);
-
+        
         const STRING_CHAR = TYPED_ARRAY.reduce((data, byte)=> {
           return data + String.fromCharCode(byte);
           }, '');
@@ -101,4 +124,10 @@ export class FeedComponent implements OnInit {
     })
     this.loadPosts();
   }
+
+  reloadPosts(){
+    console.log('inside reloadPosts');
+    this.loadPosts();
+  }
+
 }

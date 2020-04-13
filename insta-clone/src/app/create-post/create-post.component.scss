@@ -1,73 +1,52 @@
-/* @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
-@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
-html,body{
-    width: 500px;
-    margin: auto;
-    height: 100%;
-    background: #eee;
-}
-.container{
-    width: 500px;
-    margin: 20px auto;
-}
-.form-group{
-    width:  200px;
-    margin: 10px auto;
-    align-content: center;
-}
-.form-group input{
-    transition: 0.3s linear;
-}
-.form-group input:focus{
-    border: 1px solid crimson;
-    box-shadow: 0 0 0 0;
-}
-span{
-    font-size:15px;
-}
-a{
-    text-decoration:none; 
-    color: #0062cc;
-    border-bottom:2px solid #0062cc;
-}
-.button{
-    margin-top: 20vh;
-}
-.box{
-    margin-top: 5vh;
-}
-.box-part{
-    background:#FFF;
-    border-radius:0;
-}
-.text{
-    margin:20px 0px;
-}
-.fa{
-    color:black;
-}
-.ft14 {
-    font-size: 30px !important;
-    color:black;
-}
-.image-upload>input {
-    display: none;
-  } */
 
-.post-create {
-  border: 1px solid #cdcdcd;
-  border-radius: 2.8px;
-  background-color: white;
-  width: 39.12rem;
-  margin-left: 15.6rem;
+
+  .post-create{
+      border: 1px solid #cdcdcd;
+      border-radius: 5px;
+      background-color: white;
+      margin-top:1rem;
+    
+
+    &__primary{
+        margin-left: 0.8rem;
+        display: flex;
+        justify-content: space-around;
+    
+        &--user_img{
+            height: 2.6rem;
+            min-width: 2.6rem;
+            border-radius: 50% 50%;
+        }
+    
+        &--post_area{
+            font-size: 1.6rem;
+            margin-left: 0.8rem;
+            width: 52rem;
+            height: 6rem;
+            resize: none;
+            color: #333;
+            border: none;
+            outline: none;
+
+            overflow: -moz-scrollbars-none;
+            -ms-overflow-style: none;
+
+            &::placeholder{
+                color: #cdcdcd;
+            }
+
+            &::-webkit-scrollbar { width: 0 !important }
+        }
+    }
+
 
   background-image: linear-gradient(
       to bottom right,
       rgba(255, 255, 255, 0.92),
       rgba(255, 255, 255, 0.92)
     ),
-    url(https://lh3.googleusercontent.com/proxy/o6ElyPirttjJVz_H_lUZDC_EEMd6vQEPt_rm-CMcSG3_PGzeNfOJyqzCExI35eDsMlfpL9HGCUpnXvcWLD9z8RQaitPzooagNuD6v5KwEXiH8z7ppa2cASrcunOHaQK8vmj5fmC-rymWVpP8tPuY6kZeAEf0XtRUxnM);
+    url(https://api.time.com/wp-content/uploads/2019/07/instagram-eliminates-likes.jpg?w=600&quality=85);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -180,6 +159,25 @@ a{
   opacity: 0;
 }
 
+
+.highlight{
+    color: #38a1f3;
+}
+
+@media (max-width: 375px) {
+    .post-create {
+       margin-left: 0;
+       max-width: 375px;
+    }
+  }
+@media (max-width: 320px) {
+    .post-create {
+       margin-left: 0;
+       max-width: 320px;
+    }
+  }
+  
+
 .post-create:focus-within {
   transition: all 1s;
 
@@ -188,5 +186,6 @@ a{
       rgba(230, 230, 230, 0.92),
       rgba(230, 230, 230, 0.92)
     ),
-    url(https://lh3.googleusercontent.com/proxy/o6ElyPirttjJVz_H_lUZDC_EEMd6vQEPt_rm-CMcSG3_PGzeNfOJyqzCExI35eDsMlfpL9HGCUpnXvcWLD9z8RQaitPzooagNuD6v5KwEXiH8z7ppa2cASrcunOHaQK8vmj5fmC-rymWVpP8tPuY6kZeAEf0XtRUxnM);
+    url(https://api.time.com/wp-content/uploads/2019/07/instagram-eliminates-likes.jpg?w=600&quality=85);
 }
+
