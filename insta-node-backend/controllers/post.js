@@ -270,8 +270,13 @@ class Post {
   }
 
   async userPosts(req, res){
+    console.log(req.query, 'req.query');
     const { _id } = (await model.user.getOne({ instaHandle: req.query.instaHandle })) || {};
-    const posts = await model.post.index({ user: _id });
+    let posts = await model.post.index({ user: _id });
+
+    posts = posts.map((post) => {
+      return { post, image: fs.readFileSync(post.image) }
+    });
 
     return res.send({
       success: true,
