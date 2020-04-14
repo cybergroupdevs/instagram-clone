@@ -2,7 +2,7 @@ import { SafeUrl } from '@angular/platform-browser';
 import { BufferToImage } from './../utils/bufferToImage';
 import { FileUploader } from 'ng2-file-upload';
 import { FileSelectDirective } from 'ng2-file-upload';
-import { Component, Input, OnInit, NgModule, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, NgModule, ViewEncapsulation, EventEmitter, Output , Input} from '@angular/core';
 import { ObjectUnsubscribedError } from 'rxjs';
 import findHashtags from '../utils/findHashTags';
 import findMentions from '../utils/findMentions';
@@ -28,7 +28,6 @@ export class CreatePostComponent implements OnInit {
 
   @Output()
   reloadPost: EventEmitter<void> = new EventEmitter<void>();
-
 
   @Input()
     bufferedImage : SafeUrl

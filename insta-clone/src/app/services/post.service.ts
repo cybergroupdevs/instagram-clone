@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { IResponse } from '../models/IResponse';
 import { Observable } from 'rxjs';
 
@@ -26,6 +26,17 @@ export class PostService{
 
     getFeed(): Observable<any>{
         return this.http.get<any>(GET_FEED,  this.httpOptions);
+        
     }
+    getUsersPosts(instaHandle:string): Observable<any>{
+        console.log(instaHandle, 'instaHandle inside getUserPosts()');
+        
+        const params: HttpParams = new HttpParams()
+        .set('instaHandle', instaHandle);
+
+        return this.http.get<IResponse>(POST_API, { ...this.httpOptions, params }); 
+    }
+    
+    
 
 }
