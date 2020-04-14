@@ -2,10 +2,7 @@
 
 <div class="container-fluid" style="background-color: #FAFAFA;">
   
-  
-  <app-create-post [bufferedImage]="bufferedImage"></app-create-post>
-  
-  <div class="row">
+  <!-- <div class="row">
 
     <div class="col-lg-5 offset-lg-2" style="background-color: white; border:1px solid #DBDBDB; margin-top: 2rem;">
       <div class="row user-details-row" style="padding: 0.5rem 0;">
@@ -21,10 +18,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="row">
-    <app-create-post (reloadPost)="reloadPosts()"></app-create-post>
+    <app-create-post (reloadPost)="reloadPosts()"  [bufferedImage]="bufferedImage"></app-create-post>
 
     <div *ngFor = "let item of feed; let i = index" class="col-lg-5 offset-lg-2" style="background-color: white; border:1px solid #DBDBDB; margin-top: 2rem; margin-bottom: 2rem; border-radius: 5px;">
       <div class="row user-details-row" style="padding: 0.5rem 0;">
@@ -32,7 +29,7 @@
           <img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 2.5rem; height: 2.5rem; border: 1px solid black;">
         </div>
         <div class="col-lg-10">
-          <div><b>{{item.user.instaHandle}}</b></div>
+          <div><b>{{item.post.user.instaHandle}}</b></div>
         </div>
         <div class="col-lg-1">
           <span ><b><h3 >...</h3></b></span>
@@ -42,23 +39,24 @@
         <img [src]="postImages[i]" class="img-responsive" style="width: 100%; ">
       </div>
       <div class="row like-comment-row" style="padding-top:0.4rem;">
-        <input type="checkbox"  id="togglelike" class="visually-hidden">
-        <label for="togglelike" (click)="like(item._id)"  class="control"></label>
+        <a (click)="toggleLike(item.post._id,'inc')" *ngIf="!item.post.relation"><img src="../../assets/images/igheart.png" ></a>
+        <a (click)="toggleLike(item.post._id,'dec')" *ngIf="item.post.relation"><img src="../../assets/images/heartr.png" ></a>
         <img src="../../assets/images/comment1.png" style="width:1.7rem; height:1.5rem; opacity: 0.75;">
       </div>
       <div class="row" style="padding:0 2rem" >
-        <span *ngIf="item.count.likeCount != 0">Liked by<b>{{item.likesArray[0].likedBy.instaHandle}}</b></span><button (click)="openDialog()" *ngIf="899>0" >and {{item.count.likeCount-1}} others</button>
+        <span *ngIf="item.post.count.likeCount > 0" >Liked by<a [routerLink]="['../profile', item.post.likesArray[0].likedBy.instaHandle]"><b>{{item.post.likesArray[0].likedBy.instaHandle}}</b></a>and<a (click)="openDialog(item.post._id)" *ngIf="item.post.count.likeCount-1 > 0" >{{item.post.count.likeCount-1}} others</a></span>
       </div>
       <div class="row" style="padding:0 2rem ">
-        <span></span><b>{{item.user.instaHandle}}</b><span>{{item.caption}}</span>
+        <span><a [routerLink]="['../profile', item.post.user.instaHandle]" (click)=""><b>{{item.post.user.instaHandle}}</b></a></span><span>{{item.post.caption}}</span>
       </div>
-      <div *ngIf="item.count.commentCount>0">
-        <span class="viewComments" *ngIf="item.count.commentCount>2">View all {{item.count.commentCount}} comments</span>
-        <span class="row" *ngIf="item.count.commentCount>0"><b>{{item.commentsArray[0].commentedBy.instaHandle}}</b></span>
-        <span class="row" *ngIf="item.count.commentCount>1"><b>{{item.commentsArray[1].commentedBy.instaHandle}}</b></span>
+      <div *ngIf="item.post.count.commentCount>0">
+        <span class="viewComments" *ngIf="item.post.count.commentCount>2">View all {{item.post.count.commentCount}} comments</span>
+        <span class="row" *ngIf="item.post.count.commentCount>0"><b>{{item.post.commentsArray[0].commentedBy.instaHandle}}</b></span>
+        <span class="row" *ngIf="item.count.post.commentCount>1"><b>{{item.post.commentsArray[1].commentedBy.instaHandle}}</b></span>
       </div>
       <div class="row add-comment-section">
         <input type="text" style="height: 4rem; width:100%; border: 1px solid #EFEFEF; border-bottom: none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" placeholder="  Add a comment...">
+        <button type="submit" class="post-create--btn_post">Post</button>
       </div>
     </div>
   </div>
