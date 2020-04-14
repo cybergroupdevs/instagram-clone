@@ -1,15 +1,15 @@
+import { SafeUrl } from '@angular/platform-browser';
+import { BufferToImage } from './../utils/bufferToImage';
 import { FileUploader } from 'ng2-file-upload';
 import { FileSelectDirective } from 'ng2-file-upload';
-
 import { Component, OnInit, NgModule, ViewEncapsulation, EventEmitter, Output , Input} from '@angular/core';
 import { ObjectUnsubscribedError } from 'rxjs';
 import findHashtags from '../utils/findHashTags';
 import findMentions from '../utils/findMentions';
 import { PostService } from '../services/post.service';
 import { IResponse } from '../models/IResponse';
-import { jsonDecoder } from '../utils/jsonDecoder';
-import { FileUploadService } from "../services/fileUpload.service";
-import { SafeUrl } from '@angular/platform-browser';
+
+
 interface IPostContent{
   caption: string;
   imageFile: File;
@@ -21,6 +21,7 @@ interface IPostContent{
   styleUrls: ['./create-post.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class CreatePostComponent implements OnInit {
   imageFile: File;
   caption: string;
@@ -28,15 +29,12 @@ export class CreatePostComponent implements OnInit {
   @Output()
   reloadPost: EventEmitter<void> = new EventEmitter<void>();
 
-  @Input() bufferedImage: SafeUrl;
-
-  constructor(
-    private postService: PostService,
-    private fileUploadService: FileUploadService) { }
-
-  ngOnInit(){
+  @Input()
+    bufferedImage : SafeUrl
     
-  }
+  constructor(private postService: PostService) { }
+
+  ngOnInit(){}
 
   selectImage(event: any): void{
     console.log(event, 'event');
