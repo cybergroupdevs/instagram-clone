@@ -1,11 +1,11 @@
-<div mat-dialog-content class="modal-dialog modal-dialog-scrollable modal-dialog-centered" >
-  <div class="modal-header text-center">
-    <p class="modal-title w-100"><b>Likes</b></p>
+<div mat-dialog-content >
+  <div>
+    <p><b>Likes</b></p>
     
-    <button type="button" class="close" (click)="closeBtn()" mat-button mat-dialog-close>&times;</button>
+    <button type="button" mat-button mat-dialog-close>&times;</button>
   </div>
 
-  <div class="modal-body " *ngFor="let like of likesArray">
+  <div *ngFor="let like of likesArray">
     <div class="row">
       <div class="col-lg-2">
         <img
@@ -17,11 +17,8 @@
       <div class="col-lg-7">
         <div class="followers-username">
           <a
-            [routerLink]="['../', like.like.likedBy.instaHandle]"
-            (click)="
-              loadUserData(null, followers.follower.followerId.instaHandle)
-            "
-            data-dismiss="modal"
+            [routerLink]="['../../profile', like.like.likedBy.instaHandle]"  
+            mat-dialog-close
             ><b>{{like.like.likedBy.instaHandle}}</b></a
           >
         </div>

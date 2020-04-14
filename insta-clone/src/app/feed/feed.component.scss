@@ -213,6 +213,10 @@ button.following:not(.wait):hover .msg-unfollow{
 color: #8e8e8e;
 }
 
+a{
+  cursor: pointer;
+}
+
 @media (max-width: 425px) {
   .col-12{
      width: 425px;

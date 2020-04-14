@@ -44,10 +44,10 @@
         <img src="../../assets/images/comment1.png" style="width:1.7rem; height:1.5rem; opacity: 0.75;">
       </div>
       <div class="row" style="padding:0 2rem" >
-        <span *ngIf="item.post.count.likeCount > 0">Liked by<b>{{item.post.likesArray[0].likedBy.instaHandle}}</b></span><button (click)="openDialog(item.post._id)" *ngIf="item.post.count.likeCount-1 > 0" >and {{item.post.count.likeCount-1}} others</button>
+        <span *ngIf="item.post.count.likeCount > 0" >Liked by<a [routerLink]="['../profile', item.post.likesArray[0].likedBy.instaHandle]"><b>{{item.post.likesArray[0].likedBy.instaHandle}}</b></a>and<a (click)="openDialog(item.post._id)" *ngIf="item.post.count.likeCount-1 > 0" >{{item.post.count.likeCount-1}} others</a></span>
       </div>
       <div class="row" style="padding:0 2rem ">
-        <span></span><b>{{item.post.user.instaHandle}}</b><span>{{item.post.caption}}</span>
+        <span><a [routerLink]="['../profile', item.post.user.instaHandle]" (click)=""><b>{{item.post.user.instaHandle}}</b></a></span><span>{{item.post.caption}}</span>
       </div>
       <div *ngIf="item.post.count.commentCount>0">
         <span class="viewComments" *ngIf="item.post.count.commentCount>2">View all {{item.post.count.commentCount}} comments</span>

@@ -185,12 +185,14 @@ export class ProfileDashboardComponent implements OnInit {
         else{
           this.getFollowers();
           this.getFollowing()
-          this.loadUserData(null, ownerId)
+          
         }
+        
       }
       else if(res.status == 401){
         localStorage.removeItem("token");
         this._router.navigate(['/login']);
+        
       }
     });
   }
@@ -205,20 +207,24 @@ export class ProfileDashboardComponent implements OnInit {
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this.sendReq.unfollowUser(ownerId, loggedinUserId).subscribe(res => {
       if(res.status == 200){
-
+        
         if (current_route[2] == ownerId){
           this.loadUserData(null, ownerId)
+          
         }
         else{
           this.getFollowers();
           this.getFollowing()
-          this.loadUserData(null, ownerId)
+          this.loadUserData(null, current_route[2])
         }
+        return true
 
       }
       else if(res.status == 401){
+        
         localStorage.removeItem("token");
         this._router.navigate(['/login']);
+        return false
       }   
     });
   }
