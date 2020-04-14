@@ -33,8 +33,8 @@
 
 <div class="container mt-5">
   <div class="gallery-item row">
-    <div *ngFor="let img of postImages" class="gallery_product col-lg-4 col-md-6 col-sm-6 col-xs-12 filter hdpe" >
-      <img [src]="img" class="img-responsive">
+    <div class="gallery_product col-lg-4 col-md-6 col-sm-6 col-xs-12 filter hdpe" *ngFor="let item of postImages; let i = index">
+      <img [src]="postImages[i]" class="img-responsive">
       <div class="gallery-item-info">
         <ul>
           <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fa fa-heart"
