@@ -1,31 +1,29 @@
+<!-- <div class="row">
+  <form class="post-create col-lg-5 offset-lg-2" #form="ngForm" (ngSubmit)="createPostHandler(form.value)">
+    <div class="post-create__primary">
+      
+      <img class="post-create__primary--user_img" [src]="bufferedImage" alt="pro-img">
+      <label for="caption" class="post-create__primary--post_area" [innerHtml]="caption"></label>
+      <textarea id="caption" name="caption" placeholder="Show to the world!" ngModel (ngModelChange)="styleCaption($event)"></textarea>
+    </div>
+    <div class="post-create__secondary">
+      <label class="custom-file-input-label" for="file-input">
+        <a class="post-create--image_upload"><i class="fa fa-image fa-2x"></i></a>
+      </label>
+      <input id="file-input" name="imageFile" type="file" accept="image/*" class="custom-file-input" ngModel (change)="selectImage($event)" />
 
-<!-- <div class="file-upload">
-    <input type="file" name="image" ng2FileSelect [uploader] = "uploader">
-    <button type="submit" (click)="uploader.uploadAll()" [disabled] = "!uploader.getNotUploadedItems().length">Upload</button> 
+      <button type="submit" class="post-create--btn_post">Post</button>
+    </div>
+  </form> 
 </div> -->
-<!-- <div class="h-100">
-    <div class="image-upload text-center">
-        <label for="file-input">
-          <img src="https://icon-library.net/images/upload-photo-icon/upload-photo-icon-21.jpg"/>
-        </label>
-        <input id="file-input" type="file" />
-    </div>
-    
-    <div class="form-group text-center">
-        <label>Add post</label>
-        <input class="form-control" type="text" name="fullname" required placeholder="Write your thoughts!!"/>
-        <span class="Error"></span>
-    </div>
-    
-    <div class="form-group text-center ">
-        <input class="btn btn-primary btn-block" type="submit" value="Post"/>
-    </div>
-</div> -->
+
+
 <div class="row">
   <form class="post-create col-lg-5 offset-lg-2" #form="ngForm" (ngSubmit)="createPostHandler(form.value)">
     <div class="post-create__primary">
       <img class="post-create__primary--user_img" [src]="bufferedImage" alt="pro-img">
-      <textarea name="caption" class="post-create__primary--post_area" placeholder="Show to the world!" [ngModel]="caption" (ngModelChange)="styleCaption($event)"></textarea>
+      <label for="caption" class="post-create__primary--post_area" [innerHtml]="caption"></label>
+      <textarea id="caption" name="caption" placeholder="Show to the world!" ngModel (ngModelChange)="styleCaption($event)"></textarea>
     </div>
     <div class="post-create__secondary">
       <label class="custom-file-input-label" for="file-input">
@@ -37,6 +35,3 @@
     </div>
   </form>
 </div>
-
-
-
