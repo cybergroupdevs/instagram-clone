@@ -1,38 +1,11 @@
-<!-- <div class="modal" id="followersModal">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-      <div class="modal-content">
+<div mat-dialog-content >
+  <div>
+    <p><b>Likes</b></p>
     
-        <div class="modal-header text-center">
-          <p class="modal-title w-100"><b>Followers</b></p>
-          <button type="button" class="close" data-dismiss="modal" >&times;</button>
-        </div>
-        
-        <div class="modal-body" *ngFor="let followers of followersArray">
-            <div class="row">
-              <div class="col-lg-2">
-                  <img src="../../assets/ss.png" class="rounded-circle follwers-img" alt="">
-              </div>
-              <div class="col-lg-7">
-                <div class="followers-username" ><a [routerLink]="['../',followers.follower.followerId._id]" (click)="loadUserData(null, followers.follower.followerId.instaHandle)" data-dismiss="modal"><b>INSTA HANDLE</b></a></div>
-                <div class="followers-name">NAME</div>
-              </div>
-              <div class="col-lg-3">
-                  <a  ><button class="btn btn-primary follow-btn" *ngIf="followers.follower.followerId._id != loggedinUserId && !followers.relation" (click)="follow(followers.follower.followerId.instaHandle)">Follow</button></a>
-                  <a ><button class="btn unfollow-btn" *ngIf="followers.follower.followerId._id != loggedinUserId && followers.relation" (click)="unfollow(followers.follower.followerId.instaHandle)">Following</button></a>
-              </div>
-            </div>    
-        </div>
-    
-      </div>
-    </div>
-</div> -->
-<div mat-dialog-content>
-  <div class="modal-header text-center">
-    <p class="modal-title w-100"><b>Followers</b></p>
-    <button type="button" class="close" mat-button mat-dialog-close>&times;</button>
+    <button type="button" mat-button mat-dialog-close>&times;</button>
   </div>
 
-  <div class="modal-body" *ngFor="let follower of followers">
+  <div *ngFor="let like of likesArray">
     <div class="row">
       <div class="col-lg-2">
         <img
@@ -44,41 +17,36 @@
       <div class="col-lg-7">
         <div class="followers-username">
           <a
-            [routerLink]="['../', followers.follower.followerId._id]"
-            (click)="
-              loadUserData(null, followers.follower.followerId.instaHandle)
-            "
-            data-dismiss="modal"
-            ><b>INSTA HANDLE</b></a
+            [routerLink]="['../../profile', like.like.likedBy.instaHandle]"  
+            mat-dialog-close
+            ><b>{{like.like.likedBy.instaHandle}}</b></a
           >
         </div>
-        <div class="followers-name">NAME</div>
+        <div class="followers-name">{{like.like.likedBy.name}}</div>
       </div>
       <div class="col-lg-3">
-        <a
-          ><button
+        <!-- {{like.like.likedBy._id}} -->
+        
+        <button
             class="btn btn-primary follow-btn"
             *ngIf="
-              followers.follower.followerId._id != loggedinUserId &&
-              !followers.relation
+            like.like.likedBy._id != loggedInUserId &&
+              !like.relation
             "
-            (click)="follow(followers.follower.followerId.instaHandle)"
+            (click)="follow(like.like.likedBy.instaHandle)"
           >
             Follow
-          </button></a
-        >
-        <a
-          ><button
+          </button>
+          <button
             class="btn unfollow-btn"
             *ngIf="
-              followers.follower.followerId._id != loggedinUserId &&
-              followers.relation
+            like.like.likedBy._id != loggedInUserId &&
+              like.relation
             "
-            (click)="unfollow(followers.follower.followerId.instaHandle)"
+            (click)="unfollow(like.like.likedBy.instaHandle)"
           >
             Following
-          </button></a
-        >
+          </button>
       </div>
     </div>
   </div>
