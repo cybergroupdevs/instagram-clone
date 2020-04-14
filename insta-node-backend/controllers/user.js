@@ -223,7 +223,7 @@ class user {
       });
     });
   }
-  async index(req, res) {
+  async   index(req, res) {
     const userList = await model.user.get();
     res.send(userList);
   }
