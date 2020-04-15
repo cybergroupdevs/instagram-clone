@@ -15,6 +15,7 @@ import { ModalComponent } from '../modal/modal.component';
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { jsonDecoder } from '../utils/jsonDecoder';
 import { BufferToImage } from '../utils/bufferToImage';
+import { IResponse } from '../models/IResponse';
 
 @Injectable({
   providedIn: "root",
@@ -128,6 +129,12 @@ export class FeedComponent implements OnInit {
   reloadPosts(){
     console.log('inside reloadPosts');
     this.loadPosts();
+  }
+
+  createComment(content: string, postId:string){
+    this.PostService.createComment(postId, content, 'inc').subscribe((res: IResponse) => {
+      console.log(res);
+    });
   }
 
 }

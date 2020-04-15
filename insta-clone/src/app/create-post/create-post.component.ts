@@ -30,16 +30,27 @@ export class CreatePostComponent implements OnInit {
   reloadPost: EventEmitter<void> = new EventEmitter<void>();
 
   @Input()
-    bufferedImage : SafeUrl
+  bufferedImage : SafeUrl;
     
   constructor(private postService: PostService) { }
 
   ngOnInit(){}
 
+  preview: SafeUrl;
+
   selectImage(event: any): void{
     console.log(event, 'event');
     this.imageFile = event.target.files[0];
     console.log(this.imageFile, 'this.imageFile');
+
+    if(event.target.files && event.target.files[0]){
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+          this.preview = event.target.result;
+          console.log(this.preview, 'this.preview');
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
 
   createPostHandler(content: IPostContent): void{
@@ -61,6 +72,7 @@ export class CreatePostComponent implements OnInit {
       this.reloadPost.emit();
       this.caption = null;
       this.imageFile = null;
+      this.preview = null;
     }); 
   }
 

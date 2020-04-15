@@ -169,6 +169,7 @@ class Post {
 
     if (req.query.type === "comment") {
       if (req.query.operation === "inc") {
+        console.log(req.body, 'req.body');
         await model.post.modify(
           { _id: req.params.postId },
           { "count.commentCount": ++post.count.commentCount }
