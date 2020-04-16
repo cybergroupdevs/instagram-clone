@@ -10,7 +10,6 @@ module.exports = {
         type: ObjectId,
         ref: 'Post'
     },
-    
     content: {
         type: String,
         maxlength: 100

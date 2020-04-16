@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const schema = require('../schemas');
-const commentSchema = mongoose.Schema(schema.comments);
+const commentSchema = mongoose.Schema(schema.comment);
 class Comment{
 
     constructor(){
@@ -17,6 +17,7 @@ class Comment{
     }
 
     async save(commentObj){
+        console.log(commentObj, 'commentObj');
         return await this.model.create(commentObj);
     }
 
