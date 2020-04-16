@@ -62,8 +62,6 @@ class Post {
     )
     )
 
-    let postBody = { mentions: mentionsWithId, caption, tags, user: req.user.data._id, createdAt: Date.now() };
-
     upload(req, res, async (error) => {
       if (error) {
         return res.status(400).send({
@@ -108,9 +106,11 @@ class Post {
         hashtags,
         image: file.path,
         user: req.user.data._id,
+        createdAt: Date.now()
       };
 
       await model.post.save(postBody);
+      await model.user.update({ _id: req.user.data._id }, { $inc: { postsCount: 1 } });
 
       res.send({
         success: true,

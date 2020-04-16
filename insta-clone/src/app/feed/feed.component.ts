@@ -95,7 +95,7 @@ export class FeedComponent implements OnInit {
     this.userService.userInfo(jsonDecoder().data._id, null).subscribe((res) => {
       console.log(res.body);
       this.userInfo = res.body.user;
-      this.bufferedImage = BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer);
+      this.bufferedImage = res.body.bufferedImage && BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer);
     })
   }
 
@@ -134,6 +134,7 @@ export class FeedComponent implements OnInit {
   createComment(content: string, postId:string){
     this.PostService.createComment(postId, content, 'inc').subscribe((res: IResponse) => {
       console.log(res);
+      this.loadPosts();
     });
   }
 

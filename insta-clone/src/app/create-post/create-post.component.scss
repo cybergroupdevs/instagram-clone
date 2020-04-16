@@ -12,6 +12,17 @@
     margin-left: 0.8rem;
     display: flex;
     justify-content: space-around;
+    position: relative;
+
+    &--alert{
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: red;
+      width: 100%;
+      text-align: right;
+      font-size: 1.24rem;
+    }
 
     &--user_img{
         height: 2.6rem;
@@ -149,21 +160,16 @@ display: none;
 .highlight {
 color: #38a1f3 !important;
 
-&:hover {
-color: #38a1f3 !important;
-text-decoration: none !important;
-}
+  &:hover {
+    color: #38a1f3 !important;
+    text-decoration: underline !important;
+  }
 }
 
 #caption {
 width: 0.5rem;
 height: 0.5rem;
 opacity: 0;
-}
-
-
-.highlight{
-color: #38a1f3;
 }
 
 @media (max-width: 375px) {
