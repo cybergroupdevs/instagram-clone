@@ -14,31 +14,31 @@
           <div><b>{{item.post.user.instaHandle}}</b></div>
         </div>
         <div class="col-lg-1">
-          <span ><b><h3 >...</h3></b></span>
+          <span [routerLink]="['/post/'+item.post._id]"><b><h3 >...</h3></b></span>
         </div>
       </div>
       <div class="row user-image-row" *ngIf="postImages[i]">
         <img [src]="postImages[i]" class="img-responsive" style="width: 100%; ">
       </div>
-      <div class="row like-comment-row" style="padding-top:0.4rem;">
+      <div class="row like-comment-row">
         <a (click)="toggleLike(item.post._id,'inc')" *ngIf="!item.post.relation"><img src="../../assets/images/igheart.png" ></a>
         <a (click)="toggleLike(item.post._id,'dec')" *ngIf="item.post.relation"><img src="../../assets/images/heartr.png" ></a>
-        <img src="../../assets/images/comment1.png" style="width:1.7rem; height:1.5rem; opacity: 0.75;">
+        <img src="../../assets/images/comment1.png">
       </div>
       <div class="row" style="padding:0 2rem" >
-        <span *ngIf="item.post.count.likeCount > 0" >Liked by<a [routerLink]="['../profile', item.post.likesArray[0].likedBy.instaHandle]"><b>{{item.post.likesArray[0].likedBy.instaHandle}}</b></a>and<a (click)="openDialog(item.post._id)" *ngIf="item.post.count.likeCount-1 > 0" >{{item.post.count.likeCount-1}} others</a></span>
+        <span *ngIf="item.post.count.likeCount > 0" >Liked by<a class="userid" [routerLink]="['../profile', item.post.likesArray[0].likedBy.instaHandle]"><b>{{item.post.likesArray[0].likedBy.instaHandle}}</b></a>and<a (click)="openDialog(item.post._id)" *ngIf="item.post.count.likeCount-1 > 0" >{{item.post.count.likeCount-1}} others</a></span>
       </div>
-      <div class="row" style="padding:0 2rem ">
-        <span><a [routerLink]="['../profile', item.post.user.instaHandle]"><b>{{item.post.user.instaHandle}}</b></a></span><span>{{item.post.caption}}</span>
+      <div class="row">
+        <span><a class="userid" [routerLink]="['../profile', item.post.user.instaHandle]"><b>{{item.post.user.instaHandle}}</b></a></span><span>{{item.post.caption}}</span>
       </div>
       <div *ngIf="item.post.count.commentCount>0">
         <span class="viewComments" *ngIf="item.post.count.commentCount>2">View all {{item.post.count.commentCount}} comments</span>
-        <span class="row" *ngIf="item.post.commentsArray[0]"><b>{{item.post.commentsArray[0].commentedBy.instaHandle}}</b><span>{{item.post.commentsArray[0].content}}</span></span>
-        <span class="row" *ngIf="item.post.commentsArray[1]"><b>{{item.post.commentsArray[1].commentedBy.instaHandle}}</b><span>{{item.post.commentsArray[1].content}}</span></span>
+        <span class="row" *ngIf="item.post.commentsArray[0]"><a class="userid" [routerLink]="['../profile', item.post.commentsArray[0].commentedBy.instaHandle]"><b>{{item.post.commentsArray[0].commentedBy.instaHandle}}</b></a><span>{{item.post.commentsArray[0].content}}</span></span>
+        <span class="row" *ngIf="item.post.commentsArray[1]"><a class="userid" [routerLink]="['../profile', item.post.commentsArray[1].commentedBy.instaHandle]"><b>{{item.post.commentsArray[1].commentedBy.instaHandle}}</b></a><span>{{item.post.commentsArray[1].content}}</span></span>
       </div>
       <div class="row add-comment-section">
-        <input type="text" style="height: 4rem; width:100%; border: 1px solid #EFEFEF; border-bottom: none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" placeholder="  Add a comment..." #commentInput>
-        <button type="submit" class="post-create--btn_post" (click)="createComment(commentInput.value, item.post._id)">Post</button>
+        <input type="text" style="height: 4rem;" placeholder="  Add a comment..." #commentInput>
+        <button type="submit" (click)="createComment(commentInput.value, item.post._id)">Post</button>
       </div>
     </div>
   

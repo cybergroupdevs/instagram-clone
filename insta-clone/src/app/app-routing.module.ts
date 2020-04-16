@@ -70,7 +70,7 @@ const routes: Routes = [
       }
     ]
   },
-  {path:"post/id", component:ViewPostComponent,
+  {path:"post/:id", component:ViewPostComponent,
   
   // children:[
   //   {

@@ -61,10 +61,10 @@ padding:0 4rem;
 .dropdown-toggle::after{
     display: none;
 }
-.caption-and-comments::-webkit-scrollbar {
+/* .caption-and-comments::-webkit-scrollbar {
     
   }
-  
+   */
 .caption-and-comments {
     -ms-overflow-style: none;
     display: flex;
