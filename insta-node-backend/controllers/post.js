@@ -262,6 +262,14 @@ class Post {
       return {post, relation: (relation? true: false) }
     }) );
 
+
+    feedFinal = await Promise.all( feedFinal.map(async(post) => {
+      console.log(post, 'post.user.image');
+      post.post.user = post.post.user.image ? { ...post.post.user, userImage: fs.readFileSync(post.post.user.image) } : post.post.user;
+
+      return post;
+    }) );
+
     
       
     res.send({
