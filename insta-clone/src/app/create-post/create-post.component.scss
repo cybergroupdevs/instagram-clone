@@ -149,21 +149,16 @@ display: none;
 .highlight {
 color: #38a1f3 !important;
 
-&:hover {
-color: #38a1f3 !important;
-text-decoration: none !important;
-}
+  &:hover {
+    color: #38a1f3 !important;
+    text-decoration: underline !important;
+  }
 }
 
 #caption {
 width: 0.5rem;
 height: 0.5rem;
 opacity: 0;
-}
-
-
-.highlight{
-color: #38a1f3;
 }
 
 @media (max-width: 375px) {

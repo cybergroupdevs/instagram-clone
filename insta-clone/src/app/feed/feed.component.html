@@ -33,8 +33,8 @@
       </div>
       <div *ngIf="item.post.count.commentCount>0">
         <span class="viewComments" *ngIf="item.post.count.commentCount>2">View all {{item.post.count.commentCount}} comments</span>
-        <span class="row" *ngIf="item.post.count.commentCount>0"><b>{{item.post.commentsArray[0].commentedBy.instaHandle}}</b></span>
-        <span class="row" *ngIf="item.count.post.commentCount>1"><b>{{item.post.commentsArray[1].commentedBy.instaHandle}}</b></span>
+        <span class="row" *ngIf="item.post.commentsArray[0]"><b>{{item.post.commentsArray[0].commentedBy.instaHandle}}</b><span>{{item.post.commentsArray[0].content}}</span></span>
+        <span class="row" *ngIf="item.post.commentsArray[1]"><b>{{item.post.commentsArray[1].commentedBy.instaHandle}}</b><span>{{item.post.commentsArray[1].content}}</span></span>
       </div>
       <div class="row add-comment-section">
         <input type="text" style="height: 4rem; width:100%; border: 1px solid #EFEFEF; border-bottom: none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" placeholder="  Add a comment..." #commentInput>
