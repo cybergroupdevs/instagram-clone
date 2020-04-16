@@ -1,35 +1,17 @@
-<!-- <div class="row">
-  <form class="post-create col-lg-5 offset-lg-2" #form="ngForm" (ngSubmit)="createPostHandler(form.value)">
-    <div class="post-create__primary">
-      
-      <img class="post-create__primary--user_img" [src]="bufferedImage" alt="pro-img">
-      <label for="caption" class="post-create__primary--post_area" [innerHtml]="caption"></label>
-      <textarea id="caption" name="caption" placeholder="Show to the world!" ngModel (ngModelChange)="styleCaption($event)"></textarea>
-    </div>
-    <div class="post-create__secondary">
-      <label class="custom-file-input-label" for="file-input">
-        <a class="post-create--image_upload"><i class="fa fa-image fa-2x"></i></a>
-      </label>
-      <input id="file-input" name="imageFile" type="file" accept="image/*" class="custom-file-input" ngModel (change)="selectImage($event)" />
-
-      <button type="submit" class="post-create--btn_post">Post</button>
-    </div>
-  </form> 
-</div> -->
-
-
 <div class="row container">
   <form class="post-create col-lg-5 offset-lg-2" #form="ngForm" (ngSubmit)="createPostHandler(form.value)">
     <div class="post-create__primary">
       <img class="post-create__primary--user_img" [src]="bufferedImage" alt="pro-img">
-      <label for="caption" class="post-create__primary--post_area" [innerHtml]="caption"></label>
+      <p class="post-create__primary--alert" *ngIf="!form.valid && form.submitted">Add image before post</p>
+      <label for="caption" class="post-create__primary--post_area" [innerHtml]="caption">
+      </label>
       <textarea id="caption" name="caption" placeholder="Show to the world!" ngModel (ngModelChange)="styleCaption($event)"></textarea>
     </div>
     <div class="post-create__secondary">
       <label class="custom-file-input-label" for="file-input">
         <a class="post-create--image_upload"><i class="fa fa-image fa-2x"></i></a>
       </label>
-      <input id="file-input" name="imageFile" type="file" accept="image/*" class="custom-file-input" ngModel (change)="selectImage($event)" />
+      <input id="file-input" required name="imageFile" type="file" accept="image/*" class="custom-file-input" ngModel (change)="selectImage($event)" />
       <button type="submit" class="post-create--btn_post">Post</button>
     </div>
   </form>
