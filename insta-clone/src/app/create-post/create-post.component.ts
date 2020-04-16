@@ -1,16 +1,15 @@
+import { SafeUrl } from '@angular/platform-browser';
+import { BufferToImage } from './../utils/bufferToImage';
 import { FileUploader } from 'ng2-file-upload';
 import { FileSelectDirective } from 'ng2-file-upload';
-
-import { Component, OnInit, NgModule, ViewEncapsulation, Input } from '@angular/core';
-
+import { Component, OnInit, NgModule, ViewEncapsulation, EventEmitter, Output , Input} from '@angular/core';
 import { ObjectUnsubscribedError } from 'rxjs';
 import findHashtags from '../utils/findHashTags';
 import findMentions from '../utils/findMentions';
 import { PostService } from '../services/post.service';
 import { IResponse } from '../models/IResponse';
-import { jsonDecoder } from '../utils/jsonDecoder';
-import { FileUploadService } from "../services/fileUpload.service";
-import { SafeUrl } from '@angular/platform-browser';
+
+
 interface IPostContent{
   caption: string;
   imageFile: File;
@@ -22,23 +21,36 @@ interface IPostContent{
   styleUrls: ['./create-post.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class CreatePostComponent implements OnInit {
   imageFile: File;
+  caption: string;
 
-  @Input() bufferedImage: SafeUrl;
+  @Output()
+  reloadPost: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(
-    private postService: PostService,
-    private fileUploadService: FileUploadService) { }
-
-  ngOnInit(){
+  @Input()
+  bufferedImage : SafeUrl;
     
-  }
+  constructor(private postService: PostService) { }
+
+  ngOnInit(){}
+
+  preview: SafeUrl;
 
   selectImage(event: any): void{
     console.log(event, 'event');
     this.imageFile = event.target.files[0];
     console.log(this.imageFile, 'this.imageFile');
+
+    if(event.target.files && event.target.files[0]){
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+          this.preview = event.target.result;
+          console.log(this.preview, 'this.preview');
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
 
   createPostHandler(content: IPostContent): void{
@@ -57,6 +69,10 @@ export class CreatePostComponent implements OnInit {
 
     this.postService.createPost(formData).subscribe((res: IResponse) => {
       console.log(res, 'response after subscribing');
+      this.reloadPost.emit();
+      this.caption = null;
+      this.imageFile = null;
+      this.preview = null;
     }); 
   }
 
@@ -77,7 +93,4 @@ export class CreatePostComponent implements OnInit {
     
     this.caption = substrings.join('');
   }
-
-  caption: string;
-
 }

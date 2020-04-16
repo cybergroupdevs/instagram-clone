@@ -9,11 +9,13 @@ import {
   OnInit,
   Injectable,
 } from "@angular/core";
+
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../modal/modal.component';
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { jsonDecoder } from '../utils/jsonDecoder';
 import { BufferToImage } from '../utils/bufferToImage';
-
-
+import { IResponse } from '../models/IResponse';
 
 @Injectable({
   providedIn: "root",
@@ -27,10 +29,10 @@ export class FeedComponent implements OnInit {
   constructor(
     private sendReq: SendHttpRequestService,
     private PostService: PostService,
-
     private userService: SendHttpRequestService,
     private domSanitizer: DomSanitizer,
-    private LikeService:LikeService
+    private LikeService:LikeService,
+    private dialog: MatDialog
 
   ) {}
   @ViewChild("modal", { static: false }) modal: ElementRef;
@@ -47,8 +49,6 @@ export class FeedComponent implements OnInit {
   
   res: any;
   feed: any;
-  liked : boolean = false
-  operation : string = "inc"
 
   addcomment(text: string) {
     let commentObj = {
@@ -59,6 +59,14 @@ export class FeedComponent implements OnInit {
     console.log(commentObj);
     this.sendReq.commentPost(commentObj).subscribe((res) => (this.res = res));
     console.log(this.res);
+  }
+
+  openDialog(postId : string) {
+    this.dialog.open(ModalComponent, {
+      data: {
+        postId : postId
+      }
+    });
   }
 
   ngOnInit() {
@@ -93,9 +101,9 @@ export class FeedComponent implements OnInit {
 
   fillPostImages() {
     this.feed.map((post: any, index: number) => {
-      if (post.image) {
-        let TYPED_ARRAY = new Uint8Array(post.image.data);
-
+      if (post.post.image) {
+        let TYPED_ARRAY = new Uint8Array(post.post.image.data);
+        
         const STRING_CHAR = TYPED_ARRAY.reduce((data, byte)=> {
           return data + String.fromCharCode(byte);
           }, '');
@@ -109,21 +117,24 @@ export class FeedComponent implements OnInit {
 
   }
 
-  like(postId){
+  toggleLike(postId, operation){
     console.log("here")
-    if (this.liked==false){
-      this.operation = "inc"
-      this.liked = true;
-    }
-    else{
-        this.operation = "dec";
-        this.liked = false;
-    }
-
-    this.LikeService.like(postId, this.operation).subscribe(res=>{
-          let message = res.payload.message
-          console.log(message, "message")
+    
+    this.LikeService.like(postId, operation).subscribe(res=>{
+          console.log(res.success, res.payload.message, "response")
     })
+    this.loadPosts();
+  }
+
+  reloadPosts(){
+    console.log('inside reloadPosts');
+    this.loadPosts();
+  }
+
+  createComment(content: string, postId:string){
+    this.PostService.createComment(postId, content, 'inc').subscribe((res: IResponse) => {
+      console.log(res);
+    });
   }
 
 }

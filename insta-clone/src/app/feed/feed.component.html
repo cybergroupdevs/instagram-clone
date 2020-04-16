@@ -3,16 +3,15 @@
 <div class="container-fluid" style="background-color: #FAFAFA;">
   
   
-  <app-create-post [bufferedImage]="bufferedImage"></app-create-post>
-  
-  <div class="row">
-    <div *ngFor = "let item of feed; let i = index" class="col-12 col-lg-5 offset-lg-2" style="background-color: white; border:1px solid #DBDBDB; margin-top: 2rem; margin-bottom: 2rem; border-radius: 5px;">
+    <app-create-post (reloadPost)="reloadPosts()"  [bufferedImage]="bufferedImage"></app-create-post>
+
+    <div *ngFor = "let item of feed; let i = index" class="col-lg-5 offset-lg-2" style="background-color: white; border:1px solid #DBDBDB; margin-top: 2rem; margin-bottom: 2rem; border-radius: 5px;">
       <div class="row user-details-row" style="padding: 0.5rem 0;">
         <div class="col-lg-1">
           <img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 2.5rem; height: 2.5rem; border: 1px solid black;">
         </div>
         <div class="col-lg-10">
-          <div><b>{{item.user.instaHandle}}</b></div>
+          <div><b>{{item.post.user.instaHandle}}</b></div>
         </div>
         <div class="col-lg-1">
           <span ><b><h3 >...</h3></b></span>
@@ -22,26 +21,27 @@
         <img [src]="postImages[i]" class="img-responsive" style="width: 100%; ">
       </div>
       <div class="row like-comment-row" style="padding-top:0.4rem;">
-        <input type="checkbox"  id="togglelike" class="visually-hidden">
-        <label for="togglelike" (click)="like(item._id)"  class="control"></label>
+        <a (click)="toggleLike(item.post._id,'inc')" *ngIf="!item.post.relation"><img src="../../assets/images/igheart.png" ></a>
+        <a (click)="toggleLike(item.post._id,'dec')" *ngIf="item.post.relation"><img src="../../assets/images/heartr.png" ></a>
         <img src="../../assets/images/comment1.png" style="width:1.7rem; height:1.5rem; opacity: 0.75;">
       </div>
       <div class="row" style="padding:0 2rem" >
-        <span *ngIf="item.count.likeCount != 0">Liked by<b>{{item.likesArray[0].likedBy.instaHandle}}</b></span><div *ngIf="item.count.likeCount-1>0" >and {{item.count.likeCount-1}} others</div>
+        <span *ngIf="item.post.count.likeCount > 0" >Liked by<a [routerLink]="['../profile', item.post.likesArray[0].likedBy.instaHandle]"><b>{{item.post.likesArray[0].likedBy.instaHandle}}</b></a>and<a (click)="openDialog(item.post._id)" *ngIf="item.post.count.likeCount-1 > 0" >{{item.post.count.likeCount-1}} others</a></span>
       </div>
       <div class="row" style="padding:0 2rem ">
-        <span></span><b>{{item.user.instaHandle}}</b><span>{{item.caption}}</span>
+        <span><a [routerLink]="['../profile', item.post.user.instaHandle]"><b>{{item.post.user.instaHandle}}</b></a></span><span>{{item.post.caption}}</span>
       </div>
-      <div *ngIf="item.count.commentCount>0">
-        <span class="viewComments" *ngIf="item.count.commentCount>2">View all {{item.count.commentCount}} comments</span>
-        <span class="row" *ngIf="item.count.commentCount>0"><b>{{item.commentsArray[0].commentedBy.instaHandle}}</b></span>
-        <span class="row" *ngIf="item.count.commentCount>1"><b>{{item.commentsArray[1].commentedBy.instaHandle}}</b></span>
+      <div *ngIf="item.post.count.commentCount>0">
+        <span class="viewComments" *ngIf="item.post.count.commentCount>2">View all {{item.post.count.commentCount}} comments</span>
+        <span class="row" *ngIf="item.post.count.commentCount>0"><b>{{item.post.commentsArray[0].commentedBy.instaHandle}}</b></span>
+        <span class="row" *ngIf="item.count.post.commentCount>1"><b>{{item.post.commentsArray[1].commentedBy.instaHandle}}</b></span>
       </div>
       <div class="row add-comment-section">
-        <input type="text" style="height: 4rem; width:100%; border: 1px solid #EFEFEF; border-bottom: none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" placeholder="  Add a comment...">
+        <input type="text" style="height: 4rem; width:100%; border: 1px solid #EFEFEF; border-bottom: none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" placeholder="  Add a comment..." #commentInput>
+        <button type="submit" class="post-create--btn_post" (click)="createComment(commentInput.value, item.post._id)">Post</button>
       </div>
     </div>
-  </div>
+  
 </div>
 
 
@@ -54,138 +54,4 @@
 
 
 
-
-
-<!-- <section class="container-fluid">
-    
-       
-        <div class="row">
-            
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
-             
-                    <div class="card w-75"  *ngFor="let img of allImages">
-                           
-                          <div class="card-header">
-                               <div>
-                                 <img src={{res.profileImage}} alt="post"class="avatar">
-                             </div>  
-                  
-                <div class="profile-info">
-                  <a routerLink="/profile"> <div class="name">{{res.name}}</div> </a>
-                    <div class="location">{{location}}</div>
-                    
-                </div>
-            </div>
-
-               
-             <div id="#responsive ">
-                <img src={{img}} class=" image"  alt="post">
-               </div>
-                       
-                
-                          <div class="row">
-                               <div class="column">
-                                <div id="activity">
-                                <input type="checkbox" id="togglefeed" class="visually-hidden">
-                                 <label for="togglefeed"  class="control"></label>
-                                </div> 
-                                   <div >
-                                    <i class="fa fa-comment-o fa-2x "></i>
-                                   </div>
-                             </div>
-                          </div>
-                          <div class="like">
-                              
-                              4944 likes
-                            
-                          </div>
-                          <div class="mycard-footer"> 
-                               <div class="comment-intro">
-                                   <a href="/feed" class="comment-link">
-                                    <p>view all 24 comments</p>
-                                </a>   
-                                </div>
-                              
-                               <div class="comments" >
-                                 <p class="comm-para"><span id="username"style="margin-right:20px" >{{username1}}</span>{{comment1}}</p>
-                                 <p class="comm-para"><span id="username"style="margin-right:20px">{{username2}}</span>{{comment2}}</p>
-                               </div> 
-                                  <div>
-                                    <input type="text" id="commentarea" #commentarea placeholder="add your comment">
-                                    <button (click)="addcomment(commentarea.value)">add comment</button> 
-                                  </div>
-                         </div>
-                    
-                </div>
-            </div>
-              
-                   <div class="col-lg-4 col-md-6 col-sm-0 col-xs-0">
-                      
-                        <div class="card shadow mb-3">
-                            <div class="card-body " >
-                              
-                              <h5>Suggestions for you</h5>
-                              <div *ngFor="let suggestion of suggestions">
-                                <button (click)="getfollowdata()" id="btn">follow</button>
-                              <p><img src={{suggestion.url}} class="rounded-circle float-left mr-2" width="40"/>
-                                <a href="#">{{suggestion.instaHandle}} <small class="text-muted">{{suggestion.name}}</small></a></p>
-                                <button class="follow"(click)="follow(username,suggestion.instaHandle)">
-                                  {{buttonName}}
-                                </button><hr>
-                               
-                              <hr>
-                            </div>
-                            </div>
-                            <div class="card-footer">
-                              <a href="#">Find more</a>
-                            
-                            </div>
-                            
-                          </div>
-                          
-            </div> 
-           
-            </div>           
-
-      
-        <div class="image-upload add-post">
-          <label for="file-input">
-            <img src="../../assets/add-btn2.png"/>
-          </label>
-          <button id="file-input" type="file" (click)="openModal()"></button>
-        </div>
-
-        
-        <div class="modal" tabindex="-1" role="dialog" #modal style="display: none;">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">What you thinking ?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <input class="w-25" type="file" name="image" ng2FileSelect [uploader]="uploader">
-                <input type="text" #caption>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" (click)="uploadPost()" [disabled] = "!uploader.getNotUploadedItems().length">Post</button>
-                <button type="button" class="btn btn-secondary" (click)="closeModal()" data-dismiss="modal">Cancel</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <section id="lab_social_icon_footer" class="plus">
-          
-          <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-          <div class="container">
-          <div class="text-center center-block">
-          <i id="social-em" class="fa fa-plus fa-3x social"></i>
-          </div>
-          </div>
-          
-          </section>
-</section> -->
 

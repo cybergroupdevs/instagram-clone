@@ -157,12 +157,15 @@ box-sizing:border-box;
   font: 1em sans-serif;
   width:100%;
 }
+
 .control::after {
     content: url('../../assets/images/igheart.png');
 }
+
 #togglelike:checked ~ .control::after {
     content: url('../../assets/images/heartr.png');
 }
+
 #activity{
   margin-top: 1vh;
   margin-left: 6vw;
@@ -208,6 +211,10 @@ button.following:not(.wait):hover .msg-unfollow{
 
 .viewComments{
 color: #8e8e8e;
+}
+
+a{
+  cursor: pointer;
 }
 
 @media (max-width: 425px) {

@@ -1,27 +1,47 @@
-// import { SendHttpRequestService } from './../send-http-request.service';
-// import { LikeService } from './../services/like.service';
-// import { Component } from "@angular/core"
+import { ProfileDashboardComponent } from './../profile-dashboard/profile-dashboard.component';
+import { jsonDecoder } from '../utils/jsonDecoder';
+import { LikeService } from './../services/like.service';
+import { Component, OnInit, Inject } from "@angular/core";
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
-// @Component({
-//     selector: 'app-modal',
-//     templateUrl: 'modal.component.html',
-//     styleUrls: ['modal.component.scss']   
-// })
+@Component({
+    selector: 'app-modal',
+    templateUrl: 'modal.component.html',
+    styleUrls: ['modal.component.scss']   
+})
 
-// export class ModalComponent{
+export class ModalComponent implements OnInit{
+    likesArray : any
+    loggedInUserId : string
+    result : boolean = false;
 
-//     likesArray : any = [];
-//     loggedInUserId : string;
+    constructor(private LikeService: LikeService, private ProfileDashboardComponent: ProfileDashboardComponent, @Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<ModalComponent>) { 
+        
+    }
 
-//     constructor(private LikeService: LikeService, private sendReq: SendHttpRequestService) { }
+    ngOnInit() {
+        this.getLikes(this.data.postId);
+        this.loggedInUserId = jsonDecoder().data._id
+    }
 
-//     ngOnInit() {
-//         this.loggedInUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
-//     }
+    getLikes(postId:string){
+        this.LikeService.getLikes(postId).subscribe(res=>{
+          this.likesArray = res.payload.data.allLikes
+          
+        })
 
-//     getLikes(postId:string){
-//         this.LikeService.getLikes(postId).subscribe(res=>{
-//           this.likesArray = res.payload.data.likesArray
-//         })
-//     }
-// }
+    }
+
+    follow(instaHandle:string){
+        this.ProfileDashboardComponent.follow(instaHandle)
+        this.getLikes(this.data.postId)
+        
+    }
+
+    unfollow(instaHandle: string){
+        this.ProfileDashboardComponent.unfollow(instaHandle)
+        this.getLikes(this.data.postId)
+    }
+
+    
+}
