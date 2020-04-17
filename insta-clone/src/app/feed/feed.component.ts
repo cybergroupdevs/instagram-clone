@@ -135,6 +135,7 @@ export class FeedComponent implements OnInit {
     this.PostService.createComment(postId, content, 'inc').subscribe((res: IResponse) => {
       console.log(res);
       this.loadPosts();
+      
     });
   }
 

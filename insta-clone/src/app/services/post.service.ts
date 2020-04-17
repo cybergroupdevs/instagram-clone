@@ -46,6 +46,26 @@ export class PostService{
 
         return this.http.get<IResponse>(POST_API, { ...this.httpOptions, params }); 
     }
+
+    getComments(id:string): Observable<IResponse>{
+
+        const httpOptions = {
+            headers: this.headers
+        };
+
+        return this.http.get<IResponse>(`http://localhost:8080/comments/${id}`,  httpOptions);
+    }
+
+    getPost(id:string): Observable<IResponse>{
+
+        const httpOptions = {
+            headers: this.headers
+        };
+
+        return this.http.get<IResponse>(`http://localhost:8080/post/${id}`,  httpOptions);
+    }
+
+
     
     
 

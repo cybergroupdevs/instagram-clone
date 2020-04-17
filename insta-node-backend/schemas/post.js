@@ -28,22 +28,6 @@ module.exports = {
     }
   ],
 
-  // likes:[      //added
-  //   {
-  //     type: ObjectId,
-  //     ref: "Like"
-
-  //   }
-  // ],
-
-  // comments:[     //added
-  //   {
-  //     type: ObjectId,
-  //     ref: "Comment"
-
-  //   }
-  // ],
-
   count: {
     likeCount: {
       type: Number,
@@ -64,4 +48,3 @@ module.exports = {
   }
 
 };
-//RECENT UPDATES
