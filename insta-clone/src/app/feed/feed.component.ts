@@ -112,10 +112,16 @@ export class FeedComponent implements OnInit {
         
         this.postImages[index] = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ` + base64String);
       }
-      return null;
+
+      console.log(post.post.user.userImage, post, 'post.user.userImage');
+      this.postUserImages[index] = post.post.user.userImage? 
+        BufferToImage.bufferToImage(post.post.user.userImage, this.domSanitizer) : null;
     });
 
+    console.log(this.postUserImages, 'this.postUserImages');
   }
+
+  postUserImages: SafeUrl[] = [];
 
   toggleLike(postId, operation){
     console.log("here")
