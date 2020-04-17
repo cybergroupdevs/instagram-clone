@@ -1,14 +1,28 @@
+.container{
+  margin-top:1rem;
+}
+
 .post-create{
   border: 1px solid #cdcdcd;
   border-radius: 5px;
   background-color: white;
-  margin-top:1rem;
 
 
 &__primary{
     margin-left: 0.8rem;
     display: flex;
     justify-content: space-around;
+    position: relative;
+
+    &--alert{
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: red;
+      width: 100%;
+      text-align: right;
+      font-size: 1.24rem;
+    }
 
     &--user_img{
         height: 2.6rem;
@@ -146,21 +160,16 @@ display: none;
 .highlight {
 color: #38a1f3 !important;
 
-&:hover {
-color: #38a1f3 !important;
-text-decoration: none !important;
-}
+  &:hover {
+    color: #38a1f3 !important;
+    text-decoration: underline !important;
+  }
 }
 
 #caption {
 width: 0.5rem;
 height: 0.5rem;
 opacity: 0;
-}
-
-
-.highlight{
-color: #38a1f3;
 }
 
 @media (max-width: 375px) {
@@ -188,3 +197,9 @@ background-image: linear-gradient(
 url(https://lh3.googleusercontent.com/proxy/o6ElyPirttjJVz_H_lUZDC_EEMd6vQEPt_rm-CMcSG3_PGzeNfOJyqzCExI35eDsMlfpL9HGCUpnXvcWLD9z8RQaitPzooagNuD6v5KwEXiH8z7ppa2cASrcunOHaQK8vmj5fmC-rymWVpP8tPuY6kZeAEf0XtRUxnM);
 }
 
+.preview{
+  width: 14%;
+  max-height: 10rem;
+  background-size: cover;
+  background-position: center;
+}

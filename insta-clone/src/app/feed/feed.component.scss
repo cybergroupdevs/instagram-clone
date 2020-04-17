@@ -222,3 +222,48 @@ a{
      width: 425px;
   }
 }
+
+.like-comment-row{
+  & > * {
+    padding: 1.65rem 0.65rem 1.6rem 0.65rem;
+  }
+}
+
+.userid{
+  color: #262626;
+  color: rgba(var(--i1d,38,38,38),1);
+  margin-right: 0.65rem;
+  text-decoration: none;
+  padding-left: 0.75rem;
+}
+
+.add-comment-section{
+  display: flex;
+  border-top: 0.65px solid #DBDBDB;
+  border-bottom: 0.65px solid #DBDBDB;
+  
+  & > input{
+    margin-left: 0.75rem;
+    border: none;
+    outline: none;
+    flex: 1;
+  }
+
+  & > button{
+    display: inline-block;
+    padding: 0;
+    align-self: center;
+    flex: 0.1;
+    border: 0;
+    color: #0095f6;
+    color: rgba(var(--d69,0,149,246),1);
+    display: inline;
+    position: relative;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 5px 9px;
+    text-align: center;
+    text-transform: inherit;
+    text-overflow: ellipsis;
+  }
+}

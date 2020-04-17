@@ -4,6 +4,7 @@ import { IResponse } from '../models/IResponse';
 import { Observable } from 'rxjs';
 
 const POST_API = `http://localhost:8080/api/post`;
+const POST_OPERATION_API = `http://localhost:8080/api/operation`;
 const GET_FEED = `http://localhost:8080/feed`;
 
 @Injectable({
@@ -22,6 +23,15 @@ export class PostService{
 
     createPost(formData: FormData): Observable<IResponse>{
         return this.http.post<IResponse>(POST_API, formData, this.httpOptions);
+    }
+
+    createComment(postId: string, content: string, operation: string): Observable<IResponse>{
+        console.log(postId, 'postId', content, 'content');
+        const params: HttpParams = new HttpParams()
+        .set('type', 'comment')
+        .set('operation', operation);
+
+        return this.http.patch<IResponse>(`${POST_OPERATION_API}/${postId}`, { content }, { ...this.httpOptions, params });
     }
 
     getFeed(): Observable<any>{
