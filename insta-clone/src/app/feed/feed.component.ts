@@ -127,9 +127,9 @@ export class FeedComponent implements OnInit {
     console.log("here")
     
     this.LikeService.like(postId, operation).subscribe(res=>{
-          console.log(res.success, res.payload.message, "response")
+      this.loadPosts();    
+      console.log(res.success, res.payload.message, "response")
     })
-    this.loadPosts();
   }
 
   reloadPosts(){
