@@ -18,7 +18,7 @@ class Post{
     }
 
     async index(criteria = {}, columns = {}){
-        let fields = 'instaHandle';
+        let fields = 'instaHandle image';
         return this.model.find(criteria ,columns).sort({ 'createdAt': -1 }).populate('user', fields);
     }
 
