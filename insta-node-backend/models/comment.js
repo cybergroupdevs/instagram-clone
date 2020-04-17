@@ -12,8 +12,8 @@ class Comment{
     }
 
     async log(criteria = {}, columns = {}){
-        let fields = 'instaHandle';
-        return this.model.find(criteria, columns).sort({ 'createdAt': -1 }).populate('commentedBy', fields);
+        let fields = 'instaHandle image';
+        return await this.model.find(criteria, columns).sort({ 'createdAt': -1 }).populate('commentedBy', fields);
     }
 
     async save(commentObj){

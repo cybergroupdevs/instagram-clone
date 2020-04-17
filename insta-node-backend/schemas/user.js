@@ -63,9 +63,7 @@ module.exports = {
     },
     phone: {
         type: String,
-        max : 15,
-        required: false,
-        unique: true
+        max : 15
     }
 }
 

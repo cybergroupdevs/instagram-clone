@@ -50,17 +50,6 @@ export class FeedComponent implements OnInit {
   res: any;
   feed: any;
 
-  addcomment(text: string) {
-    let commentObj = {
-      ownerID: this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id, //from token
-      comment: this.commentarea.nativeElement.value,
-    };
-
-    console.log(commentObj);
-    this.sendReq.commentPost(commentObj).subscribe((res) => (this.res = res));
-    console.log(this.res);
-  }
-
   openDialog(postId : string) {
     this.dialog.open(ModalComponent, {
       data: {
@@ -112,18 +101,24 @@ export class FeedComponent implements OnInit {
         
         this.postImages[index] = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ` + base64String);
       }
-      return null;
+
+      console.log(post.post.user.userImage, post, 'post.user.userImage');
+      this.postUserImages[index] = post.post.user.userImage? 
+        BufferToImage.bufferToImage(post.post.user.userImage, this.domSanitizer) : null;
     });
 
+    console.log(this.postUserImages, 'this.postUserImages');
   }
+
+  postUserImages: SafeUrl[] = [];
 
   toggleLike(postId, operation){
     console.log("here")
     
     this.LikeService.like(postId, operation).subscribe(res=>{
-          console.log(res.success, res.payload.message, "response")
+      this.loadPosts();    
+      console.log(res.success, res.payload.message, "response")
     })
-    this.loadPosts();
   }
 
   reloadPosts(){
@@ -135,6 +130,7 @@ export class FeedComponent implements OnInit {
     this.PostService.createComment(postId, content, 'inc').subscribe((res: IResponse) => {
       console.log(res);
       this.loadPosts();
+      
     });
   }
 

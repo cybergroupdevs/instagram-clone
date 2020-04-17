@@ -262,6 +262,14 @@ class Post {
       return {post, relation: (relation? true: false) }
     }) );
 
+
+    feedFinal = await Promise.all( feedFinal.map(async(post) => {
+      console.log(post, 'post.user.image');
+      post.post.user = post.post.user.image ? { ...post.post.user, userImage: fs.readFileSync(post.post.user.image) } : post.post.user;
+
+      return post;
+    }) );
+
     
       
     res.send({
@@ -276,7 +284,7 @@ class Post {
 
   }
 
-  async userPosts(req, res){
+  async userPosts (req, res){
     console.log(req.query, 'req.query');
     const { _id } = (await model.user.getOne({ instaHandle: req.query.instaHandle })) || {};
     let posts = await model.post.index({ user: _id });
@@ -294,6 +302,38 @@ class Post {
         message: 'Posts for profile retrieved successfully'
       }
     })
+  }
+
+  async getPost(req,res) {
+
+    try{
+        console.log("inside api")
+        const postId = req.params.id
+        let postObj = await model.post.get({_id:postId} )
+
+        console.log(postObj, "postObj")
+
+        let likesArray = await model.like.log({post : postId})
+        console.log(likesArray, "lkesArray")
+
+        const isLiked = await model.like.get({ post: postId, likedBy: req.user.data._id })
+
+        let returnObj = { ...postObj.toObject(), likesArray, image: fs.readFileSync(postObj.image), isLiked: (isLiked? true: false) };
+
+        res.send({
+            success: true,
+            payload: {
+                data : {
+                  returnObj
+                },
+                message: "postObj returned successfully!!"
+            }
+          });
+    }
+    catch(error){
+        console.log(error)
+
+    }
   }
 
 }

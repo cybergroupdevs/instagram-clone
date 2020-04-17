@@ -1,17 +1,19 @@
+<app-homenav></app-homenav>
+
 <div class="container">
     <div class="row">
         <div class="col-lg-6" style="background-color:#311D38;">
             <div id="carouselExampleControls" class="carousel" data-ride="carousel" data-interval="false">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img class="d-block" src="https://www.w3schools.com/bootstrap/ny.jpg" alt="First slide">
+                    <img class="d-block" [src]="postImage" alt="First slide">
                   </div>
-                  <div class="carousel-item">
+                  <!-- <div class="carousel-item">
                     <img class="d-block" src="https://www.w3schools.com/bootstrap/chicago.jpg" alt="Second slide">
                   </div>
                   <div class="carousel-item">
                     <img class="d-block" src="https://www.w3schools.com/bootstrap/la.jpg" alt="Third slide">
-                  </div>
+                  </div> -->
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -29,8 +31,8 @@
                   <img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 2.5rem; height: 2.5rem; border: 1px solid  #EFEFEF;">
                 </div>
                 <div class="col-lg-5" style="padding:0 2rem;">
-                  <div><b>username</b></div>
-                  <p style="line-height: 0.8;">location</p>
+                  <div><b>{{postObj.user.instaHandle}}</b></div>
+                  <p style="line-height: 0.8;">{{postObj.location}}</p>
                 </div>
                 <div class="col-lg-5">
                     <span class="dot-before-follow-btn">.</span>
@@ -46,21 +48,22 @@
                         <img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 2.5rem; height: 2.5rem; border: 1px solid  #EFEFEF;">
                     </div>
                     <div class="col-lg-11" style="padding:0 2rem;">
-                        <a href="" class="username-post-caption">username</a>
-                        <span class="ml-2">caption caption caption caption caption caption caption caption caption</span>
+                      <!-- {{postObj | json}} -->
+                        <a href="" class="username-post-caption userid"><b>{{postObj.user.instaHandle}}</b></a>
+                        <span class="ml-2">{{postObj.caption}}</span>
                         <p><small>time</small></p>
                     </div>    
                 </div>
-                <div class="row comments">
+                <div class="row comments" *ngFor = "let item of commentsArray">
                     <div class="col-lg-1">
                         <img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 2.5rem; height: 2.5rem; border: 1px solid  #EFEFEF;">
                     </div>
-                    <div class="col-lg-10" style="padding:0 2rem;">
-                        <a href="" class="username-post-caption">username</a>
-                        <span class="ml-2">comment comment comment comment comment comment comment comment</span>
+                    <div class="col-lg-10"   style="padding:0 2rem;">
+                        <a href="" class="username-post-caption userid"><b>{{item.commentedBy.instaHandle}}</b></a>
+                        <span class="ml-2">{{item.content}}</span>
                         <p><small><span>time&emsp;</span><span>12</span><span> likes&emsp;</span><span> Reply</span></small></p>
-                        <p (click)="toggle()" class="view-replies"><strong>{{paragraphName}}</strong></p>
-                        <div *ngIf="show" class="row">
+                        <!-- <p (click)="toggle()" class="view-replies"><strong>{{paragraphName}}</strong></p> -->
+                        <!-- <div *ngIf="show" class="row">
                             <ul >
                                 <li>
                                     <div class="row reply">
@@ -79,7 +82,7 @@
                                     </div>
                                 </li> 
                             </ul>
-                        </div>        
+                        </div>         -->
                     </div>
                     <div class="col-lg-1">
                         <input type="checkbox" id="togglelikeSmall" class="visually-hidden">
@@ -89,20 +92,22 @@
                 
             </div>
             <div class="row like-comment-row-user-post" style="padding:1rem 2rem;">
-                <input type="checkbox" id="togglelikeBig" class="visually-hidden">
-                <label for="togglelikeBig"  class="like-control-big"></label>
+              <a (click)="toggleLike(postObj._id,'inc')" *ngIf="!postObj.isLiked"><i class="fa fa-heart-o" aria-hidden="true" ></i></a>
+              <a (click)="toggleLike(postObj._id,'dec')" *ngIf="postObj.isLiked"><i class="fa fa-heart" aria-hidden="true" ></i></a>
                 
                 <img src="../../assets/images/comment1.png" style="width:1.7rem;margin-left: 1rem; height:1.5rem; opacity: 0.75;">
               </div>
               <div class="row" style="padding:0 2rem">
-                <span><img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 1.7rem; height: 1.7rem;">
-                    Liked by<b> username</b> and <b>39 others</b></span>
+                <!-- <span><img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 1.7rem; height: 1.7rem;">
+                    Liked by<b> username </b> and <b></b></span> -->
+                    <span *ngIf="postObj.count.likeCount > 0" ><img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 1.7rem; height: 1.7rem;">Liked by<a class="userid" [routerLink]="['../../profile', postObj.likesArray[0].likedBy.instaHandle]"><b>{{postObj.likesArray[0].likedBy.instaHandle}}</b></a><a (click)="openDialog(item.post._id)" *ngIf="postObj.count.likeCount-1 > 0" >and {{postObj.count.likeCount-1}} others</a></span>
               </div>
               <div class="row" style="padding:0 2rem">
                 <p><small><span>time&emsp;</span></small></p>
               </div>
               <div class="row add-comment-section">
-                <input type="text" style="height: 4rem; width:100%; border: 1px solid #EFEFEF; border-bottom: none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" placeholder="  Add a comment...">
+                <input required ngModel type="text" style="height: 4rem; width:100%; border: 1px solid #EFEFEF; border-bottom: none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" placeholder="  Add a comment..." #commentInput="ngModel">
+                <button type="submit" [ngStyle]="(!commentInput.valid) && {'color': 'rgba(0, 148, 246, 0.432)', 'cursor': 'not-allowed'}" [disabled]="!commentInput.valid" (click)="createComment(commentInput.value, postObj._id)">Post</button>
               </div>
         </div>
     </div>

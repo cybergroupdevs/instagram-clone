@@ -211,6 +211,7 @@ button.following:not(.wait):hover .msg-unfollow{
 
 .viewComments{
 color: #8e8e8e;
+text-decoration: none;
 }
 
 a{
@@ -225,7 +226,7 @@ a{
 
 .like-comment-row{
   & > * {
-    padding: 1.65rem 0.65rem 1.6rem 0.65rem;
+    padding: 0.65rem;
   }
 }
 
@@ -266,4 +267,32 @@ a{
     text-transform: inherit;
     text-overflow: ellipsis;
   }
+}
+
+.fa-heart-o {
+  color: black;
+  font-size: 1.6rem;
+  cursor: pointer;
+  animation: pulse .2s ease;
+}
+
+.fa-heart {
+  color: red;
+  font-size: 1.6rem;
+  cursor: pointer;
+  animation: pulse .2s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.row-time{
+  line-height: 1.2rem;
+  color: #8e8e8e;
+  text-decoration: none;
+  font-size: 0.75rem;
+  text-transform: uppercase;
 }
