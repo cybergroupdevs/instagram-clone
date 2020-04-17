@@ -21,6 +21,9 @@ module.exports = (app) => {
   app.post("/api/post", authenticator, controller.post.create);
   app.get("/feed", authenticator, controller.post.getFeed);
   app.get("/likes/:id", authenticator, controller.likes.getLikes);
+  app.get("/comments/:id", authenticator, controller.comments.getComments);
+
+  app.get("/post/:id", authenticator, controller.post.getPost);
 
   app.patch(
     "/api/operation/:postId",

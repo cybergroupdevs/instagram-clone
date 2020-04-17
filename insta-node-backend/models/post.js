@@ -8,9 +8,9 @@ class Post{
     }
 
     async get(criteria = {}, columns = {}){
-        return this.model.findOne(criteria, columns, (err, res) => {
-            console.log(err, res);
-        });
+        let fields = "instaHandle"
+        return await this.model.findOne(criteria, columns).populate("user", fields);
+
     }
 
     async save(post){
