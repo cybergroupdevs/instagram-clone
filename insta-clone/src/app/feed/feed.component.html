@@ -23,7 +23,7 @@
       <div class="row like-comment-row">
         <a (click)="toggleLike(item.post._id,'inc')" *ngIf="!item.relation"><i class="fa fa-heart-o" aria-hidden="true" ></i></a>
         <a (click)="toggleLike(item.post._id,'dec')" *ngIf="item.relation"><i class="fa fa-heart" aria-hidden="true" ></i></a>
-        <img src="../../assets/images/comment1.png">
+        <a [routerLink]="['/post/'+item.post._id]"><img src="../../assets/images/comment1.png"></a>
       </div>
       <div class="row" style="padding-left: 0.75rem" >
         <span *ngIf="item.post.count.likeCount > 0" >Liked by<a class="userid" [routerLink]="['../profile', item.post.likesArray[0].likedBy.instaHandle]"><b>{{item.post.likesArray[0].likedBy.instaHandle}}</b></a><a (click)="openDialog(item.post._id)" *ngIf="item.post.count.likeCount-1 > 0" >and {{item.post.count.likeCount-1}} others</a></span>
