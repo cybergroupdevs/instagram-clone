@@ -1,5 +1,7 @@
 const models=require('../models');
-var posts =models.posts;
+const fs = require("fs");
+const path = require("path");
+const multer = require("multer");
 
 
 class comment{
@@ -7,10 +9,15 @@ class comment{
     
     async getComments(req,res){
         try{
-            console.log("inside api")
+            console.log("inside api commenty ------------->>>>>>>>>>>>>>>>")
             const postId = req.params.id
             let commentsArray = await models.comment.log({post:postId})
             console.log(commentsArray, "array")
+
+            // commentsArray = commentsArray.map((comment) => {
+            //     return { comment, image: fs.readFileSync(comment.commentedBy.image) }
+            //   });
+          
 
             res.send({
                 success: true,
@@ -26,8 +33,6 @@ class comment{
             console.log(error)
 
         }
-        
-
     }
 
 }

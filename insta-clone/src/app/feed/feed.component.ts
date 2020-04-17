@@ -50,17 +50,6 @@ export class FeedComponent implements OnInit {
   res: any;
   feed: any;
 
-  addcomment(text: string) {
-    let commentObj = {
-      ownerID: this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id, //from token
-      comment: this.commentarea.nativeElement.value,
-    };
-
-    console.log(commentObj);
-    this.sendReq.commentPost(commentObj).subscribe((res) => (this.res = res));
-    console.log(this.res);
-  }
-
   openDialog(postId : string) {
     this.dialog.open(ModalComponent, {
       data: {
