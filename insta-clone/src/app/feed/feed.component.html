@@ -35,6 +35,7 @@
         <span class="viewComments" *ngIf="item.post.count.commentCount>2"><a class="viewComments" [routerLink]="['/post/'+item.post._id]">View all {{item.post.count.commentCount}} comments</a></span>
         <span class="row" *ngIf="item.post.commentsArray[0]"><a class="userid" [routerLink]="['../profile', item.post.commentsArray[0].commentedBy.instaHandle]"><b>{{item.post.commentsArray[0].commentedBy.instaHandle}}</b></a><span>{{item.post.commentsArray[0].content}}</span></span>
         <span class="row" *ngIf="item.post.commentsArray[1]"><a class="userid" [routerLink]="['../profile', item.post.commentsArray[1].commentedBy.instaHandle]"><b>{{item.post.commentsArray[1].commentedBy.instaHandle}}</b></a><span>{{item.post.commentsArray[1].content}}</span></span>
+        <span style="padding-left: 0.75rem" class="row row-time">{{ (item.post.createdAt) | dateAgo }}</span>
       </div>
       <div class="row add-comment-section">
         <input type="text" style="height: 4rem;" required ngModel placeholder="  Add a comment..." #commentInput="ngModel">

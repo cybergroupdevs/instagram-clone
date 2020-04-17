@@ -23,6 +23,7 @@ import { AddFeedComponent } from './add-feed/add-feed.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
+import { DateAgoPipe } from './pipes/date-ago.pipe';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ModalComponent } from './modal/modal.component';
     ViewPostComponent,
     FileSelectDirective,
     AddFeedComponent,
-    ModalComponent
+    ModalComponent,
+    DateAgoPipe
   ],
   imports: [
     Ng2SearchPipeModule,

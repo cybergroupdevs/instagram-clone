@@ -33,14 +33,14 @@
 
 <div class="container mt-5">
   <div class="gallery-item row">
-    <div class="gallery_product col-lg-4 col-md-6 col-sm-6 col-xs-12 filter hdpe" *ngFor="let item of postImages; let i = index">
+    <div style="cursor: pointer;" class="gallery_product col-lg-4 col-md-6 col-sm-6 col-xs-12 filter hdpe" [routerLink]="['/post', posts[i].post._id]" *ngFor="let item of postImages; let i = index">
       <img [src]="postImages[i]" class="img-responsive">
       <div class="gallery-item-info">
         <ul>
           <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fa fa-heart"
-              aria-hidden="true"></i>{{ posts[i].count?.likeCount || 0 }}</li>
+              aria-hidden="true"></i>{{ posts[i].post.count?.likeCount || 0 }}</li>
           <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fa fa-comment"
-              aria-hidden="true"></i>{{ posts[i].count?.commentCount || 0 }}</li>
+              aria-hidden="true"></i>{{ posts[i].post.count?.commentCount || 0 }}</li>
         </ul>
       </div>
     </div>
