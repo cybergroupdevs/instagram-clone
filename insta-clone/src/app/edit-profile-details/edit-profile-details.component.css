@@ -1,5 +1,8 @@
 .changeDP{
-    text-decoration: none;   
+    text-decoration: none;  
+    color: #0095F6; 
+    font-weight: 550;
+    
 }
 .modal-content  {
     -webkit-border-radius: 1rem !important;
