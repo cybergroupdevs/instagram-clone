@@ -172,18 +172,28 @@ height: 0.5rem;
 opacity: 0;
 }
 
+@media (min-width: 900px) {
+  .post-create {
+     width: 43.2rem;
+  }
+  }
+  
 @media (max-width: 375px) {
 .post-create {
    margin-left: 0;
+   width: 100%;
    max-width: 375px;
 }
 }
 @media (max-width: 320px) {
 .post-create {
    margin-left: 0;
+   width: 100%;
    max-width: 320px;
 }
 }
+
+
 
 
 .post-create:focus-within {

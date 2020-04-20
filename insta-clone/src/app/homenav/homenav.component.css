@@ -20,6 +20,9 @@
     
     
 }
+label:hover{
+    cursor: pointer;
+}
 .search-result{
     
     margin-top: 1.5rem;
