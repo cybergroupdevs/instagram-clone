@@ -35,10 +35,10 @@
                   <div><b>{{postObj.user.instaHandle}}</b></div>
                   <p style="line-height: 0.8;">{{postObj.location}}</p>
                 </div>
-                <div class="col-lg-4">
+                <!-- <div class="col-lg-4">
                     <span class="dot-before-follow-btn">.</span>
                     <button class="btn follow-btn-view-post">Follow</button>
-                </div>
+                </div> -->
                 <div class="col-lg-1">
                   <span class="triple-dot">...</span>
                 </div>
@@ -62,7 +62,7 @@
                     <div class="col-lg-8" *ngIf="item">
                         <a href="" class="username-post-caption userid"><b>{{item.commentedBy.instaHandle}}</b></a>
                         <span class="ml-2">{{item.content}}</span>
-                        <p><small><span>{{ item.createdAt  | dateAgo}}&emsp;</span><span></span><span> </span><span> Reply</span></small></p>
+                        <p><small><span>{{ item.createdAt  | dateAgo}}&emsp;</span><span></span><span> </span><span> </span></small></p>
                         <!-- <p (click)="toggle()" class="view-replies"><strong>{{paragraphName}}</strong></p> -->
                         <!-- <div *ngIf="show" class="row">
                             <ul >
@@ -85,10 +85,10 @@
                             </ul>
                         </div>         -->
                     </div>
-                    <div class="col-lg-1">
+                    <!-- <div class="col-lg-1">
                         <input type="checkbox" id="togglelikeSmall" class="visually-hidden">
                         <label for="togglelikeSmall"  class="like-control"></label>    
-                    </div>
+                    </div> -->
                 </div>
                 
             </div>
