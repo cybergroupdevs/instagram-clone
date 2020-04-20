@@ -39,18 +39,30 @@ export class ViewPostComponent implements OnInit {
   }
 
   postImage: SafeUrl;
+  userImage: SafeUrl;
 
   getpost(postId : string){
     this.PostService.getPost(postId).subscribe(res=> {
+      console.log(res, 'postObject')
       this.postObj = res.payload.data.returnObj;
+
       this.postImage = BufferToImage.bufferToImage(this.postObj.image, this.domSanitizer);
-      console.log(this.postObj)
+      this.userImage = BufferToImage.bufferToImage(this.postObj.userImage, this.domSanitizer);
+
     })
 
 
     this.PostService.getComments(postId).subscribe(res=>{
       this.commentsArray = res.payload.data.commentsArray
-      console.log(this.commentsArray)
+      console.log(this.commentsArray, 'response after subscribing to post api', Date.now());
+
+      this.commentsArray = this.commentsArray.map((comment: any, index: number) => {
+        comment.image = BufferToImage.bufferToImage(comment.bufferedImage, this.domSanitizer);
+        console.log(Date.now(), comment, index);
+        return comment;
+      });
+
+      console.log(this.commentsArray, 'after adding SafeUrls', Date.now());
     })
   }
 

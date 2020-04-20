@@ -8,7 +8,7 @@ class Post{
     }
 
     async get(criteria = {}, columns = {}){
-        let fields = "instaHandle"
+        let fields = "image instaHandle"
         return await this.model.findOne(criteria, columns).populate("user", fields);
 
     }
