@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
     FileSelectDirective,
     AddFeedComponent,
     ModalComponent,
-    DateAgoPipe
+    DateAgoPipe,
+    UserInfoComponent
   ],
   imports: [
     Ng2SearchPipeModule,

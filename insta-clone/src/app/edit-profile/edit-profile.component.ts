@@ -52,12 +52,10 @@ export class EditProfileComponent implements OnInit {
 
     this.sendReq.updateData(userObj,loggedinUserId).subscribe(res =>  {
       if(res.status == 200){
-        console.log('Successful update!!');
 
       }
       else if(res.status == 406){
         let message="Username is already in use!" 
-        console.log(message);
       }
       else if(res.status == 401){
         alert("Unauthorized");
@@ -70,7 +68,6 @@ export class EditProfileComponent implements OnInit {
   loadUserData(id: string){
     this.sendReq.userInfo(id, null).subscribe(res => {
       if(res.status == 200){
-        console.log(res.body[0]);
         this.usersData = res.body[0];
         this.setUserData();
       }

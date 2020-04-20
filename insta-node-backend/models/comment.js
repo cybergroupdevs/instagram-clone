@@ -17,7 +17,6 @@ class Comment{
     }
 
     async save(commentObj){
-        console.log(commentObj, 'commentObj');
         return await this.model.create(commentObj);
     }
 

@@ -76,13 +76,10 @@ export class FeedComponent implements OnInit {
   loadPosts() {
     this.PostService.getFeed().subscribe((res) => {
       this.feed = res.payload.data.feedFinal;
-      console.log(res, this.feed, "response feed");
-      console.log(this.feed, "my feed");
       this.fillPostImages();
     });
 
     this.userService.userInfo(jsonDecoder().data._id, null).subscribe((res) => {
-      console.log(res.body);
       this.userInfo = res.body.user;
       this.bufferedImage = res.body.bufferedImage && BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer);
     })
@@ -102,33 +99,27 @@ export class FeedComponent implements OnInit {
         this.postImages[index] = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ` + base64String);
       }
 
-      console.log(post.post.user.userImage, post, 'post.user.userImage');
       this.postUserImages[index] = post.post.user.userImage? 
         BufferToImage.bufferToImage(post.post.user.userImage, this.domSanitizer) : null;
     });
 
-    console.log(this.postUserImages, 'this.postUserImages');
   }
 
   postUserImages: SafeUrl[] = [];
 
   toggleLike(postId, operation){
-    console.log("here")
     
     this.LikeService.like(postId, operation).subscribe(res=>{
       this.loadPosts();    
-      console.log(res.success, res.payload.message, "response")
     })
   }
 
   reloadPosts(){
-    console.log('inside reloadPosts');
     this.loadPosts();
   }
 
   createComment(content: string, postId:string){
     this.PostService.createComment(postId, content, 'inc').subscribe((res: IResponse) => {
-      console.log(res);
       this.loadPosts();
       
     });

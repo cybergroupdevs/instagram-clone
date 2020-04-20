@@ -62,7 +62,6 @@ class follow{
         if(token){
             
             let user = await model.user.getOne({instaHandle:req.params.id})
-            console.log(user, "user")
             let allFollowers = await model.follower.getAll({"ownerId":user._id});
             
             allFollowers = await Promise.all( allFollowers.map(async(follower) => {

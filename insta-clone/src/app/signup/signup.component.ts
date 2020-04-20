@@ -72,7 +72,6 @@ export class SignupComponent implements AfterViewInit {
           password: userObj.password
         });
       } else {
-        console.log("not signed up");
         this.warningText = res.error.message;
         this.warning = true;
       }

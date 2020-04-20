@@ -34,13 +34,11 @@ export class ImageGalleryComponent implements OnInit {
   posts: any;
   loadPosts(instaHandle:string) {
       this.PostService.getUsersPosts(instaHandle).subscribe((res) => {
-        console.log(res,"response loadpoast")
       this.posts = res.payload.data.posts;
       this.fillPostImages();
     });
 
     this.userService.userInfo(jsonDecoder().data._id, null).subscribe((res) => {
-      console.log(res.body, 'userINfo');
       this.userInfo = res.body;
       this.bufferedImage = BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer);
     })
@@ -49,7 +47,6 @@ export class ImageGalleryComponent implements OnInit {
   fillPostImages() {
     this.posts.map((post: any, index: number) => {
       if (post.image) {
-        console.log(post, 'posttttt');
         let TYPED_ARRAY = new Uint8Array(post.image.data);
 
         const STRING_CHAR = TYPED_ARRAY.reduce((data, byte)=> {
@@ -60,7 +57,6 @@ export class ImageGalleryComponent implements OnInit {
         
         this.postImages[index] = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ` + base64String);
       }
-      console.log(this.postImages, 'this.postImages');
       this.posts.postImages = this.postImages;
       return null;
     });

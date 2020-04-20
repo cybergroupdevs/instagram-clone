@@ -39,27 +39,22 @@ export class CreatePostComponent implements OnInit {
   preview: SafeUrl;
 
   selectImage(event: any): void{
-    console.log(event, 'event');
     this.imageFile = event.target.files[0];
-    console.log(this.imageFile, 'this.imageFile');
 
     if(event.target.files && event.target.files[0]){
       var reader = new FileReader();
       reader.onload = (event: any) => {
           this.preview = event.target.result;
-          console.log(this.preview, 'this.preview');
       }
       reader.readAsDataURL(event.target.files[0]);
     }
   }
 
   createPostHandler(content: IPostContent): void{
-    console.log('post content', content);
 
     let hashtags: Array<string> = findHashtags(content.caption);
     let mentions: Array<string> = findMentions(content.caption);
 
-    console.log('hashTags ', hashtags.toString(), 'mentions ', mentions);
 
     const formData = new FormData();
     formData.append('caption', content.caption);
@@ -68,7 +63,6 @@ export class CreatePostComponent implements OnInit {
     formData.append('imageFile', this.imageFile);
 
     this.postService.createPost(formData).subscribe((res: IResponse) => {
-      console.log(res, 'response after subscribing');
       this.reloadPost.emit();
       this.caption = null;
       this.imageFile = null;
@@ -77,7 +71,6 @@ export class CreatePostComponent implements OnInit {
   }
 
   styleCaption(caption: string){
-    console.log(caption);
     let substrings: Array<string> = caption.split(/([@,#][\w_-]+)/g);
     
     substrings.forEach((substring: string, index: number) => {
@@ -89,7 +82,6 @@ export class CreatePostComponent implements OnInit {
       }
     }); 
 
-    console.log(substrings.join(""));
     
     this.caption = substrings.join('');
   }

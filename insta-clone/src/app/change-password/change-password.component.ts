@@ -57,10 +57,8 @@ export class ChangePasswordComponent  {
     
   }
   loadUserData(id: string = null, instaHandle: string = null) {
-    console.log("loadingggggg");
     this.sendReq.userInfo(id, null).subscribe(res => {
       if (res.status == 200) {
-        console.log(res.body.user);
         this.userData = res.body.user;
         this.image = res.body.bufferedImage ? BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer): null;
         this.instaHandle = this.userData.instaHandle;

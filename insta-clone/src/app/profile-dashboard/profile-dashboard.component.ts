@@ -56,7 +56,6 @@ export class ProfileDashboardComponent implements OnInit {
 
   selectImage(event) {
     if (event.target.files.length > 0) {
-      console.log(event.target.files);
       const file = event.target.files[0];
       this.images = file;
 
@@ -67,11 +66,9 @@ export class ProfileDashboardComponent implements OnInit {
     const formData = new FormData();
     formData.append('image', this.images);
 
-    console.log(formData);
-
+    
     const _id = jsonDecoder().data.instaHandle;
     this.fileUploadService.fileUpload(formData, _id).subscribe((res: any) => {
-      console.log(res);
       alert('Successful');
     });
   }
@@ -82,8 +79,7 @@ export class ProfileDashboardComponent implements OnInit {
       this.currentProfileId = id;
     }
 
-    console.log(this.currentProfileId, "id")
-
+    
 
     this.sendReq.userInfo(id,instaHandle).subscribe(res => {
       if(res.status == 200){
@@ -110,7 +106,6 @@ export class ProfileDashboardComponent implements OnInit {
     this.following = this.usersArray.following;
     this.posts = this.usersArray.postsCount;
     this.bio = this.usersArray.about;
-    console.log(this.image);
     
 
     if (this.loggedinUserInstaHandle == current_route[2]){
@@ -177,7 +172,6 @@ export class ProfileDashboardComponent implements OnInit {
     let current_route = this._router.url.split("/");
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token")).data._id
     this.sendReq.followUser(ownerId, loggedinUserId).subscribe(res => {
-      console.log(res.status, res, "status ????")
       if(res.status == 200 ){
         if (current_route[2] == ownerId){
           this.loadUserData(null, ownerId)

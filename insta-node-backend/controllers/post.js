@@ -5,18 +5,14 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(file, "file inside destination");
-    console.log(req.user.data.instaHandle, "instaHandle");
     let dir = `./uploads/${req.user.data.instaHandle}`;
-    console.log(dir, 'before fs.exists');
-
+    
     if(!fs.existsSync(dir)){
       fs.mkdirSync(dir);
     };
     dir = `./uploads/${req.user.data.instaHandle}/posts`;
 
     fs.exists(dir, (exist) => {
-      console.log(dir, 'Inside second fs.exists');
       if (!exist) return fs.mkdir(dir, (error) => cb(error, dir));
 
       return cb(null, dir);
@@ -47,7 +43,6 @@ class Post {
   constructor() {}
 
   async create(req, res){
-    console.log(req.body);
     const { mentions, tags, caption } = req.body;
 
     let mentionsWithId = [];
@@ -73,7 +68,6 @@ class Post {
       }
 
       const file = req.file;
-      console.log(req.file);
       if (!file) {
         const error = new Error("No File");
         return res.status(400).send({
@@ -83,8 +77,7 @@ class Post {
           },
         });
       }
-      console.log(req.body);
-
+    
       let { mentions, hashtags, caption } = req.body;
       hashtags = hashtags.split(',');
       mentions = mentions.split(',');
@@ -122,7 +115,6 @@ class Post {
   }
 
   async operations(req, res) {
-    console.log("inside api")
     const post = await model.post.findById(req.params.postId);
 
     if (req.query.type === "like") {
@@ -169,7 +161,6 @@ class Post {
 
     if (req.query.type === "comment") {
       if (req.query.operation === "inc") {
-        console.log(req.body, 'req.body');
         await model.post.modify(
           { _id: req.params.postId },
           { "count.commentCount": ++post.count.commentCount }
@@ -243,15 +234,12 @@ class Post {
         const postId = item._id
         
         let likesArray = await model.like.log({post : postId})
-        console.log(likesArray, "lkesArray")
         let commentsArray = await model.comment.log({ post : postId })
 
         let returnObj = { ...item.toObject(), likesArray, commentsArray };
         if(!item.image){
           return returnObj;
         }
-        // console.log(fs.readFileSync(item.image), 'IMAGE AFTER READ FILE');
-        // console.log(fs.createReadStream(item.image), "image");
         
         return { ...returnObj, image: fs.readFileSync(item.image) }
       })
@@ -264,7 +252,6 @@ class Post {
 
 
     feedFinal = await Promise.all( feedFinal.map(async(post) => {
-      console.log(post, 'post.user.image');
       post.post.user = post.post.user.image ? { ...post.post.user, userImage: fs.readFileSync(post.post.user.image) } : post.post.user;
 
       return post;
@@ -285,7 +272,6 @@ class Post {
   }
 
   async userPosts (req, res){
-    console.log(req.query, 'req.query');
     const { _id } = (await model.user.getOne({ instaHandle: req.query.instaHandle })) || {};
     let posts = await model.post.index({ user: _id });
 
@@ -307,15 +293,12 @@ class Post {
   async getPost(req,res) {
 
     try{
-        console.log("inside api")
         const postId = req.params.id
         let postObj = await model.post.get({_id:postId} )
 
-        console.log(postObj, "postObj")
-
+    
         let likesArray = await model.like.log({post : postId})
-        console.log(likesArray, "lkesArray")
-
+    
         const isLiked = await model.like.get({ post: postId, likedBy: req.user.data._id })
 
         let returnObj = { ...postObj.toObject(), likesArray, image: fs.readFileSync(postObj.image), userImage: fs.readFileSync(postObj.user.image), isLiked: (isLiked? true: false) };
@@ -331,7 +314,6 @@ class Post {
           });
     }
     catch(error){
-        console.log(error)
 
     }
   }

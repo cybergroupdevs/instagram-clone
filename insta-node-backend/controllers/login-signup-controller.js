@@ -18,8 +18,7 @@ class employee {
           email: req.body.email,
           password: hashedPassword,
         };
-        console.log(userObject);
-
+     
         var instaUser = await model.user.save(userObject);
         let message = "user created";
         res.status(200).send({
@@ -27,7 +26,6 @@ class employee {
         });
       }
     } catch (error) {
-      console.log(error);
       let message =
         error.message;
 

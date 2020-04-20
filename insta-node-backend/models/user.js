@@ -28,7 +28,6 @@ class Operations{
         let user = await this.model.findOne(criteria)
         const match = await bcrypt.compare(enteredPassword, user.password);
 
-        console.log(user.password,match, "existingPassword")
 
         return match
     }

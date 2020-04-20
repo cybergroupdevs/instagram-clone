@@ -69,11 +69,9 @@ export class EditProfileDetailsComponent implements OnInit {
       status: any,
       headers: any
     ) => {
-      console.log("ImageUpload:uploaded:", item, status, response);
     };
   }
   update() {
-    console.log("inside update");
     let loggedinUserId = this.sendReq.jsonDecoder(localStorage.getItem("token"))
       .data._id;
     let userObj = {
@@ -89,7 +87,6 @@ export class EditProfileDetailsComponent implements OnInit {
 
     this.sendReq.updateData(userObj, loggedinUserId).subscribe(res => {
       if (res.status == 200) {
-        console.log("Successful update!!");
       } else if (res.status == 406) {
         this.warningText = res.error.message;
         this.warning = true;
@@ -102,10 +99,8 @@ export class EditProfileDetailsComponent implements OnInit {
   }
 
   loadUserData(id: string = null, instaHandle: string = null) {
-    console.log("loadingggggg");
     this.sendReq.userInfo(id, null).subscribe(res => {
       if (res.status == 200) {
-        console.log(res.body.user);
         this.usersData = res.body.user;
         this.image = res.body.bufferedImage ? BufferToImage.bufferToImage(res.body.bufferedImage, this.domSanitizer): null;
         this.setUserData();
@@ -119,7 +114,6 @@ export class EditProfileDetailsComponent implements OnInit {
   setUserData() {
     this.name = this.usersData.name;
     this.username = this.usersData.instaHandle;
-    console.log(this.usersData.email, "emaillll", this.usersData);
     this.email = this.usersData.email;
     this.phone = this.usersData.phone;
     this.bio = this.usersData.about;
@@ -138,7 +132,6 @@ export class EditProfileDetailsComponent implements OnInit {
       "load",
       function() {
         preview.src = String(reader.result);
-        console.log(reader.result);
       },
       false
     );
@@ -158,7 +151,6 @@ export class EditProfileDetailsComponent implements OnInit {
 
   selectImage(event) {
     if (event.target.files.length > 0) {
-      console.log(event.target.files);
       const file = event.target.files[0];
       this.images = file;
 
@@ -170,11 +162,9 @@ export class EditProfileDetailsComponent implements OnInit {
     const formData = new FormData();
     formData.append('image', this.images);
 
-    console.log(formData);
-
+    
     const _id = jsonDecoder().data.instaHandle;
     this.fileUploadService.fileUpload(formData, _id).subscribe((res: any) => {
-      console.log(res);
       alert('Successful');
     });
   }

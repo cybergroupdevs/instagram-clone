@@ -17,7 +17,6 @@ export class SendHttpRequestService {
   constructor(private http: HttpClient) {}
 
   private log(message: string) {
-    console.log(message);
   }
   // //Decode JWT and return the Payload in JSON Format
   jsonDecoder = token => {
@@ -113,14 +112,12 @@ export class SendHttpRequestService {
   }
 
   getFollowersList(id: string): Observable<any> {
-    console.log("inside service");
     return this.http.get(`http://localhost:8080/followers/${id}`, {
       headers: this.header_token
     });
   }
 
   getFollowingList(id: string): Observable<any> {
-    console.log(this.header_token, "followers ");
     return this.http.get(`http://localhost:8080/following/${id}`, {
       headers: this.header_token
     });

@@ -26,7 +26,6 @@ export class PostService{
     }
 
     createComment(postId: string, content: string, operation: string): Observable<IResponse>{
-        console.log(postId, 'postId', content, 'content');
         const params: HttpParams = new HttpParams()
         .set('type', 'comment')
         .set('operation', operation);
@@ -39,7 +38,6 @@ export class PostService{
         
     }
     getUsersPosts(instaHandle:string): Observable<any>{
-        console.log(instaHandle, 'instaHandle inside getUserPosts()');
         
         const params: HttpParams = new HttpParams()
         .set('instaHandle', instaHandle);

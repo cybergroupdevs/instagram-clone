@@ -52,10 +52,8 @@ export class HomenavComponent  implements OnInit {
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.sendReq.searchUsers(term)
     )).subscribe(res => {
-      console.log(res, 'response inseide searchTerms pipe call');
       this.users$ = res;  
     });
-    // console.log(this.users$, "usersssssssssss")
     
   }
 
@@ -73,7 +71,7 @@ export class HomenavComponent  implements OnInit {
 
   searchUser(userId:string){
     this.profileDashboard.loadUserData(userId, null)
-    console.log(userId);
+    
   }
   
   // close(){
@@ -84,7 +82,6 @@ func(event){
  
   var box = document.querySelector(".boxes");
 
-  console.log(box,event.target,  "my boxxxx")
   // this.isVisible = box.contains(event.target)
 
   if (box.contains(event.target)){
@@ -93,9 +90,7 @@ func(event){
   else{
     this.isVisible = false
   }
-  console.log(this.isVisible, "valueee")
-  console.log(box.contains(event.target),"hhhhhh");
-
+  
 }
 onBlur(){
   setTimeout(() =>{

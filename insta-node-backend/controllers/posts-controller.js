@@ -7,7 +7,6 @@ class employee{
     }
     async createNewPost(req, res){
         let token = jwtHandler.tokenVerifier(req.headers.token);
-        console.log(token);
         if(token)
         {
             let newPost={
@@ -26,7 +25,6 @@ class employee{
             
             }
             catch(error){
-                console.log(error);
                     
             }
         }
@@ -42,9 +40,7 @@ class employee{
         if(token)
         {
             const post = await model.posts.get({"ownerId":req.params.id});
-            console.log(post);
             const userData=await model.user.get({"_id":req.params.id})
-            console.log(userData);
             const userPost={
                 "ownerId":post.ownerId,
                 "instaHandle":userData.instaHandle,
@@ -66,13 +62,9 @@ class employee{
     }
     async show(req,res) {
         let token = jwtHandler.tokenVerifier(req.headers.token);
-        console.log(req.headers.token);
-        console.log(JSON.stringify(token));
-        console.log( typeof(token.data._id));
         if(token)
         {
             let postObj= await model.posts.get({"ownerId": req.params.id});
-            console.log(postObj);
             res.send(postObj);
         }
         else{

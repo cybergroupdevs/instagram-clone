@@ -37,7 +37,6 @@ export class LoginComponent {
         localStorage.setItem("token", res.body.token);
         this._router.navigate(["/feed"]);
       } else if (res.status == 401) {
-        console.log(res, "response");
         this.warningText = res.error.message;
         this.warning = true;
       }

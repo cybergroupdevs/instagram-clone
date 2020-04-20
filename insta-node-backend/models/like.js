@@ -18,7 +18,6 @@ class Like{
     }
 
     async save(likeObj){
-        console.log(likeObj);
         return this.model.create(likeObj);
     }
 

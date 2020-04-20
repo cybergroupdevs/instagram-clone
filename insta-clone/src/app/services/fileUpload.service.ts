@@ -19,7 +19,6 @@ export class FileUploadService{
     constructor(private http: HttpClient){}
 
     fileUpload(formData: any, id: string): Observable<any>{
-        console.log(formData, 'formData inside service');
         return this.http.patch<any>(`${PATH}`, formData, this.httpOptions);
     }
 }

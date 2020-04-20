@@ -7,8 +7,6 @@ const bcrypt = require("bcrypt");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(file, "file inside destination");
-    console.log(req.user.data.instaHandle, "instaHandle");
     const dir = `./uploads/${req.user.data.instaHandle}`;
     fs.exists(dir, exist => {
       if (!exist) return fs.mkdir(dir, error => cb(error, dir));
@@ -39,8 +37,6 @@ const upload = multer({
 
 class user {
   constructor() {
-    // console.log(this, "inside constructor")
-    // const $this = this;
   }
 
   async checkIfDuplicate(req, res) {
@@ -64,8 +60,6 @@ class user {
           exists = true;
         }
 
-        // console.log(instaHandle, "instahandle")
-        // exists = user.checkInstaHandle({instaHandle})
       }
       try {
         if (exists == false) {
@@ -101,10 +95,8 @@ class user {
   }
 
   async show(req, res) {
-    console.log(req.query, "req.body", req.headers.token, "req.headers.token");
     if (jwtHandler.tokenVerifier(req.headers.token)) {
       var obj = req.query;
-      console.log(obj);
       if (obj.id != "null") {
         var userObj = await model.user.get({ _id: obj.id });
       } else {
@@ -137,8 +129,6 @@ class user {
     const passwordObj = req.body
     const token = jwtHandler.tokenVerifier(req.headers.token);
     const checkPassword = await model.user.checkPassword({_id : req.params.id}, passwordObj.oldPassword)
-
-    console.log(checkPassword, "checkPassword")
 
     if (token) {
       
@@ -197,7 +187,6 @@ class user {
       }
 
       const file = req.file;
-      console.log(req.file);
 
 
       if (!file) {

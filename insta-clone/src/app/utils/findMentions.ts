@@ -5,7 +5,6 @@ function findMentions(searchText) {
     result = result.map(function (s) {
       return s.trim();
     });
-    console.log(result);
     return result;
   } else {
     return [];
