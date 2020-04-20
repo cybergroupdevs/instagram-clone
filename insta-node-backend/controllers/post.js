@@ -318,7 +318,7 @@ class Post {
 
         const isLiked = await model.like.get({ post: postId, likedBy: req.user.data._id })
 
-        let returnObj = { ...postObj.toObject(), likesArray, image: fs.readFileSync(postObj.image), isLiked: (isLiked? true: false) };
+        let returnObj = { ...postObj.toObject(), likesArray, image: fs.readFileSync(postObj.image), userImage: fs.readFileSync(postObj.user.image), isLiked: (isLiked? true: false) };
 
         res.send({
             success: true,
