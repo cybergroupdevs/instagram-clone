@@ -31,7 +31,7 @@
                 <div class="col-lg-1">
                   <img [src]="userImage" class="rounded-circle profile-img" style="width: 2.5rem; height: 2.5rem; border: 1px solid  #EFEFEF;">
                 </div>
-                <div *ngIf="postObj" class="col-lg-5" style="padding:0 2rem;">
+                <div *ngIf="postObj" class="col-lg-8" style="padding:0 2rem;">
                   <div><b>{{postObj.user.instaHandle}}</b></div>
                   <p style="line-height: 0.8;">{{postObj.location}}</p>
                 </div>
@@ -48,7 +48,7 @@
                     <div class="col-lg-1">
                         <img [src]="userImage" class="rounded-circle profile-img" style="width: 2.5rem; height: 2.5rem; border: 1px solid  #EFEFEF;">
                     </div>
-                    <div *ngIf="postObj" class="col-lg-11" style="padding:0 2rem;">
+                    <div *ngIf="postObj" class="col-lg-10" style="padding:0 2rem;">
                       <!-- {{postObj | json}} -->
                         <a href="" class="username-post-caption userid"><b>{{postObj.user.instaHandle}}</b></a>
                         <span class="ml-2">{{postObj.caption}}</span>
@@ -59,31 +59,10 @@
                     <div class="col-lg-1">
                         <img *ngIf="item" [src]="item.image" class="rounded-circle profile-img" style="width: 2.5rem; height: 2.5rem; border: 1px solid  #EFEFEF;">
                     </div>
-                    <div class="col-lg-8" *ngIf="item">
+                    <div class="col-lg-10" *ngIf="item" style="padding:0 2rem;">
                         <a href="" class="username-post-caption userid"><b>{{item.commentedBy.instaHandle}}</b></a>
                         <span class="ml-2">{{item.content}}</span>
                         <p><small><span>{{ item.createdAt  | dateAgo}}&emsp;</span><span></span><span> </span><span> </span></small></p>
-                        <!-- <p (click)="toggle()" class="view-replies"><strong>{{paragraphName}}</strong></p> -->
-                        <!-- <div *ngIf="show" class="row">
-                            <ul >
-                                <li>
-                                    <div class="row reply">
-                                        <div class="col-lg-1">
-                                            <img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 2rem; height: 2rem;">
-                                        </div>
-                                        <div class="col-lg-9" style="padding:0 1.5rem;">
-                                            <a href="" class="username-post-caption">username</a>
-                                            <span class="ml-2">reply reply reply reply reply reply reply reply reply reply </span>
-                                            <p><small><span>time&emsp;</span><span> Reply</span></small></p>
-                                        </div>
-                                        <div class="col-lg-1">
-                                            <input type="checkbox" id="togglelike" class="visually-hidden">
-                                            <label for="togglelike"  class="control"></label>    
-                                        </div>
-                                    </div>
-                                </li> 
-                            </ul>
-                        </div>         -->
                     </div>
                     <!-- <div class="col-lg-1">
                         <input type="checkbox" id="togglelikeSmall" class="visually-hidden">
@@ -101,7 +80,7 @@
               <div class="row" style="padding:0 2rem">
                 <!-- <span><img src="../../assets/ss.png" class="rounded-circle profile-img" style="width: 1.7rem; height: 1.7rem;">
                     Liked by<b> username </b> and <b></b></span> -->
-                    <span *ngIf="postObj?.count.likeCount > 0" >Liked by<a class="userid" [routerLink]="['../../profile', postObj.likesArray[0].likedBy.instaHandle]"><b>{{postObj.likesArray[0].likedBy.instaHandle}}</b></a><a (click)="openDialog(item.post._id)" *ngIf="postObj?.count.likeCount-1 > 0" >and {{postObj.count.likeCount-1}} others</a></span>
+                    <span *ngIf="postObj?.count.likeCount > 0" >Liked by <a class="userid" [routerLink]="['../../profile', postObj.likesArray[0].likedBy.instaHandle]"><b>{{postObj.likesArray[0].likedBy.instaHandle}}</b></a><a (click)="openDialog(item.post._id)" *ngIf="postObj?.count.likeCount-1 > 0" >and {{postObj.count.likeCount-1}} others</a></span>
               </div>
               <div class="row" style="padding:0 2rem">
                 <p><small><span>{{postObj.likesArray[0].createdAt | dateAgo}}&emsp;</span></small></p>
